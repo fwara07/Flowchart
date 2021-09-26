@@ -1,6 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Grid from "@material-ui/core/Grid";
-import { Button, Typography, Divider, IconButton } from "@material-ui/core";
+import {
+  Button,
+  Typography,
+  Divider,
+  IconButton,
+  FormControl,
+  Select,
+  MenuItem,
+  InputLabel,
+} from "@material-ui/core";
 import CreateNewFolderIcon from "@material-ui/icons/CreateNewFolder";
 import DeleteIcon from "@material-ui/icons/Delete";
 import NoteAddIcon from "@material-ui/icons/NoteAdd";
@@ -21,18 +30,22 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import ListItemText from "@material-ui/core/ListItemText";
 import Avatar from "@material-ui/core/Avatar";
+import reactCSS from "reactcss";
+import { SketchPicker } from "react-color";
 
-const SideBar = () => {
+const SideBar = ({
+  currentFile,
+  setCurrentFile,
+  setCanvasVisibility,
+  setEdgeType,
+  setSelectedColor,
+}) => {
   const [files, setFiles] = useState(
     localStorage.getItem("files") === null
       ? []
       : JSON.parse(localStorage.getItem("files"))
   );
-  const [currentFile, setCurrentFile] = useState(
-    localStorage.getItem("current") === null
-      ? {}
-      : JSON.parse(localStorage.getItem("current"))
-  );
+
   const [folder, setFolder] = useState("");
   const [file, setFile] = useState("");
   const [openNewFolder, setOpenNewFolder] = React.useState(false);
@@ -55,6 +68,14 @@ const SideBar = () => {
   const [currentEditTag, setCurrentEditTag] = useState("");
   const [editTag, setEditTag] = useState("");
   const [editTagError, setEditTagError] = useState({});
+  const [activeFolder, setActiveFolder] = useState(false);
+  const [displayColorPicker, setDisplayColorPicker] = useState(false);
+  const [color, setColor] = useState({
+    r: "193",
+    g: "230",
+    b: "255",
+    a: "100",
+  });
 
   const newFolder = () => {
     setOpenNewFolder(true);
@@ -84,6 +105,76 @@ const SideBar = () => {
     setFile(event.target.value);
   };
 
+  const updateFilesDb = (newElements) => {
+    console.log("updating database....");
+    fetch("http://127.0.0.1:8000/api/update-files", {
+      method: "POST",
+      body: JSON.stringify({
+        session_id: localStorage.getItem("session"),
+        files: newElements,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .then((json) => {
+        console.log(
+          json,
+          "ndsojdmsio99999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999"
+        );
+        setFiles(json.files);
+      });
+  };
+
+  const updateNamesDb = (newNames) => {
+    console.log("updating database....");
+    fetch("http://127.0.0.1:8000/api/update-names", {
+      method: "POST",
+      body: JSON.stringify({
+        session_id: localStorage.getItem("session"),
+        names: newNames,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .then((json) => setNames(json.names));
+  };
+
+  const updateElementsDb = (newElements) => {
+    console.log("updating database....");
+    fetch("http://127.0.0.1:8000/api/update-elements", {
+      method: "POST",
+      body: JSON.stringify({
+        session_id: localStorage.getItem("session"),
+        elements: newElements,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .then((json) => console.log(json));
+  };
+
+  const updateTagsDb = (newTags) => {
+    console.log("updating database....");
+    fetch("http://127.0.0.1:8000/api/update-tags", {
+      method: "POST",
+      body: JSON.stringify({
+        session_id: localStorage.getItem("session"),
+        tags: newTags,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .then((json) => setTags(json.tags));
+  };
+
   const submitFolder = () => {
     if (folder.length === 0) {
       setError({ value: true, msg: "Folder name can not be empty." });
@@ -94,10 +185,12 @@ const SideBar = () => {
         const newFiles = [...files];
         newFiles.push({ id: folder, text: folder, expanded: true });
         setFiles(newFiles);
+        updateFilesDb(newFiles);
         localStorage.setItem("files", JSON.stringify(newFiles));
         const newNames = [...names];
         newNames.push(folder);
         setNames(newNames);
+        updateNamesDb(newNames);
         localStorage.setItem("names", JSON.stringify(newNames));
         setError({});
         setOpenNewFolder(false);
@@ -126,11 +219,13 @@ const SideBar = () => {
             elements: [],
           });
           setFiles(newFiles);
+          updateFilesDb(newFiles);
           localStorage.setItem("files", JSON.stringify(newFiles));
           const newNames = [...names];
           newNames.push(file);
           setNames(newNames);
           localStorage.setItem("names", JSON.stringify(newNames));
+          updateNamesDb(newNames);
           setError({});
           setOpenNewFile(false);
         }
@@ -139,19 +234,26 @@ const SideBar = () => {
   };
 
   const deleteItem = () => {
-    const newFiles = [...files];
+    const newFiles = JSON.parse(JSON.stringify(files));
     const index = files.findIndex((element) => element === currentFile);
     newFiles.splice(index, 1);
     const newNames = [...names];
     const namesIndex = names.indexOf(currentFile.id);
     newNames.splice(namesIndex, 1);
     setNames(newNames);
+    updateNamesDb(newNames);
     localStorage.setItem("names", JSON.stringify(newNames));
     setFiles(newFiles);
+    updateFilesDb(newFiles);
     localStorage.setItem("files", JSON.stringify(newFiles));
     localStorage.removeItem("current");
     setCurrentFile({});
-    setCurrentFile({});
+    const elements = JSON.parse(localStorage.getItem("elements"));
+    const newElements = elements.filter((data) => {
+      return currentFile.id !== data.node;
+    });
+    updateElementsDb(newElements);
+    localStorage.setItem("elements", JSON.stringify(newElements));
   };
 
   const handleChangeTag = (event) => {
@@ -170,6 +272,7 @@ const SideBar = () => {
         const newTags = [...tags];
         newTags.push(tag);
         setTags((prevTags) => [...prevTags].concat([tag]));
+        updateTagsDb(newTags);
         localStorage.setItem("tags", JSON.stringify(newTags));
         setTagError({});
         setOpenNewTag(false);
@@ -189,6 +292,7 @@ const SideBar = () => {
         const index = tags.indexOf(originalTag);
         newTags[index] = editTag;
         setTags(newTags);
+        updateTagsDb(newTags);
         localStorage.setItem("tags", JSON.stringify(newTags));
         setEditTagError({});
         setOpenEditTag(false);
@@ -203,12 +307,72 @@ const SideBar = () => {
     const index = tags.findIndex((element) => element === tag);
     newTags.splice(index, 1);
     setTags(newTags);
+    updateTagsDb(newTags);
     localStorage.setItem("tags", JSON.stringify(newTags));
   };
 
   const handleChangeEditTag = (event) => {
     setEditTag(event.target.value);
   };
+
+  useEffect(() => {
+    const canvasVisibilityHandler = (nodes) => {
+      const files = nodes.filter(
+        (node) =>
+          node.hasOwnProperty("parentId") || node.hasOwnProperty("elements")
+      );
+      if (files.length && !activeFolder) setCanvasVisibility(true);
+      else setCanvasVisibility(false);
+    };
+
+    canvasVisibilityHandler(files);
+  }, [files, setCanvasVisibility]);
+
+  const handleClickColor = () => {
+    setDisplayColorPicker(!displayColorPicker);
+  };
+
+  const handleCloseColor = () => {
+    setDisplayColorPicker(false);
+  };
+
+  const handleChangeColor = (color) => {
+    setSelectedColor(color.rgb);
+    setColor(color.rgb);
+  };
+
+  const handleChangeEdgeType = (event) => {
+    setEdgeType(event.target.value);
+  };
+
+  const styles = reactCSS({
+    default: {
+      color: {
+        width: "36px",
+        height: "14px",
+        borderRadius: "2px",
+        background: `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`,
+      },
+      swatch: {
+        padding: "5px",
+        borderRadius: "1px",
+        boxShadow: "0 0 0 1px rgba(0,0,0,.1)",
+        display: "inline-block",
+        cursor: "pointer",
+      },
+      popover: {
+        position: "absolute",
+        zIndex: "2",
+      },
+      cover: {
+        position: "fixed",
+        top: "0px",
+        right: "0px",
+        bottom: "0px",
+        left: "0px",
+      },
+    },
+  });
 
   return (
     <div>
@@ -333,13 +497,69 @@ const SideBar = () => {
               items={files}
               width="100%"
               onItemClick={(e) => {
-                setCurrentFile(e.itemData);
+                console.log("ddd", e.itemData.hasOwnProperty("expanded"));
                 if (!e.itemData.hasOwnProperty("expanded")) {
                   localStorage.setItem("current", JSON.stringify(e.itemData));
+                  setActiveFolder(false);
+                  setCanvasVisibility(true);
+                } else {
+                  setActiveFolder(true);
+                  setCanvasVisibility(false);
                 }
+                setCurrentFile(e.itemData);
               }}
             />
           )}
+        </Grid>
+        <Divider orientation="horizontal" />
+        <Grid
+          item
+          xs={12}
+          style={{ textAlign: "start", maxHeight: "100%", overflow: "auto" }}
+        >
+          <div style={{ paddingLeft: 20, paddingTop: 20 }}>
+            <Grid item xs={12} direction="row">
+              <Typography variant="subtitle1" gutterBottom>
+                Node Color
+              </Typography>
+              <div style={styles.swatch} onClick={handleClickColor}>
+                <div style={styles.color} />
+              </div>
+              {displayColorPicker ? (
+                <div style={styles.popover}>
+                  <div style={styles.cover} onClick={handleCloseColor} />
+                  <SketchPicker color={color} onChange={handleChangeColor} />
+                </div>
+              ) : null}
+            </Grid>
+          </div>
+        </Grid>
+        <Grid
+          item
+          xs={12}
+          style={{ textAlign: "start", maxHeight: "100%", overflow: "auto" }}
+        >
+          <FormControl
+            variant="outlined"
+            style={{ width: 150, marginTop: 30, marginLeft: 20 }}
+          >
+            <InputLabel id="demo-simple-select-outlined-label">
+              EdgeType
+            </InputLabel>
+            <Select
+              style={{ fontSize: 15 }}
+              labelId="demo-simple-select-outlined-label"
+              id="demo-simple-select-outlined"
+              onChange={handleChangeEdgeType}
+              variant="outlined"
+              label="EdgeType"
+              defaultValue="smoothstep"
+              displayEmpty={true}
+            >
+              <MenuItem value="smoothstep">Step Edge</MenuItem>
+              <MenuItem value="default">Curved Edge</MenuItem>
+            </Select>
+          </FormControl>
         </Grid>
       </Grid>
       <Divider orientation="horizontal" />
