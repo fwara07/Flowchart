@@ -13,15 +13,23 @@ import {
   MenuItem,
   Switch,
   Badge,
+  Snackbar,
   DialogActions,
   Button,
   Chip,
 } from "@material-ui/core";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import AddIcon from "@material-ui/icons/Add";
+import CloudUploadIcon from "@material-ui/icons/CloudUpload";
+import { DropzoneDialogBase } from "material-ui-dropzone";
+import CloseIcon from "@material-ui/icons/Close";
+import Papa from "papaparse";
 import Edit from "@material-ui/icons/Edit";
 import ReactFlow, {
   removeElements,
+  getIncomers,
+  getOutgoers,
+  isNode,
   addEdge,
   MiniMap,
   Controls,
@@ -34,6 +42,71 @@ import reactCSS from "reactcss";
 import { SketchPicker } from "react-color";
 import VisibilityIcon from "@material-ui/icons/Visibility";
 import EditIcon from "@material-ui/icons/Edit";
+import { createStyles, makeStyles } from "@material-ui/core/styles";
+import { Alert, AlertTitle } from "@material-ui/lab";
+import dagre from "dagre";
+
+const dagreGraph = new dagre.graphlib.Graph();
+dagreGraph.setDefaultEdgeLabel(() => ({}));
+
+// In order to keep this example simple the node width and height are hardcoded.
+// In a real world app you would use the correct width and height values of
+// const nodes = useStoreState(state => state.nodes) and then node.__rf.width, node.__rf.height
+
+const nodeDimensions = {
+  special: { width: 50, height: 150 },
+  rectangle: { width: 150, height: 70 },
+  oval: { width: 150, height: 70 },
+  diamond: { width: 100, height: 100 },
+};
+
+const getLayoutedElements = (elements, direction = "TB") => {
+  const isHorizontal = direction === "LR";
+  dagreGraph.setGraph({ rankdir: direction });
+
+  elements.forEach((el) => {
+    if (isNode(el)) {
+      dagreGraph.setNode(el.id, {
+        width: nodeDimensions[el.type].width,
+        height: nodeDimensions[el.type].height,
+      });
+    } else {
+      dagreGraph.setEdge(el.source, el.target);
+    }
+  });
+
+  dagre.layout(dagreGraph);
+
+  return elements.map((el) => {
+    if (isNode(el)) {
+      const nodeWithPosition = dagreGraph.node(el.id);
+      el.targetPosition = isHorizontal ? "left" : "top";
+      el.sourcePosition = isHorizontal ? "right" : "bottom";
+
+      // unfortunately we need this little hack to pass a slightly different position
+      // to notify react flow about the change. Moreover we are shifting the dagre node position
+      // (anchor=center center) to the top left so it matches the react flow node anchor point (top left).
+      el.position = {
+        x:
+          nodeWithPosition.x -
+          nodeDimensions[el.type].width / 2 +
+          Math.random() / 1000,
+        y: nodeWithPosition.y - nodeDimensions[el.type].height / 2,
+      };
+    }
+
+    return el;
+  });
+};
+
+const useStyles = makeStyles((theme) =>
+  createStyles({
+    previewChip: {
+      minWidth: 160,
+      maxWidth: 210,
+    },
+  })
+);
 
 const onLoad = (reactFlowInstance) => {
   // console.log("flow loaded:", reactFlowInstance);
@@ -46,10 +119,10 @@ const SpecialNodeComponent = ({ data }) => {
     <div>
       <div
         style={{
-          background: `rgba(${data.color.r}, ${data.color.g}, ${data.color.b}, ${data.color.a})`,
+          borderColor: `rgba(${data.color.r}, ${data.color.g}, ${data.color.b}, ${data.color.a})`,
           color: "black",
           padding: 10,
-          border: "1px solid black",
+          border: `2px solid rgba(${data.color.r}, ${data.color.g}, ${data.color.b}, ${data.color.a})`,
           width: 150,
           minHeight: 10,
           borderRadius: "10px 10px 0px 0px",
@@ -85,7 +158,7 @@ const SpecialNodeComponent = ({ data }) => {
       <div
         style={{
           background: "white",
-          border: "1px solid black",
+          border: `2px solid rgba(${data.color.r}, ${data.color.g}, ${data.color.b}, ${data.color.a})`,
           color: "black",
           padding: 10,
           width: 150,
@@ -136,10 +209,10 @@ const OvalNodeComponent = ({ data }) => {
   return (
     <div
       style={{
-        background: `rgba(${data.color.r}, ${data.color.g}, ${data.color.b}, ${data.color.a})`,
+        borderColor: `rgba(${data.color.r}, ${data.color.g}, ${data.color.b}, ${data.color.a})`,
         color: "black",
         padding: 10,
-        border: "1px solid black",
+        border: `2px solid rgba(${data.color.r}, ${data.color.g}, ${data.color.b}, ${data.color.a})`,
         width: 150,
         minHeight: 70,
         textAlign: "center",
@@ -183,10 +256,10 @@ const RectangleNodeComponent = ({ data }) => {
   return (
     <div
       style={{
-        background: `rgba(${data.color.r}, ${data.color.g}, ${data.color.b}, ${data.color.a})`,
+        borderColor: `rgba(${data.color.r}, ${data.color.g}, ${data.color.b}, ${data.color.a})`,
         color: "black",
         padding: 10,
-        border: "1px solid black",
+        border: `2px solid rgba(${data.color.r}, ${data.color.g}, ${data.color.b}, ${data.color.a})`,
         width: 150,
         minHeight: 70,
         textAlign: "center",
@@ -231,10 +304,10 @@ const DiamondNodeComponent = ({ data }) => {
     <div>
       <div
         style={{
-          background: `rgba(${data.color.r}, ${data.color.g}, ${data.color.b}, ${data.color.a})`,
+          backgroundColor: "white",
           color: "black",
           padding: 10,
-          border: "1px solid black",
+          border: `2px solid rgba(${data.color.r}, ${data.color.g}, ${data.color.b}, ${data.color.a})`,
           width: 100,
           minHeight: 100,
           textAlign: "center",
@@ -288,6 +361,7 @@ const Canvas = ({ currentFile, selectedColor, edgeType }) => {
   const [editModeDescription, setEditModeDescription] = useState(false);
   const [isEditMode, setEditMode] = useState(false);
   const [open, setOpen] = useState(false);
+  const [openUpload, setOpenUpload] = React.useState(false);
   const [openNewNode, setOpenNewNode] = useState(false);
   const [tag, setTag] = useState("");
   const [displayColorPicker, setDisplayColorPicker] = useState(false);
@@ -297,10 +371,16 @@ const Canvas = ({ currentFile, selectedColor, edgeType }) => {
     b: "255",
     a: "100",
   });
+  const [toggledElements, setToggledElements] = useState([]);
+  const [targetElements, setTargetElements] = useState({});
+  const [isFirstTime, setFirstTime] = useState(true);
+  const [fileObjects, setFileObjects] = React.useState([]);
+  const [renderAlert, setRenderAlert] = useState({ value: false, msg: "" });
+  const [tags, setTags] = useState([]);
 
   const updateElementsDb = (newElements) => {
-    console.log("updating database....");
-    console.log(newElements);
+    // console.log("updating database....");
+    // console.log(newElements);
     fetch("http://127.0.0.1:8000/api/update-elements", {
       method: "POST",
       body: JSON.stringify({
@@ -313,7 +393,7 @@ const Canvas = ({ currentFile, selectedColor, edgeType }) => {
     })
       .then((res) => res.json())
       .then((json) => {
-        console.log(json.elements);
+        // console.log(json.elements);
         setElements(json.elements);
       });
   };
@@ -341,7 +421,131 @@ const Canvas = ({ currentFile, selectedColor, edgeType }) => {
   };
 
   const onElementClick = async (event, element) => {
-    setElementClicked(element);
+    if (isEditMode) {
+      setElementClicked(element);
+    }
+  };
+
+  const getAllOutgoers = (node, elements) => {
+    return getOutgoers(node, elements).reduce(
+      (memo, outgoer) => [
+        ...memo,
+        outgoer,
+        ...getAllOutgoers(outgoer, elements),
+      ],
+      []
+    );
+  };
+
+  const onNodeClick = async (event, element) => {
+    if (isEditMode === false) {
+      if (element.data.isCollapsable) {
+        let newElements = [...elements];
+        const children = getOutgoers(element, elements);
+        if (children.length > 0) {
+          const allOutgoers = getAllOutgoers(element, elements);
+          console.log(allOutgoers);
+          console.log(children);
+          if (children[0].isHidden) {
+            children.map((child) => {
+              const newChild = { ...child };
+              newChild.isHidden = false;
+              console.log(newChild);
+              newElements = newElements.map((u) => {
+                if (u.id !== child.id) {
+                  if (u.hasOwnProperty("target")) {
+                    if (u.target === child.id) {
+                      u.isHidden = false;
+                    }
+                  }
+                  return u;
+                } else {
+                  return newChild;
+                }
+              });
+              // newElements = newElements.map((u) => (u.id !== child.id ? u : newChild));
+            });
+          } else {
+            allOutgoers.map((child) => {
+              const newChild = { ...child };
+              newChild.isHidden = true;
+              console.log(newChild);
+              newElements = newElements.map((u) => {
+                if (u.id !== child.id) {
+                  if (u.hasOwnProperty("target")) {
+                    if (u.target === child.id) {
+                      u.isHidden = true;
+                    }
+                  }
+                  return u;
+                } else {
+                  return newChild;
+                }
+              });
+              // newElements = newElements.map((u) => (u.id !== child.id ? u : newChild));
+            });
+          }
+          console.log(newElements);
+          setElements(newElements);
+          updateNode(newElements);
+          // let _elements;
+          // if (Object.keys(targetElements).length > 0) {
+          //   _elements = JSON.parse(JSON.stringify(toggledElements));
+          // } else {
+          //   _elements = JSON.parse(JSON.stringify(elements));
+          // }
+          // if (!targetElements[element.id]) {
+          //   const targets = [];
+          //   _elements.forEach((elem) => {
+          //     if (elem["source"] !== undefined && elem.source === element.id) {
+          //       targets.push(elem.target);
+          //     }
+          //   });
+          //   console.log("targets", targets);
+          //   console.log("elements", _elements);
+          //   let firstLevelChildren;
+          //   firstLevelChildren = _elements.filter(
+          //     (elem) => elem.source !== element.id
+          //   );
+          //   // console.log('first-level-children-1', firstLevelChildren);
+          //   firstLevelChildren = firstLevelChildren.filter(
+          //     (elem) => !targets.includes(elem.id)
+          //   );
+          //   // console.log('first-level-children-2', firstLevelChildren);
+          //   firstLevelChildren.forEach((elem) => {
+          //     if (elem["source"] !== undefined && targets.includes(elem.source)) {
+          //       targets.push(elem.target);
+          //     }
+          //   });
+          //   setTargetElements({
+          //     [element.id]: targets,
+          //   });
+          //   firstLevelChildren = firstLevelChildren.filter(
+          //     (elem) => !targets.includes(elem.source)
+          //   );
+          //   // console.log('first-level-children-3', firstLevelChildren);
+          //   firstLevelChildren = firstLevelChildren.filter(
+          //     (elem) => !targets.includes(elem.id)
+          //   );
+          //   console.log("first-level-children-final", firstLevelChildren);
+          //   setToggledElements(firstLevelChildren);
+          // } else {
+          //   const firstLevelChildren = _elements.filter(
+          //     (elem) =>
+          //       elem.source === element.id ||
+          //       targetElements[element.id].includes(elem.id) ||
+          //       targetElements[element.id].includes(elem.source)
+          //   );
+          //   console.log("first-level-children", firstLevelChildren);
+          //   setToggledElements([...toggledElements, ...firstLevelChildren]);
+          //   const _targetElements = JSON.parse(JSON.stringify(targetElements));
+          //   delete _targetElements[element.id];
+          //   setTargetElements(_targetElements);
+          // }
+          // setElementClicked(element);
+        }
+      }
+    }
   };
 
   useEffect(() => {
@@ -356,14 +560,15 @@ const Canvas = ({ currentFile, selectedColor, edgeType }) => {
     })
       .then((res) => res.json())
       .then((json) => {
-        console.log(json.elements, "the bugggggggggggg");
+        console.log("testtttttttttt", json);
         setElements(json.elements);
+        setTags(json.tags);
       });
   }, [currentFile]);
 
   const onNodeDragStop = (event, node) => {
     const newElements = [...elements];
-    console.log(newElements);
+    // console.log(newElements);
     newElements.map((element) => {
       if (element.id === node.id) {
         element.position = node.position;
@@ -374,7 +579,7 @@ const Canvas = ({ currentFile, selectedColor, edgeType }) => {
   };
 
   const handleClose = () => {
-    setOpen(false);
+    setOpenNewNode(false);
   };
 
   const handleChangeTag = (event) => {
@@ -456,6 +661,7 @@ const Canvas = ({ currentFile, selectedColor, edgeType }) => {
       newCurrent.elements = update;
     }
     setElements(update);
+    updateElementsDb(update);
     setElementClicked({});
   };
 
@@ -481,8 +687,10 @@ const Canvas = ({ currentFile, selectedColor, edgeType }) => {
         title: "title",
         description: type === "special" ? "A description" : null,
         color: selectedColor,
+        isCollapsable: true,
         tags: [],
       },
+      isHidden: true,
       position: { x: 100, y: 0 },
     });
     const newCurrent = { ...currentFile };
@@ -509,6 +717,14 @@ const Canvas = ({ currentFile, selectedColor, edgeType }) => {
     setElements(newElements);
     updateNode();
   };
+
+  // useEffect(() => {
+  //   if (elements.length > 0) {
+  //   }
+  // }, [elements]);
+
+  // console.log('target-elements', targetElements);
+  // console.log('toggled-elemetns', toggledElements);
 
   const styles = reactCSS({
     default: {
@@ -540,10 +756,48 @@ const Canvas = ({ currentFile, selectedColor, edgeType }) => {
   });
 
   const handleChangeSwitch = () => {
+    setFirstTime(true);
     setEditMode(!isEditMode);
   };
 
-  console.log(elements);
+  const handleChangeCollapsable = () => {
+    console.log("YYYYYYYYYYYYYGUKB");
+    const newElements = [...elements];
+    newElements.map((element) => {
+      if (element.id === elementCLicked.id) {
+        console.log(!element.data.isCollapsable);
+        element.data.isCollapsable = !element.data.isCollapsable;
+        setElementClicked(element);
+      }
+    });
+    updateNode(newElements);
+  };
+
+  const checkTags = (tags2Check) => {
+    console.log(tags);
+    if (tags2Check.length === 0) {
+      return [];
+    } else {
+      const newTags = tags2Check.split(",");
+      if (tags.length === 0) {
+        return {
+          value: true,
+          msg: "One or more of the tags provided does not exist.",
+        };
+      }
+      newTags.map((tag) => {
+        if (!tags.includes(tag)) {
+          return {
+            value: true,
+            msg: "One or more of the tags provided does not exist.",
+          };
+        }
+      });
+      return newTags;
+    }
+  };
+
+  console.log("elements", elements);
 
   let filteredElements;
 
@@ -554,14 +808,36 @@ const Canvas = ({ currentFile, selectedColor, edgeType }) => {
     filteredElements = elements.filter((data) => {
       return data.node === currentFile.id || data.source;
     });
+    filteredElements.sort((a, b) => {
+      if (a.hasOwnProperty("data") && b.hasOwnProperty("data")) {
+        return parseInt(a.id.slice(11)) - parseInt(b.id.slice(11));
+      }
+    });
+    if (!isEditMode) {
+      if (isFirstTime) {
+        console.log(filteredElements);
+        const newFilteredElements = filteredElements.slice(1);
+        newFilteredElements.map((element) => {
+          element.isHidden = true;
+        });
+        setFirstTime(false);
+      }
+    } else {
+      filteredElements.map((element) => {
+        element.isHidden = false;
+      });
+    }
   }
+  console.log(filteredElements);
+  console.log(elements);
+  const classes = useStyles();
 
   if (currentFile === null) {
     return <div></div>;
   } else {
     return (
       <>
-        <Grid container spacing={3}>
+        <Grid container spacing={3} style={{ width: "80%" }}>
           <Grid item xs={4} style={{ textAlign: "start" }}>
             {isEditMode && (
               <>
@@ -581,7 +857,7 @@ const Canvas = ({ currentFile, selectedColor, edgeType }) => {
                   open={openNewNode}
                   onClose={handleClose}
                   aria-labelledby="form-dialog-title"
-                  style={{ overflow: "hidden" }}
+                  // style={{ overflow: "hidden" }}
                 >
                   <DialogTitle
                     id="form-dialog-title"
@@ -727,16 +1003,190 @@ const Canvas = ({ currentFile, selectedColor, edgeType }) => {
                     color="primary"
                     style={{ marginLeft: 60 }}
                     onClick={() => {
-                      console.log(
-                        elements,
-                        "t8934ufjhn888ewhyobfo8ulh74uilw748ofulufo47fuligo7t357grlgt57grsg7rsty7osrlgwyot7rswy7hsgywo7hrlgwy7oglyo4rhgyotrglyo4rgyot7r"
-                      );
+                      // console.log(
+                      //   elements,
+                      //   "t8934ufjhn888ewhyobfo8ulh74uilw748ofulufo47fuligo7t357grlgt57grsg7rsty7osrlgwyot7rswy7hsgywo7hrlgwy7oglyo4rhgyotrglyo4rgyot7r"
+                      // );
                       updateElementsDb([...elements]);
                     }}
                   >
                     Save
                   </Button>
                 )}
+                <Button
+                  variant="contained"
+                  color="primary"
+                  style={{ marginLeft: isEditMode ? 10 : 60 }}
+                  startIcon={<CloudUploadIcon />}
+                  onClick={() => {
+                    setOpenUpload(true);
+                  }}
+                >
+                  Import CSV
+                </Button>
+                <DropzoneDialogBase
+                  clearOnUnmount={true}
+                  filesLimit={1}
+                  dialogTitle={
+                    <>
+                      {console.log(renderAlert)}
+                      {renderAlert.value && (
+                        <Alert severity="error">{renderAlert.msg}</Alert>
+                      )}
+                      <span>Upload file</span>
+                      <IconButton
+                        style={{
+                          right: "12px",
+                          top: "8px",
+                          position: "absolute",
+                        }}
+                        onClick={() => setOpenUpload(false)}
+                      >
+                        <CloseIcon />
+                      </IconButton>
+                    </>
+                  }
+                  acceptedFiles={[".csv"]}
+                  fileObjects={fileObjects}
+                  cancelButtonText={"cancel"}
+                  showAlerts={["error", "info"]}
+                  submitButtonText={"submit"}
+                  maxFileSize={5000000}
+                  open={openUpload}
+                  onAdd={(newFileObjs) => {
+                    console.log("onAdd", newFileObjs);
+                    if (fileObjects.length === 0) {
+                      setFileObjects([].concat(fileObjects, newFileObjs));
+                    }
+                  }}
+                  onDelete={(deleteFileObj) => {
+                    const newFilesObjects = [...fileObjects].filter(
+                      (item) => item !== deleteFileObj
+                    );
+                    setFileObjects(newFilesObjects);
+                    console.log("onDelete", deleteFileObj);
+                  }}
+                  onClose={() => setOpenUpload(false)}
+                  onSave={() => {
+                    console.log(fileObjects[0]);
+                    Papa.parse(fileObjects[0].file, {
+                      complete: function (results) {
+                        let data = results.data;
+                        let jsonArr = [];
+                        const ids = {};
+                        const children = {};
+                        data = data.slice(1);
+                        data.map((element) => {
+                          const checkedTags = checkTags(element[4]);
+                          console.log(checkedTags, "7777777777777777777");
+                          console.log(element[5]);
+                          if (
+                            [
+                              "special",
+                              "oval",
+                              "rectangle",
+                              "diamond",
+                            ].includes(element[5].toLowerCase())
+                          ) {
+                            console.log(
+                              typeof checkedTags,
+                              "888888888888888888888888"
+                            );
+                            if (Array.isArray(checkedTags)) {
+                              ids[element[0]] = getNodeId();
+                              jsonArr.push({
+                                id: ids[element[0]],
+                                node: currentFile.id,
+                                type: element[5],
+                                data: {
+                                  title: element[1],
+                                  description:
+                                    element[2].length === 0 ? null : element[2],
+                                  color: {
+                                    r: "193",
+                                    g: "230",
+                                    b: "255",
+                                    a: "100",
+                                  },
+                                  tags: checkedTags,
+                                  isCollapsable:
+                                    element[6] === "TRUE" ? true : false,
+                                },
+                                isHidden: false,
+                                position: { x: 0, y: 0 },
+                              });
+                              if (element[7].length > 0) {
+                                if (element[7].includes(",")) {
+                                  const csvChildren = element[7].split(",");
+                                  csvChildren.map((child) => {
+                                    children[element[0]] = child;
+                                  });
+                                }
+                              }
+                            } else {
+                              console.log(checkedTags);
+                              // setRenderAlert(checkedTags);
+                              setRenderAlert({
+                                value: true,
+                                msg: "One or more of the tags provided does not exist.",
+                              });
+                            }
+                          } else {
+                            console.log("test");
+                            setRenderAlert({
+                              value: true,
+                              msg: "A type of shape in the file does not exist.",
+                            });
+                          }
+                        });
+                        console.log(jsonArr);
+                        console.log("Finished:", results.data);
+                        console.log("onSave", fileObjects);
+                        console.log(jsonArr.length);
+                        if (jsonArr.length === data.length) {
+                          console.log(ids);
+                          console.log(children);
+                          for (var key in children) {
+                            if (children.hasOwnProperty(key)) {
+                              const edge = addEdge(
+                                {
+                                  source: ids[key],
+                                  target: ids[children[key]],
+                                },
+                                jsonArr
+                              );
+                              jsonArr = edge;
+                            }
+                          }
+                          const layoutedElements = getLayoutedElements(jsonArr);
+                          setElements(layoutedElements);
+                          updateNode(layoutedElements);
+                          console.log(jsonArr);
+                          setOpenUpload(false);
+                        }
+                      },
+                    });
+                  }}
+                  showPreviewsInDropzone={false}
+                  useChipsForPreview
+                  previewGridProps={{
+                    container: { spacing: 1, direction: "row" },
+                  }}
+                  previewChipProps={{ classes: { root: classes.previewChip } }}
+                  showFileNamesInPreview={true}
+                />
+                <Snackbar
+                  open={renderAlert.value}
+                  autoHideDuration={5000}
+                  onClose={() => setRenderAlert({ value: false, msg: "" })}
+                >
+                  <Alert
+                    onClose={() => setRenderAlert({ value: false, msg: "" })}
+                    severity="error"
+                  >
+                    {renderAlert.msg}
+                  </Alert>
+                </Snackbar>
               </Grid>
             </Typography>
           </Grid>
@@ -749,9 +1199,15 @@ const Canvas = ({ currentFile, selectedColor, edgeType }) => {
             rectangle: RectangleNodeComponent,
             diamond: DiamondNodeComponent,
           }}
-          elements={filteredElements}
+          elements={
+            Object.keys(targetElements).length !== 0
+              ? toggledElements
+              : filteredElements
+          }
+          // elements={filteredElements}
           onElementsRemove={onElementsRemove}
           onNodeDoubleClick={onElementClick}
+          onElementClick={onNodeClick}
           onNodeDragStop={onNodeDragStop}
           connectionLineType={edgeType}
           onPaneContextMenu={() => setOpenNewNode(true)}
@@ -941,6 +1397,26 @@ const Canvas = ({ currentFile, selectedColor, edgeType }) => {
                       />
                     ))}
 
+                  <Divider orientation="horizontal" style={{ marginTop: 10 }} />
+                  <Typography component="div">
+                    <Grid
+                      component="label"
+                      container
+                      alignItems="center"
+                      spacing={1}
+                      style={{ paddingTop: 20, paddingLeft: 40 }}
+                    >
+                      <Grid item>
+                        <Switch
+                          color="primary"
+                          checked={elementCLicked.data.isCollapsable}
+                          onChange={handleChangeCollapsable}
+                          name="checked"
+                        />
+                      </Grid>
+                      <Grid item>Collapsable</Grid>
+                    </Grid>
+                  </Typography>
                   <Divider orientation="horizontal" style={{ marginTop: 10 }} />
                   <Grid
                     item

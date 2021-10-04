@@ -247,13 +247,11 @@ const SideBar = ({
     updateFilesDb(newFiles);
     localStorage.setItem("files", JSON.stringify(newFiles));
     localStorage.removeItem("current");
-    setCurrentFile({});
-    const elements = JSON.parse(localStorage.getItem("elements"));
-    const newElements = elements.filter((data) => {
+    const newElements = currentFile.elements.filter((data) => {
       return currentFile.id !== data.node;
     });
+    setCurrentFile({});
     updateElementsDb(newElements);
-    localStorage.setItem("elements", JSON.stringify(newElements));
   };
 
   const handleChangeTag = (event) => {
