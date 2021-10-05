@@ -23,7 +23,7 @@ function App() {
   const [edgeType, setEdgeType] = useState("smoothstep");
 
   const updateSessionDb = (session) => {
-    fetch("http://127.0.0.1:8000/api/update-session", {
+    fetch("https://flowchart-backend.herokuapp.com/api/update-session", {
       method: "POST",
       body: JSON.stringify({ session_id: session }),
       headers: {

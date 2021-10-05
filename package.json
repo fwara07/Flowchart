@@ -13,6 +13,7 @@
     "dagre": "^0.8.5",
     "devextreme": "^21.1.5",
     "devextreme-react": "^21.1.5",
+    "gh-pages": "^3.2.3",
     "jsonwebtoken": "^8.5.1",
     "material-ui-dropzone": "^3.5.0",
     "react": "^17.0.2",
@@ -50,8 +51,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "gh-pages": "^3.2.3"
   }
 }

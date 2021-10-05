@@ -381,7 +381,7 @@ const Canvas = ({ currentFile, selectedColor, edgeType }) => {
     // console.log("updating database....");
     // console.log(newElements);
     console.log(currentFile);
-    fetch("http://127.0.0.1:8000/api/update-elements", {
+    fetch("https://flowchart-backend.herokuapp.com/api/update-elements", {
       method: "POST",
       body: JSON.stringify({
         session_id: localStorage.getItem("session"),
@@ -551,7 +551,7 @@ const Canvas = ({ currentFile, selectedColor, edgeType }) => {
   };
 
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/api/get-user-info", {
+    fetch("https://flowchart-backend.herokuapp.com/api/get-user-info", {
       method: "POST",
       body: JSON.stringify({
         session_id: localStorage.getItem("session"),

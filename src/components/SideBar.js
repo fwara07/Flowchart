@@ -107,7 +107,7 @@ const SideBar = ({
 
   const updateFilesDb = (newElements) => {
     console.log("updating database....");
-    fetch("http://127.0.0.1:8000/api/update-files", {
+    fetch("https://flowchart-backend.herokuapp.com/api/update-files", {
       method: "POST",
       body: JSON.stringify({
         session_id: localStorage.getItem("session"),
@@ -129,7 +129,7 @@ const SideBar = ({
 
   const updateNamesDb = (newNames) => {
     console.log("updating database....");
-    fetch("http://127.0.0.1:8000/api/update-names", {
+    fetch("https://flowchart-backend.herokuapp.com/api/update-names", {
       method: "POST",
       body: JSON.stringify({
         session_id: localStorage.getItem("session"),
@@ -145,7 +145,7 @@ const SideBar = ({
 
   const updateElementsDb = (newElements, isDelete = false) => {
     console.log("updating database....");
-    fetch("http://127.0.0.1:8000/api/update-elements", {
+    fetch("https://flowchart-backend.herokuapp.com/api/update-elements", {
       method: "POST",
       body: JSON.stringify({
         session_id: localStorage.getItem("session"),
@@ -163,7 +163,7 @@ const SideBar = ({
 
   const updateTagsDb = (newTags) => {
     console.log("updating database....");
-    fetch("http://127.0.0.1:8000/api/update-tags", {
+    fetch("https://flowchart-backend.herokuapp.com/api/update-tags", {
       method: "POST",
       body: JSON.stringify({
         session_id: localStorage.getItem("session"),
