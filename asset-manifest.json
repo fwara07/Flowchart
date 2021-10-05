@@ -1,23 +1,23 @@
 {
   "files": {
-    "main.css": "/Flowchart/static/css/main.eb2daafa.chunk.css",
-    "main.js": "/Flowchart/static/js/main.4cf69ab9.chunk.js",
-    "main.js.map": "/Flowchart/static/js/main.4cf69ab9.chunk.js.map",
-    "runtime-main.js": "/Flowchart/static/js/runtime-main.a2c46a01.js",
-    "runtime-main.js.map": "/Flowchart/static/js/runtime-main.a2c46a01.js.map",
-    "static/css/2.9d345820.chunk.css": "/Flowchart/static/css/2.9d345820.chunk.css",
-    "static/js/2.7ff41cc1.chunk.js": "/Flowchart/static/js/2.7ff41cc1.chunk.js",
-    "static/js/2.7ff41cc1.chunk.js.map": "/Flowchart/static/js/2.7ff41cc1.chunk.js.map",
-    "index.html": "/Flowchart/index.html",
-    "static/css/2.9d345820.chunk.css.map": "/Flowchart/static/css/2.9d345820.chunk.css.map",
-    "static/css/main.eb2daafa.chunk.css.map": "/Flowchart/static/css/main.eb2daafa.chunk.css.map",
-    "static/js/2.7ff41cc1.chunk.js.LICENSE.txt": "/Flowchart/static/js/2.7ff41cc1.chunk.js.LICENSE.txt",
-    "static/media/dx.light.css": "/Flowchart/static/media/dxicons.d8b3a23c.ttf"
+    "main.css": "/flowchart/static/css/main.eb2daafa.chunk.css",
+    "main.js": "/flowchart/static/js/main.4cf69ab9.chunk.js",
+    "main.js.map": "/flowchart/static/js/main.4cf69ab9.chunk.js.map",
+    "runtime-main.js": "/flowchart/static/js/runtime-main.f9c5fb51.js",
+    "runtime-main.js.map": "/flowchart/static/js/runtime-main.f9c5fb51.js.map",
+    "static/css/2.9a639276.chunk.css": "/flowchart/static/css/2.9a639276.chunk.css",
+    "static/js/2.2321367a.chunk.js": "/flowchart/static/js/2.2321367a.chunk.js",
+    "static/js/2.2321367a.chunk.js.map": "/flowchart/static/js/2.2321367a.chunk.js.map",
+    "index.html": "/flowchart/index.html",
+    "static/css/2.9a639276.chunk.css.map": "/flowchart/static/css/2.9a639276.chunk.css.map",
+    "static/css/main.eb2daafa.chunk.css.map": "/flowchart/static/css/main.eb2daafa.chunk.css.map",
+    "static/js/2.2321367a.chunk.js.LICENSE.txt": "/flowchart/static/js/2.2321367a.chunk.js.LICENSE.txt",
+    "static/media/dx.light.css": "/flowchart/static/media/dxicons.d8b3a23c.ttf"
   },
   "entrypoints": [
-    "static/js/runtime-main.a2c46a01.js",
-    "static/css/2.9d345820.chunk.css",
-    "static/js/2.7ff41cc1.chunk.js",
+    "static/js/runtime-main.f9c5fb51.js",
+    "static/css/2.9a639276.chunk.css",
+    "static/js/2.2321367a.chunk.js",
     "static/css/main.eb2daafa.chunk.css",
     "static/js/main.4cf69ab9.chunk.js"
   ]
