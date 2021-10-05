@@ -53,13 +53,14 @@ dagreGraph.setDefaultEdgeLabel(() => ({}));
 // In a real world app you would use the correct width and height values of
 // const nodes = useStoreState(state => state.nodes) and then node.__rf.width, node.__rf.height
 
-const nodeDimensions = {
-  special: { width: 50, height: 150 },
-  rectangle: { width: 150, height: 70 },
-  oval: { width: 150, height: 70 },
-  diamond: { width: 100, height: 100 },
-};
-
+// const nodeDimensions = {
+//   special: { width: 50, height: 150 },
+//   rectangle: { width: 150, height: 70 },
+//   oval: { width: 150, height: 70 },
+//   diamond: { width: 100, height: 100 },
+// };
+const nodeWidth = 170;
+const nodeHeight = 170;
 const getLayoutedElements = (elements, direction = "TB") => {
   const isHorizontal = direction === "LR";
   dagreGraph.setGraph({ rankdir: direction });
@@ -67,8 +68,8 @@ const getLayoutedElements = (elements, direction = "TB") => {
   elements.forEach((el) => {
     if (isNode(el)) {
       dagreGraph.setNode(el.id, {
-        width: nodeDimensions[el.type].width,
-        height: nodeDimensions[el.type].height,
+        width: nodeWidth,
+        height: nodeHeight,
       });
     } else {
       dagreGraph.setEdge(el.source, el.target);
@@ -87,11 +88,8 @@ const getLayoutedElements = (elements, direction = "TB") => {
       // to notify react flow about the change. Moreover we are shifting the dagre node position
       // (anchor=center center) to the top left so it matches the react flow node anchor point (top left).
       el.position = {
-        x:
-          nodeWithPosition.x -
-          nodeDimensions[el.type].width / 2 +
-          Math.random() / 1000,
-        y: nodeWithPosition.y - nodeDimensions[el.type].height / 2,
+        x: nodeWithPosition.x - nodeWidth / 2 + Math.random() / 1000,
+        y: nodeWithPosition.y - nodeHeight / 2,
       };
     }
 
@@ -377,14 +375,18 @@ const Canvas = ({ currentFile, selectedColor, edgeType }) => {
   const [fileObjects, setFileObjects] = React.useState([]);
   const [renderAlert, setRenderAlert] = useState({ value: false, msg: "" });
   const [tags, setTags] = useState([]);
+  const [csv, setCsv] = useState(false);
 
-  const updateElementsDb = (newElements) => {
+  const updateElementsDb = (newElements, currentFile, isDelete = false) => {
     // console.log("updating database....");
     // console.log(newElements);
+    console.log(currentFile);
     fetch("http://127.0.0.1:8000/api/update-elements", {
       method: "POST",
       body: JSON.stringify({
         session_id: localStorage.getItem("session"),
+        file: currentFile.id,
+        isDelete: isDelete,
         elements: newElements,
       }),
       headers: {
@@ -393,7 +395,7 @@ const Canvas = ({ currentFile, selectedColor, edgeType }) => {
     })
       .then((res) => res.json())
       .then((json) => {
-        // console.log(json.elements);
+        console.log(json.elements);
         setElements(json.elements);
       });
   };
@@ -561,7 +563,18 @@ const Canvas = ({ currentFile, selectedColor, edgeType }) => {
       .then((res) => res.json())
       .then((json) => {
         console.log("testtttttttttt", json);
-        setElements(json.elements);
+        let newElements = [];
+        if (json.elements.length === 0) {
+          newElements = [];
+        } else {
+          if (json.elements.hasOwnProperty(currentFile.id)) {
+            newElements = json.elements[currentFile.id];
+          } else {
+            newElements = [];
+          }
+        }
+        console.log(newElements);
+        setElements(newElements);
         setTags(json.tags);
       });
   }, [currentFile]);
@@ -661,7 +674,7 @@ const Canvas = ({ currentFile, selectedColor, edgeType }) => {
       newCurrent.elements = update;
     }
     setElements(update);
-    updateElementsDb(update);
+    updateElementsDb(update, currentFile);
     setElementClicked({});
   };
 
@@ -669,13 +682,14 @@ const Canvas = ({ currentFile, selectedColor, edgeType }) => {
     setEditModeDescription(true);
   };
 
-  const getNodeId = () => `randomnode_${+new Date()}`;
+  const getNodeId = () => `randomnode_${+new Date() + Math.random()}`;
 
   const updateNode = (element = elements) => {
     const newElements = [...element];
     const newCurrent = { ...currentFile };
     newCurrent.elements = newElements;
     setElements(newElements);
+    updateElementsDb(newElements, currentFile);
   };
   const addNode = (type) => {
     let newElements = elements ? [...elements] : [];
@@ -690,7 +704,7 @@ const Canvas = ({ currentFile, selectedColor, edgeType }) => {
         isCollapsable: true,
         tags: [],
       },
-      isHidden: true,
+      isHidden: false,
       position: { x: 100, y: 0 },
     });
     const newCurrent = { ...currentFile };
@@ -810,23 +824,23 @@ const Canvas = ({ currentFile, selectedColor, edgeType }) => {
     });
     filteredElements.sort((a, b) => {
       if (a.hasOwnProperty("data") && b.hasOwnProperty("data")) {
-        return parseInt(a.id.slice(11)) - parseInt(b.id.slice(11));
+        return parseInt(a.id.slice(11, 24)) - parseInt(b.id.slice(11, 24));
       }
     });
-    if (!isEditMode) {
-      if (isFirstTime) {
-        console.log(filteredElements);
-        const newFilteredElements = filteredElements.slice(1);
-        newFilteredElements.map((element) => {
-          element.isHidden = true;
-        });
-        setFirstTime(false);
-      }
-    } else {
-      filteredElements.map((element) => {
-        element.isHidden = false;
-      });
-    }
+    // if (!isEditMode) {
+    //     if (isFirstTime) {
+    //       console.log(filteredElements);
+    //       const newFilteredElements = filteredElements.slice(1);
+    //       newFilteredElements.map((element) => {
+    //         element.isHidden = true;
+    //       });
+    //       setFirstTime(false);
+    //     }
+    // } else {
+    //   filteredElements.map((element) => {
+    //     element.isHidden = false;
+    //   });
+    // }
   }
   console.log(filteredElements);
   console.log(elements);
@@ -1007,7 +1021,7 @@ const Canvas = ({ currentFile, selectedColor, edgeType }) => {
                       //   elements,
                       //   "t8934ufjhn888ewhyobfo8ulh74uilw748ofulufo47fuligo7t357grlgt57grsg7rsty7osrlgwyot7rswy7hsgywo7hrlgwy7oglyo4rhgyotrglyo4rgyot7r"
                       // );
-                      updateElementsDb([...elements]);
+                      updateElementsDb([...elements], currentFile);
                     }}
                   >
                     Save
@@ -1088,10 +1102,6 @@ const Canvas = ({ currentFile, selectedColor, edgeType }) => {
                               "diamond",
                             ].includes(element[5].toLowerCase())
                           ) {
-                            console.log(
-                              typeof checkedTags,
-                              "888888888888888888888888"
-                            );
                             if (Array.isArray(checkedTags)) {
                               ids[element[0]] = getNodeId();
                               jsonArr.push({
@@ -1118,9 +1128,7 @@ const Canvas = ({ currentFile, selectedColor, edgeType }) => {
                               if (element[7].length > 0) {
                                 if (element[7].includes(",")) {
                                   const csvChildren = element[7].split(",");
-                                  csvChildren.map((child) => {
-                                    children[element[0]] = child;
-                                  });
+                                  children[element[0]] = csvChildren;
                                 }
                               }
                             } else {
@@ -1148,20 +1156,36 @@ const Canvas = ({ currentFile, selectedColor, edgeType }) => {
                           console.log(children);
                           for (var key in children) {
                             if (children.hasOwnProperty(key)) {
-                              const edge = addEdge(
-                                {
-                                  source: ids[key],
-                                  target: ids[children[key]],
-                                },
-                                jsonArr
-                              );
-                              jsonArr = edge;
+                              if (Array.isArray(children[key])) {
+                                children[key].map((child) => {
+                                  const edge = addEdge(
+                                    {
+                                      source: ids[key],
+                                      target: ids[child],
+                                    },
+                                    jsonArr
+                                  );
+                                  console.log(edge);
+                                  jsonArr = edge;
+                                });
+                              } else {
+                                const edge = addEdge(
+                                  {
+                                    source: ids[key],
+                                    target: ids[children[key]],
+                                  },
+                                  jsonArr
+                                );
+                                console.log(edge);
+                                jsonArr = edge;
+                              }
                             }
                           }
                           const layoutedElements = getLayoutedElements(jsonArr);
                           setElements(layoutedElements);
                           updateNode(layoutedElements);
                           console.log(jsonArr);
+                          setCsv(true);
                           setOpenUpload(false);
                         }
                       },

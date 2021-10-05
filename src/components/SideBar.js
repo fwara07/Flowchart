@@ -143,12 +143,14 @@ const SideBar = ({
       .then((json) => setNames(json.names));
   };
 
-  const updateElementsDb = (newElements) => {
+  const updateElementsDb = (newElements, isDelete = false) => {
     console.log("updating database....");
     fetch("http://127.0.0.1:8000/api/update-elements", {
       method: "POST",
       body: JSON.stringify({
         session_id: localStorage.getItem("session"),
+        file: currentFile.id,
+        isDelete: isDelete,
         elements: newElements,
       }),
       headers: {
@@ -251,7 +253,7 @@ const SideBar = ({
       return currentFile.id !== data.node;
     });
     setCurrentFile({});
-    updateElementsDb(newElements);
+    updateElementsDb(newElements, true);
   };
 
   const handleChangeTag = (event) => {
