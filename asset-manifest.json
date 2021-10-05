@@ -1,23 +1,23 @@
 {
   "files": {
-    "main.css": "/react-gh-pages/static/css/main.eb2daafa.chunk.css",
-    "main.js": "/react-gh-pages/static/js/main.ca4dc2d7.chunk.js",
-    "main.js.map": "/react-gh-pages/static/js/main.ca4dc2d7.chunk.js.map",
-    "runtime-main.js": "/react-gh-pages/static/js/runtime-main.08a35ffc.js",
-    "runtime-main.js.map": "/react-gh-pages/static/js/runtime-main.08a35ffc.js.map",
-    "static/css/2.a7c24f99.chunk.css": "/react-gh-pages/static/css/2.a7c24f99.chunk.css",
-    "static/js/2.2133e59e.chunk.js": "/react-gh-pages/static/js/2.2133e59e.chunk.js",
-    "static/js/2.2133e59e.chunk.js.map": "/react-gh-pages/static/js/2.2133e59e.chunk.js.map",
-    "index.html": "/react-gh-pages/index.html",
-    "static/css/2.a7c24f99.chunk.css.map": "/react-gh-pages/static/css/2.a7c24f99.chunk.css.map",
-    "static/css/main.eb2daafa.chunk.css.map": "/react-gh-pages/static/css/main.eb2daafa.chunk.css.map",
-    "static/js/2.2133e59e.chunk.js.LICENSE.txt": "/react-gh-pages/static/js/2.2133e59e.chunk.js.LICENSE.txt",
-    "static/media/dx.light.css": "/react-gh-pages/static/media/dxicons.d8b3a23c.ttf"
+    "main.css": "/Flowchart/static/css/main.eb2daafa.chunk.css",
+    "main.js": "/Flowchart/static/js/main.ca4dc2d7.chunk.js",
+    "main.js.map": "/Flowchart/static/js/main.ca4dc2d7.chunk.js.map",
+    "runtime-main.js": "/Flowchart/static/js/runtime-main.a2c46a01.js",
+    "runtime-main.js.map": "/Flowchart/static/js/runtime-main.a2c46a01.js.map",
+    "static/css/2.9d345820.chunk.css": "/Flowchart/static/css/2.9d345820.chunk.css",
+    "static/js/2.7ff41cc1.chunk.js": "/Flowchart/static/js/2.7ff41cc1.chunk.js",
+    "static/js/2.7ff41cc1.chunk.js.map": "/Flowchart/static/js/2.7ff41cc1.chunk.js.map",
+    "index.html": "/Flowchart/index.html",
+    "static/css/2.9d345820.chunk.css.map": "/Flowchart/static/css/2.9d345820.chunk.css.map",
+    "static/css/main.eb2daafa.chunk.css.map": "/Flowchart/static/css/main.eb2daafa.chunk.css.map",
+    "static/js/2.7ff41cc1.chunk.js.LICENSE.txt": "/Flowchart/static/js/2.7ff41cc1.chunk.js.LICENSE.txt",
+    "static/media/dx.light.css": "/Flowchart/static/media/dxicons.d8b3a23c.ttf"
   },
   "entrypoints": [
-    "static/js/runtime-main.08a35ffc.js",
-    "static/css/2.a7c24f99.chunk.css",
-    "static/js/2.2133e59e.chunk.js",
+    "static/js/runtime-main.a2c46a01.js",
+    "static/css/2.9d345820.chunk.css",
+    "static/js/2.7ff41cc1.chunk.js",
     "static/css/main.eb2daafa.chunk.css",
     "static/js/main.ca4dc2d7.chunk.js"
   ]
