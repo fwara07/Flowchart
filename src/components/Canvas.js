@@ -588,7 +588,6 @@ const Canvas = ({ currentFile, selectedColor, edgeType }) => {
       }
     });
     setElements(newElements);
-    updateNode();
   };
 
   const handleClose = () => {
