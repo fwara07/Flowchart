@@ -123,7 +123,7 @@ const SideBar = ({
           json,
           "ndsojdmsio99999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999"
         );
-        setFiles(json.files);
+        setFiles(JSON.parse(json.files));
       });
   };
 
