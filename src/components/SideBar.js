@@ -208,7 +208,7 @@ const SideBar = ({
         setError({ value: true, msg: "File name must be unique." });
       } else {
         const newFiles = [...files];
-        if (!"parentId" in newFiles[0]) {
+        if (newFiles[0].hasOwnProperty("parentId")) {
           setError({
             value: true,
             msg: "You must have folder to create a file.",
