@@ -396,7 +396,7 @@ const Canvas = ({ currentFile, selectedColor, edgeType }) => {
       .then((res) => res.json())
       .then((json) => {
         console.log(json.elements);
-        setElements(json.elements);
+        setElements(JSON.parse(json.elements));
       });
   };
 
