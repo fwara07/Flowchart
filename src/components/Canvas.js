@@ -563,7 +563,7 @@ const Canvas = ({ currentFile, selectedColor, edgeType }) => {
       .then((json) => {
         console.log("testtttttttttt", json);
         let newElements = [];
-        jsonElements = JSON.parse(json.elements);
+        const jsonElements = JSON.parse(json.elements);
         if (jsonElements.length === 0) {
           newElements = [];
         } else {
