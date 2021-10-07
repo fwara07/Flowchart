@@ -566,7 +566,7 @@ const Canvas = ({ currentFile, selectedColor, edgeType }) => {
         if (json.elements.length === 0) {
           newElements = [];
         } else {
-          if (json.elements.hasOwnProperty(currentFile.id)) {
+          if (JSON.parse(json.elements).hasOwnProperty(currentFile.id)) {
             newElements = json.elements[currentFile.id];
           } else {
             newElements = [];
@@ -574,7 +574,7 @@ const Canvas = ({ currentFile, selectedColor, edgeType }) => {
         }
         console.log(newElements);
         setElements(newElements);
-        setTags(json.tags);
+        setTags(JSON.parse(json.tags));
       });
   }, [currentFile]);
 
