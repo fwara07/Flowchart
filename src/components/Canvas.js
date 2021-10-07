@@ -609,7 +609,7 @@ const Canvas = ({ currentFile, selectedColor, edgeType }) => {
       }
     });
     await setElements(newElements);
-    updateNode();
+    updateNode(newElements);
     // localStorage.setItem("elements", JSON.stringify(newElements));
     setOpen(false);
   };
@@ -628,7 +628,7 @@ const Canvas = ({ currentFile, selectedColor, edgeType }) => {
       }
     });
     setElements(newElements);
-    updateNode();
+    updateNode(newElements);
     // const newElements = [...elements];
     // newElements.map((element) => {
     //   if (element.id === event.target.name) {
@@ -651,7 +651,7 @@ const Canvas = ({ currentFile, selectedColor, edgeType }) => {
       }
     });
     setElements(newElements);
-    updateNode();
+    updateNode(newElements);
     // const newElements = [...elements];
     // newElements.map((element) => {
     //   if (element.id === event.target.name) {
@@ -727,7 +727,7 @@ const Canvas = ({ currentFile, selectedColor, edgeType }) => {
       }
     });
     setElements(newElements);
-    updateNode();
+    updateNode(newElements);
   };
 
   // useEffect(() => {
@@ -1019,7 +1019,7 @@ const Canvas = ({ currentFile, selectedColor, edgeType }) => {
                       //   elements,
                       //   "t8934ufjhn888ewhyobfo8ulh74uilw748ofulufo47fuligo7t357grlgt57grsg7rsty7osrlgwyot7rswy7hsgywo7hrlgwy7oglyo4rhgyotrglyo4rgyot7r"
                       // );
-                      updateElementsDb([...elements], currentFile);
+                      updateNode([...elements]);
                     }}
                   >
                     Save
