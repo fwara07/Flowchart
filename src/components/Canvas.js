@@ -407,7 +407,7 @@ const Canvas = ({ currentFile, selectedColor, edgeType }) => {
     const newCurrent = { ...currentFile };
     newCurrent.elements = update;
     setElements(update);
-    updateNode();
+    updateNode(update);
   };
 
   const onConnect = async (params) => {
