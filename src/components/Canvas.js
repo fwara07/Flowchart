@@ -419,7 +419,6 @@ const Canvas = ({ currentFile, selectedColor, edgeType }) => {
     // console.log(newParams, "**********8");
     const edge = await addEdge(newParams, elements);
     await setElements(edge);
-    await updateNode(edge);
   };
 
   const onElementClick = async (event, element) => {
