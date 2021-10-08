@@ -2,10 +2,16 @@ import "./App.css";
 import SideBar from "./components/SideBar";
 import Grid from "@material-ui/core/Grid";
 import Canvas from "./components/Canvas";
+import { Tabs, Tab } from "@material-ui/core";
+import StorageIcon from "@material-ui/icons/Storage";
+import PermDataSettingIcon from "@material-ui/icons/PermDataSetting";
 import { useState, useEffect } from "react";
 import jwt from "jsonwebtoken";
 import { v4 as uuidv4 } from "uuid";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+
+// https://flowchart-backend.herokuapp.com
+// http://127.0.0.1:8000
+const apiUrl = "http://127.0.0.1:8000";
 
 function App() {
   const [currentFile, setCurrentFile] = useState(
@@ -21,9 +27,14 @@ function App() {
     a: "100",
   });
   const [edgeType, setEdgeType] = useState("smoothstep");
+  const [value, setValue] = useState(0);
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
 
   const updateSessionDb = (session) => {
-    fetch("https://flowchart-backend.herokuapp.com/api/update-session", {
+    fetch(`${apiUrl}/api/update-session`, {
       method: "POST",
       body: JSON.stringify({ session_id: session }),
       headers: {
@@ -32,6 +43,13 @@ function App() {
     })
       .then((res) => res.json())
       .then((json) => console.log(json));
+  };
+
+  const a11yProps = (index) => {
+    return {
+      id: `scrollable-force-tab-${index}`,
+      "aria-controls": `scrollable-force-tabpanel-${index}`,
+    };
   };
 
   useEffect(() => {
@@ -45,8 +63,8 @@ function App() {
     }
   }, []);
   return (
-    <Grid container spacing={3}>
-      <Grid item xs={5} sm={5} md={2} lg={2}>
+    <Grid container spacing={1}>
+      <Grid item xs={5} sm={4} md={2} lg={2}>
         <SideBar
           currentFile={currentFile}
           setCurrentFile={setCurrentFile}
@@ -56,7 +74,7 @@ function App() {
         />
       </Grid>
       {isCanvasVisible && (
-        <Grid item xs={7} sm={7} md={10} lg={10}>
+        <Grid item xs={7} sm={8} md={10} lg={10}>
           <Canvas
             currentFile={currentFile}
             setCurrentFile={setCurrentFile}

@@ -32,6 +32,9 @@ import ListItemText from "@material-ui/core/ListItemText";
 import Avatar from "@material-ui/core/Avatar";
 import reactCSS from "reactcss";
 import { SketchPicker } from "react-color";
+// https://flowchart-backend.herokuapp.com
+// http://127.0.0.1:8000
+const apiUrl = "http://127.0.0.1:8000";
 
 const SideBar = ({
   currentFile,
@@ -107,7 +110,7 @@ const SideBar = ({
 
   const updateFilesDb = (newElements) => {
     console.log("updating database....");
-    fetch("https://flowchart-backend.herokuapp.com/api/update-files", {
+    fetch(`${apiUrl}/api/update-files`, {
       method: "POST",
       body: JSON.stringify({
         session_id: localStorage.getItem("session"),
@@ -129,7 +132,7 @@ const SideBar = ({
 
   const updateNamesDb = (newNames) => {
     console.log("updating database....");
-    fetch("https://flowchart-backend.herokuapp.com/api/update-names", {
+    fetch(`${apiUrl}/api/update-names`, {
       method: "POST",
       body: JSON.stringify({
         session_id: localStorage.getItem("session"),
@@ -145,7 +148,7 @@ const SideBar = ({
 
   const updateElementsDb = (newElements, isDelete = false) => {
     console.log("updating database....");
-    fetch("https://flowchart-backend.herokuapp.com/api/update-elements", {
+    fetch(`${apiUrl}/api/update-elements`, {
       method: "POST",
       body: JSON.stringify({
         session_id: localStorage.getItem("session"),
@@ -163,7 +166,7 @@ const SideBar = ({
 
   const updateTagsDb = (newTags) => {
     console.log("updating database....");
-    fetch("https://flowchart-backend.herokuapp.com/api/update-tags", {
+    fetch(`${apiUrl}/api/update-tags`, {
       method: "POST",
       body: JSON.stringify({
         session_id: localStorage.getItem("session"),

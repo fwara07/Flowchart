@@ -47,6 +47,9 @@ import { Alert, AlertTitle } from "@material-ui/lab";
 import dagre from "dagre";
 
 const dagreGraph = new dagre.graphlib.Graph();
+// https://flowchart-backend.herokuapp.com
+// http://127.0.0.1:8000
+const apiUrl = "http://127.0.0.1:8000";
 dagreGraph.setDefaultEdgeLabel(() => ({}));
 
 // In order to keep this example simple the node width and height are hardcoded.
@@ -381,7 +384,7 @@ const Canvas = ({ currentFile, selectedColor, edgeType }) => {
     // console.log("updating database....");
     // console.log(newElements);
     console.log(currentFile);
-    fetch("https://flowchart-backend.herokuapp.com/api/update-elements", {
+    fetch(`${apiUrl}/api/update-elements`, {
       method: "POST",
       body: JSON.stringify({
         session_id: localStorage.getItem("session"),
@@ -550,7 +553,7 @@ const Canvas = ({ currentFile, selectedColor, edgeType }) => {
   };
 
   useEffect(() => {
-    fetch("https://flowchart-backend.herokuapp.com/api/get-user-info", {
+    fetch(`${apiUrl}/api/get-user-info`, {
       method: "POST",
       body: JSON.stringify({
         session_id: localStorage.getItem("session"),
@@ -784,6 +787,26 @@ const Canvas = ({ currentFile, selectedColor, edgeType }) => {
       }
     });
     updateNode(newElements);
+  };
+
+  const hexToRgb = (hex) => {
+    console.log(hex);
+    var c;
+    if (/^#([A-Fa-f0-9]{3}){1,2}$/.test(hex)) {
+      console.log("yayyyyyyyyyyyyy");
+      c = hex.substring(1).split("");
+      if (c.length == 3) {
+        c = [c[0], c[0], c[1], c[1], c[2], c[2]];
+      }
+      c = "0x" + c.join("");
+      return { r: (c >> 16) & 255, g: (c >> 8) & 255, b: c & 255, a: 1 };
+    }
+    return {
+      r: "193",
+      g: "230",
+      b: "255",
+      a: "100",
+    };
   };
 
   const checkTags = (tags2Check) => {
@@ -1111,12 +1134,14 @@ const Canvas = ({ currentFile, selectedColor, edgeType }) => {
                                   title: element[1],
                                   description:
                                     element[2].length === 0 ? null : element[2],
-                                  color: {
-                                    r: "193",
-                                    g: "230",
-                                    b: "255",
-                                    a: "100",
-                                  },
+                                  color: element[3].startsWith("#")
+                                    ? hexToRgb(element[3])
+                                    : {
+                                        r: "193",
+                                        g: "230",
+                                        b: "255",
+                                        a: "100",
+                                      },
                                   tags: checkedTags,
                                   isCollapsable:
                                     element[6] === "TRUE" ? true : false,
@@ -1124,6 +1149,7 @@ const Canvas = ({ currentFile, selectedColor, edgeType }) => {
                                 isHidden: false,
                                 position: { x: 0, y: 0 },
                               });
+                              console.log(jsonArr);
                               if (element[7].length > 0) {
                                 if (element[7].includes(",")) {
                                   const csvChildren = element[7].split(",");
