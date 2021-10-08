@@ -11,7 +11,7 @@ import { v4 as uuidv4 } from "uuid";
 
 // https://flowchart-backend.herokuapp.com
 // http://127.0.0.1:8000
-const apiUrl = "http://127.0.0.1:8000";
+const apiUrl = "https://flowchart-backend.herokuapp.com";
 
 function App() {
   const [currentFile, setCurrentFile] = useState(

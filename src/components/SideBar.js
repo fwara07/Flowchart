@@ -34,7 +34,7 @@ import reactCSS from "reactcss";
 import { SketchPicker } from "react-color";
 // https://flowchart-backend.herokuapp.com
 // http://127.0.0.1:8000
-const apiUrl = "http://127.0.0.1:8000";
+const apiUrl = "https://flowchart-backend.herokuapp.com";
 
 const SideBar = ({
   currentFile,

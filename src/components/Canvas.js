@@ -49,7 +49,7 @@ import dagre from "dagre";
 const dagreGraph = new dagre.graphlib.Graph();
 // https://flowchart-backend.herokuapp.com
 // http://127.0.0.1:8000
-const apiUrl = "http://127.0.0.1:8000";
+const apiUrl = "https://flowchart-backend.herokuapp.com";
 dagreGraph.setDefaultEdgeLabel(() => ({}));
 
 // In order to keep this example simple the node width and height are hardcoded.
