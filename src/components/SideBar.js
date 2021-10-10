@@ -219,7 +219,7 @@ const SideBar = ({
     })
       .then((res) => res.json())
       .then((json) => {
-        console.log(json.tags);
+        console.log(JSON.parse(json.tags));
         setTags(JSON.parse(json.tags));
       });
   };
