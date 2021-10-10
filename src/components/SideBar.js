@@ -101,7 +101,7 @@ const SideBar = ({
         if (Array.isArray(json.names)) {
           newNames = json.names;
         } else {
-          newNames = JSON.parse(json.names).names;
+          newNames = JSON.parse(json.names);
         }
         console.log(newTags);
         console.log(newNames);
