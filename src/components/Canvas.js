@@ -16,7 +16,10 @@ import {
   Snackbar,
   DialogActions,
   Button,
+  FormControl,
+  InputLabel,
   Chip,
+  Fab,
 } from "@material-ui/core";
 import React, { useState, useEffect, useRef } from "react";
 import AddIcon from "@material-ui/icons/Add";
@@ -27,6 +30,7 @@ import Papa from "papaparse";
 import Edit from "@material-ui/icons/Edit";
 import ReactFlow, {
   removeElements,
+  ReactFlowProvider,
   getIncomers,
   getOutgoers,
   isNode,
@@ -35,6 +39,8 @@ import ReactFlow, {
   Controls,
   Background,
   Handle,
+  getConnectedEdges,
+  isEdge,
 } from "react-flow-renderer";
 import Delete from "@material-ui/icons/Delete";
 import Add from "@material-ui/icons/Add";
@@ -45,6 +51,13 @@ import EditIcon from "@material-ui/icons/Edit";
 import { createStyles, makeStyles } from "@material-ui/core/styles";
 import { Alert, AlertTitle } from "@material-ui/lab";
 import dagre from "dagre";
+import { EditText } from "react-edit-text";
+import "react-edit-text/dist/index.css";
+
+let id = 0;
+const getId = () => `dndnode_${id++}`;
+
+let realOrientation;
 
 const dagreGraph = new dagre.graphlib.Graph();
 // https://flowchart-backend.herokuapp.com
@@ -63,7 +76,7 @@ dagreGraph.setDefaultEdgeLabel(() => ({}));
 //   diamond: { width: 100, height: 100 },
 // };
 const nodeWidth = 170;
-const nodeHeight = 170;
+const nodeHeight = 180;
 const getLayoutedElements = (elements, direction = "TB") => {
   const isHorizontal = direction === "LR";
   dagreGraph.setGraph({ rankdir: direction });
@@ -109,17 +122,12 @@ const useStyles = makeStyles((theme) =>
   })
 );
 
-const onLoad = (reactFlowInstance) => {
-  // console.log("flow loaded:", reactFlowInstance);
-  // console.log(reactFlowInstance.getElements());
-  reactFlowInstance.fitView();
-};
-
 const SpecialNodeComponent = ({ data }) => {
   return (
     <div>
       <div
         style={{
+          background: "white",
           borderColor: `rgba(${data.color.r}, ${data.color.g}, ${data.color.b}, ${data.color.a})`,
           color: "black",
           padding: 10,
@@ -130,7 +138,11 @@ const SpecialNodeComponent = ({ data }) => {
           textAlign: "center",
         }}
       >
-        <Handle type="target" position="top" style={{ background: "black" }} />
+        <Handle
+          type="target"
+          position={realOrientation === "horizontal" ? "left" : "top"}
+          style={{ background: "black" }}
+        />
         {/* <div>
           {data.title.length >= 21
             ? data.title.slice(0, 20) + "..."
@@ -158,11 +170,12 @@ const SpecialNodeComponent = ({ data }) => {
       </div>
       <div
         style={{
+          width: "93%",
+          width: 150,
           background: "white",
           border: `2px solid rgba(${data.color.r}, ${data.color.g}, ${data.color.b}, ${data.color.a})`,
           color: "black",
           padding: 10,
-          width: 150,
           minHeight: 40,
           borderRadius: "0px 0px 10px 10px",
           textAlign: "center",
@@ -179,13 +192,58 @@ const SpecialNodeComponent = ({ data }) => {
           style={{
             width: "93%",
             minHeight: "40px",
-            // textAlign: "center",
-            overflowWrap: "break-word",
+            // overflowWrap: "break-word",
+            textAlign: "center",
             marginLeft: 10,
             marginRight: 300,
           }}
         >
-          <Typography
+          <Grid
+            container
+            direction="row"
+            spacing={1}
+            justifyContent="center"
+            alignItems="center"
+          >
+            {/* <div style={{ paddingLeft: 35, paddingRight: 10 }}>key</div> */}
+            <div style={{ textAlign: "center" }}>
+              {data.description.map((pair) => {
+                return (
+                  <Typography
+                    variant="subtitle2"
+                    gutterBottom
+                    style={{
+                      paddingRight: 10,
+                    }}
+                  >
+                    {pair.key}
+                  </Typography>
+                );
+              })}
+            </div>
+            <Divider
+              orientation="vertical"
+              style={{ minHeight: 50, textAlign: "center" }}
+              flexItem
+            />
+            <div style={{ textAlign: "center" }}>
+              {data.description.map((pair) => {
+                return (
+                  <Typography
+                    variant="subtitle2"
+                    gutterBottom
+                    style={{
+                      paddingLeft: 10,
+                    }}
+                  >
+                    {pair.value}
+                  </Typography>
+                );
+              })}
+            </div>
+            {/* <div style={{ paddingLeft: 10 }}>Value</div> */}
+          </Grid>
+          {/* <Typography
             variant="subtitle2"
             gutterBottom
             style={{
@@ -193,12 +251,12 @@ const SpecialNodeComponent = ({ data }) => {
             }}
           >
             {data.description}
-          </Typography>
+          </Typography> */}
         </div>
       </div>
       <Handle
         type="source"
-        position="bottom"
+        position={realOrientation === "horizontal" ? "right" : "bottom"}
         style={{ background: "black" }}
         isConnectable={true}
       />
@@ -210,6 +268,7 @@ const OvalNodeComponent = ({ data }) => {
   return (
     <div
       style={{
+        background: "white",
         borderColor: `rgba(${data.color.r}, ${data.color.g}, ${data.color.b}, ${data.color.a})`,
         color: "black",
         padding: 10,
@@ -220,7 +279,11 @@ const OvalNodeComponent = ({ data }) => {
         borderRadius: "50px",
       }}
     >
-      <Handle type="target" position="top" style={{ background: "black" }} />
+      <Handle
+        type="target"
+        position={realOrientation === "horizontal" ? "left" : "top"}
+        style={{ background: "black" }}
+      />
       {/* <div style={{ paddingTop: 20 }}>
         {data.title.length >= 21 ? data.title.slice(0, 20) + "..." : data.title}
       </div> */}
@@ -245,7 +308,7 @@ const OvalNodeComponent = ({ data }) => {
       </div>
       <Handle
         type="source"
-        position="bottom"
+        position={realOrientation === "horizontal" ? "right" : "bottom"}
         style={{ background: "black" }}
         isConnectable={true}
       />
@@ -257,6 +320,7 @@ const RectangleNodeComponent = ({ data }) => {
   return (
     <div
       style={{
+        background: "white",
         borderColor: `rgba(${data.color.r}, ${data.color.g}, ${data.color.b}, ${data.color.a})`,
         color: "black",
         padding: 10,
@@ -267,7 +331,11 @@ const RectangleNodeComponent = ({ data }) => {
         borderRadius: "10px",
       }}
     >
-      <Handle type="target" position="top" style={{ background: "black" }} />
+      <Handle
+        type="target"
+        position={realOrientation === "horizontal" ? "left" : "top"}
+        style={{ background: "black" }}
+      />
       {/* <div style={{ paddingTop: 20 }}>
         {data.title.length >= 21 ? data.title.slice(0, 20) + "..." : data.title}
       </div> */}
@@ -292,7 +360,7 @@ const RectangleNodeComponent = ({ data }) => {
       </div>
       <Handle
         type="source"
-        position="bottom"
+        position={realOrientation === "horizontal" ? "right" : "bottom"}
         style={{ background: "black" }}
         isConnectable={true}
       />
@@ -305,6 +373,7 @@ const DiamondNodeComponent = ({ data }) => {
     <div>
       <div
         style={{
+          background: "white",
           backgroundColor: "white",
           color: "black",
           padding: 10,
@@ -346,21 +415,32 @@ const DiamondNodeComponent = ({ data }) => {
       </div>
       <Handle
         type="source"
-        position="bottom"
+        position={realOrientation === "horizontal" ? "right" : "bottom"}
         style={{ background: "black" }}
         isConnectable={true}
       />
-      <Handle type="target" position="top" style={{ background: "black" }} />
+      <Handle
+        type="target"
+        position={realOrientation === "horizontal" ? "left" : "top"}
+        style={{ background: "black" }}
+      />
     </div>
   );
 };
 
-const Canvas = ({ currentFile, selectedColor, edgeType }) => {
+const Canvas = ({
+  currentFile,
+  selectedColor,
+  edgeType,
+  setEditMode,
+  isEditMode,
+  orientation,
+}) => {
+  realOrientation = orientation;
   const [elements, setElements] = useState([]);
   const [elementCLicked, setElementClicked] = useState({});
   const [editModeTtitle, setEditModeTitle] = useState(false);
   const [editModeDescription, setEditModeDescription] = useState(false);
-  const [isEditMode, setEditMode] = useState(false);
   const [open, setOpen] = useState(false);
   const [openUpload, setOpenUpload] = React.useState(false);
   const [openNewNode, setOpenNewNode] = useState(false);
@@ -379,6 +459,39 @@ const Canvas = ({ currentFile, selectedColor, edgeType }) => {
   const [renderAlert, setRenderAlert] = useState({ value: false, msg: "" });
   const [tags, setTags] = useState([]);
   const [csv, setCsv] = useState(false);
+  const reactFlowWrapper = useRef(null);
+  const [reactFlowInstance, setReactFlowInstance] = useState(null);
+  const [openNewField, setOpenNewField] = useState(false);
+  const [field, setField] = useState({ key: "", value: "" });
+
+  const onLoad = (reactFlowInstance) => {
+    // console.log("flow loaded:", reactFlowInstance);
+    // console.log(reactFlowInstance.getElements());
+    setReactFlowInstance(reactFlowInstance);
+    reactFlowInstance.fitView();
+  };
+
+  const handleCloseField = () => {
+    setOpenNewField(false);
+  };
+
+  const handleChangeEdgeType = (event) => {
+    const edges = getConnectedEdges([elementCLicked], elements);
+    const newElements = [...elements];
+    let elementClickedIndex;
+    edges.map((edge) => {
+      newElements.map((element, index) => {
+        if (isEdge(element)) {
+          if (element.id === edge.id) {
+            console.log(element);
+            element.type = event.target.value;
+          }
+        }
+      });
+    });
+    setElements(newElements);
+    updateNode(newElements);
+  };
 
   const updateElementsDb = (newElements, currentFile, isDelete = false) => {
     // console.log("updating database....");
@@ -419,6 +532,7 @@ const Canvas = ({ currentFile, selectedColor, edgeType }) => {
     //  updateNode()
     const newParams = { ...params };
     newParams.type = edgeType;
+    newParams.animated = false;
     // console.log(newParams, "**********8");
     const edge = await addEdge(newParams, elements);
     await setElements(edge);
@@ -491,7 +605,6 @@ const Canvas = ({ currentFile, selectedColor, edgeType }) => {
           }
           console.log(newElements);
           setElements(newElements);
-          updateNode(newElements);
           // let _elements;
           // if (Object.keys(targetElements).length > 0) {
           //   _elements = JSON.parse(JSON.stringify(toggledElements));
@@ -693,7 +806,7 @@ const Canvas = ({ currentFile, selectedColor, edgeType }) => {
     setElements(newElements);
     updateElementsDb(newElements, currentFile);
   };
-  const addNode = (type) => {
+  const addNode = (type, position = { x: 100, y: 0 }) => {
     let newElements = elements ? [...elements] : [];
     newElements.push({
       id: getNodeId(),
@@ -701,17 +814,48 @@ const Canvas = ({ currentFile, selectedColor, edgeType }) => {
       type: type,
       data: {
         title: "title",
-        description: type === "special" ? "A description" : null,
+        description:
+          type === "special" ? [{ key: "Key", value: "Value" }] : null,
         color: selectedColor,
         isCollapsable: true,
+        hasAnimatedEdge: false,
+        hasArrowEdge: false,
         tags: [],
       },
+      targetPosition: orientation === "horizontal" ? "left" : "top",
+      sourcePosition: orientation === "horizontal" ? "right" : "bottom",
       isHidden: false,
-      position: { x: 100, y: 0 },
+      position: position,
     });
     const newCurrent = { ...currentFile };
     newCurrent.elements = newElements;
     setElements(newElements);
+  };
+
+  const handleChangeArrow = () => {
+    const edges = getConnectedEdges([elementCLicked], elements);
+    const newElements = [...elements];
+    let elementClickedIndex;
+    edges.map((edge) => {
+      newElements.map((element, index) => {
+        if (isEdge(element)) {
+          if (element.id === edge.id) {
+            console.log(element);
+            element.arrowHeadType = elementCLicked.data.hasArrowEdge
+              ? null
+              : "arrowclosed";
+          }
+        } else {
+          if (element.id === elementCLicked.id) {
+            elementClickedIndex = index;
+          }
+        }
+      });
+    });
+    newElements[elementClickedIndex].data.hasArrowEdge =
+      !newElements[elementClickedIndex].data.hasArrowEdge;
+    setElements(newElements);
+    updateNode(newElements);
   };
 
   const handleClickColor = () => {
@@ -732,6 +876,23 @@ const Canvas = ({ currentFile, selectedColor, edgeType }) => {
     });
     setElements(newElements);
     updateNode(newElements);
+  };
+
+  const onDragOver = (event) => {
+    event.preventDefault();
+    event.dataTransfer.dropEffect = "move";
+  };
+
+  const onDrop = (event) => {
+    event.preventDefault();
+
+    const reactFlowBounds = reactFlowWrapper.current.getBoundingClientRect();
+    const type = event.dataTransfer.getData("application/reactflow");
+    const position = reactFlowInstance.project({
+      x: event.clientX - reactFlowBounds.left,
+      y: event.clientY - reactFlowBounds.top,
+    });
+    addNode(type, position);
   };
 
   // useEffect(() => {
@@ -809,6 +970,52 @@ const Canvas = ({ currentFile, selectedColor, edgeType }) => {
     };
   };
 
+  const parseDescription = (des) => {
+    const lst = des.split(",");
+    const finalLst = [];
+    lst.map((pair) => {
+      const newPair = pair.split(":");
+      finalLst.push({ key: newPair[0], value: newPair[1] });
+    });
+    return finalLst;
+  };
+
+  const submitField = () => {
+    const newElements = [...elements];
+    newElements.map((element) => {
+      if (element.id === elementCLicked.id) {
+        element.data.description.push(field);
+      }
+    });
+    setElements(newElements);
+    updateNode(newElements);
+    setOpenNewField(false);
+  };
+
+  const handleChangeAnimated = (event) => {
+    const edges = getConnectedEdges([elementCLicked], elements);
+    const newElements = [...elements];
+    let elementClickedIndex;
+    edges.map((edge) => {
+      newElements.map((element, index) => {
+        if (isEdge(element)) {
+          if (element.id === edge.id) {
+            console.log(element);
+            element.animated = !element.animated;
+          }
+        } else {
+          if (element.id === elementCLicked.id) {
+            elementClickedIndex = index;
+          }
+        }
+      });
+    });
+    newElements[elementClickedIndex].data.hasAnimatedEdge =
+      !newElements[elementClickedIndex].data.hasAnimatedEdge;
+    setElements(newElements);
+    updateNode(newElements);
+  };
+
   const checkTags = (tags2Check) => {
     console.log(tags);
     if (tags2Check.length === 0) {
@@ -849,20 +1056,12 @@ const Canvas = ({ currentFile, selectedColor, edgeType }) => {
         return parseInt(a.id.slice(11, 24)) - parseInt(b.id.slice(11, 24));
       }
     });
-    // if (!isEditMode) {
-    //     if (isFirstTime) {
-    //       console.log(filteredElements);
-    //       const newFilteredElements = filteredElements.slice(1);
-    //       newFilteredElements.map((element) => {
-    //         element.isHidden = true;
-    //       });
-    //       setFirstTime(false);
-    //     }
-    // } else {
-    //   filteredElements.map((element) => {
-    //     element.isHidden = false;
-    //   });
-    // }
+  }
+  if (!isEditMode) {
+    filteredElements = getLayoutedElements(
+      filteredElements,
+      orientation === "vertical" ? "TB" : "LR"
+    );
   }
   console.log(filteredElements);
   console.log(elements);
@@ -1111,6 +1310,9 @@ const Canvas = ({ currentFile, selectedColor, edgeType }) => {
                         let jsonArr = [];
                         const ids = {};
                         const children = {};
+                        const animateds = [];
+                        const edgeTypes = {};
+                        const arrows = [];
                         data = data.slice(1);
                         data.map((element) => {
                           const checkedTags = checkTags(element[4]);
@@ -1133,7 +1335,9 @@ const Canvas = ({ currentFile, selectedColor, edgeType }) => {
                                 data: {
                                   title: element[1],
                                   description:
-                                    element[2].length === 0 ? null : element[2],
+                                    element[2].length === 0
+                                      ? null
+                                      : parseDescription(element[2]),
                                   color: element[3].startsWith("#")
                                     ? hexToRgb(element[3])
                                     : {
@@ -1149,6 +1353,17 @@ const Canvas = ({ currentFile, selectedColor, edgeType }) => {
                                 isHidden: false,
                                 position: { x: 0, y: 0 },
                               });
+                              if (element[8] === "TRUE") {
+                                animateds.push(ids[element[0]]);
+                              }
+                              if (element[9] === "step") {
+                                edgeTypes[ids[element[0]]] = "step";
+                              } else {
+                                edgeTypes[ids[element[0]]] = "curved";
+                              }
+                              if (element[10] === "TRUE") {
+                                arrows.push(ids[element[0]]);
+                              }
                               console.log(jsonArr);
                               if (element[7].length > 0) {
                                 if (element[7].includes(",")) {
@@ -1185,6 +1400,13 @@ const Canvas = ({ currentFile, selectedColor, edgeType }) => {
                                 children[key].map((child) => {
                                   const edge = addEdge(
                                     {
+                                      animated: animateds.includes(ids[key])
+                                        ? true
+                                        : false,
+                                      type: edgeTypes[ids[key]],
+                                      arrowHeadType: arrows.includes(ids[key])
+                                        ? "arrowclosed"
+                                        : null,
                                       source: ids[key],
                                       target: ids[child],
                                     },
@@ -1196,6 +1418,13 @@ const Canvas = ({ currentFile, selectedColor, edgeType }) => {
                               } else {
                                 const edge = addEdge(
                                   {
+                                    animated: animateds.includes(ids[key])
+                                      ? true
+                                      : false,
+                                    type: edgeTypes[ids[key]],
+                                    arrowHeadType: arrows.includes(ids[key])
+                                      ? "arrowclosed"
+                                      : null,
                                     source: ids[key],
                                     target: ids[children[key]],
                                   },
@@ -1241,54 +1470,60 @@ const Canvas = ({ currentFile, selectedColor, edgeType }) => {
           </Grid>
         </Grid>
         <Divider orientation="horizontal" />
-        <ReactFlow
-          nodeTypes={{
-            special: SpecialNodeComponent,
-            oval: OvalNodeComponent,
-            rectangle: RectangleNodeComponent,
-            diamond: DiamondNodeComponent,
-          }}
-          elements={
-            Object.keys(targetElements).length !== 0
-              ? toggledElements
-              : filteredElements
-          }
-          // elements={filteredElements}
-          onElementsRemove={onElementsRemove}
-          onNodeDoubleClick={onElementClick}
-          onElementClick={onNodeClick}
-          onNodeDragStop={onNodeDragStop}
-          connectionLineType={edgeType}
-          onPaneContextMenu={() => setOpenNewNode(true)}
-          onConnect={onConnect}
-          onLoad={onLoad}
-          snapToGrid={false}
-          // snapGrid={[15, 15]}
-          paneMoveable={true}
-          style={{ height: "90vh", width: isEditMode ? "84%" : "95%" }}
-        >
-          <MiniMap
-            nodeStrokeColor={(n) => {
-              if (n.style?.background) return n.style.background;
-              if (n.type === "special") return "#0041d0";
-              if (n.type === "oval") return "#008000";
-              if (n.type === "rectangle") return "#8A2BE2";
-              if (n.type === "diamond") return "#00008b";
-              if (n.type === "output") return "#ff0072";
-              if (n.type === "default") return "#1a192b";
+        <ReactFlowProvider>
+          <div className="reactflow-wrapper" ref={reactFlowWrapper}>
+            <ReactFlow
+              nodeTypes={{
+                special: SpecialNodeComponent,
+                oval: OvalNodeComponent,
+                rectangle: RectangleNodeComponent,
+                diamond: DiamondNodeComponent,
+              }}
+              elements={
+                Object.keys(targetElements).length !== 0
+                  ? toggledElements
+                  : filteredElements
+              }
+              // elements={filteredElements}
+              onElementsRemove={onElementsRemove}
+              onNodeDoubleClick={onElementClick}
+              onElementClick={onNodeClick}
+              onDrop={onDrop}
+              onDragOver={onDragOver}
+              onNodeDragStop={onNodeDragStop}
+              connectionLineType={edgeType}
+              onPaneContextMenu={() => setOpenNewNode(true)}
+              onConnect={onConnect}
+              onLoad={onLoad}
+              snapToGrid={false}
+              // snapGrid={[15, 15]}
+              paneMoveable={true}
+              style={{ height: "90vh", width: isEditMode ? "84%" : "95%" }}
+            >
+              <MiniMap
+                nodeStrokeColor={(n) => {
+                  if (n.style?.background) return n.style.background;
+                  if (n.type === "special") return "#0041d0";
+                  if (n.type === "oval") return "#008000";
+                  if (n.type === "rectangle") return "#8A2BE2";
+                  if (n.type === "diamond") return "#00008b";
+                  if (n.type === "output") return "#ff0072";
+                  if (n.type === "default") return "#1a192b";
 
-              return "#eee";
-            }}
-            nodeColor={(n) => {
-              if (n.style?.background) return n.style.background;
+                  return "#eee";
+                }}
+                nodeColor={(n) => {
+                  if (n.style?.background) return n.style.background;
 
-              return "#fff";
-            }}
-            nodeBorderRadius={2}
-          />
-          <Controls />
-          <Background color="#aaa" gap={16} />
-        </ReactFlow>
+                  return "#fff";
+                }}
+                nodeBorderRadius={2}
+              />
+              <Controls />
+              <Background color="#aaa" gap={16} />
+            </ReactFlow>
+          </div>
+        </ReactFlowProvider>
         {/* <div /> */}
         {isEditMode && (
           <Drawer
@@ -1344,47 +1579,63 @@ const Canvas = ({ currentFile, selectedColor, edgeType }) => {
                   {elementCLicked.type === "special" && (
                     <>
                       <Typography variant="h6" style={{ marginTop: 20 }}>
-                        Edit Description
+                        Add Field
                       </Typography>
-                      <TextField
-                        name={elementCLicked.id}
-                        defaultValue={elementCLicked.data.description}
-                        margin="normal"
-                        onChange={handleChangeDescription}
-                        disabled={!editModeDescription}
-                        style={{ width: "90%" }}
-                        value={elementCLicked.data.description}
-                        // className={{
-                        //   marginLeft: 40,
-                        //   marginRight: 40,
-                        //   width: 300,
-                        //   color: "black",
-                        //   fontSize: 30,
-                        //   opacity: 1,
-                        //   borderBottom: 0,
-                        //   "&:before": {
-                        //     borderBottom: 0,
-                        //   },
-                        // }}
-                        InputProps={{
-                          // classes: {
-                          //   disabled: {
-                          //     color: "black",
-                          //     borderBottom: 0,
-                          //     "&:before": {
-                          //       borderBottom: 0,
-                          //     },
-                          //   },
-                          // },
-                          endAdornment: (
-                            <InputAdornment position="end">
-                              <IconButton onClick={handleClickDescription}>
-                                <Edit />
-                              </IconButton>
-                            </InputAdornment>
-                          ),
-                        }}
-                      />
+                      <Button
+                        variant="outlined"
+                        startIcon={<AddIcon />}
+                        color="secondary"
+                        onClick={() => setOpenNewField(true)}
+                      >
+                        Add
+                      </Button>
+                      <Dialog
+                        open={openNewField}
+                        onClose={handleCloseField}
+                        aria-labelledby="form-dialog-title"
+                      >
+                        <DialogTitle id="form-dialog-title">
+                          Add New Field
+                        </DialogTitle>
+                        <DialogContent>
+                          <div style={{ textAlign: "center" }}>
+                            <TextField
+                              style={{ width: "40%", marginRigh: 10 }}
+                              label="Key"
+                              id="outlined-size-small"
+                              defaultValue="Key"
+                              variant="outlined"
+                              size="small"
+                              onChange={(event) => {
+                                const newField = { ...field };
+                                newField.key = event.target.value;
+                                setField(newField);
+                              }}
+                            />
+                            <TextField
+                              style={{ width: "40%", marginLeft: 10 }}
+                              label="Value"
+                              id="outlined-size-normal"
+                              defaultValue="Value"
+                              onChange={(event) => {
+                                const newField = { ...field };
+                                newField.value = event.target.value;
+                                setField(newField);
+                              }}
+                              variant="outlined"
+                              size="small"
+                            />
+                          </div>
+                        </DialogContent>
+                        <DialogActions>
+                          <Button onClick={handleCloseField} color="primary">
+                            Cancel
+                          </Button>
+                          <Button onClick={submitField} color="primary">
+                            Add
+                          </Button>
+                        </DialogActions>
+                      </Dialog>
                     </>
                   )}
                   <Divider style={{ marginTop: 10 }} />
@@ -1499,6 +1750,76 @@ const Canvas = ({ currentFile, selectedColor, edgeType }) => {
                       </Grid>
                     </div>
                   </Grid>
+                  <Divider style={{ marginTop: 20, marginBottom: 10 }} />
+                  <Grid
+                    item
+                    xs={12}
+                    style={{
+                      textAlign: "start",
+                      maxHeight: "100%",
+                      overflow: "auto",
+                    }}
+                  >
+                    <FormControl
+                      variant="outlined"
+                      style={{ width: 150, marginTop: 30, marginLeft: 20 }}
+                    >
+                      <InputLabel id="demo-simple-select-outlined-label">
+                        EdgeType
+                      </InputLabel>
+                      <Select
+                        style={{ fontSize: 15 }}
+                        labelId="demo-simple-select-outlined-label"
+                        id="demo-simple-select-outlined"
+                        onChange={handleChangeEdgeType}
+                        variant="outlined"
+                        label="EdgeType"
+                        defaultValue="smoothstep"
+                        displayEmpty={true}
+                      >
+                        <MenuItem value="smoothstep">Step Edge</MenuItem>
+                        <MenuItem value="default">Curved Edge</MenuItem>
+                      </Select>
+                    </FormControl>
+                  </Grid>
+                  <Typography component="div">
+                    <Grid
+                      component="label"
+                      container
+                      alignItems="center"
+                      spacing={1}
+                      style={{ paddingTop: 20, paddingLeft: 40 }}
+                    >
+                      <Grid item>
+                        <Switch
+                          color="primary"
+                          checked={elementCLicked.data.hasAnimatedEdge}
+                          onChange={handleChangeAnimated}
+                          name="checked"
+                        />
+                      </Grid>
+                      <Grid item>Animated</Grid>
+                    </Grid>
+                  </Typography>
+                  <Typography component="div">
+                    <Grid
+                      component="label"
+                      container
+                      alignItems="center"
+                      spacing={1}
+                      style={{ paddingTop: 20, paddingLeft: 40 }}
+                    >
+                      <Grid item>
+                        <Switch
+                          color="primary"
+                          checked={elementCLicked.data.hasArrowEdge}
+                          onChange={handleChangeArrow}
+                          name="checked"
+                        />
+                      </Grid>
+                      <Grid item>Arrow</Grid>
+                    </Grid>
+                  </Typography>
                   <Divider style={{ marginTop: 20, marginBottom: 10 }} />
                   <IconButton
                     style={{ color: "red" }}

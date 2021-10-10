@@ -1,10 +1,8 @@
 import "./App.css";
+import React from "react";
 import SideBar from "./components/SideBar";
 import Grid from "@material-ui/core/Grid";
 import Canvas from "./components/Canvas";
-import { Tabs, Tab } from "@material-ui/core";
-import StorageIcon from "@material-ui/icons/Storage";
-import PermDataSettingIcon from "@material-ui/icons/PermDataSetting";
 import { useState, useEffect } from "react";
 import jwt from "jsonwebtoken";
 import { v4 as uuidv4 } from "uuid";
@@ -27,11 +25,8 @@ function App() {
     a: "100",
   });
   const [edgeType, setEdgeType] = useState("smoothstep");
-  const [value, setValue] = useState(0);
-
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
+  const [isEditMode, setEditMode] = useState(false);
+  const [orientation, setOrientation] = useState("vertical");
 
   const updateSessionDb = (session) => {
     fetch(`${apiUrl}/api/update-session`, {
@@ -43,13 +38,6 @@ function App() {
     })
       .then((res) => res.json())
       .then((json) => console.log(json));
-  };
-
-  const a11yProps = (index) => {
-    return {
-      id: `scrollable-force-tab-${index}`,
-      "aria-controls": `scrollable-force-tabpanel-${index}`,
-    };
   };
 
   useEffect(() => {
@@ -71,13 +59,19 @@ function App() {
           setCanvasVisibility={(flag) => setIsCanvasVisible(flag)}
           setEdgeType={setEdgeType}
           setSelectedColor={setSelectedColor}
+          isEditMode={isEditMode}
+          setOrientation={setOrientation}
+          orientation={orientation}
         />
       </Grid>
       {isCanvasVisible && (
         <Grid item xs={7} sm={8} md={10} lg={10}>
           <Canvas
+            orientation={orientation}
             currentFile={currentFile}
             setCurrentFile={setCurrentFile}
+            isEditMode={isEditMode}
+            setEditMode={setEditMode}
             selectedColor={selectedColor}
             edgeType={edgeType}
           />

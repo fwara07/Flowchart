@@ -9,6 +9,10 @@ import {
   Select,
   MenuItem,
   InputLabel,
+  FormControlLabel,
+  RadioGroup,
+  FormLabel,
+  Radio,
 } from "@material-ui/core";
 import CreateNewFolderIcon from "@material-ui/icons/CreateNewFolder";
 import DeleteIcon from "@material-ui/icons/Delete";
@@ -32,6 +36,9 @@ import ListItemText from "@material-ui/core/ListItemText";
 import Avatar from "@material-ui/core/Avatar";
 import reactCSS from "reactcss";
 import { SketchPicker } from "react-color";
+import { Tabs, Tab } from "@material-ui/core";
+import StorageIcon from "@material-ui/icons/Storage";
+import PermDataSettingIcon from "@material-ui/icons/PermDataSetting";
 // https://flowchart-backend.herokuapp.com
 // http://127.0.0.1:8000
 const apiUrl = "https://flowchart-backend.herokuapp.com";
@@ -42,30 +49,20 @@ const SideBar = ({
   setCanvasVisibility,
   setEdgeType,
   setSelectedColor,
+  isEditMode,
+  setOrientation,
+  orientation,
 }) => {
-  const [files, setFiles] = useState(
-    localStorage.getItem("files") === null
-      ? []
-      : JSON.parse(localStorage.getItem("files"))
-  );
-
+  const [files, setFiles] = useState([]);
   const [folder, setFolder] = useState("");
   const [file, setFile] = useState("");
   const [openNewFolder, setOpenNewFolder] = React.useState(false);
   const [openNewTag, setOpenNewTag] = useState(false);
   const [error, setError] = useState({ value: false, msg: "" });
-  const [names, setNames] = useState(
-    localStorage.getItem("names") === null
-      ? []
-      : JSON.parse(localStorage.getItem("names"))
-  );
+  const [names, setNames] = useState([]);
   const [tagError, setTagError] = useState({});
   const [tag, setTag] = useState("");
-  const [tags, setTags] = useState(
-    localStorage.getItem("tags") === null
-      ? []
-      : JSON.parse(localStorage.getItem("tags"))
-  );
+  const [tags, setTags] = useState([]);
   const [openNewFile, setOpenNewFile] = React.useState(false);
   const [openEditTag, setOpenEditTag] = useState(false);
   const [currentEditTag, setCurrentEditTag] = useState("");
@@ -79,6 +76,38 @@ const SideBar = ({
     b: "255",
     a: "100",
   });
+  const [value, setValue] = useState(0);
+
+  useEffect(() => {
+    fetch(`${apiUrl}/api/get-user-info`, {
+      method: "POST",
+      body: JSON.stringify({
+        session_id: localStorage.getItem("session"),
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .then((json) => {
+        console.log("testtttttttttt", json);
+        console.log(JSON.parse(json.tags));
+        console.log(JSON.parse(json.names));
+        console.log(JSON.parse(json.files));
+        setTags(JSON.parse(json.tags));
+        setNames(JSON.parse(json.names));
+        setFiles(JSON.parse(json.files));
+      });
+  }, []);
+
+  const handleChange = (event, newValue) => {
+    console.log(newValue);
+    setValue(newValue);
+  };
+
+  const handleChangeOrientation = (event) => {
+    setOrientation(event.target.value);
+  };
 
   const newFolder = () => {
     setOpenNewFolder(true);
@@ -348,6 +377,18 @@ const SideBar = ({
     setEdgeType(event.target.value);
   };
 
+  const a11yProps = (index) => {
+    return {
+      id: `scrollable-force-tab-${index}`,
+      "aria-controls": `scrollable-force-tabpanel-${index}`,
+    };
+  };
+
+  const onDragStart = (event, nodeType) => {
+    event.dataTransfer.setData("application/reactflow", nodeType);
+    event.dataTransfer.effectAllowed = "move";
+  };
+
   const styles = reactCSS({
     default: {
       color: {
@@ -379,192 +420,333 @@ const SideBar = ({
 
   return (
     <div>
-      <Grid
-        item
-        xs={12}
-        style={{
-          height: "70vh",
-          textAlign: "center",
-          backgroundColor: "#F2F2F2",
-        }}
+      <Tabs
+        value={value}
+        onChange={handleChange}
+        variant="fullWidth"
+        indicatorColor="primary"
+        tabItemContainerStyle={{ width: "100%" }}
+        textColor="primary"
+        aria-label="icon label tabs example"
       >
-        <Typography variant="h5" gutterBottom style={{ padding: 10 }}>
-          Folder Structures
-        </Typography>
-        <Grid container spacing={0} justifyContent="center">
-          <Grid item xs={4}>
-            <IconButton
-              aria-label="Add Folder"
-              onClick={newFolder}
-              color="primary"
-            >
-              <CreateNewFolderIcon fontSize="medium" />
-            </IconButton>
-          </Grid>
-          <Dialog
-            open={openNewFolder}
-            onClose={handleClose}
-            aria-labelledby="form-dialog-title"
-          >
-            <DialogTitle id="form-dialog-title">Create New Folder</DialogTitle>
-            <DialogContent>
-              <TextField
-                error={error.value ? true : false}
-                autoFocus
-                margin="dense"
-                id="folder"
-                label="Folder Name"
-                helperText={error.value && error.msg}
-                onChange={handleChangeFolder}
-                fullWidth
-              />
-            </DialogContent>
-            <DialogActions>
-              <Button onClick={handleClose} color="primary">
-                Cancel
-              </Button>
-              <Button onClick={submitFolder} color="primary">
-                Submit
-              </Button>
-            </DialogActions>
-          </Dialog>
-          <Grid item xs={4}>
-            <IconButton
-              aria-label="Add File"
-              color="primary"
-              onClick={newFile}
-              disabled={currentFile.hasOwnProperty("expanded") ? false : true}
-            >
-              <NoteAddIcon fontSize="medium" />
-            </IconButton>
-          </Grid>
-          <Dialog
-            open={openNewFile}
-            onClose={handleClose}
-            aria-labelledby="form-dialog-title"
-          >
-            <DialogTitle id="form-dialog-title">Create New File</DialogTitle>
-            <DialogContent>
-              <TextField
-                error={error.value ? true : false}
-                autoFocus
-                margin="dense"
-                id="file"
-                label="File Name"
-                onChange={handleChangeFile}
-                helperText={error.value && error.msg}
-                fullWidth
-              />
-            </DialogContent>
-            <DialogActions>
-              <Button onClick={handleClose} color="primary">
-                Cancel
-              </Button>
-              <Button onClick={submitFile} color="primary">
-                Submit
-              </Button>
-            </DialogActions>
-          </Dialog>
-          <Grid item xs={4}>
-            <IconButton
-              aria-label="Delete"
-              color="secondary"
-              onClick={deleteItem}
-              disabled={Object.keys(currentFile).length === 0 ? true : false}
-            >
-              <DeleteIcon fontSize="medium" />
-            </IconButton>
-          </Grid>
-        </Grid>
-        <Divider style={{ marginTop: 20 }} orientation="horizontal" />
+        <Tab icon={<StorageIcon />} label="Files" />
+        <Tab icon={<PermDataSettingIcon />} label="Shapes" />
+      </Tabs>
+      {value === 0 ? (
         <Grid
           item
           xs={12}
-          style={{ textAlign: "start", maxHeight: "100%", overflow: "auto" }}
+          style={{
+            height: "70vh",
+            textAlign: "center",
+            borderRight: "solid #D5D5D5 1px",
+          }}
         >
-          {files.length === 0 ? (
-            <div></div>
-          ) : (
-            <TreeView
-              searchEnabled={true}
-              style={{
-                display: "inline-block",
-                paddingLeft: 15,
-                paddingTop: 15,
-                paddingRight: 15,
-                fontSize: 18,
-                fontWeight: "normal",
-              }}
-              dataStructure="plain"
-              id="simple-treeview"
-              items={files}
-              width="100%"
-              onItemClick={(e) => {
-                console.log("ddd", e.itemData.hasOwnProperty("expanded"));
-                if (!e.itemData.hasOwnProperty("expanded")) {
-                  localStorage.setItem("current", JSON.stringify(e.itemData));
-                  setActiveFolder(false);
-                  setCanvasVisibility(true);
-                } else {
-                  setActiveFolder(true);
-                  setCanvasVisibility(false);
-                }
-                setCurrentFile(e.itemData);
-              }}
-            />
+          <Typography variant="h5" gutterBottom style={{ padding: 20 }}>
+            Folder Structures
+          </Typography>
+          <Grid container spacing={0} justifyContent="center">
+            <Grid item xs={4}>
+              <IconButton
+                aria-label="Add Folder"
+                onClick={newFolder}
+                color="primary"
+              >
+                <CreateNewFolderIcon fontSize="medium" />
+              </IconButton>
+            </Grid>
+            <Dialog
+              open={openNewFolder}
+              onClose={handleClose}
+              aria-labelledby="form-dialog-title"
+            >
+              <DialogTitle id="form-dialog-title">
+                Create New Folder
+              </DialogTitle>
+              <DialogContent>
+                <TextField
+                  error={error.value ? true : false}
+                  autoFocus
+                  margin="dense"
+                  id="folder"
+                  label="Folder Name"
+                  helperText={error.value && error.msg}
+                  onChange={handleChangeFolder}
+                  fullWidth
+                />
+              </DialogContent>
+              <DialogActions>
+                <Button onClick={handleClose} color="primary">
+                  Cancel
+                </Button>
+                <Button onClick={submitFolder} color="primary">
+                  Submit
+                </Button>
+              </DialogActions>
+            </Dialog>
+            <Grid item xs={4}>
+              <IconButton
+                aria-label="Add File"
+                color="primary"
+                onClick={newFile}
+                disabled={currentFile.hasOwnProperty("expanded") ? false : true}
+              >
+                <NoteAddIcon fontSize="medium" />
+              </IconButton>
+            </Grid>
+            <Dialog
+              open={openNewFile}
+              onClose={handleClose}
+              aria-labelledby="form-dialog-title"
+            >
+              <DialogTitle id="form-dialog-title">Create New File</DialogTitle>
+              <DialogContent>
+                <TextField
+                  error={error.value ? true : false}
+                  autoFocus
+                  margin="dense"
+                  id="file"
+                  label="File Name"
+                  onChange={handleChangeFile}
+                  helperText={error.value && error.msg}
+                  fullWidth
+                />
+              </DialogContent>
+              <DialogActions>
+                <Button onClick={handleClose} color="primary">
+                  Cancel
+                </Button>
+                <Button onClick={submitFile} color="primary">
+                  Submit
+                </Button>
+              </DialogActions>
+            </Dialog>
+            <Grid item xs={4}>
+              <IconButton
+                aria-label="Delete"
+                color="secondary"
+                onClick={deleteItem}
+                disabled={Object.keys(currentFile).length === 0 ? true : false}
+              >
+                <DeleteIcon fontSize="medium" />
+              </IconButton>
+            </Grid>
+          </Grid>
+          <Divider style={{ marginTop: 20 }} orientation="horizontal" />
+          <Grid
+            item
+            xs={12}
+            style={{ textAlign: "start", maxHeight: "100%", overflow: "auto" }}
+          >
+            {files.length === 0 ? (
+              <div></div>
+            ) : (
+              <TreeView
+                searchEnabled={true}
+                style={{
+                  display: "inline-block",
+                  paddingLeft: 15,
+                  paddingTop: 15,
+                  paddingRight: 15,
+                  fontSize: 18,
+                  fontWeight: "normal",
+                }}
+                dataStructure="plain"
+                id="simple-treeview"
+                items={files}
+                width="100%"
+                onItemClick={(e) => {
+                  console.log("ddd", e.itemData.hasOwnProperty("expanded"));
+                  if (!e.itemData.hasOwnProperty("expanded")) {
+                    localStorage.setItem("current", JSON.stringify(e.itemData));
+                    setActiveFolder(false);
+                    setCanvasVisibility(true);
+                  } else {
+                    setActiveFolder(true);
+                    setCanvasVisibility(false);
+                  }
+                  setCurrentFile(e.itemData);
+                }}
+              />
+            )}
+          </Grid>
+        </Grid>
+      ) : (
+        <Grid
+          item
+          xs={12}
+          style={{
+            height: "70vh",
+            textAlign: "center",
+            borderRight: "solid #D5D5D5 1px",
+          }}
+        >
+          <Typography variant="h5" gutterBottom style={{ padding: 20 }}>
+            Shapes Settings
+          </Typography>
+          {isEditMode && (
+            <Grid container direction="column" spacing={1}>
+              <Grid container direction="row" spacing={1}>
+                <Grid item xs={6}>
+                  <div
+                    onDragStart={(event) => onDragStart(event, "special")}
+                    draggable
+                  >
+                    <div
+                      style={{
+                        background: "#ADD8E6",
+                        color: "black",
+                        padding: 10,
+                        border: "1px solid black",
+                        width: 50,
+                        height: 5,
+                        borderRadius: "10px 10px 0px 0px",
+                        textAlign: "center",
+                        marginLeft: 20,
+                        cursor: "pointer",
+                      }}
+                    ></div>
+                    <div
+                      style={{
+                        background: "white",
+                        border: "1px solid black",
+                        color: "black",
+                        padding: 10,
+                        width: 50,
+                        height: 15,
+                        borderRadius: "0px 0px 10px 10px",
+                        textAlign: "center",
+                        marginLeft: 20,
+                        cursor: "pointer",
+                      }}
+                    ></div>
+                  </div>
+                </Grid>
+                <Grid item xs={6}>
+                  <div
+                    style={{
+                      border: "1px solid black",
+                      height: "60px",
+                      width: "80px",
+                      borderRadius: "50px",
+                      cursor: "pointer",
+                    }}
+                    onDragStart={(event) => onDragStart(event, "oval")}
+                    draggable
+                  ></div>
+                </Grid>
+              </Grid>
+              <Grid
+                container
+                direction="row"
+                spacing={1}
+                style={{ paddingTop: "30px", paddingBottom: "20px" }}
+              >
+                <Grid item xs={6}>
+                  <div
+                    style={{
+                      border: "1px solid black",
+                      height: "50px",
+                      width: "80px",
+                      borderRadius: "10px",
+                      cursor: "pointer",
+                      marginLeft: 20,
+                    }}
+                    onDragStart={(event) => onDragStart(event, "rectangle")}
+                    draggable
+                  ></div>
+                </Grid>
+                <Grid item xs={6}>
+                  <div
+                    style={{
+                      border: "1px solid black",
+                      height: "50px",
+                      width: "50px",
+                      borderRadius: "5px",
+                      transform: "rotate(45deg)",
+                      marginLeft: "10px",
+                      cursor: "pointer",
+                    }}
+                    onDragStart={(event) => onDragStart(event, "diamond")}
+                    draggable
+                  ></div>
+                </Grid>
+              </Grid>
+            </Grid>
+          )}
+          <Grid
+            item
+            xs={12}
+            style={{ textAlign: "start", maxHeight: "100%", overflow: "auto" }}
+          >
+            <div style={{ paddingLeft: 20, paddingTop: 20 }}>
+              <Grid item xs={12} direction="row">
+                <Typography variant="subtitle1" gutterBottom>
+                  Node Color
+                </Typography>
+                <div style={styles.swatch} onClick={handleClickColor}>
+                  <div style={styles.color} />
+                </div>
+                {displayColorPicker ? (
+                  <div style={styles.popover}>
+                    <div style={styles.cover} onClick={handleCloseColor} />
+                    <SketchPicker color={color} onChange={handleChangeColor} />
+                  </div>
+                ) : null}
+              </Grid>
+            </div>
+          </Grid>
+          <Grid
+            item
+            xs={12}
+            style={{ textAlign: "start", maxHeight: "100%", overflow: "auto" }}
+          >
+            <FormControl
+              variant="outlined"
+              style={{ width: 150, marginTop: 30, marginLeft: 20 }}
+            >
+              <InputLabel id="demo-simple-select-outlined-label">
+                EdgeType
+              </InputLabel>
+              <Select
+                style={{ fontSize: 15 }}
+                labelId="demo-simple-select-outlined-label"
+                id="demo-simple-select-outlined"
+                onChange={handleChangeEdgeType}
+                variant="outlined"
+                label="EdgeType"
+                defaultValue="smoothstep"
+                displayEmpty={true}
+              >
+                <MenuItem value="smoothstep">Step Edge</MenuItem>
+                <MenuItem value="default">Curved Edge</MenuItem>
+              </Select>
+            </FormControl>
+          </Grid>
+          {!isEditMode && (
+            <FormControl component="fieldset" style={{ marginTop: 30 }}>
+              <FormLabel component="legend">Orientation</FormLabel>
+              <RadioGroup
+                aria-label="Orientation"
+                name="orientation"
+                value={orientation}
+                onChange={handleChangeOrientation}
+              >
+                <FormControlLabel
+                  value="vertical"
+                  control={<Radio />}
+                  label="Vertical"
+                />
+                <FormControlLabel
+                  value="horizontal"
+                  control={<Radio />}
+                  label="Horizontal"
+                />
+              </RadioGroup>
+            </FormControl>
           )}
         </Grid>
-        <Divider orientation="horizontal" />
-        <Grid
-          item
-          xs={12}
-          style={{ textAlign: "start", maxHeight: "100%", overflow: "auto" }}
-        >
-          <div style={{ paddingLeft: 20, paddingTop: 20 }}>
-            <Grid item xs={12} direction="row">
-              <Typography variant="subtitle1" gutterBottom>
-                Node Color
-              </Typography>
-              <div style={styles.swatch} onClick={handleClickColor}>
-                <div style={styles.color} />
-              </div>
-              {displayColorPicker ? (
-                <div style={styles.popover}>
-                  <div style={styles.cover} onClick={handleCloseColor} />
-                  <SketchPicker color={color} onChange={handleChangeColor} />
-                </div>
-              ) : null}
-            </Grid>
-          </div>
-        </Grid>
-        <Grid
-          item
-          xs={12}
-          style={{ textAlign: "start", maxHeight: "100%", overflow: "auto" }}
-        >
-          <FormControl
-            variant="outlined"
-            style={{ width: 150, marginTop: 30, marginLeft: 20 }}
-          >
-            <InputLabel id="demo-simple-select-outlined-label">
-              EdgeType
-            </InputLabel>
-            <Select
-              style={{ fontSize: 15 }}
-              labelId="demo-simple-select-outlined-label"
-              id="demo-simple-select-outlined"
-              onChange={handleChangeEdgeType}
-              variant="outlined"
-              label="EdgeType"
-              defaultValue="smoothstep"
-              displayEmpty={true}
-            >
-              <MenuItem value="smoothstep">Step Edge</MenuItem>
-              <MenuItem value="default">Curved Edge</MenuItem>
-            </Select>
-          </FormControl>
-        </Grid>
-      </Grid>
+      )}
       <Divider orientation="horizontal" />
       <Grid
         item
