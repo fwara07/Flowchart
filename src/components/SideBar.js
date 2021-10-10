@@ -270,7 +270,7 @@ const SideBar = ({
           setFiles(newFiles);
           updateFilesDb(newFiles);
           localStorage.setItem("files", JSON.stringify(newFiles));
-          const newNames = [...names];
+          const newNames = names.length === 0 ? [] : [...names];
           newNames.push(file);
           setNames(newNames);
           localStorage.setItem("names", JSON.stringify(newNames));
