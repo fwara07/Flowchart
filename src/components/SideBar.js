@@ -95,7 +95,7 @@ const SideBar = ({
         if (Array.isArray(json.tags)) {
           newTags = json.tags;
         } else {
-          newTags = JSON.parse(json.tags).tags;
+          newTags = JSON.parse(json.tags);
         }
         let newNames;
         if (Array.isArray(json.names)) {
@@ -238,6 +238,7 @@ const SideBar = ({
         localStorage.setItem("files", JSON.stringify(newFiles));
         const newNames = names.length === 0 ? [] : [...names];
         newNames.push(folder);
+        console.log(folder);
         setNames(newNames);
         updateNamesDb(newNames);
         localStorage.setItem("names", JSON.stringify(newNames));
