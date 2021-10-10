@@ -218,7 +218,10 @@ const SideBar = ({
       },
     })
       .then((res) => res.json())
-      .then((json) => setTags(json.tags));
+      .then((json) => {
+        console.log(tags);
+        setTags(json.tags);
+      });
   };
 
   const submitFolder = () => {
