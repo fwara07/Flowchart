@@ -1,1 +1,0 @@
-{"version":3,"sources":["webpack://src/index.css"],"names":[],"mappings":"AAAA,KACE,QAAS,CACT,SAAU,CACV,eAAgB,CAChB,uBACF","file":"main.eb2daafa.chunk.css","sourcesContent":["body {\n  margin: 0;\n  padding: 0;\n  overflow: hidden;\n  font-family: \"Open Sans\";\n}\n"]}
