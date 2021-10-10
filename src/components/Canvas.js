@@ -855,6 +855,8 @@ const Canvas = ({
     });
     newElements[elementClickedIndex].data.hasArrowEdge =
       !newElements[elementClickedIndex].data.hasArrowEdge;
+
+    console.log(newElements[elementClickedIndex].data.hasArrowEdge);
     setElements(newElements);
     updateNode(newElements);
   };
