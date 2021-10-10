@@ -841,9 +841,10 @@ const Canvas = ({
         if (isEdge(element)) {
           if (element.id === edge.id) {
             console.log(element);
-            element.arrowHeadType = elementCLicked.data.hasArrowEdge
-              ? null
-              : "arrowclosed";
+            // element.arrowHeadType = elementCLicked.data.hasArrowEdge
+            //   ? null
+            //   : "arrowclosed";
+            element.markerEndId = "arrowclosed";
           }
         } else {
           if (element.id === elementCLicked.id) {
