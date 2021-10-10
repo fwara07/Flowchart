@@ -512,7 +512,7 @@ const Canvas = ({
       .then((res) => res.json())
       .then((json) => {
         console.log(json.elements);
-        setElements(JSON.parse(json.elements));
+        setElements(json.elements);
       });
   };
 
