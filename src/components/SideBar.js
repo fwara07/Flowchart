@@ -92,7 +92,19 @@ const SideBar = ({
       .then((json) => {
         console.log("testtttttttttt", json);
         console.log(JSON.parse(json.tags));
-        console.log(JSON.parse(json.names));
+        console.log(json.names);
+        let newTags;
+        if (Array.isArray(json.tags)) {
+          newTags = json.tags;
+        } else {
+          newTags = JSON.parse(json.tags).tags;
+        }
+        let newNames;
+        if (Array.isArray(json.names)) {
+          newNames = json.names;
+        } else {
+          newNames = JSON.parse(json.names).names;
+        }
         console.log(JSON.parse(json.files));
         setTags(JSON.parse(json.tags));
         setNames(JSON.parse(json.names));
