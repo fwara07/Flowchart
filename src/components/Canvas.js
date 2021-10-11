@@ -830,8 +830,8 @@ const Canvas = ({
     setElements(newElements);
   };
 
-  const handleChangeArrow = () => {
-    const edges = getConnectedEdges([elementCLicked], elements);
+  const handleChangeArrow = async () => {
+    const edges = await getConnectedEdges([elementCLicked], elements);
     const newElements = [...elements];
     let elementClickedIndex;
     edges.map((edge) => {
@@ -852,7 +852,6 @@ const Canvas = ({
     });
     newElements[elementClickedIndex].data.hasArrowEdge =
       !newElements[elementClickedIndex].data.hasArrowEdge;
-
     console.log(newElements[elementClickedIndex].data.hasArrowEdge);
     setElements(newElements);
     updateNode(newElements);
@@ -944,7 +943,6 @@ const Canvas = ({
       if (element.id === elementCLicked.id) {
         console.log(!element.data.isCollapsable);
         element.data.isCollapsable = !element.data.isCollapsable;
-        setElementClicked(element);
       }
     });
     updateNode(newElements);

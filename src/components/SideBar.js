@@ -588,7 +588,12 @@ const SideBar = ({
           </Grid>
           <Divider style={{ marginTop: 20 }} orientation="horizontal" />
           {isEditMode && (
-            <Grid container direction="column" spacing={1}>
+            <Grid
+              container
+              direction="column"
+              style={{ marginTop: 30 }}
+              spacing={1}
+            >
               <Grid container direction="row" spacing={1}>
                 <Grid item xs={6}>
                   <div
