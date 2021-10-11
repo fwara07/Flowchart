@@ -990,7 +990,7 @@ const Canvas = ({
     setOpenNewField(false);
   };
 
-  const handleChangeAnimated = (event) => {
+  const handleChangeAnimated = () => {
     const edges = getConnectedEdges([elementCLicked], elements);
     const newElements = [...elements];
     let elementClickedIndex;
@@ -1710,7 +1710,7 @@ const Canvas = ({
                         <Switch
                           color="primary"
                           checked={elementCLicked.data.isCollapsable}
-                          onChange={handleChangeCollapsable}
+                          onClick={() => handleChangeCollapsable()}
                           name="checked2"
                         />
                       </Grid>
@@ -1794,7 +1794,7 @@ const Canvas = ({
                         <Switch
                           color="primary"
                           checked={elementCLicked.data.hasAnimatedEdge}
-                          onChange={handleChangeAnimated}
+                          onClick={() => handleChangeAnimated()}
                           name="checked3"
                         />
                       </Grid>
@@ -1813,7 +1813,7 @@ const Canvas = ({
                         <Switch
                           color="primary"
                           checked={elementCLicked.data.hasArrowEdge}
-                          onChange={handleChangeArrow}
+                          onClick={() => handleChangeArrow}
                           name="checked4"
                         />
                       </Grid>
