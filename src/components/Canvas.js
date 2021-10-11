@@ -813,8 +813,7 @@ const Canvas = ({
       type: type,
       data: {
         title: "title",
-        description:
-          type === "special" ? [{ key: "Key", value: "Value" }] : null,
+        description: type === "special" ? [{ key: "", value: "" }] : null,
         color: selectedColor,
         isCollapsable: true,
         hasAnimatedEdge: false,
@@ -1073,7 +1072,7 @@ const Canvas = ({
   } else {
     return (
       <>
-        <Grid container spacing={3} style={{ width: "80%" }}>
+        <Grid container direction="row" spacing={3} style={{ width: "80%" }}>
           <Grid item xs={4} style={{ textAlign: "start" }}>
             {isEditMode && (
               <>
@@ -1202,7 +1201,7 @@ const Canvas = ({
               </>
             )}
           </Grid>
-          <Grid item xs={2} direction="row" style={{ textAlign: "center" }}>
+          <Grid item xs={2} style={{ textAlign: "center" }}>
             <Typography
               variant="h6"
               gutterBottom

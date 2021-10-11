@@ -586,20 +586,7 @@ const SideBar = ({
               />
             )}
           </Grid>
-        </Grid>
-      ) : (
-        <Grid
-          item
-          xs={12}
-          style={{
-            height: "70vh",
-            textAlign: "center",
-            borderRight: "solid #D5D5D5 1px",
-          }}
-        >
-          <Typography variant="h5" gutterBottom style={{ padding: 20 }}>
-            Shapes Settings
-          </Typography>
+          <Divider style={{ marginTop: 20 }} orientation="horizontal" />
           {isEditMode && (
             <Grid container direction="column" spacing={1}>
               <Grid container direction="row" spacing={1}>
@@ -690,6 +677,21 @@ const SideBar = ({
               </Grid>
             </Grid>
           )}
+        </Grid>
+      ) : (
+        <Grid
+          item
+          xs={12}
+          style={{
+            height: "70vh",
+            textAlign: "center",
+            borderRight: "solid #D5D5D5 1px",
+          }}
+        >
+          <Typography variant="h5" gutterBottom style={{ padding: 20 }}>
+            Shapes Settings
+          </Typography>
+
           <Grid
             item
             xs={12}
