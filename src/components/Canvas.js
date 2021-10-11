@@ -127,7 +127,7 @@ const SpecialNodeComponent = ({ data }) => {
     <div>
       <div
         style={{
-          background: "#e8e8e8",
+          background: "#f5f5f5",
           borderColor: `rgba(${data.color.r}, ${data.color.g}, ${data.color.b}, ${data.color.a})`,
           color: "black",
           padding: 10,
@@ -172,7 +172,7 @@ const SpecialNodeComponent = ({ data }) => {
         style={{
           width: "93%",
           width: 150,
-          background: "#e8e8e8",
+          background: "#f5f5f5",
           border: `2px solid rgba(${data.color.r}, ${data.color.g}, ${data.color.b}, ${data.color.a})`,
           color: "black",
           padding: 10,
@@ -268,7 +268,7 @@ const OvalNodeComponent = ({ data }) => {
   return (
     <div
       style={{
-        background: "#e8e8e8",
+        background: "#f5f5f5",
         borderColor: `rgba(${data.color.r}, ${data.color.g}, ${data.color.b}, ${data.color.a})`,
         color: "black",
         padding: 10,
@@ -320,7 +320,7 @@ const RectangleNodeComponent = ({ data }) => {
   return (
     <div
       style={{
-        background: "#e8e8e8",
+        background: "#f5f5f5",
         borderColor: `rgba(${data.color.r}, ${data.color.g}, ${data.color.b}, ${data.color.a})`,
         color: "black",
         padding: 10,
@@ -373,7 +373,7 @@ const DiamondNodeComponent = ({ data }) => {
     <div>
       <div
         style={{
-          background: "#e8e8e8",
+          background: "#f5f5f5",
           color: "black",
           padding: 10,
           border: `2px solid rgba(${data.color.r}, ${data.color.g}, ${data.color.b}, ${data.color.a})`,
@@ -1202,7 +1202,7 @@ const Canvas = ({
               </>
             )}
           </Grid>
-          <Grid item xs={2} style={{ textAlign: "center" }}>
+          <Grid item xs={2} direction="row" style={{ textAlign: "center" }}>
             <Typography
               variant="h6"
               gutterBottom
