@@ -851,7 +851,7 @@ const Canvas = ({
           if (element.id === edge.id) {
             console.log(element);
             element.arrowHeadType =
-              hasArrowEdge === true ? "arrowclosed" : null;
+              hasArrowEdge === true ? null : "arrowclosed";
           }
         } else {
           if (element.id === elementCLicked.id) {
