@@ -1200,16 +1200,18 @@ const Canvas = ({
             )}
           </Grid>
           <Grid item xs={2} style={{ textAlign: "center" }}>
-            <Typography
-              variant="h6"
-              gutterBottom
-              style={{ paddingTop: 10, fontWeight: "bold" }}
-            >
-              {`Project: ${currentFile.parentId}`}
-            </Typography>
-            <Typography variant="h6" gutterBottom>
-              {`Sub Process: ${currentFile.text}`}
-            </Typography>
+            <Grid container direction="row" spacing={1}>
+              <Typography
+                variant="h6"
+                gutterBottom
+                style={{ paddingTop: 10, fontWeight: "bold" }}
+              >
+                {`Project: ${currentFile.parentId}`}
+              </Typography>
+              <Typography variant="h6" gutterBottom>
+                {`Sub Process: ${currentFile.text}`}
+              </Typography>
+            </Grid>
           </Grid>
           <Grid item xs={6} style={{ textAlign: "center" }}>
             <Typography component="div">
@@ -1709,7 +1711,7 @@ const Canvas = ({
                           color="primary"
                           checked={elementCLicked.data.isCollapsable}
                           onChange={handleChangeCollapsable}
-                          name="checked"
+                          name="checked2"
                         />
                       </Grid>
                       <Grid item>Collapsable</Grid>
@@ -1793,7 +1795,7 @@ const Canvas = ({
                           color="primary"
                           checked={elementCLicked.data.hasAnimatedEdge}
                           onChange={handleChangeAnimated}
-                          name="checked"
+                          name="checked3"
                         />
                       </Grid>
                       <Grid item>Animated</Grid>
@@ -1812,7 +1814,7 @@ const Canvas = ({
                           color="primary"
                           checked={elementCLicked.data.hasArrowEdge}
                           onChange={handleChangeArrow}
-                          name="checked"
+                          name="checked4"
                         />
                       </Grid>
                       <Grid item>Arrow</Grid>
