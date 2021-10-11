@@ -127,7 +127,7 @@ const SpecialNodeComponent = ({ data }) => {
     <div>
       <div
         style={{
-          background: "#f5f5f5",
+          background: "#f0f0f0",
           borderColor: `rgba(${data.color.r}, ${data.color.g}, ${data.color.b}, ${data.color.a})`,
           color: "black",
           padding: 10,
@@ -172,7 +172,7 @@ const SpecialNodeComponent = ({ data }) => {
         style={{
           width: "93%",
           width: 150,
-          background: "#f5f5f5",
+          background: "#f0f0f0",
           border: `2px solid rgba(${data.color.r}, ${data.color.g}, ${data.color.b}, ${data.color.a})`,
           color: "black",
           padding: 10,
@@ -268,7 +268,7 @@ const OvalNodeComponent = ({ data }) => {
   return (
     <div
       style={{
-        background: "#f5f5f5",
+        background: "#f0f0f0",
         borderColor: `rgba(${data.color.r}, ${data.color.g}, ${data.color.b}, ${data.color.a})`,
         color: "black",
         padding: 10,
@@ -320,7 +320,7 @@ const RectangleNodeComponent = ({ data }) => {
   return (
     <div
       style={{
-        background: "#f5f5f5",
+        background: "#f0f0f0",
         borderColor: `rgba(${data.color.r}, ${data.color.g}, ${data.color.b}, ${data.color.a})`,
         color: "black",
         padding: 10,
@@ -373,7 +373,7 @@ const DiamondNodeComponent = ({ data }) => {
     <div>
       <div
         style={{
-          background: "#f5f5f5",
+          background: "#f0f0f0",
           color: "black",
           padding: 10,
           border: `2px solid rgba(${data.color.r}, ${data.color.g}, ${data.color.b}, ${data.color.a})`,
