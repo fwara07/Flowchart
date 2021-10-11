@@ -1825,7 +1825,7 @@ const Canvas = ({
                         <Switch
                           color="primary"
                           checked={hasArrowEdge}
-                          onClick={() => handleChangeArrow}
+                          onClick={() => handleChangeArrow()}
                           name="checked4"
                         />
                       </Grid>
