@@ -462,13 +462,14 @@ const Canvas = ({
   const [reactFlowInstance, setReactFlowInstance] = useState(null);
   const [openNewField, setOpenNewField] = useState(false);
   const [field, setField] = useState({ key: "", value: "" });
+  console.log();
   const [hasArrowEdge, setArrowEdge] = useState(
-    !elementCLicked.hasOwnProperty("data")
+    elementCLicked.hasOwnProperty("data")
       ? elementCLicked.data.hasArrowEdge
       : false
   );
   const [hasAnimatedEdge, setAnimatedEdge] = useState(
-    !elementCLicked.hasOwnProperty("data")
+    elementCLicked.hasOwnProperty("data")
       ? elementCLicked.data.hasAnimatedEdge
       : false
   );
