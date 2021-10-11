@@ -462,6 +462,16 @@ const Canvas = ({
   const [reactFlowInstance, setReactFlowInstance] = useState(null);
   const [openNewField, setOpenNewField] = useState(false);
   const [field, setField] = useState({ key: "", value: "" });
+  const [hasArrowEdge, setArrowEdge] = useState(
+    !elementCLicked.hasOwnProperty("data")
+      ? elementCLicked.data.hasArrowEdge
+      : false
+  );
+  const [hasAnimatedEdge, setAnimatedEdge] = useState(
+    !elementCLicked.hasOwnProperty("data")
+      ? elementCLicked.data.hasAnimatedEdge
+      : false
+  );
 
   const onLoad = (reactFlowInstance) => {
     // console.log("flow loaded:", reactFlowInstance);
@@ -839,9 +849,8 @@ const Canvas = ({
         if (isEdge(element)) {
           if (element.id === edge.id) {
             console.log(element);
-            element.arrowHeadType = elementCLicked.data.hasArrowEdge
-              ? null
-              : "arrowclosed";
+            element.arrowHeadType =
+              hasArrowEdge === true ? "arrowclosed" : null;
           }
         } else {
           if (element.id === elementCLicked.id) {
@@ -852,6 +861,7 @@ const Canvas = ({
     });
     newElements[elementClickedIndex].data.hasArrowEdge =
       !newElements[elementClickedIndex].data.hasArrowEdge;
+    setArrowEdge(!hasArrowEdge);
     console.log(newElements[elementClickedIndex].data.hasArrowEdge);
     setElements(newElements);
     updateNode(newElements);
@@ -999,7 +1009,7 @@ const Canvas = ({
         if (isEdge(element)) {
           if (element.id === edge.id) {
             console.log(element);
-            element.animated = !element.animated;
+            element.animated = !hasAnimatedEdge;
           }
         } else {
           if (element.id === elementCLicked.id) {
@@ -1010,6 +1020,7 @@ const Canvas = ({
     });
     newElements[elementClickedIndex].data.hasAnimatedEdge =
       !newElements[elementClickedIndex].data.hasAnimatedEdge;
+    setAnimatedEdge(!hasAnimatedEdge);
     setElements(newElements);
     updateNode(newElements);
   };
@@ -1793,7 +1804,7 @@ const Canvas = ({
                       <Grid item>
                         <Switch
                           color="primary"
-                          checked={elementCLicked.data.hasAnimatedEdge}
+                          checked={hasAnimatedEdge}
                           onClick={() => handleChangeAnimated()}
                           name="checked3"
                         />
@@ -1812,7 +1823,7 @@ const Canvas = ({
                       <Grid item>
                         <Switch
                           color="primary"
-                          checked={elementCLicked.data.hasArrowEdge}
+                          checked={hasArrowEdge}
                           onClick={() => handleChangeArrow}
                           name="checked4"
                         />
