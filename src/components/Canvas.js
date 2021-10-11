@@ -844,7 +844,7 @@ const Canvas = ({
             // element.arrowHeadType = elementCLicked.data.hasArrowEdge
             //   ? null
             //   : "arrowclosed";
-            element.markerEndId = "arrowclosed";
+            element.markerEndId = "url(#arrowHead)";
           }
         } else {
           if (element.id === elementCLicked.id) {
@@ -1503,6 +1503,20 @@ const Canvas = ({
               paneMoveable={true}
               style={{ height: "90vh", width: isEditMode ? "84%" : "95%" }}
             >
+              <defs>
+                <marker
+                  id="arrowHead"
+                  viewBox="0 0 12 12"
+                  refX="3"
+                  refY="6"
+                  markerUnits="strokeWidth"
+                  markerWidth={headSize}
+                  markerHeight={headSize}
+                  orient={`${st.headOrient}`}
+                >
+                  <path d="M 0 0 L 12 6 L 0 12 L 3 6 z" fill={headColor} />
+                </marker>
+              </defs>
               <MiniMap
                 nodeStrokeColor={(n) => {
                   if (n.style?.background) return n.style.background;
