@@ -473,6 +473,11 @@ const Canvas = ({
       ? elementCLicked.data.hasAnimatedEdge
       : false
   );
+  const [isCollapsable, setCollapsable] = useState(
+    elementCLicked.hasOwnProperty("data")
+      ? elementCLicked.data.isCollapsable
+      : false
+  );
 
   const onLoad = (reactFlowInstance) => {
     // console.log("flow loaded:", reactFlowInstance);
@@ -551,6 +556,9 @@ const Canvas = ({
   const onElementClick = async (event, element) => {
     if (isEditMode) {
       setElementClicked(element);
+      setCollapsable(element.data.isCollapsable);
+      setAnimatedEdge(element.data.hasAnimatedEdge);
+      setArrowEdge(element.data.hasArrowEdge);
     }
   };
 
@@ -953,9 +961,10 @@ const Canvas = ({
     newElements.map((element) => {
       if (element.id === elementCLicked.id) {
         console.log(!element.data.isCollapsable);
-        element.data.isCollapsable = !element.data.isCollapsable;
+        element.data.isCollapsable = !isCollapsable;
       }
     });
+    setCollapsable(!isCollapsable);
     updateNode(newElements);
   };
 
@@ -1721,7 +1730,7 @@ const Canvas = ({
                       <Grid item>
                         <Switch
                           color="primary"
-                          checked={elementCLicked.data.isCollapsable}
+                          checked={isCollapsable}
                           onClick={() => handleChangeCollapsable()}
                           name="checked2"
                         />
