@@ -127,7 +127,7 @@ const SpecialNodeComponent = ({ data }) => {
     <div>
       <div
         style={{
-          background: "white",
+          background: "#e8e8e8",
           borderColor: `rgba(${data.color.r}, ${data.color.g}, ${data.color.b}, ${data.color.a})`,
           color: "black",
           padding: 10,
@@ -172,7 +172,7 @@ const SpecialNodeComponent = ({ data }) => {
         style={{
           width: "93%",
           width: 150,
-          background: "white",
+          background: "#e8e8e8",
           border: `2px solid rgba(${data.color.r}, ${data.color.g}, ${data.color.b}, ${data.color.a})`,
           color: "black",
           padding: 10,
@@ -268,7 +268,7 @@ const OvalNodeComponent = ({ data }) => {
   return (
     <div
       style={{
-        background: "white",
+        background: "#e8e8e8",
         borderColor: `rgba(${data.color.r}, ${data.color.g}, ${data.color.b}, ${data.color.a})`,
         color: "black",
         padding: 10,
@@ -320,7 +320,7 @@ const RectangleNodeComponent = ({ data }) => {
   return (
     <div
       style={{
-        background: "white",
+        background: "#e8e8e8",
         borderColor: `rgba(${data.color.r}, ${data.color.g}, ${data.color.b}, ${data.color.a})`,
         color: "black",
         padding: 10,
@@ -373,8 +373,7 @@ const DiamondNodeComponent = ({ data }) => {
     <div>
       <div
         style={{
-          background: "white",
-          backgroundColor: "white",
+          background: "#e8e8e8",
           color: "black",
           padding: 10,
           border: `2px solid rgba(${data.color.r}, ${data.color.g}, ${data.color.b}, ${data.color.a})`,
@@ -841,10 +840,9 @@ const Canvas = ({
         if (isEdge(element)) {
           if (element.id === edge.id) {
             console.log(element);
-            // element.arrowHeadType = elementCLicked.data.hasArrowEdge
-            //   ? null
-            //   : "arrowclosed";
-            element.markerEndId = "url(#arrowHead)";
+            element.arrowHeadType = elementCLicked.data.hasArrowEdge
+              ? null
+              : "arrowclosed";
           }
         } else {
           if (element.id === elementCLicked.id) {
@@ -1503,20 +1501,6 @@ const Canvas = ({
               paneMoveable={true}
               style={{ height: "90vh", width: isEditMode ? "84%" : "95%" }}
             >
-              <defs>
-                <marker
-                  id="arrowHead"
-                  viewBox="0 0 12 12"
-                  refX="3"
-                  refY="6"
-                  markerUnits="strokeWidth"
-                  markerWidth={headSize}
-                  markerHeight={headSize}
-                  orient={`${st.headOrient}`}
-                >
-                  <path d="M 0 0 L 12 6 L 0 12 L 3 6 z" fill={headColor} />
-                </marker>
-              </defs>
               <MiniMap
                 nodeStrokeColor={(n) => {
                   if (n.style?.background) return n.style.background;
