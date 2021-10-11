@@ -1222,16 +1222,20 @@ const Canvas = ({
           </Grid>
           <Grid item xs={2} style={{ textAlign: "center" }}>
             <Grid container direction="row" spacing={1}>
-              <Typography
-                variant="h6"
-                gutterBottom
-                style={{ paddingTop: 10, fontWeight: "bold" }}
-              >
-                {`Project: ${currentFile.parentId}`}
-              </Typography>
-              <Typography variant="h6" gutterBottom>
-                {`Sub Process: ${currentFile.text}`}
-              </Typography>
+              <div>
+                <Typography
+                  variant="h6"
+                  gutterBottom
+                  style={{ paddingTop: 10, fontWeight: "bold" }}
+                >
+                  {`Project: ${currentFile.parentId}`}
+                </Typography>
+              </div>
+              <div>
+                <Typography variant="h6" gutterBottom>
+                  {`Sub Process: ${currentFile.text}`}
+                </Typography>
+              </div>
             </Grid>
           </Grid>
           <Grid item xs={6} style={{ textAlign: "center" }}>
