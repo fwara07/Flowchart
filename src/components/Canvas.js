@@ -1221,7 +1221,7 @@ const Canvas = ({
             )}
           </Grid>
           <Grid item xs={2}>
-            <Grid item xs={6} style={{ marginRight: 10 }}>
+            <Grid item xs={6}>
               <Typography
                 variant="h6"
                 gutterBottom
