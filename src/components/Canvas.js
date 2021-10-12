@@ -1268,7 +1268,7 @@ const Canvas = ({
                 <Button
                   variant="contained"
                   color="primary"
-                  style={{ marginLeft: isEditMode ? 10 : 60 }}
+                  style={{ marginLeft: isEditMode ? 10 : 30 }}
                   startIcon={<CloudUploadIcon />}
                   onClick={() => {
                     setOpenUpload(true);
