@@ -1091,8 +1091,8 @@ const Canvas = ({
   } else {
     return (
       <>
-        <Grid container direction="row" spacing={3} style={{ width: "80%" }}>
-          <Grid item xs={4} style={{ textAlign: "start" }}>
+        <Grid container direction="row" spacing={1} style={{ width: "80%" }}>
+          <Grid item xs={2} style={{ textAlign: "start" }}>
             {isEditMode && (
               <>
                 <Button
@@ -1220,7 +1220,7 @@ const Canvas = ({
               </>
             )}
           </Grid>
-          <Grid item xs={6}>
+          <Grid item xs={4}>
             <Grid container direction="row">
               <Typography variant="h6" style={{ fontWeight: "bold" }}>
                 {`Project: ${currentFile.parentId}`}
