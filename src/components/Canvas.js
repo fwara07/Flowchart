@@ -1226,7 +1226,7 @@ const Canvas = ({
               <Typography
                 variant="h6"
                 gutterBottom
-                style={{ paddingTop: 10, fontWeight: "bold" }}
+                style={{ paddingTop: 10, paddingRight: 20, fontWeight: "bold" }}
               >
                 {`Project: ${currentFile.parentId}`}
               </Typography>
