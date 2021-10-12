@@ -548,7 +548,7 @@ const Canvas = ({
     const newParams = { ...params };
     newParams.type = edgeType;
     newParams.animated = false;
-    newParams.markerEndId = null;
+    newParams.markerEndId = "my-marker";
     // console.log(newParams, "**********8");
     const edge = await addEdge(newParams, elements);
     await setElements(edge);
