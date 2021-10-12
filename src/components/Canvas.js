@@ -1516,7 +1516,31 @@ const Canvas = ({
               // snapGrid={[15, 15]}
               paneMoveable={true}
               style={{ height: "90vh", width: isEditMode ? "84%" : "95%" }}
+              markerEndId="my-marker"
             >
+              <svg width="0" height="0">
+                <defs>
+                  <marker
+                    className="react-flow__arrowhead"
+                    id="my-marker"
+                    markerWidth="12.5"
+                    markerHeight="12.5"
+                    viewBox="-10 -10 20 20"
+                    orient="auto"
+                    refX="0"
+                    refY="0"
+                  >
+                    <polyline
+                      stroke="#000"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="1"
+                      fill="#000"
+                      points="-5,-4 0,0 -5,4 -5,-4"
+                    />
+                  </marker>
+                </defs>
+              </svg>
               <MiniMap
                 nodeStrokeColor={(n) => {
                   if (n.style?.background) return n.style.background;
