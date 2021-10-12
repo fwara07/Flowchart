@@ -799,7 +799,7 @@ const Canvas = ({
   };
 
   const handleDelete = async () => {
-    edges = getConnectedEdges([elementCLicked], elements);
+    const edges = getConnectedEdges([elementCLicked], elements);
     const update = elements.filter((data) => {
       if (edges.includes(data)) {
         return false;
