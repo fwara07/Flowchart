@@ -1533,11 +1533,11 @@ const Canvas = ({
                     refY="0"
                   >
                     <polyline
-                      stroke="#000"
+                      stroke="#BBBBC0"
                       strokeLinecap="round"
                       strokeLinejoin="round"
                       strokeWidth="1"
-                      fill="#000"
+                      fill="#BBBBC0"
                       points="-5,-4 0,0 -5,4 -5,-4"
                     />
                   </marker>
