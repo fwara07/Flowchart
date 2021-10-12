@@ -1220,7 +1220,7 @@ const Canvas = ({
               </>
             )}
           </Grid>
-          <Grid item xs={2}>
+          <Grid item xs={3}>
             <Typography variant="h6" style={{ fontWeight: "bold" }}>
               {`Project: ${currentFile.parentId}`}
             </Typography>
