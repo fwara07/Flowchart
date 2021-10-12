@@ -1221,7 +1221,7 @@ const Canvas = ({
             )}
           </Grid>
           {/* <Grid item xs={2}> */}
-          <Grid container direction="row" spacing={1}>
+          <Grid container direction="row" spacing={0}>
             <Grid item xs={6}>
               <Typography
                 variant="h6"
