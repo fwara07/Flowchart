@@ -721,6 +721,7 @@ const Canvas = ({
 
   const onNodeDragStop = (event, node) => {
     const newElements = [...elements];
+    console.log(node);
     // console.log(newElements);
     newElements.map((element) => {
       console.log(element);
