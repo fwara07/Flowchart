@@ -863,7 +863,7 @@ const Canvas = ({
         if (isEdge(element)) {
           if (element.id === edge.id) {
             console.log(element);
-            // element.markerEndId = hasArrowEdge === true ? null : "my-marker";
+            element.markerEndId = hasArrowEdge === true ? null : "my-marker";
           }
         } else {
           if (element.id === elementCLicked.id) {
