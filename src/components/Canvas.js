@@ -723,6 +723,7 @@ const Canvas = ({
     const newElements = [...elements];
     // console.log(newElements);
     newElements.map((element) => {
+      console.log(element);
       if (element.id === node.id) {
         element.position = node.position;
       }
