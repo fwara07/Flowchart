@@ -555,7 +555,7 @@ const Canvas = ({
     newParams.type = "customEdge";
     newParams.data = { hasArrow: false };
     newParams.animated = false;
-    // console.log(newParams, "**********8");
+    console.log(newParams, "**********8");
     const edge = await addEdge(newParams, elements);
     await setElements(edge);
   };
