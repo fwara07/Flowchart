@@ -729,6 +729,7 @@ const Canvas = ({
         element.position = node.position;
       }
     });
+    console.log(newElements);
     setElements(newElements);
   };
 
