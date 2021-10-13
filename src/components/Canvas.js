@@ -54,6 +54,7 @@ import { Alert, AlertTitle } from "@material-ui/lab";
 import dagre from "dagre";
 import { EditText } from "react-edit-text";
 import "react-edit-text/dist/index.css";
+import CustomEdge from "./CustomEdge";
 const markerEnd = getMarkerEnd("arrowclosed", "my-marker");
 console.log(markerEnd);
 
@@ -551,9 +552,9 @@ const Canvas = ({
     //  console.log(elements);
     //  updateNode()
     const newParams = { ...params };
-    newParams.type = edgeType;
+    newParams.type = "customEdge";
+    newParams.data = { hasArrow: false };
     newParams.animated = false;
-    newParams.markerEndId = null;
     // console.log(newParams, "**********8");
     const edge = await addEdge(newParams, elements);
     await setElements(edge);
@@ -868,7 +869,7 @@ const Canvas = ({
         if (isEdge(element)) {
           if (element.id === edge.id) {
             console.log(element);
-            element.markerEndId = hasArrowEdge === true ? null : markerEnd;
+            element.data.hasArrow = hasArrowEdge === true ? null : markerEnd;
           }
         } else {
           if (element.id === elementCLicked.id) {
@@ -1504,6 +1505,9 @@ const Canvas = ({
                 oval: OvalNodeComponent,
                 rectangle: RectangleNodeComponent,
                 diamond: DiamondNodeComponent,
+              }}
+              edgeTypes={{
+                customEdge: CustomEdge,
               }}
               elements={
                 Object.keys(targetElements).length !== 0
