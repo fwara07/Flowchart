@@ -22,7 +22,6 @@ export default function CustomEdge({
     targetX,
     targetY,
     targetPosition,
-    borderRadius: 4,
   });
   return (
     <>
@@ -39,11 +38,11 @@ export default function CustomEdge({
             refY="0"
           >
             <polyline
-              // stroke={color}
+              //   stroke={color}
               strokeLinecap="round"
               strokeLinejoin="round"
               strokeWidth="1"
-              // fill={color}
+              //   fill={color}
               points="-5,-4 0,0 -5,4 -5,-4"
             />
           </marker>
