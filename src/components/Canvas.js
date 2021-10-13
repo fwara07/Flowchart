@@ -726,7 +726,8 @@ const Canvas = ({
     newElements.map((element) => {
       console.log(element);
       if (element.id === node.id) {
-        element.position = node.position;
+        console.log(element);
+        element.position = { ...node.position };
       }
     });
     console.log(newElements);
