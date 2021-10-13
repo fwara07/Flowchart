@@ -1,5 +1,5 @@
 import React from "react";
-import { getSmoothStepPath } from "react-flow-renderer";
+import { getSmoothStepPath, getBezierPath } from "react-flow-renderer";
 
 export default function CustomEdge({
   source,
@@ -15,14 +15,24 @@ export default function CustomEdge({
   style = {},
   data,
 }) {
-  const edgePath = getSmoothStepPath({
-    sourceX,
-    sourceY,
-    sourcePosition,
-    targetX,
-    targetY,
-    targetPosition,
-  });
+  const edgePath =
+    data.type === "smoothstep"
+      ? getSmoothStepPath({
+          sourceX,
+          sourceY,
+          sourcePosition,
+          targetX,
+          targetY,
+          targetPosition,
+        })
+      : getBezierPath({
+          sourceX,
+          sourceY,
+          sourcePosition,
+          targetX,
+          targetY,
+          targetPosition,
+        });
   return (
     <>
       {data.hasArrow && (
@@ -30,19 +40,19 @@ export default function CustomEdge({
           <marker
             className="react-flow__arrowhead"
             id={`marker-${id}`}
-            markerWidth="20"
-            markerHeight="20"
+            markerWidth="12.5"
+            markerHeight="12.5"
             viewBox="-10 -10 20 20"
             orient="auto"
             refX="0"
             refY="0"
           >
             <polyline
-              //   stroke={color}
+              stroke="#BBBBC0"
               strokeLinecap="round"
               strokeLinejoin="round"
               strokeWidth="1"
-              //   fill={color}
+              fill="#BBBBC0"
               points="-5,-4 0,0 -5,4 -5,-4"
             />
           </marker>

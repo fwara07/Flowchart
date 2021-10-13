@@ -499,13 +499,12 @@ const Canvas = ({
   const handleChangeEdgeType = (event) => {
     const edges = getConnectedEdges([elementCLicked], elements);
     const newElements = [...elements];
-    let elementClickedIndex;
     edges.map((edge) => {
-      newElements.map((element, index) => {
+      newElements.map((element) => {
         if (isEdge(element)) {
           if (element.id === edge.id) {
             console.log(element);
-            element.type = event.target.value;
+            element.data.type = event.target.value;
           }
         }
       });
@@ -553,7 +552,7 @@ const Canvas = ({
     //  updateNode()
     const newParams = { ...params };
     newParams.type = "customEdge";
-    newParams.data = { hasArrow: false };
+    newParams.data = { hasArrow: false, type: edgeType };
     newParams.animated = false;
     console.log(newParams, "**********8");
     const edge = await addEdge(newParams, elements);
@@ -1430,10 +1429,10 @@ const Canvas = ({
                                       animated: animateds.includes(ids[key])
                                         ? true
                                         : false,
-                                      type: edgeTypes[ids[key]],
-                                      arrowHeadType: arrows.includes(ids[key])
-                                        ? "arrowclosed"
-                                        : null,
+                                      data: {
+                                        type: edgeTypes[ids[key]],
+                                        hasArrow: arrows.includes(ids[key]),
+                                      },
                                       source: ids[key],
                                       target: ids[child],
                                     },
