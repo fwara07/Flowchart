@@ -284,7 +284,7 @@ const SideBar = ({
   };
 
   const deleteItem = () => {
-    const newFiles = JSON.parse(JSON.stringify(files));
+    const newFiles = [...files];
     const index = files.findIndex((element) => element === currentFile);
     newFiles.splice(index, 1);
     const newNames = [...names];
@@ -292,10 +292,7 @@ const SideBar = ({
     newNames.splice(namesIndex, 1);
     setNames(newNames);
     updateNamesDb(newNames);
-    localStorage.setItem("names", JSON.stringify(newNames));
-    setFiles(newFiles);
     updateFilesDb(newFiles);
-    localStorage.setItem("files", JSON.stringify(newFiles));
     localStorage.removeItem("current");
     const newElements = currentFile.elements.filter((data) => {
       return currentFile.id !== data.node;

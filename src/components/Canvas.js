@@ -1525,7 +1525,6 @@ const Canvas = ({
               // snapGrid={[15, 15]}
               paneMoveable={true}
               style={{ height: "90vh", width: isEditMode ? "84%" : "95%" }}
-              markerEndId="my-marker"
             >
               <MiniMap
                 nodeStrokeColor={(n) => {
