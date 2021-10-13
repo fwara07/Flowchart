@@ -1558,8 +1558,8 @@ const Canvas = ({
             <marker
               className="react-flow__arrowhead"
               id="my-marker"
-              markerWidth="12.5"
-              markerHeight="12.5"
+              markerWidth="25"
+              markerHeight="25"
               viewBox="-10 -10 20 20"
               orient="auto"
               refX="0"
