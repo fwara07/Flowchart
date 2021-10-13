@@ -290,7 +290,8 @@ const OvalNodeComponent = ({ data }) => {
       <div
         style={{
           width: "93%",
-          // textAlign: "center",
+          paddingTop: 20,
+          textAlign: "center",
           overflowWrap: "break-word",
           marginLeft: 10,
           marginRight: 300,
@@ -343,6 +344,7 @@ const RectangleNodeComponent = ({ data }) => {
         style={{
           width: "93%",
           // textAlign: "center",
+          paddingTop: 20,
           overflowWrap: "break-word",
           marginLeft: 10,
           marginRight: 300,
