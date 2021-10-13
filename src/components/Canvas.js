@@ -31,7 +31,7 @@ import Edit from "@material-ui/icons/Edit";
 import ReactFlow, {
   removeElements,
   ReactFlowProvider,
-  getMarkerEnd
+  getMarkerEnd,
   getIncomers,
   getOutgoers,
   isNode,
@@ -54,7 +54,7 @@ import { Alert, AlertTitle } from "@material-ui/lab";
 import dagre from "dagre";
 import { EditText } from "react-edit-text";
 import "react-edit-text/dist/index.css";
-const markerEnd = getMarkerEnd('arrowclosed', 'my-marker');
+const markerEnd = getMarkerEnd("arrowclosed", "my-marker");
 
 let id = 0;
 const getId = () => `dndnode_${id++}`;
