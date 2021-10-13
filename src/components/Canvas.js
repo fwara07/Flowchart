@@ -55,6 +55,7 @@ import dagre from "dagre";
 import { EditText } from "react-edit-text";
 import "react-edit-text/dist/index.css";
 const markerEnd = getMarkerEnd("arrowclosed", "my-marker");
+console.log(markerEnd);
 
 let id = 0;
 const getId = () => `dndnode_${id++}`;
@@ -552,7 +553,7 @@ const Canvas = ({
     const newParams = { ...params };
     newParams.type = edgeType;
     newParams.animated = false;
-    newParams.markerEndId = "my-marker";
+    newParams.markerEndId = null;
     // console.log(newParams, "**********8");
     const edge = await addEdge(newParams, elements);
     await setElements(edge);
