@@ -1089,12 +1089,12 @@ const Canvas = ({
       }
     });
   }
-  // if (!isEditMode) {
-  //   filteredElements = getLayoutedElements(
-  //     filteredElements,
-  //     orientation === "vertical" ? "TB" : "LR"
-  //   );
-  // }
+  if (!isEditMode) {
+    filteredElements = getLayoutedElements(
+      filteredElements,
+      orientation === "vertical" ? "TB" : "LR"
+    );
+  }
   console.log(filteredElements);
   console.log(elements);
   const classes = useStyles();
