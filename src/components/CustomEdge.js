@@ -51,6 +51,7 @@ export default function CustomEdge({
       <path
         id={id}
         d={edgePath}
+        className="react-flow__edge-path"
         style={style}
         markerEnd={`url(#marker-${id})`}
       />
