@@ -1546,6 +1546,29 @@ const Canvas = ({
             </ReactFlow>
           </div>
         </ReactFlowProvider>
+        <svg width="0" height="0">
+          <defs>
+            <marker
+              className="react-flow__arrowhead"
+              id="my-marker"
+              markerWidth="12.5"
+              markerHeight="12.5"
+              viewBox="-10 -10 20 20"
+              orient="auto"
+              refX="0"
+              refY="0"
+            >
+              <polyline
+                stroke="#BBBBC0"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="1"
+                fill="#BBBBC0"
+                points="-5,-4 0,0 -5,4 -5,-4"
+              />
+            </marker>
+          </defs>
+        </svg>
         {/* <div /> */}
         {isEditMode && (
           <Drawer
