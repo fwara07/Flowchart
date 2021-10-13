@@ -14,6 +14,15 @@ export default function CustomEdge({
   style = {},
   data,
 }) {
+  const edgePath = getSmoothStepPath({
+    sourceX,
+    sourceY,
+    sourcePosition,
+    targetX,
+    targetY,
+    targetPosition,
+    borderRadius: 4,
+  });
   return (
     <>
       <defs>
@@ -39,7 +48,12 @@ export default function CustomEdge({
           </marker>
         )}
       </defs>
-      <path id={id} style={style} markerEnd={`url(#marker-${id})`} />
+      <path
+        id={id}
+        d={edgePath}
+        style={style}
+        markerEnd={`url(#marker-${id})`}
+      />
     </>
   );
 }
