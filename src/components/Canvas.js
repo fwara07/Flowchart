@@ -1456,11 +1456,15 @@ const Canvas = ({
                                       ? true
                                       : false,
                                     type: edgeTypes[ids[key]],
-                                    arrowHeadType: arrows.includes(ids[key])
-                                      ? "arrowclosed"
-                                      : null,
+                                    data: {
+                                      type: edgeTypes[ids[key]],
+                                      hasArrow:
+                                        arrows.includes(ids[key]) === true
+                                          ? true
+                                          : false,
+                                    },
                                     source: ids[key],
-                                    target: ids[children[key]],
+                                    target: ids[child],
                                   },
                                   jsonArr
                                 );
