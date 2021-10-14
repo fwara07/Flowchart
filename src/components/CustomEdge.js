@@ -41,7 +41,7 @@ export default function CustomEdge({
             className="react-flow__arrowhead"
             id={`marker-${id}`}
             markerWidth="25"
-            markerHeight="25"
+            markerHeight="30"
             viewBox="-10 -10 20 20"
             orient="auto"
             refX="0"
