@@ -65,6 +65,29 @@ export default function CustomEdge({
         style={style}
         markerEnd={`url(#marker-${id})`}
       />
+      {data.hasArrow && (
+        <defs>
+          <marker
+            className="react-flow__arrowhead"
+            id={`marker-${id}`}
+            markerWidth="25"
+            markerHeight="30"
+            viewBox="-10 -10 20 20"
+            orient="auto"
+            refX="0"
+            refY="0"
+          >
+            <polyline
+              stroke="#BBBBC0"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="1"
+              fill="#BBBBC0"
+              points="-5,-4 0,0 -5,4 -5,-4"
+            />
+          </marker>
+        </defs>
+      )}
     </>
   );
 }
