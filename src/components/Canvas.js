@@ -1433,9 +1433,13 @@ const Canvas = ({
                                       animated: animateds.includes(ids[key])
                                         ? true
                                         : false,
+                                      type: edgeTypes[ids[key]],
                                       data: {
                                         type: edgeTypes[ids[key]],
-                                        hasArrow: arrows.includes(ids[key]),
+                                        hasArrow:
+                                          arrows.includes(ids[key]) === true
+                                            ? true
+                                            : false,
                                       },
                                       source: ids[key],
                                       target: ids[child],
