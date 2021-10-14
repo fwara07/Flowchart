@@ -45,7 +45,7 @@ export default function CustomEdge({
             viewBox="-10 -10 20 20"
             orient="auto"
             refX="10"
-            refY="0"
+            refY="10"
           >
             <polyline
               stroke="#BBBBC0"
