@@ -56,23 +56,12 @@ export default function CustomEdge({
               points="-5,-4 0,0 -5,4 -5,-4"
             />
           </marker>
-        </defs>
-      )}
-      <path
-        id={id}
-        d={edgePath}
-        className="react-flow__edge-path"
-        style={style}
-        markerEnd={`url(#marker-${id})`}
-      />
-      {data.hasArrow && (
-        <defs>
           <marker
             className="react-flow__arrowhead"
             id={`marker-${id}`}
             markerWidth="25"
             markerHeight="30"
-            viewBox="-10 -10 20 20"
+            viewBox="10 10 -20 -20"
             orient="auto"
             refX="0"
             refY="0"
@@ -88,6 +77,13 @@ export default function CustomEdge({
           </marker>
         </defs>
       )}
+      <path
+        id={id}
+        d={edgePath}
+        className="react-flow__edge-path"
+        style={style}
+        markerEnd={`url(#marker-${id})`}
+      />
     </>
   );
 }
