@@ -39,12 +39,12 @@ export default function CustomEdge({
         <defs>
           <marker
             className="react-flow__arrowhead"
-            id={`marker-${id}`}
+            id={`marker-start-${id}`}
             markerWidth="25"
             markerHeight="30"
             viewBox="-10 -10 20 20"
             orient="auto"
-            refX="0"
+            refX="10"
             refY="0"
           >
             <polyline
@@ -58,7 +58,7 @@ export default function CustomEdge({
           </marker>
           <marker
             className="react-flow__arrowhead"
-            id={`marker-start-${id}`}
+            id={`marker-${id}`}
             markerWidth="25"
             markerHeight="30"
             viewBox="-10 -10 20 20"
