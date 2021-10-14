@@ -1433,7 +1433,7 @@ const Canvas = ({
                                       animated: animateds.includes(ids[key])
                                         ? true
                                         : false,
-                                      type: edgeTypes[ids[key]],
+                                      type: "customEdge",
                                       data: {
                                         type: edgeTypes[ids[key]],
                                         hasArrow:
@@ -1455,7 +1455,7 @@ const Canvas = ({
                                     animated: animateds.includes(ids[key])
                                       ? true
                                       : false,
-                                    type: edgeTypes[ids[key]],
+                                    type: "customEdge",
                                     data: {
                                       type: edgeTypes[ids[key]],
                                       hasArrow:
@@ -1464,7 +1464,7 @@ const Canvas = ({
                                           : false,
                                     },
                                     source: ids[key],
-                                    target: ids[child],
+                                    target: ids[children[key]],
                                   },
                                   jsonArr
                                 );
