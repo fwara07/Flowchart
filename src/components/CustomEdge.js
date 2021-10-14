@@ -76,6 +76,29 @@ export default function CustomEdge({
             />
           </marker> */}
           <marker
+            className="react-flow__arrowhead"
+            id={`marker-${id}`}
+            markerWidth="10"
+            markerHeight="7"
+            refX="10"
+            refY="3.5"
+            orient="auto"
+          >
+            <polygon points="10 0, 10 7, 0 3.5" fill="red" />
+          </marker>
+          <marker
+            className="react-flow__arrowhead"
+            id={`marker-${id}`}
+            markerWidth="10"
+            markerHeight="7"
+            refX="0"
+            refY="3.5"
+            orient="auto"
+            markerUnits="strokeWidth"
+          >
+            <polygon points="0 0, 10 3.5, 0 7" fill="red" />
+          </marker>
+          {/* <marker
             viewBox="-10 -10 20 20"
             className="react-flow__arrowhead"
             id={`marker-${id}`}
@@ -113,7 +136,7 @@ export default function CustomEdge({
               strokeWidth="1"
               fill="#BBBBC0"
             />
-          </marker>
+          </marker> */}
         </defs>
       )}
       <path
