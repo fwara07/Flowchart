@@ -1357,10 +1357,19 @@ const Canvas = ({
                           console.log(element[0].includes("."));
                           if (element[0].includes(".")) {
                             counter = counter + 1;
-                            description[ids[element[0].split(".")[0]]] = {
+                            const lst =
+                              description[ids[element[0].split(".")[0]]]
+                                .length > 0
+                                ? [
+                                    ...description[
+                                      ids[element[0].split(".")[0]]
+                                    ],
+                                  ]
+                                : [];
+                            lst.push({
                               key: element[1],
                               value: element[2],
-                            };
+                            });
                           } else {
                             if (
                               [
