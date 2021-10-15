@@ -451,10 +451,17 @@ const Canvas = ({
   const [openNewNode, setOpenNewNode] = useState(false);
   const [tag, setTag] = useState("");
   const [displayColorPicker, setDisplayColorPicker] = useState(false);
+  const [displayColorPickerArrow, setDisplayColorPickerArrow] = useState(false);
   const [color, setColor] = useState({
     r: "193",
     g: "230",
     b: "255",
+    a: "100",
+  });
+  const [colorArrow, setColorArrow] = useState({
+    r: "187",
+    g: "187",
+    b: "192",
     a: "100",
   });
   const [toggledElements, setToggledElements] = useState([]);
@@ -886,11 +893,14 @@ const Canvas = ({
     setArrowEdge(!hasArrowEdge);
     console.log(newElements[elementClickedIndex].data.hasArrowEdge);
     setElements(newElements);
-    updateNode(newElements);
   };
 
   const handleClickColor = () => {
     setDisplayColorPicker(!displayColorPicker);
+  };
+
+  const handleClickColorArrow = () => {
+    setDisplayColorPickerArrow(!displayColorPickerArrow);
   };
 
   const handleCloseColor = () => {
@@ -906,7 +916,23 @@ const Canvas = ({
       }
     });
     setElements(newElements);
-    updateNode(newElements);
+  };
+
+  const handleChangeColorArrow = (color) => {
+    setColorArrow(color.rgb);
+    const edges = await getConnectedEdges([elementCLicked], elements);
+    const newElements = [...elements];
+    edges.map((edge) => {
+      newElements.map((element, index) => {
+        if (isEdge(element)) {
+          if (element.id === edge.id) {
+            console.log(element);
+            element.data.color = color.rgb;
+          }
+        }
+      });
+    });
+    setElements(newElements);
   };
 
   const onDragOver = (event) => {
@@ -944,6 +970,35 @@ const Canvas = ({
         height: "14px",
         borderRadius: "2px",
         background: `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`,
+      },
+      swatch: {
+        padding: "5px",
+        borderRadius: "1px",
+        boxShadow: "0 0 0 1px rgba(0,0,0,.1)",
+        display: "inline-block",
+        cursor: "pointer",
+      },
+      popover: {
+        position: "absolute",
+        zIndex: "2",
+      },
+      cover: {
+        position: "fixed",
+        top: "0px",
+        right: "0px",
+        bottom: "0px",
+        left: "0px",
+      },
+    },
+  });
+
+  const stylesArrow = reactCSS({
+    default: {
+      color: {
+        width: "36px",
+        height: "14px",
+        borderRadius: "2px",
+        background: `rgba(${colorArrow.r}, ${colorArrow.g}, ${colorArrow.b}, ${colorArrow.a})`,
       },
       swatch: {
         padding: "5px",
@@ -1912,6 +1967,31 @@ const Canvas = ({
                       <Grid item>Arrow</Grid>
                     </Grid>
                   </Typography>
+                  <div style={{ paddingLeft: 20, paddingTop: 20 }}>
+                    <Grid item xs={12}>
+                      <Typography variant="subtitle1" gutterBottom>
+                        Arrow Color
+                      </Typography>
+                      <div
+                        style={stylesArrow.swatch}
+                        onClick={handleClickColorArrow}
+                      >
+                        <div style={stylesArrow.color} />
+                      </div>
+                      {displayColorPicker ? (
+                        <div style={stylesArrow.popover}>
+                          <div
+                            style={stylesArrow.cover}
+                            onClick={handleCloseColorArrow}
+                          />
+                          <SketchPicker
+                            color={colorArrow}
+                            onChange={handleChangeColorArrow}
+                          />
+                        </div>
+                      ) : null}
+                    </Grid>
+                  </div>
                   <Divider style={{ marginTop: 20, marginBottom: 10 }} />
                   <IconButton
                     style={{ color: "red" }}
