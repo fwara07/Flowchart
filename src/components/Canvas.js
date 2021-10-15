@@ -1444,7 +1444,7 @@ const Canvas = ({
                         console.log(jsonArr);
                         console.log(description);
                         jsonArr.map((element) => {
-                          element.description = description[element.id];
+                          element.data.description = description[element.id];
                         });
                         console.log("Finished:", results.data);
                         console.log("onSave", fileObjects);
