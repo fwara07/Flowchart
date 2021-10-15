@@ -559,7 +559,7 @@ const Canvas = ({
     //  updateNode()
     const newParams = { ...params };
     newParams.type = "customEdge";
-    newParams.data = { hasArrow: false, type: edgeType };
+    newParams.data = { hasArrow: false, type: edgeType, color: colorArrow };
     newParams.animated = false;
     console.log(newParams, "**********8");
     const edge = await addEdge(newParams, elements);

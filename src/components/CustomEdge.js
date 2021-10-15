@@ -48,11 +48,11 @@ export default function CustomEdge({
             refY="0"
           >
             <polyline
-              stroke="#BBBBC0"
+              stroke={`rgba(${data.color.r}, ${data.color.g}, ${data.color.b}, ${data.color.a})`}
               strokeLinecap="round"
               strokeLinejoin="round"
               strokeWidth="1"
-              fill="#BBBBC0"
+              fill={`rgba(${data.color.r}, ${data.color.g}, ${data.color.b}, ${data.color.a})`}
               points="-5,-4 0,0 -5,4 -5,-4"
             />
           </marker>
@@ -69,11 +69,11 @@ export default function CustomEdge({
             <polyline
               // transform="translate(90)"
               style={{ transform: "rotate(180deg)" }}
-              stroke="#BBBBC0"
+              stroke={`rgba(${data.color.r}, ${data.color.g}, ${data.color.b}, ${data.color.a})`}
               strokeLinecap="round"
               strokeLinejoin="round"
               strokeWidth="1"
-              fill="#BBBBC0"
+              fill={`rgba(${data.color.r}, ${data.color.g}, ${data.color.b}, ${data.color.a})`}
               points="-5,-4 0,0 -5,4 -5,-4"
             />
           </marker>
