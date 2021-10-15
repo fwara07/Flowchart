@@ -155,7 +155,7 @@ const SpecialNodeComponent = ({ data }) => {
           isConnectable={true}
         /> */}
         <Handle
-          type="source"
+          type="target"
           position="left"
           style={{ background: "black" }}
           isConnectable={true}
@@ -169,7 +169,7 @@ const SpecialNodeComponent = ({ data }) => {
           connectionMode="loose"
         />
         <Handle
-          type="source"
+          type="target"
           position="top"
           style={{ background: "black" }}
           isConnectable={true}
