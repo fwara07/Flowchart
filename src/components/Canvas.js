@@ -156,6 +156,7 @@ const SpecialNodeComponent = ({ data }) => {
         /> */}
         <Handle
           type="source"
+          id="1"
           position="left"
           style={{ background: "black" }}
           isConnectable={true}
@@ -163,6 +164,7 @@ const SpecialNodeComponent = ({ data }) => {
         />
         <Handle
           type="source"
+          id="2"
           position="right"
           style={{ background: "black" }}
           isConnectable={true}
@@ -170,6 +172,7 @@ const SpecialNodeComponent = ({ data }) => {
         />
         <Handle
           type="source"
+          id="3"
           position="top"
           style={{ background: "black" }}
           isConnectable={true}
@@ -177,6 +180,7 @@ const SpecialNodeComponent = ({ data }) => {
         />
         <Handle
           type="source"
+          id="4"
           position="bottom"
           style={{ background: "black" }}
           isConnectable={true}
