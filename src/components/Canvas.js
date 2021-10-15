@@ -1527,6 +1527,7 @@ const Canvas = ({
                                           arrows.includes(ids[key]) === true
                                             ? true
                                             : false,
+                                        color: colorArrow,
                                       },
                                       source: ids[key],
                                       target: ids[child],
@@ -1549,6 +1550,7 @@ const Canvas = ({
                                         arrows.includes(ids[key]) === true
                                           ? true
                                           : false,
+                                      color: colorArrow,
                                     },
                                     source: ids[key],
                                     target: ids[children[key]],
