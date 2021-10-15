@@ -330,8 +330,35 @@ const OvalNodeComponent = ({ data }) => {
     >
       <Handle
         type="target"
-        position={realOrientation === "horizontal" ? "left" : "top"}
+        id="1"
+        position="left"
         style={{ background: "black" }}
+        isConnectable={true}
+        connectionMode="loose"
+      />
+      <Handle
+        type="source"
+        id="2"
+        position="right"
+        style={{ background: "black" }}
+        isConnectable={true}
+        connectionMode="loose"
+      />
+      <Handle
+        type="target"
+        id="3"
+        position="top"
+        style={{ background: "black" }}
+        isConnectable={true}
+        connectionMode="loose"
+      />
+      <Handle
+        type="source"
+        id="4"
+        position="bottom"
+        style={{ background: "black" }}
+        isConnectable={true}
+        connectionMode="loose"
       />
       {/* <div style={{ paddingTop: 20 }}>
         {data.title.length >= 21 ? data.title.slice(0, 20) + "..." : data.title}
@@ -356,12 +383,6 @@ const OvalNodeComponent = ({ data }) => {
           {data.title.substring(0, 27)}
         </Typography>
       </div>
-      <Handle
-        type="source"
-        position={realOrientation === "horizontal" ? "right" : "bottom"}
-        style={{ background: "black" }}
-        isConnectable={true}
-      />
     </div>
   );
 };
@@ -383,8 +404,35 @@ const RectangleNodeComponent = ({ data }) => {
     >
       <Handle
         type="target"
-        position={realOrientation === "horizontal" ? "left" : "top"}
+        id="1"
+        position="left"
         style={{ background: "black" }}
+        isConnectable={true}
+        connectionMode="loose"
+      />
+      <Handle
+        type="source"
+        id="2"
+        position="right"
+        style={{ background: "black" }}
+        isConnectable={true}
+        connectionMode="loose"
+      />
+      <Handle
+        type="target"
+        id="3"
+        position="top"
+        style={{ background: "black" }}
+        isConnectable={true}
+        connectionMode="loose"
+      />
+      <Handle
+        type="source"
+        id="4"
+        position="bottom"
+        style={{ background: "black" }}
+        isConnectable={true}
+        connectionMode="loose"
       />
       {/* <div style={{ paddingTop: 20 }}>
         {data.title.length >= 21 ? data.title.slice(0, 20) + "..." : data.title}
@@ -409,12 +457,6 @@ const RectangleNodeComponent = ({ data }) => {
           {data.title}
         </Typography>
       </div>
-      <Handle
-        type="source"
-        position={realOrientation === "horizontal" ? "right" : "bottom"}
-        style={{ background: "black" }}
-        isConnectable={true}
-      />
     </div>
   );
 };
@@ -464,15 +506,36 @@ const DiamondNodeComponent = ({ data }) => {
         </div>
       </div>
       <Handle
-        type="source"
-        position={realOrientation === "horizontal" ? "right" : "bottom"}
+        type="target"
+        id="1"
+        position="left"
         style={{ background: "black" }}
         isConnectable={true}
+        connectionMode="loose"
+      />
+      <Handle
+        type="source"
+        id="2"
+        position="right"
+        style={{ background: "black" }}
+        isConnectable={true}
+        connectionMode="loose"
       />
       <Handle
         type="target"
-        position={realOrientation === "horizontal" ? "left" : "top"}
+        id="3"
+        position="top"
         style={{ background: "black" }}
+        isConnectable={true}
+        connectionMode="loose"
+      />
+      <Handle
+        type="source"
+        id="4"
+        position="bottom"
+        style={{ background: "black" }}
+        isConnectable={true}
+        connectionMode="loose"
       />
     </div>
   );
