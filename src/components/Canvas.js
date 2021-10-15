@@ -149,6 +149,7 @@ const SpecialNodeComponent = ({ data }) => {
         />
         <Handle
           type="source"
+          connectionMode="loose"
           position={realOrientation === "horizontal" ? "bottom" : "right"}
           style={{ background: "black" }}
         />
@@ -266,11 +267,13 @@ const SpecialNodeComponent = ({ data }) => {
       <Handle
         type="source"
         position={realOrientation === "horizontal" ? "right" : "bottom"}
+        connectionMode="loose"
         style={{ background: "black" }}
         isConnectable={true}
       />
       <Handle
         type="source"
+        connectionMode="loose"
         position={realOrientation === "horizontal" ? "top" : "left"}
         style={{ background: "black" }}
         isConnectable={true}
