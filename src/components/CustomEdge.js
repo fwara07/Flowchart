@@ -42,9 +42,9 @@ export default function CustomEdge({
             id={`marker-start-${id}`}
             markerWidth="25"
             markerHeight="30"
-            viewBox="10 10 -20 -20"
+            viewBox="-10 -10 20 20"
             orient="auto"
-            refX={edgePath.x1}
+            refX={0}
             refY="0"
           >
             <polyline
