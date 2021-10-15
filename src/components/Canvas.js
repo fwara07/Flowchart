@@ -907,6 +907,10 @@ const Canvas = ({
     setDisplayColorPicker(false);
   };
 
+  const handleCloseColor = () => {
+    setDisplayColorPickerArrow(false);
+  };
+
   const handleChangeColor = (color) => {
     setColor(color.rgb);
     const newElements = [...elements];
