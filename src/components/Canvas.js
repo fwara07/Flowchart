@@ -148,7 +148,7 @@ const SpecialNodeComponent = ({ data }) => {
           style={{ background: "black" }}
         />
         <Handle
-          type="target"
+          type="souece"
           position={realOrientation === "horizontal" ? "bottom" : "right"}
           style={{ background: "black" }}
         />
@@ -270,7 +270,7 @@ const SpecialNodeComponent = ({ data }) => {
         isConnectable={true}
       />
       <Handle
-        type="source"
+        type="target"
         position={realOrientation === "horizontal" ? "top" : "left"}
         style={{ background: "black" }}
         isConnectable={true}
