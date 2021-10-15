@@ -1984,7 +1984,7 @@ const Canvas = ({
                       >
                         <div style={stylesArrow.color} />
                       </div>
-                      {displayColorPicker ? (
+                      {displayColorPickerArrow ? (
                         <div style={stylesArrow.popover}>
                           <div
                             style={stylesArrow.cover}

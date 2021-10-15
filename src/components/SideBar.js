@@ -95,7 +95,11 @@ const SideBar = ({
         if (Array.isArray(json.tags)) {
           newTags = json.tags;
         } else {
-          newTags = JSON.parse(json.tags);
+          if (JSON.parse(json.tags).hasOwnProperty("tags")) {
+            newTags = JSON.parse(json.tags).tags;
+          } else {
+            newTags = JSON.parse(json.tags);
+          }
         }
         let newNames;
         if (Array.isArray(json.names)) {
