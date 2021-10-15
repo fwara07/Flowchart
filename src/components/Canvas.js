@@ -142,7 +142,7 @@ const SpecialNodeComponent = ({ data }) => {
           textAlign: "center",
         }}
       >
-        <Handle
+        {/* <Handle
           type="source"
           position={realOrientation === "horizontal" ? "left" : "top"}
           style={{ background: "black" }}
@@ -153,6 +153,34 @@ const SpecialNodeComponent = ({ data }) => {
           position={realOrientation === "horizontal" ? "bottom" : "right"}
           style={{ background: "black" }}
           isConnectable={true}
+        /> */}
+        <Handle
+          type="source"
+          position="left"
+          style={{ background: "black" }}
+          isConnectable={true}
+          connectionMode="loose"
+        />
+        <Handle
+          type="source"
+          position="left"
+          style={{ background: "black" }}
+          isConnectable={true}
+          connectionMode="loose"
+        />
+        <Handle
+          type="source"
+          position="left"
+          style={{ background: "black" }}
+          isConnectable={true}
+          connectionMode="loose"
+        />
+        <Handle
+          type="source"
+          position="left"
+          style={{ background: "black" }}
+          isConnectable={true}
+          connectionMode="loose"
         />
         {/* <div>
           {data.title.length >= 21
@@ -265,7 +293,7 @@ const SpecialNodeComponent = ({ data }) => {
           </Typography> */}
         </div>
       </div>
-      <Handle
+      {/* <Handle
         type="target"
         position={realOrientation === "horizontal" ? "right" : "bottom"}
         style={{ background: "black" }}
@@ -276,7 +304,7 @@ const SpecialNodeComponent = ({ data }) => {
         position={realOrientation === "horizontal" ? "top" : "left"}
         style={{ background: "black" }}
         isConnectable={true}
-      />
+      /> */}
     </div>
   );
 };
