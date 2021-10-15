@@ -44,8 +44,8 @@ export default function CustomEdge({
             markerHeight="30"
             viewBox="-10 -10 20 20"
             orient="auto"
-            refX="0"
-            refY="-10"
+            refX="10"
+            refY="0"
           >
             <polyline
               stroke="#BBBBC0"

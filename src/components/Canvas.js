@@ -1352,6 +1352,8 @@ const Canvas = ({
                           const checkedTags = checkTags(element[3]);
                           console.log(checkedTags, "7777777777777777777");
                           console.log(element[4]);
+                          console.log(element[0]);
+                          console.log(element[0].includes("."));
                           if (
                             [
                               "special",
@@ -1361,8 +1363,6 @@ const Canvas = ({
                             ].includes(element[4].toLowerCase())
                           ) {
                             if (Array.isArray(checkedTags)) {
-                              console.log(element[0]);
-                              console.log(element[0].includes("."));
                               if (element[0].includes(".")) {
                                 description[element[0].split(".")[0]] = {
                                   key: element[1],
