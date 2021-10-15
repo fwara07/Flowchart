@@ -920,7 +920,7 @@ const Canvas = ({
 
   const handleChangeColorArrow = (color) => {
     setColorArrow(color.rgb);
-    const edges = await getConnectedEdges([elementCLicked], elements);
+    const edges = getConnectedEdges([elementCLicked], elements);
     const newElements = [...elements];
     edges.map((edge) => {
       newElements.map((element, index) => {
