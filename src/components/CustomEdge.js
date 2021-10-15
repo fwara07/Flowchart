@@ -68,12 +68,13 @@ export default function CustomEdge({
           >
             <polyline
               // transform="translate(90)"
+              style={{ transform: "rotate(180deg)" }}
               stroke="#BBBBC0"
               strokeLinecap="round"
               strokeLinejoin="round"
               strokeWidth="1"
               fill="#BBBBC0"
-              points="5,4 0,0 5,-4 5,4"
+              points="-5,-4 0,0 -5,4 -5,-4"
             />
           </marker>
         </defs>

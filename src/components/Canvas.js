@@ -1358,8 +1358,8 @@ const Canvas = ({
                           if (element[0].includes(".")) {
                             counter = counter + 1;
                             const lst =
-                              description[ids[element[0].split(".")[0]]]
-                                .length > 0
+                              description[ids[element[0].split(".")[0]]] !==
+                              undefined
                                 ? [
                                     ...description[
                                       ids[element[0].split(".")[0]]
