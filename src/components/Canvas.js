@@ -926,6 +926,9 @@ const Canvas = ({
     addNode(type, position);
   };
 
+  const getKeyByValue = (object, value) => {
+    return Object.keys(object).find((key) => object[key] === value);
+  };
   // useEffect(() => {
   //   if (elements.length > 0) {
   //   }
@@ -1343,62 +1346,67 @@ const Canvas = ({
                         const animateds = [];
                         const edgeTypes = {};
                         const arrows = [];
+                        const description = {};
                         data = data.slice(1);
                         data.map((element) => {
-                          const checkedTags = checkTags(element[4]);
+                          const checkedTags = checkTags(element[3]);
                           console.log(checkedTags, "7777777777777777777");
-                          console.log(element[5]);
+                          console.log(element[4]);
                           if (
                             [
                               "special",
                               "oval",
                               "rectangle",
                               "diamond",
-                            ].includes(element[5].toLowerCase())
+                            ].includes(element[4].toLowerCase())
                           ) {
                             if (Array.isArray(checkedTags)) {
-                              ids[element[0]] = getNodeId();
-                              jsonArr.push({
-                                id: ids[element[0]],
-                                node: currentFile.id,
-                                type: element[5],
-                                data: {
-                                  title: element[1],
-                                  description:
-                                    element[2].length === 0
-                                      ? null
-                                      : parseDescription(element[2]),
-                                  color: element[3].startsWith("#")
-                                    ? hexToRgb(element[3])
-                                    : {
-                                        r: "193",
-                                        g: "230",
-                                        b: "255",
-                                        a: "100",
-                                      },
-                                  tags: checkedTags,
-                                  isCollapsable:
-                                    element[6] === "TRUE" ? true : false,
-                                },
-                                isHidden: false,
-                                position: { x: 0, y: 0 },
-                              });
-                              if (element[8] === "TRUE") {
-                                animateds.push(ids[element[0]]);
-                              }
-                              if (element[9] === "step") {
-                                edgeTypes[ids[element[0]]] = "step";
+                              if (element[0].includes(".")) {
+                                description[element[0].split(".")[0]] = {
+                                  key: element[1],
+                                  value: element[2],
+                                };
                               } else {
-                                edgeTypes[ids[element[0]]] = "curved";
-                              }
-                              if (element[10] === "TRUE") {
-                                arrows.push(ids[element[0]]);
-                              }
-                              console.log(jsonArr);
-                              if (element[7].length > 0) {
-                                if (element[7].includes(",")) {
-                                  const csvChildren = element[7].split(",");
-                                  children[element[0]] = csvChildren;
+                                ids[element[0]] = getNodeId();
+                                jsonArr.push({
+                                  id: ids[element[0]],
+                                  node: currentFile.id,
+                                  type: element[4],
+                                  data: {
+                                    title: element[1],
+                                    description: null,
+                                    color: element[2].startsWith("#")
+                                      ? hexToRgb(element[2])
+                                      : {
+                                          r: "193",
+                                          g: "230",
+                                          b: "255",
+                                          a: "100",
+                                        },
+                                    tags: checkedTags,
+                                    isCollapsable:
+                                      element[5] === "TRUE" ? true : false,
+                                  },
+                                  isHidden: false,
+                                  position: { x: 0, y: 0 },
+                                });
+                                if (element[7] === "TRUE") {
+                                  animateds.push(ids[element[0]]);
+                                }
+                                if (element[8] === "step") {
+                                  edgeTypes[ids[element[0]]] = "step";
+                                } else {
+                                  edgeTypes[ids[element[0]]] = "curved";
+                                }
+                                if (element[9] === "TRUE") {
+                                  arrows.push(ids[element[0]]);
+                                }
+                                console.log(jsonArr);
+                                if (element[6].length > 0) {
+                                  if (element[6].includes(",")) {
+                                    const csvChildren = element[6].split(",");
+                                    children[element[0]] = csvChildren;
+                                  }
                                 }
                               }
                             } else {
@@ -1418,6 +1426,10 @@ const Canvas = ({
                           }
                         });
                         console.log(jsonArr);
+                        jsonArr.map((element) => {
+                          const key = getKeyByValue(ids, element.id);
+                          element.description = description[key];
+                        });
                         console.log("Finished:", results.data);
                         console.log("onSave", fileObjects);
                         console.log(jsonArr.length);
