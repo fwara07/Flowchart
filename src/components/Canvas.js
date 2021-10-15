@@ -1357,7 +1357,7 @@ const Canvas = ({
                           console.log(element[0].includes("."));
                           if (element[0].includes(".")) {
                             counter = counter + 1;
-                            description[element[0].split(".")[0]] = {
+                            description[ids[element[0].split(".")[0]]] = {
                               key: element[1],
                               value: element[2],
                             };
@@ -1432,8 +1432,7 @@ const Canvas = ({
                         console.log(jsonArr);
                         console.log(description);
                         jsonArr.map((element) => {
-                          const key = getKeyByValue(ids, element.id);
-                          element.description = description[key];
+                          element.description = description[element.id];
                         });
                         console.log("Finished:", results.data);
                         console.log("onSave", fileObjects);
