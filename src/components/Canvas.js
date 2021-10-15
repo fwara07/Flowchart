@@ -143,7 +143,8 @@ const SpecialNodeComponent = ({ data }) => {
         }}
       >
         <Handle
-          type="target"
+          type="source"
+          connectionMode="loose"
           position={realOrientation === "horizontal" ? "left" : "top"}
           style={{ background: "black" }}
         />
