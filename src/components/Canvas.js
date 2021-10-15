@@ -1354,21 +1354,21 @@ const Canvas = ({
                           console.log(element[4]);
                           console.log(element[0]);
                           console.log(element[0].includes("."));
-                          if (
-                            [
-                              "special",
-                              "oval",
-                              "rectangle",
-                              "diamond",
-                            ].includes(element[4].toLowerCase())
-                          ) {
-                            if (Array.isArray(checkedTags)) {
-                              if (element[0].includes(".")) {
-                                description[element[0].split(".")[0]] = {
-                                  key: element[1],
-                                  value: element[2],
-                                };
-                              } else {
+                          if (element[0].includes(".")) {
+                            description[element[0].split(".")[0]] = {
+                              key: element[1],
+                              value: element[2],
+                            };
+                          } else {
+                            if (
+                              [
+                                "special",
+                                "oval",
+                                "rectangle",
+                                "diamond",
+                              ].includes(element[4].toLowerCase())
+                            ) {
+                              if (Array.isArray(checkedTags)) {
                                 ids[element[0]] = getNodeId();
                                 jsonArr.push({
                                   id: ids[element[0]],
@@ -1410,21 +1410,21 @@ const Canvas = ({
                                     children[element[0]] = csvChildren;
                                   }
                                 }
+                              } else {
+                                console.log(checkedTags);
+                                // setRenderAlert(checkedTags);
+                                setRenderAlert({
+                                  value: true,
+                                  msg: "One or more of the tags provided does not exist.",
+                                });
                               }
                             } else {
-                              console.log(checkedTags);
-                              // setRenderAlert(checkedTags);
+                              console.log("test");
                               setRenderAlert({
                                 value: true,
-                                msg: "One or more of the tags provided does not exist.",
+                                msg: "A type of shape in the file does not exist.",
                               });
                             }
-                          } else {
-                            console.log("test");
-                            setRenderAlert({
-                              value: true,
-                              msg: "A type of shape in the file does not exist.",
-                            });
                           }
                         });
                         console.log(jsonArr);

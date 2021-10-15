@@ -44,7 +44,26 @@ export default function CustomEdge({
             markerHeight="30"
             viewBox="-10 -10 20 20"
             orient="auto"
-            refX="10"
+            refX="0"
+            refY="0"
+          >
+            <polyline
+              stroke="#BBBBC0"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="1"
+              fill="#BBBBC0"
+              points="-5,-4 0,0 -5,4 -5,-4"
+            />
+          </marker>
+          <marker
+            className="react-flow__arrowhead"
+            id={`marker-start-${id}`}
+            markerWidth="25"
+            markerHeight="30"
+            viewBox="-10 -10 20 20"
+            orient="auto"
+            refX="-10"
             refY="0"
           >
             <polyline
@@ -64,7 +83,7 @@ export default function CustomEdge({
         className="react-flow__edge-path"
         style={style}
         markerEnd={`url(#marker-${id})`}
-        markerStart={`url(#marker-${id})`}
+        markerStart={`url(#marker-start-${id})`}
       />
     </>
   );
