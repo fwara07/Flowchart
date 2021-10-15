@@ -1347,6 +1347,7 @@ const Canvas = ({
                         const edgeTypes = {};
                         const arrows = [];
                         const description = {};
+                        let counter = 0;
                         data = data.slice(1);
                         data.map((element) => {
                           const checkedTags = checkTags(element[3]);
@@ -1355,6 +1356,7 @@ const Canvas = ({
                           console.log(element[0]);
                           console.log(element[0].includes("."));
                           if (element[0].includes(".")) {
+                            counter = counter + 1;
                             description[element[0].split(".")[0]] = {
                               key: element[1],
                               value: element[2],
@@ -1435,7 +1437,7 @@ const Canvas = ({
                         console.log("Finished:", results.data);
                         console.log("onSave", fileObjects);
                         console.log(jsonArr.length);
-                        if (jsonArr.length === data.length) {
+                        if (jsonArr.length === data.length - counter) {
                           console.log(ids);
                           console.log(children);
                           for (var key in children) {

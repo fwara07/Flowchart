@@ -63,10 +63,11 @@ export default function CustomEdge({
             markerHeight="30"
             viewBox="-10 -10 20 20"
             orient="auto"
-            refX="-10"
+            refX="-5"
             refY="0"
           >
             <polyline
+              transform="translate(90)"
               stroke="#BBBBC0"
               strokeLinecap="round"
               strokeLinejoin="round"
