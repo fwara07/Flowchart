@@ -1370,6 +1370,9 @@ const Canvas = ({
                               key: element[1],
                               value: element[2],
                             });
+                            description[ids[element[0].split(".")[0]]] = [
+                              ...lst,
+                            ];
                           } else {
                             if (
                               [
