@@ -148,7 +148,7 @@ const SpecialNodeComponent = ({ data }) => {
           style={{ background: "black" }}
         />
         <Handle
-          type="souece"
+          type="source"
           position={realOrientation === "horizontal" ? "bottom" : "right"}
           style={{ background: "black" }}
         />
