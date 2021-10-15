@@ -1430,6 +1430,7 @@ const Canvas = ({
                           }
                         });
                         console.log(jsonArr);
+                        console.log(description);
                         jsonArr.map((element) => {
                           const key = getKeyByValue(ids, element.id);
                           element.description = description[key];
