@@ -163,21 +163,21 @@ const SpecialNodeComponent = ({ data }) => {
         />
         <Handle
           type="source"
-          position="left"
+          position="right"
           style={{ background: "black" }}
           isConnectable={true}
           connectionMode="loose"
         />
         <Handle
           type="source"
-          position="left"
+          position="top"
           style={{ background: "black" }}
           isConnectable={true}
           connectionMode="loose"
         />
         <Handle
           type="source"
-          position="left"
+          position="bottom"
           style={{ background: "black" }}
           isConnectable={true}
           connectionMode="loose"
