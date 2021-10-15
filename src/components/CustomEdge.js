@@ -73,7 +73,7 @@ export default function CustomEdge({
               strokeLinejoin="round"
               strokeWidth="1"
               fill="#BBBBC0"
-              points="5,4 8,0 4,-4 5,4"
+              points="-5 -3,-4 -8,0 -3,4 -3,-4"
             />
           </marker>
         </defs>
