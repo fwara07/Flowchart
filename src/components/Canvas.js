@@ -147,6 +147,11 @@ const SpecialNodeComponent = ({ data }) => {
           position={realOrientation === "horizontal" ? "left" : "top"}
           style={{ background: "black" }}
         />
+        <Handle
+          type="target"
+          position={realOrientation === "horizontal" ? "right" : "bottom"}
+          style={{ background: "black" }}
+        />
         {/* <div>
           {data.title.length >= 21
             ? data.title.slice(0, 20) + "..."
@@ -261,6 +266,12 @@ const SpecialNodeComponent = ({ data }) => {
       <Handle
         type="source"
         position={realOrientation === "horizontal" ? "right" : "bottom"}
+        style={{ background: "black" }}
+        isConnectable={true}
+      />
+      <Handle
+        type="source"
+        position={realOrientation === "horizontal" ? "left" : "top"}
         style={{ background: "black" }}
         isConnectable={true}
       />
