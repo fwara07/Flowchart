@@ -97,7 +97,7 @@ const getLayoutedElements = (elements, direction = "TB") => {
   });
 
   dagre.layout(dagreGraph);
-
+  console.log(elements, "danhjsubkghbjlncsbugk hjbnudcysbkhjnonubskdgh m");
   return elements.map((el) => {
     if (isNode(el)) {
       const nodeWithPosition = dagreGraph.node(el.id);

@@ -67,7 +67,7 @@ export default function CustomEdge({
             refY="0"
           >
             <polyline
-              // transform="translate(90)"
+              transform="translate(90)"
               stroke="#BBBBC0"
               strokeLinecap="round"
               strokeLinejoin="round"
