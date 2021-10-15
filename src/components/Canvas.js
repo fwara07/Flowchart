@@ -159,28 +159,24 @@ const SpecialNodeComponent = ({ data }) => {
           position="left"
           style={{ background: "black" }}
           isConnectable={true}
-          connectionMode="loose"
         />
         <Handle
           type="source"
           position="right"
           style={{ background: "black" }}
           isConnectable={true}
-          connectionMode="loose"
         />
         <Handle
           type="target"
           position="top"
           style={{ background: "black" }}
           isConnectable={true}
-          connectionMode="loose"
         />
         <Handle
           type="source"
           position="bottom"
           style={{ background: "black" }}
           isConnectable={true}
-          connectionMode="loose"
         />
         {/* <div>
           {data.title.length >= 21
