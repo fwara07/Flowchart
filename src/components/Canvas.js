@@ -907,7 +907,7 @@ const Canvas = ({
     setDisplayColorPicker(false);
   };
 
-  const handleCloseColor = () => {
+  const handleCloseColorArrow = () => {
     setDisplayColorPickerArrow(false);
   };
 
