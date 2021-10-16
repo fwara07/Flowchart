@@ -463,43 +463,45 @@ const RectangleNodeComponent = ({ data }) => {
 
 const DiamondNodeComponent = ({ data }) => {
   return (
-    <div style={{ transform: "rotate(45deg)" }}>
-      <div
-        style={{
-          background: "#f0f0f0",
-          color: "black",
-          border: `2px solid rgba(${data.color.r}, ${data.color.g}, ${data.color.b}, ${data.color.a})`,
-          width: 100,
-          minHeight: 100,
-          textAlign: "center",
-          borderRadius: "5px",
-        }}
-      >
-        <div style={{ transform: "rotate(-45deg)", marginTop: 35 }}>
-          {/* <div>
+    <>
+      <div style={{ transform: "rotate(45deg)" }}>
+        <div
+          style={{
+            background: "#f0f0f0",
+            color: "black",
+            border: `2px solid rgba(${data.color.r}, ${data.color.g}, ${data.color.b}, ${data.color.a})`,
+            width: 100,
+            minHeight: 100,
+            textAlign: "center",
+            borderRadius: "5px",
+          }}
+        >
+          <div style={{ transform: "rotate(-45deg)", marginTop: 35 }}>
+            {/* <div>
             {data.title.length >= 16
               ? data.title.slice(0, 15) + "..."
               : data.title}
           </div> */}
-          <div
-            style={{
-              width: "93%",
-              minHeight: "40px",
-              // textAlign: "center",
-              overflowWrap: "break-word",
-              marginLeft: 10,
-              marginRight: 300,
-            }}
-          >
-            <Typography
-              variant="subtitle2"
-              gutterBottom
+            <div
               style={{
-                margin: "auto",
+                width: "93%",
+                minHeight: "40px",
+                // textAlign: "center",
+                overflowWrap: "break-word",
+                marginLeft: 10,
+                marginRight: 300,
               }}
             >
-              {data.title}
-            </Typography>
+              <Typography
+                variant="subtitle2"
+                gutterBottom
+                style={{
+                  margin: "auto",
+                }}
+              >
+                {data.title}
+              </Typography>
+            </div>
           </div>
         </div>
       </div>
@@ -535,7 +537,7 @@ const DiamondNodeComponent = ({ data }) => {
         isConnectable={true}
         connectionMode="loose"
       />
-    </div>
+    </>
   );
 };
 
