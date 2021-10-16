@@ -462,8 +462,20 @@ const RectangleNodeComponent = ({ data }) => {
 };
 
 const DiamondNodeComponent = ({ data }) => {
+  const [hidden, setHidden] = useState({
+    display: "none",
+    background: "black",
+  });
   return (
-    <div style={{ transform: "rotate(45deg)" }}>
+    <div
+      style={{ transform: "rotate(45deg)" }}
+      onMouseEnter={(_e) => {
+        setHidden({ display: "block", background: "black" });
+      }}
+      onMouseLeave={(_e) => {
+        setHidden({ display: "none", background: "black" });
+      }}
+    >
       <div
         style={{
           background: "#f0f0f0",
@@ -506,7 +518,7 @@ const DiamondNodeComponent = ({ data }) => {
           type="target"
           id="1"
           position="left"
-          style={{ background: "black" }}
+          style={style}
           isConnectable={true}
           connectionMode="loose"
         />
@@ -514,7 +526,7 @@ const DiamondNodeComponent = ({ data }) => {
           type="source"
           id="2"
           position="right"
-          style={{ background: "black" }}
+          style={style}
           isConnectable={true}
           connectionMode="loose"
         />
@@ -522,7 +534,7 @@ const DiamondNodeComponent = ({ data }) => {
           type="target"
           id="3"
           position="top"
-          style={{ background: "black" }}
+          style={style}
           isConnectable={true}
           connectionMode="loose"
         />
@@ -530,7 +542,7 @@ const DiamondNodeComponent = ({ data }) => {
           type="source"
           id="4"
           position="bottom"
-          style={{ background: "black" }}
+          style={style}
           isConnectable={true}
           connectionMode="loose"
         />
