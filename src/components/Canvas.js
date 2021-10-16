@@ -463,7 +463,7 @@ const RectangleNodeComponent = ({ data }) => {
 
 const DiamondNodeComponent = ({ data }) => {
   return (
-    <div>
+    <div style={{ transform: "rotate(45deg)" }}>
       <div
         style={{
           background: "#f0f0f0",
@@ -473,7 +473,6 @@ const DiamondNodeComponent = ({ data }) => {
           minHeight: 100,
           textAlign: "center",
           borderRadius: "5px",
-          transform: "rotate(45deg)",
         }}
       >
         <div style={{ transform: "rotate(-45deg)", marginTop: 35 }}>

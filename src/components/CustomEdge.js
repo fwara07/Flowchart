@@ -84,7 +84,10 @@ export default function CustomEdge({
         d={edgePath}
         stroke={`rgba(${data.color.r}, ${data.color.g}, ${data.color.b}, ${data.color.a})`}
         className="react-flow__edge-path"
-        style={style}
+        style={{
+          ...style,
+          color: `rgba(${data.color.r}, ${data.color.g}, ${data.color.b}, ${data.color.a})`,
+        }}
         markerEnd={`url(#marker-${id})`}
         markerStart={`url(#marker-start-${id})`}
       />
