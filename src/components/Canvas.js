@@ -464,7 +464,7 @@ const RectangleNodeComponent = ({ data }) => {
 const DiamondNodeComponent = ({ data }) => {
   return (
     <div style={{ transform: "rotate(45deg)" }}>
-      <div style={{ transform: "rotate(45deg)" }}>
+      <div style={{ transform: "rotate(-45deg)" }}>
         <Handle
           type="target"
           id="1"
