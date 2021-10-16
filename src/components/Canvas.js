@@ -462,7 +462,7 @@ const RectangleNodeComponent = ({ data }) => {
 };
 
 const DiamondNodeComponent = ({ data }) => {
-  const [hidden, setHidden] = useState({
+  const [style, setStyle] = useState({
     display: "none",
     background: "black",
   });
@@ -470,10 +470,10 @@ const DiamondNodeComponent = ({ data }) => {
     <div
       style={{ transform: "rotate(45deg)" }}
       onMouseEnter={(_e) => {
-        setHidden({ display: "block", background: "black" });
+        setStyle({ display: "block", background: "black" });
       }}
       onMouseLeave={(_e) => {
-        setHidden({ display: "none", background: "black" });
+        setStyle({ display: "none", background: "black" });
       }}
     >
       <div
