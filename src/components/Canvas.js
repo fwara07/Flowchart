@@ -468,7 +468,6 @@ const DiamondNodeComponent = ({ data }) => {
         style={{
           background: "#f0f0f0",
           color: "black",
-          padding: 10,
           border: `2px solid rgba(${data.color.r}, ${data.color.g}, ${data.color.b}, ${data.color.a})`,
           width: 100,
           minHeight: 100,
