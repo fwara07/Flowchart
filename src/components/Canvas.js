@@ -127,8 +127,16 @@ const useStyles = makeStyles((theme) =>
 );
 
 const SpecialNodeComponent = ({ data }) => {
+  const [hidden, setHidden] = useState(true);
   return (
-    <div>
+    <div
+      onMouseEnter={(_e) => {
+        setHidden(false);
+      }}
+      onMouseLeave={(_e) => {
+        setHidden(true);
+      }}
+    >
       <div
         style={{
           background: "#f0f0f0",
@@ -154,38 +162,42 @@ const SpecialNodeComponent = ({ data }) => {
           style={{ background: "black" }}
           isConnectable={true}
         /> */}
-        <Handle
-          type="target"
-          id="1"
-          position="left"
-          style={{ background: "black" }}
-          isConnectable={true}
-          connectionMode="loose"
-        />
-        <Handle
-          type="source"
-          id="2"
-          position="right"
-          style={{ background: "black" }}
-          isConnectable={true}
-          connectionMode="loose"
-        />
-        <Handle
-          type="target"
-          id="3"
-          position="top"
-          style={{ background: "black" }}
-          isConnectable={true}
-          connectionMode="loose"
-        />
-        <Handle
-          type="source"
-          id="4"
-          position="bottom"
-          style={{ background: "black" }}
-          isConnectable={true}
-          connectionMode="loose"
-        />
+        {!hidden && (
+          <>
+            <Handle
+              type="target"
+              id="1"
+              position="left"
+              style={{ background: "black" }}
+              isConnectable={true}
+              connectionMode="loose"
+            />
+            <Handle
+              type="source"
+              id="2"
+              position="right"
+              style={{ background: "black" }}
+              isConnectable={true}
+              connectionMode="loose"
+            />
+            <Handle
+              type="target"
+              id="3"
+              position="top"
+              style={{ background: "black" }}
+              isConnectable={true}
+              connectionMode="loose"
+            />
+            <Handle
+              type="source"
+              id="4"
+              position="bottom"
+              style={{ background: "black" }}
+              isConnectable={true}
+              connectionMode="loose"
+            />
+          </>
+        )}
         {/* <div>
           {data.title.length >= 21
             ? data.title.slice(0, 20) + "..."
@@ -314,8 +326,15 @@ const SpecialNodeComponent = ({ data }) => {
 };
 
 const OvalNodeComponent = ({ data }) => {
+  const [hidden, setHidden] = useState(true);
   return (
     <div
+      onMouseEnter={(_e) => {
+        setHidden(false);
+      }}
+      onMouseLeave={(_e) => {
+        setHidden(true);
+      }}
       style={{
         background: "#f0f0f0",
         borderColor: `rgba(${data.color.r}, ${data.color.g}, ${data.color.b}, ${data.color.a})`,
@@ -328,38 +347,42 @@ const OvalNodeComponent = ({ data }) => {
         borderRadius: "50px",
       }}
     >
-      <Handle
-        type="target"
-        id="1"
-        position="left"
-        style={{ background: "black" }}
-        isConnectable={true}
-        connectionMode="loose"
-      />
-      <Handle
-        type="source"
-        id="2"
-        position="right"
-        style={{ background: "black" }}
-        isConnectable={true}
-        connectionMode="loose"
-      />
-      <Handle
-        type="target"
-        id="3"
-        position="top"
-        style={{ background: "black" }}
-        isConnectable={true}
-        connectionMode="loose"
-      />
-      <Handle
-        type="source"
-        id="4"
-        position="bottom"
-        style={{ background: "black" }}
-        isConnectable={true}
-        connectionMode="loose"
-      />
+      {!hidden && (
+        <>
+          <Handle
+            type="target"
+            id="1"
+            position="left"
+            style={{ background: "black" }}
+            isConnectable={true}
+            connectionMode="loose"
+          />
+          <Handle
+            type="source"
+            id="2"
+            position="right"
+            style={{ background: "black" }}
+            isConnectable={true}
+            connectionMode="loose"
+          />
+          <Handle
+            type="target"
+            id="3"
+            position="top"
+            style={{ background: "black" }}
+            isConnectable={true}
+            connectionMode="loose"
+          />
+          <Handle
+            type="source"
+            id="4"
+            position="bottom"
+            style={{ background: "black" }}
+            isConnectable={true}
+            connectionMode="loose"
+          />
+        </>
+      )}
       {/* <div style={{ paddingTop: 20 }}>
         {data.title.length >= 21 ? data.title.slice(0, 20) + "..." : data.title}
       </div> */}
@@ -388,8 +411,15 @@ const OvalNodeComponent = ({ data }) => {
 };
 
 const RectangleNodeComponent = ({ data }) => {
+  const [hidden, setHidden] = useState(true);
   return (
     <div
+      onMouseEnter={(_e) => {
+        setHidden(false);
+      }}
+      onMouseLeave={(_e) => {
+        setHidden(true);
+      }}
       style={{
         background: "#f0f0f0",
         borderColor: `rgba(${data.color.r}, ${data.color.g}, ${data.color.b}, ${data.color.a})`,
@@ -402,38 +432,42 @@ const RectangleNodeComponent = ({ data }) => {
         borderRadius: "10px",
       }}
     >
-      <Handle
-        type="target"
-        id="1"
-        position="left"
-        style={{ background: "black" }}
-        isConnectable={true}
-        connectionMode="loose"
-      />
-      <Handle
-        type="source"
-        id="2"
-        position="right"
-        style={{ background: "black" }}
-        isConnectable={true}
-        connectionMode="loose"
-      />
-      <Handle
-        type="target"
-        id="3"
-        position="top"
-        style={{ background: "black" }}
-        isConnectable={true}
-        connectionMode="loose"
-      />
-      <Handle
-        type="source"
-        id="4"
-        position="bottom"
-        style={{ background: "black" }}
-        isConnectable={true}
-        connectionMode="loose"
-      />
+      {!hidden && (
+        <>
+          <Handle
+            type="target"
+            id="1"
+            position="left"
+            style={{ background: "black" }}
+            isConnectable={true}
+            connectionMode="loose"
+          />
+          <Handle
+            type="source"
+            id="2"
+            position="right"
+            style={{ background: "black" }}
+            isConnectable={true}
+            connectionMode="loose"
+          />
+          <Handle
+            type="target"
+            id="3"
+            position="top"
+            style={{ background: "black" }}
+            isConnectable={true}
+            connectionMode="loose"
+          />
+          <Handle
+            type="source"
+            id="4"
+            position="bottom"
+            style={{ background: "black" }}
+            isConnectable={true}
+            connectionMode="loose"
+          />
+        </>
+      )}
       {/* <div style={{ paddingTop: 20 }}>
         {data.title.length >= 21 ? data.title.slice(0, 20) + "..." : data.title}
       </div> */}
@@ -686,6 +720,8 @@ const Canvas = ({
       console.log(newParams, "**********8");
       const edge = await addEdge(newParams, elements);
       await setElements(edge);
+    } else {
+      return null;
     }
   };
 
