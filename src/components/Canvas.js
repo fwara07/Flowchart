@@ -463,19 +463,19 @@ const RectangleNodeComponent = ({ data }) => {
 
 const DiamondNodeComponent = ({ data }) => {
   const [style, setStyle] = useState({
-    display: "none",
+    // display: "none",
     background: "black",
   });
   return (
     <div>
       <div
         style={{ transform: "rotate(45deg)" }}
-        onMouseEnter={(_e) => {
-          setStyle({ background: "black" });
-        }}
-        onMouseLeave={(_e) => {
-          setStyle({ display: "none", background: "black" });
-        }}
+        // onMouseEnter={(_e) => {
+        //   setStyle({ background: "black" });
+        // }}
+        // onMouseLeave={(_e) => {
+        //   setStyle({ display: "none", background: "black" });
+        // }}
       >
         <Handle
           type="target"
