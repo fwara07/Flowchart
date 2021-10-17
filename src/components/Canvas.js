@@ -153,13 +153,21 @@ const SpecialNodeComponent = ({ data }) => {
         {/* <Handle
           type="source"
           position={realOrientation === "horizontal" ? "left" : "top"}
-          style={{ background: "black" }}
+          style={
+                hidden
+                  ? { display: "none", background: "black" }
+                  : { background: "black" }
+              }
           isConnectable={true}
         />
         <Handle
           type="target"
           position={realOrientation === "horizontal" ? "bottom" : "right"}
-          style={{ background: "black" }}
+          style={
+                hidden
+                  ? { display: "none", background: "black" }
+                  : { background: "black" }
+              }
           isConnectable={true}
         /> */}
         {!hidden && (
@@ -168,7 +176,11 @@ const SpecialNodeComponent = ({ data }) => {
               type="target"
               id="1"
               position="left"
-              style={{ background: "black" }}
+              style={
+                hidden
+                  ? { display: "none", background: "black" }
+                  : { background: "black" }
+              }
               isConnectable={true}
               connectionMode="loose"
             />
@@ -176,7 +188,11 @@ const SpecialNodeComponent = ({ data }) => {
               type="source"
               id="2"
               position="right"
-              style={{ background: "black" }}
+              style={
+                hidden
+                  ? { display: "none", background: "black" }
+                  : { background: "black" }
+              }
               isConnectable={true}
               connectionMode="loose"
             />
@@ -184,7 +200,11 @@ const SpecialNodeComponent = ({ data }) => {
               type="target"
               id="3"
               position="top"
-              style={{ background: "black" }}
+              style={
+                hidden
+                  ? { display: "none", background: "black" }
+                  : { background: "black" }
+              }
               isConnectable={true}
               connectionMode="loose"
             />
@@ -192,7 +212,11 @@ const SpecialNodeComponent = ({ data }) => {
               type="source"
               id="4"
               position="bottom"
-              style={{ background: "black" }}
+              style={
+                hidden
+                  ? { display: "none", background: "black" }
+                  : { background: "black" }
+              }
               isConnectable={true}
               connectionMode="loose"
             />
@@ -312,13 +336,21 @@ const SpecialNodeComponent = ({ data }) => {
       {/* <Handle
         type="target"
         position={realOrientation === "horizontal" ? "right" : "bottom"}
-        style={{ background: "black" }}
+        style={
+                hidden
+                  ? { display: "none", background: "black" }
+                  : { background: "black" }
+              }
         isConnectable={true}
       />
       <Handle
         type="source"
         position={realOrientation === "horizontal" ? "top" : "left"}
-        style={{ background: "black" }}
+        style={
+                hidden
+                  ? { display: "none", background: "black" }
+                  : { background: "black" }
+              }
         isConnectable={true}
       /> */}
     </div>
@@ -353,7 +385,11 @@ const OvalNodeComponent = ({ data }) => {
             type="target"
             id="1"
             position="left"
-            style={{ background: "black" }}
+            style={
+              hidden
+                ? { display: "none", background: "black" }
+                : { background: "black" }
+            }
             isConnectable={true}
             connectionMode="loose"
           />
@@ -361,7 +397,11 @@ const OvalNodeComponent = ({ data }) => {
             type="source"
             id="2"
             position="right"
-            style={{ background: "black" }}
+            style={
+              hidden
+                ? { display: "none", background: "black" }
+                : { background: "black" }
+            }
             isConnectable={true}
             connectionMode="loose"
           />
@@ -369,7 +409,11 @@ const OvalNodeComponent = ({ data }) => {
             type="target"
             id="3"
             position="top"
-            style={{ background: "black" }}
+            style={
+              hidden
+                ? { display: "none", background: "black" }
+                : { background: "black" }
+            }
             isConnectable={true}
             connectionMode="loose"
           />
@@ -377,7 +421,11 @@ const OvalNodeComponent = ({ data }) => {
             type="source"
             id="4"
             position="bottom"
-            style={{ background: "black" }}
+            style={
+              hidden
+                ? { display: "none", background: "black" }
+                : { background: "black" }
+            }
             isConnectable={true}
             connectionMode="loose"
           />
@@ -438,7 +486,11 @@ const RectangleNodeComponent = ({ data }) => {
             type="target"
             id="1"
             position="left"
-            style={{ background: "black" }}
+            style={
+              hidden
+                ? { display: "none", background: "black" }
+                : { background: "black" }
+            }
             isConnectable={true}
             connectionMode="loose"
           />
@@ -446,7 +498,11 @@ const RectangleNodeComponent = ({ data }) => {
             type="source"
             id="2"
             position="right"
-            style={{ background: "black" }}
+            style={
+              hidden
+                ? { display: "none", background: "black" }
+                : { background: "black" }
+            }
             isConnectable={true}
             connectionMode="loose"
           />
@@ -454,7 +510,11 @@ const RectangleNodeComponent = ({ data }) => {
             type="target"
             id="3"
             position="top"
-            style={{ background: "black" }}
+            style={
+              hidden
+                ? { display: "none", background: "black" }
+                : { background: "black" }
+            }
             isConnectable={true}
             connectionMode="loose"
           />
@@ -462,7 +522,11 @@ const RectangleNodeComponent = ({ data }) => {
             type="source"
             id="4"
             position="bottom"
-            style={{ background: "black" }}
+            style={
+              hidden
+                ? { display: "none", background: "black" }
+                : { background: "black" }
+            }
             isConnectable={true}
             connectionMode="loose"
           />
@@ -526,7 +590,11 @@ const DiamondNodeComponent = ({ data }) => {
               type="source"
               id="2"
               position="right"
-              style={{ background: "black" }}
+              style={
+                hidden
+                  ? { display: "none", background: "black" }
+                  : { background: "black" }
+              }
               isConnectable={true}
               connectionMode="loose"
             />
@@ -534,7 +602,11 @@ const DiamondNodeComponent = ({ data }) => {
               type="target"
               id="3"
               position="top"
-              style={{ background: "black" }}
+              style={
+                hidden
+                  ? { display: "none", background: "black" }
+                  : { background: "black" }
+              }
               isConnectable={true}
               connectionMode="loose"
             />
@@ -542,7 +614,11 @@ const DiamondNodeComponent = ({ data }) => {
               type="source"
               id="4"
               position="bottom"
-              style={{ background: "black" }}
+              style={
+                hidden
+                  ? { display: "none", background: "black" }
+                  : { background: "black" }
+              }
               isConnectable={true}
               connectionMode="loose"
             />
