@@ -712,17 +712,13 @@ const Canvas = ({
     //  setElements((els) => addEdge(params, els))
     //  console.log(elements);
     //  updateNode()
-    if (isEditMode) {
-      const newParams = { ...params };
-      newParams.type = "customEdge";
-      newParams.data = { hasArrow: false, type: edgeType, color: colorArrow };
-      newParams.animated = false;
-      console.log(newParams, "**********8");
-      const edge = await addEdge(newParams, elements);
-      await setElements(edge);
-    } else {
-      return null;
-    }
+    const newParams = { ...params };
+    newParams.type = "customEdge";
+    newParams.data = { hasArrow: false, type: edgeType, color: colorArrow };
+    newParams.animated = false;
+    console.log(newParams, "**********8");
+    const edge = await addEdge(newParams, elements);
+    await setElements(edge);
   };
 
   const onElementClick = async (event, element) => {
