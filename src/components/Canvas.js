@@ -127,16 +127,8 @@ const useStyles = makeStyles((theme) =>
 );
 
 const SpecialNodeComponent = ({ data }) => {
-  const [hidden, setHidden] = useState(true);
   return (
-    <div
-      onMouseEnter={(_e) => {
-        setHidden(false);
-      }}
-      onMouseLeave={(_e) => {
-        setHidden(true);
-      }}
-    >
+    <div>
       <div
         style={{
           background: "#f0f0f0",
@@ -153,75 +145,47 @@ const SpecialNodeComponent = ({ data }) => {
         {/* <Handle
           type="source"
           position={realOrientation === "horizontal" ? "left" : "top"}
-          style={
-                hidden
-                  ? { display: "none", background: "black" }
-                  : { background: "black" }
-              }
+          style={{ background: "black" }}
           isConnectable={true}
         />
         <Handle
           type="target"
           position={realOrientation === "horizontal" ? "bottom" : "right"}
-          style={
-                hidden
-                  ? { display: "none", background: "black" }
-                  : { background: "black" }
-              }
+          style={{ background: "black" }}
           isConnectable={true}
         /> */}
-        {!hidden && (
-          <>
-            <Handle
-              type="target"
-              id="1"
-              position="left"
-              style={
-                hidden
-                  ? { display: "none", background: "black" }
-                  : { background: "black" }
-              }
-              isConnectable={true}
-              connectionMode="loose"
-            />
-            <Handle
-              type="source"
-              id="2"
-              position="right"
-              style={
-                hidden
-                  ? { display: "none", background: "black" }
-                  : { background: "black" }
-              }
-              isConnectable={true}
-              connectionMode="loose"
-            />
-            <Handle
-              type="target"
-              id="3"
-              position="top"
-              style={
-                hidden
-                  ? { display: "none", background: "black" }
-                  : { background: "black" }
-              }
-              isConnectable={true}
-              connectionMode="loose"
-            />
-            <Handle
-              type="source"
-              id="4"
-              position="bottom"
-              style={
-                hidden
-                  ? { display: "none", background: "black" }
-                  : { background: "black" }
-              }
-              isConnectable={true}
-              connectionMode="loose"
-            />
-          </>
-        )}
+        <Handle
+          type="target"
+          id="1"
+          position="left"
+          style={{ background: "black" }}
+          isConnectable={true}
+          connectionMode="loose"
+        />
+        <Handle
+          type="source"
+          id="2"
+          position="right"
+          style={{ background: "black" }}
+          isConnectable={true}
+          connectionMode="loose"
+        />
+        <Handle
+          type="target"
+          id="3"
+          position="top"
+          style={{ background: "black" }}
+          isConnectable={true}
+          connectionMode="loose"
+        />
+        <Handle
+          type="source"
+          id="4"
+          position="bottom"
+          style={{ background: "black" }}
+          isConnectable={true}
+          connectionMode="loose"
+        />
         {/* <div>
           {data.title.length >= 21
             ? data.title.slice(0, 20) + "..."
@@ -336,21 +300,13 @@ const SpecialNodeComponent = ({ data }) => {
       {/* <Handle
         type="target"
         position={realOrientation === "horizontal" ? "right" : "bottom"}
-        style={
-                hidden
-                  ? { display: "none", background: "black" }
-                  : { background: "black" }
-              }
+        style={{ background: "black" }}
         isConnectable={true}
       />
       <Handle
         type="source"
         position={realOrientation === "horizontal" ? "top" : "left"}
-        style={
-                hidden
-                  ? { display: "none", background: "black" }
-                  : { background: "black" }
-              }
+        style={{ background: "black" }}
         isConnectable={true}
       /> */}
     </div>
@@ -358,15 +314,8 @@ const SpecialNodeComponent = ({ data }) => {
 };
 
 const OvalNodeComponent = ({ data }) => {
-  const [hidden, setHidden] = useState(true);
   return (
     <div
-      onMouseEnter={(_e) => {
-        setHidden(false);
-      }}
-      onMouseLeave={(_e) => {
-        setHidden(true);
-      }}
       style={{
         background: "#f0f0f0",
         borderColor: `rgba(${data.color.r}, ${data.color.g}, ${data.color.b}, ${data.color.a})`,
@@ -379,58 +328,54 @@ const OvalNodeComponent = ({ data }) => {
         borderRadius: "50px",
       }}
     >
-      {!hidden && (
-        <>
-          <Handle
-            type="target"
-            id="1"
-            position="left"
-            style={
-              hidden
-                ? { display: "none", background: "black" }
-                : { background: "black" }
-            }
-            isConnectable={true}
-            connectionMode="loose"
-          />
-          <Handle
-            type="source"
-            id="2"
-            position="right"
-            style={
-              hidden
-                ? { display: "none", background: "black" }
-                : { background: "black" }
-            }
-            isConnectable={true}
-            connectionMode="loose"
-          />
-          <Handle
-            type="target"
-            id="3"
-            position="top"
-            style={
-              hidden
-                ? { display: "none", background: "black" }
-                : { background: "black" }
-            }
-            isConnectable={true}
-            connectionMode="loose"
-          />
-          <Handle
-            type="source"
-            id="4"
-            position="bottom"
-            style={
-              hidden
-                ? { display: "none", background: "black" }
-                : { background: "black" }
-            }
-            isConnectable={true}
-            connectionMode="loose"
-          />
-        </>
-      )}
+      <Handle
+        type="target"
+        id="1"
+        position="left"
+        style={
+          hidden
+            ? { display: "none", background: "black" }
+            : { background: "black" }
+        }
+        isConnectable={true}
+        connectionMode="loose"
+      />
+      <Handle
+        type="source"
+        id="2"
+        position="right"
+        style={
+          hidden
+            ? { display: "none", background: "black" }
+            : { background: "black" }
+        }
+        isConnectable={true}
+        connectionMode="loose"
+      />
+      <Handle
+        type="target"
+        id="3"
+        position="top"
+        style={
+          hidden
+            ? { display: "none", background: "black" }
+            : { background: "black" }
+        }
+        isConnectable={true}
+        connectionMode="loose"
+      />
+      <Handle
+        type="source"
+        id="4"
+        position="bottom"
+        style={
+          hidden
+            ? { display: "none", background: "black" }
+            : { background: "black" }
+        }
+        isConnectable={true}
+        connectionMode="loose"
+      />
       {/* <div style={{ paddingTop: 20 }}>
         {data.title.length >= 21 ? data.title.slice(0, 20) + "..." : data.title}
       </div> */}
@@ -459,15 +404,8 @@ const OvalNodeComponent = ({ data }) => {
 };
 
 const RectangleNodeComponent = ({ data }) => {
-  const [hidden, setHidden] = useState(true);
   return (
     <div
-      onMouseEnter={(_e) => {
-        setHidden(false);
-      }}
-      onMouseLeave={(_e) => {
-        setHidden(true);
-      }}
       style={{
         background: "#f0f0f0",
         borderColor: `rgba(${data.color.r}, ${data.color.g}, ${data.color.b}, ${data.color.a})`,
@@ -480,58 +418,50 @@ const RectangleNodeComponent = ({ data }) => {
         borderRadius: "10px",
       }}
     >
-      {!hidden && (
-        <>
-          <Handle
-            type="target"
-            id="1"
-            position="left"
-            style={
-              hidden
-                ? { display: "none", background: "black" }
-                : { background: "black" }
-            }
-            isConnectable={true}
-            connectionMode="loose"
-          />
-          <Handle
-            type="source"
-            id="2"
-            position="right"
-            style={
-              hidden
-                ? { display: "none", background: "black" }
-                : { background: "black" }
-            }
-            isConnectable={true}
-            connectionMode="loose"
-          />
-          <Handle
-            type="target"
-            id="3"
-            position="top"
-            style={
-              hidden
-                ? { display: "none", background: "black" }
-                : { background: "black" }
-            }
-            isConnectable={true}
-            connectionMode="loose"
-          />
-          <Handle
-            type="source"
-            id="4"
-            position="bottom"
-            style={
-              hidden
-                ? { display: "none", background: "black" }
-                : { background: "black" }
-            }
-            isConnectable={true}
-            connectionMode="loose"
-          />
-        </>
-      )}
+      <Handle
+        type="target"
+        id="1"
+        position="left"
+        style={{ background: "black" }}
+        isConnectable={true}
+        connectionMode="loose"
+      />
+      <Handle
+        type="source"
+        id="2"
+        position="right"
+        style={
+          hidden
+            ? { display: "none", background: "black" }
+            : { background: "black" }
+        }
+        isConnectable={true}
+        connectionMode="loose"
+      />
+      <Handle
+        type="target"
+        id="3"
+        position="top"
+        style={
+          hidden
+            ? { display: "none", background: "black" }
+            : { background: "black" }
+        }
+        isConnectable={true}
+        connectionMode="loose"
+      />
+      <Handle
+        type="source"
+        id="4"
+        position="bottom"
+        style={
+          hidden
+            ? { display: "none", background: "black" }
+            : { background: "black" }
+        }
+        isConnectable={true}
+        connectionMode="loose"
+      />
       {/* <div style={{ paddingTop: 20 }}>
         {data.title.length >= 21 ? data.title.slice(0, 20) + "..." : data.title}
       </div> */}
@@ -563,67 +493,39 @@ const DiamondNodeComponent = ({ data }) => {
   const [hidden, setHidden] = useState(true);
   return (
     <div>
-      <div
-        style={{ transform: "rotate(45deg)" }}
-        onMouseEnter={(_e) => {
-          setHidden(false);
-        }}
-        onMouseLeave={(_e) => {
-          setHidden(true);
-        }}
-      >
-        {!hidden && (
-          <>
-            <Handle
-              type="target"
-              id="1"
-              position="left"
-              style={
-                hidden
-                  ? { display: "none", background: "black" }
-                  : { background: "black" }
-              }
-              isConnectable={true}
-              connectionMode="loose"
-            />
-            <Handle
-              type="source"
-              id="2"
-              position="right"
-              style={
-                hidden
-                  ? { display: "none", background: "black" }
-                  : { background: "black" }
-              }
-              isConnectable={true}
-              connectionMode="loose"
-            />
-            <Handle
-              type="target"
-              id="3"
-              position="top"
-              style={
-                hidden
-                  ? { display: "none", background: "black" }
-                  : { background: "black" }
-              }
-              isConnectable={true}
-              connectionMode="loose"
-            />
-            <Handle
-              type="source"
-              id="4"
-              position="bottom"
-              style={
-                hidden
-                  ? { display: "none", background: "black" }
-                  : { background: "black" }
-              }
-              isConnectable={true}
-              connectionMode="loose"
-            />
-          </>
-        )}
+      <div style={{ transform: "rotate(45deg)" }}>
+        <Handle
+          type="target"
+          id="1"
+          position="left"
+          style={{ background: "black" }}
+          isConnectable={true}
+          connectionMode="loose"
+        />
+        <Handle
+          type="source"
+          id="2"
+          position="right"
+          style={{ background: "black" }}
+          isConnectable={true}
+          connectionMode="loose"
+        />
+        <Handle
+          type="target"
+          id="3"
+          position="top"
+          style={{ background: "black" }}
+          isConnectable={true}
+          connectionMode="loose"
+        />
+        <Handle
+          type="source"
+          id="4"
+          position="bottom"
+          style={{ background: "black" }}
+          isConnectable={true}
+          connectionMode="loose"
+        />
         <div
           style={{
             background: "#f0f0f0",
