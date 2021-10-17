@@ -467,39 +467,7 @@ const DiamondNodeComponent = ({ data }) => {
     background: "black",
   });
   return (
-    <>
-      <Handle
-        type="target"
-        id="1"
-        position="left"
-        style={style}
-        isConnectable={true}
-        connectionMode="loose"
-      />
-      <Handle
-        type="source"
-        id="2"
-        position="right"
-        style={style}
-        isConnectable={true}
-        connectionMode="loose"
-      />
-      <Handle
-        type="target"
-        id="3"
-        position="top"
-        style={style}
-        isConnectable={true}
-        connectionMode="loose"
-      />
-      <Handle
-        type="source"
-        id="4"
-        position="bottom"
-        style={style}
-        isConnectable={true}
-        connectionMode="loose"
-      />
+    <div>
       <div
         style={{ transform: "rotate(45deg)" }}
         onMouseEnter={(_e) => {
@@ -547,9 +515,41 @@ const DiamondNodeComponent = ({ data }) => {
               </Typography>
             </div>
           </div>
+          <Handle
+            type="target"
+            id="1"
+            position="left"
+            style={style}
+            isConnectable={true}
+            connectionMode="loose"
+          />
+          <Handle
+            type="source"
+            id="2"
+            position="right"
+            style={style}
+            isConnectable={true}
+            connectionMode="loose"
+          />
+          <Handle
+            type="target"
+            id="3"
+            position="top"
+            style={style}
+            isConnectable={true}
+            connectionMode="loose"
+          />
+          <Handle
+            type="source"
+            id="4"
+            position="bottom"
+            style={style}
+            isConnectable={true}
+            connectionMode="loose"
+          />
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
