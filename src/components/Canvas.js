@@ -462,22 +462,19 @@ const RectangleNodeComponent = ({ data }) => {
 };
 
 const DiamondNodeComponent = ({ data }) => {
-  const [hidden, setHidden] = useState({
-    display: "none",
-    background: "black",
-  });
+  const [hidden, setHidden] = useState(true);
   return (
     <div>
       <div
         style={{ transform: "rotate(45deg)" }}
         onMouseEnter={(_e) => {
-          setHidden(true);
-        }}
-        onMouseLeave={(_e) => {
           setHidden(false);
         }}
+        onMouseLeave={(_e) => {
+          setHidden(true);
+        }}
       >
-        {hidden && (
+        {!hidden && (
           <>
             <Handle
               type="target"
@@ -681,13 +678,15 @@ const Canvas = ({
     //  setElements((els) => addEdge(params, els))
     //  console.log(elements);
     //  updateNode()
-    const newParams = { ...params };
-    newParams.type = "customEdge";
-    newParams.data = { hasArrow: false, type: edgeType, color: colorArrow };
-    newParams.animated = false;
-    console.log(newParams, "**********8");
-    const edge = await addEdge(newParams, elements);
-    await setElements(edge);
+    if (isEditMode) {
+      const newParams = { ...params };
+      newParams.type = "customEdge";
+      newParams.data = { hasArrow: false, type: edgeType, color: colorArrow };
+      newParams.animated = false;
+      console.log(newParams, "**********8");
+      const edge = await addEdge(newParams, elements);
+      await setElements(edge);
+    }
   };
 
   const onElementClick = async (event, element) => {
