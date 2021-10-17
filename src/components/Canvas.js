@@ -471,7 +471,7 @@ const DiamondNodeComponent = ({ data }) => {
       <div
         style={{ transform: "rotate(45deg)" }}
         onMouseEnter={(_e) => {
-          setStyle({ display: "block", background: "black" });
+          setStyle({ background: "black" });
         }}
         onMouseLeave={(_e) => {
           setStyle({ display: "none", background: "black" });
