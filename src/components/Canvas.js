@@ -514,7 +514,11 @@ const DiamondNodeComponent = ({ data }) => {
               type="target"
               id="1"
               position="left"
-              style={{ background: "black" }}
+              style={
+                hidden
+                  ? { display: "none", background: "black" }
+                  : { background: "black" }
+              }
               isConnectable={true}
               connectionMode="loose"
             />
