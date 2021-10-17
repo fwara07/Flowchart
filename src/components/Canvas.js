@@ -462,7 +462,7 @@ const RectangleNodeComponent = ({ data }) => {
 };
 
 const DiamondNodeComponent = ({ data }) => {
-  const [style, setStyle] = useState({
+  const [hidden, setHidden] = useState({
     display: "none",
     background: "black",
   });
@@ -471,44 +471,48 @@ const DiamondNodeComponent = ({ data }) => {
       <div
         style={{ transform: "rotate(45deg)" }}
         onMouseEnter={(_e) => {
-          setStyle({ background: "black" });
+          setHidden(true);
         }}
         onMouseLeave={(_e) => {
-          setStyle({ display: "none", background: "black" });
+          setHidden(false);
         }}
       >
-        <Handle
-          type="target"
-          id="1"
-          position="left"
-          style={style}
-          isConnectable={true}
-          connectionMode="loose"
-        />
-        <Handle
-          type="source"
-          id="2"
-          position="right"
-          style={style}
-          isConnectable={true}
-          connectionMode="loose"
-        />
-        <Handle
-          type="target"
-          id="3"
-          position="top"
-          style={style}
-          isConnectable={true}
-          connectionMode="loose"
-        />
-        <Handle
-          type="source"
-          id="4"
-          position="bottom"
-          style={style}
-          isConnectable={true}
-          connectionMode="loose"
-        />
+        {hidden && (
+          <>
+            <Handle
+              type="target"
+              id="1"
+              position="left"
+              style={{ background: "black" }}
+              isConnectable={true}
+              connectionMode="loose"
+            />
+            <Handle
+              type="source"
+              id="2"
+              position="right"
+              style={{ background: "black" }}
+              isConnectable={true}
+              connectionMode="loose"
+            />
+            <Handle
+              type="target"
+              id="3"
+              position="top"
+              style={{ background: "black" }}
+              isConnectable={true}
+              connectionMode="loose"
+            />
+            <Handle
+              type="source"
+              id="4"
+              position="bottom"
+              style={{ background: "black" }}
+              isConnectable={true}
+              connectionMode="loose"
+            />
+          </>
+        )}
         <div
           style={{
             background: "#f0f0f0",
