@@ -332,11 +332,7 @@ const OvalNodeComponent = ({ data }) => {
         type="target"
         id="1"
         position="left"
-        style={
-          hidden
-            ? { display: "none", background: "black" }
-            : { background: "black" }
-        }
+        style={{ background: "black" }}
         isConnectable={true}
         connectionMode="loose"
       />
@@ -344,11 +340,7 @@ const OvalNodeComponent = ({ data }) => {
         type="source"
         id="2"
         position="right"
-        style={
-          hidden
-            ? { display: "none", background: "black" }
-            : { background: "black" }
-        }
+        style={{ background: "black" }}
         isConnectable={true}
         connectionMode="loose"
       />
@@ -356,11 +348,7 @@ const OvalNodeComponent = ({ data }) => {
         type="target"
         id="3"
         position="top"
-        style={
-          hidden
-            ? { display: "none", background: "black" }
-            : { background: "black" }
-        }
+        style={{ background: "black" }}
         isConnectable={true}
         connectionMode="loose"
       />
@@ -368,11 +356,7 @@ const OvalNodeComponent = ({ data }) => {
         type="source"
         id="4"
         position="bottom"
-        style={
-          hidden
-            ? { display: "none", background: "black" }
-            : { background: "black" }
-        }
+        style={{ background: "black" }}
         isConnectable={true}
         connectionMode="loose"
       />
@@ -430,11 +414,7 @@ const RectangleNodeComponent = ({ data }) => {
         type="source"
         id="2"
         position="right"
-        style={
-          hidden
-            ? { display: "none", background: "black" }
-            : { background: "black" }
-        }
+        style={{ background: "black" }}
         isConnectable={true}
         connectionMode="loose"
       />
@@ -442,11 +422,7 @@ const RectangleNodeComponent = ({ data }) => {
         type="target"
         id="3"
         position="top"
-        style={
-          hidden
-            ? { display: "none", background: "black" }
-            : { background: "black" }
-        }
+        style={{ background: "black" }}
         isConnectable={true}
         connectionMode="loose"
       />
@@ -454,11 +430,7 @@ const RectangleNodeComponent = ({ data }) => {
         type="source"
         id="4"
         position="bottom"
-        style={
-          hidden
-            ? { display: "none", background: "black" }
-            : { background: "black" }
-        }
+        style={{ background: "black" }}
         isConnectable={true}
         connectionMode="loose"
       />
