@@ -380,10 +380,12 @@ const SideBar = ({
 
   useEffect(() => {
     const canvasVisibilityHandler = (nodes) => {
-      const files = nodes.filter(
-        (node) =>
-          node.hasOwnProperty("parentId") || node.hasOwnProperty("elements")
-      );
+      if (files.length > 0) {
+        const files = nodes.filter(
+          (node) =>
+            node.hasOwnProperty("parentId") || node.hasOwnProperty("elements")
+        );
+      }
       if (files.length && !activeFolder) setCanvasVisibility(true);
       else setCanvasVisibility(false);
     };
