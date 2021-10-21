@@ -251,7 +251,7 @@ const SideBar = ({
       if (names.includes(folder)) {
         setError({ value: true, msg: "Folder must be unique." });
       } else {
-        const newFiles = [...files];
+        const newFiles = files.length > 0 ? [...files] : [];
         newFiles.push({ id: folder, text: folder, expanded: true });
         setFiles(newFiles);
         updateFilesDb(newFiles);
