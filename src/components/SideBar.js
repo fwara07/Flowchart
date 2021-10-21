@@ -125,7 +125,7 @@ const SideBar = ({
 
         console.log(newTags);
         console.log(newNames);
-        console.log(JSON.parse(json.files));
+        console.log(newFiles);
         setTags(newTags);
         setNames(newNames);
         setFiles(JSON.parse(json.files));
