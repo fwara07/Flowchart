@@ -127,9 +127,11 @@ const useStyles = makeStyles((theme) =>
 );
 
 const SpecialNodeComponent = ({ data }) => {
+  let myRef = useRef(null);
   return (
     <div>
       <div
+        ref={myRef}
         style={{
           background: "#f0f0f0",
           borderColor: `rgba(${data.color.r}, ${data.color.g}, ${data.color.b}, ${data.color.a})`,
@@ -142,7 +144,20 @@ const SpecialNodeComponent = ({ data }) => {
           textAlign: "center",
         }}
       >
-        {/* <Handle
+        <div></div>
+        <Typography
+          className="Typography"
+          variant="subtitle2"
+          gutterBottom
+          align="center"
+          style={{ marginTop: "5%" }}
+        >
+          {data.title}
+          {/* <span class="rotate">{data.title}</span> */}
+        </Typography>
+      </div>
+
+      {/* <Handle
           type="source"
           position={realOrientation === "horizontal" ? "left" : "top"}
           style={{ background: "black" }}
@@ -154,44 +169,86 @@ const SpecialNodeComponent = ({ data }) => {
           style={{ background: "black" }}
           isConnectable={true}
         /> */}
-        <Handle
-          type="target"
-          id="1"
-          position="left"
-          style={{ background: "black" }}
-          isConnectable={true}
-          connectionMode="loose"
-        />
-        <Handle
-          type="source"
-          id="2"
-          position="right"
-          style={{ background: "black" }}
-          isConnectable={true}
-          connectionMode="loose"
-        />
-        <Handle
-          type="target"
-          id="3"
-          position="top"
-          style={{ background: "black" }}
-          isConnectable={true}
-          connectionMode="loose"
-        />
-        <Handle
-          type="source"
-          id="4"
-          position="bottom"
-          style={{ background: "black" }}
-          isConnectable={true}
-          connectionMode="loose"
-        />
-        {/* <div>
+
+      <Handle
+        type="target"
+        id="1"
+        position="left"
+        style={{
+          backgroundColor: "transparent",
+          marginRight: "5%",
+          border: "0px",
+          padding: "23%",
+          zIndex: 1,
+        }}
+        isConnectable={true}
+        connectionMode="loose"
+        onMouseOver={(e) =>
+          myRef.current && (myRef.current.className = "rectangle")
+        }
+        onMouseLeave={(e) => myRef.current && (myRef.current.className = "")}
+      />
+      <Handle
+        type="source"
+        id="2"
+        position="top"
+        style={{
+          backgroundColor: "transparent",
+          marginRight: "5%",
+          border: "0px",
+          padding: "23%",
+          zIndex: 1,
+        }}
+        isConnectable={true}
+        connectionMode="loose"
+        onMouseOver={(e) =>
+          myRef.current && (myRef.current.className = "rectangle")
+        }
+        onMouseLeave={(e) => myRef.current && (myRef.current.className = "")}
+      />
+      <Handle
+        type="target"
+        id="3"
+        position="right"
+        style={{
+          backgroundColor: "transparent",
+          marginRight: "5%",
+          border: "0px",
+          padding: "23%",
+          zIndex: 1,
+        }}
+        isConnectable={true}
+        connectionMode="loose"
+        onMouseOver={(e) =>
+          myRef.current && (myRef.current.className = "rectangle")
+        }
+        onMouseLeave={(e) => myRef.current && (myRef.current.className = "")}
+      />
+      <Handle
+        type="source"
+        id="4"
+        position="bottom"
+        style={{
+          backgroundColor: "transparent",
+          marginRight: "5%",
+          border: "0px",
+          padding: "23%",
+          zIndex: 1,
+        }}
+        isConnectable={true}
+        connectionMode="loose"
+        onMouseOver={(e) =>
+          myRef.current && (myRef.current.className = "rectangle")
+        }
+        onMouseLeave={(e) => myRef.current && (myRef.current.className = "")}
+      />
+      {/* <div>
           {data.title.length >= 21
             ? data.title.slice(0, 20) + "..."
             : data.title}
         </div> */}
-        <div
+
+      {/* <div
           style={{
             width: "93%",
             // textAlign: "center",
@@ -209,8 +266,7 @@ const SpecialNodeComponent = ({ data }) => {
           >
             {data.title}
           </Typography>
-        </div>
-      </div>
+        </div> */}
       <div
         style={{
           width: "93%",
@@ -314,25 +370,52 @@ const SpecialNodeComponent = ({ data }) => {
 };
 
 const OvalNodeComponent = ({ data }) => {
+  let myRef = useRef(null);
   return (
-    <div
-      style={{
-        background: "#f0f0f0",
-        borderColor: `rgba(${data.color.r}, ${data.color.g}, ${data.color.b}, ${data.color.a})`,
-        color: "black",
-        padding: 10,
-        border: `2px solid rgba(${data.color.r}, ${data.color.g}, ${data.color.b}, ${data.color.a})`,
-        width: 150,
-        minHeight: 70,
-        textAlign: "center",
-        borderRadius: "50px",
-      }}
-    >
+    <>
+      <div
+        ref={myRef}
+        style={{
+          background: "#f0f0f0",
+          borderColor: `rgba(${data.color.r}, ${data.color.g}, ${data.color.b}, ${data.color.a})`,
+          color: "black",
+          padding: 10,
+          border: `2px solid rgba(${data.color.r}, ${data.color.g}, ${data.color.b}, ${data.color.a})`,
+          width: 150,
+          minHeight: 70,
+          textAlign: "center",
+          borderRadius: "50px",
+        }}
+      >
+        {/* ADDED BY ME*/}
+        <div></div>
+        <Typography
+          className="Typography"
+          variant="subtitle2"
+          gutterBottom
+          align="center"
+          style={{ marginTop: "15%" }}
+        >
+          {data.title}
+          {/* <span class="rotate">{data.title}</span> */}
+        </Typography>
+      </div>
+
       <Handle
         type="target"
         id="1"
         position="left"
-        style={{ background: "black" }}
+        style={{
+          backgroundColor: "transparent",
+          marginRight: "5%",
+          border: "0px",
+          padding: "23%",
+          zIndex: 1,
+        }}
+        onMouseOver={(e) =>
+          myRef.current && (myRef.current.className = "rectangle")
+        }
+        onMouseLeave={(e) => myRef.current && (myRef.current.className = "")}
         isConnectable={true}
         connectionMode="loose"
       />
@@ -340,15 +423,35 @@ const OvalNodeComponent = ({ data }) => {
         type="source"
         id="2"
         position="right"
-        style={{ background: "black" }}
         isConnectable={true}
+        style={{
+          backgroundColor: "transparent",
+          marginRight: "5%",
+          border: "0px",
+          padding: "23%",
+          zIndex: 1,
+        }}
+        onMouseOver={(e) =>
+          myRef.current && (myRef.current.className = "rectangle")
+        }
+        onMouseLeave={(e) => myRef.current && (myRef.current.className = "")}
         connectionMode="loose"
       />
       <Handle
         type="target"
         id="3"
         position="top"
-        style={{ background: "black" }}
+        style={{
+          backgroundColor: "transparent",
+          marginRight: "5%",
+          border: "0px",
+          padding: "23%",
+          zIndex: 1,
+        }}
+        onMouseOver={(e) =>
+          myRef.current && (myRef.current.className = "rectangle")
+        }
+        onMouseLeave={(e) => myRef.current && (myRef.current.className = "")}
         isConnectable={true}
         connectionMode="loose"
       />
@@ -356,160 +459,259 @@ const OvalNodeComponent = ({ data }) => {
         type="source"
         id="4"
         position="bottom"
-        style={{ background: "black" }}
+        style={{
+          backgroundColor: "transparent",
+          marginRight: "5%",
+          border: "0px",
+          padding: "23%",
+          zIndex: 1,
+        }}
+        onMouseOver={(e) =>
+          myRef.current && (myRef.current.className = "rectangle")
+        }
+        onMouseLeave={(e) => myRef.current && (myRef.current.className = "")}
         isConnectable={true}
         connectionMode="loose"
       />
       {/* <div style={{ paddingTop: 20 }}>
         {data.title.length >= 21 ? data.title.slice(0, 20) + "..." : data.title}
       </div> */}
-      <div
-        style={{
-          width: "93%",
-          paddingTop: 20,
-          textAlign: "center",
-          overflowWrap: "break-word",
-          marginLeft: 10,
-          marginRight: 300,
-        }}
-      >
-        <Typography
-          variant="subtitle2"
-          gutterBottom
-          style={{
-            margin: "auto",
-          }}
-        >
-          {data.title.substring(0, 27)}
-        </Typography>
-      </div>
-    </div>
+    </>
   );
 };
 
 const RectangleNodeComponent = ({ data }) => {
+  let myRef = useRef(null);
   return (
-    <div
-      style={{
-        background: "#f0f0f0",
-        borderColor: `rgba(${data.color.r}, ${data.color.g}, ${data.color.b}, ${data.color.a})`,
-        color: "black",
-        padding: 10,
-        border: `2px solid rgba(${data.color.r}, ${data.color.g}, ${data.color.b}, ${data.color.a})`,
-        width: 150,
-        minHeight: 70,
-        textAlign: "center",
-        borderRadius: "10px",
-      }}
-    >
+    <>
+      <div
+        ref={myRef}
+        style={{
+          background: "#f0f0f0",
+          borderColor: `rgba(${data.color.r}, ${data.color.g}, ${data.color.b}, ${data.color.a})`,
+          color: "black",
+          padding: 10,
+          border: `2px solid rgba(${data.color.r}, ${data.color.g}, ${data.color.b}, ${data.color.a})`,
+          width: 150,
+          minHeight: 70,
+          textAlign: "center",
+          borderRadius: "10px",
+        }}
+      >
+        {/* ADDED BY ME*/}
+        <div></div>
+        <Typography
+          className="Typography"
+          variant="subtitle2"
+          gutterBottom
+          align="center"
+          style={{ marginTop: "15%" }}
+        >
+          {data.title}
+          {/* <span class="rotate">{data.title}</span> */}
+        </Typography>
+      </div>
       <Handle
         type="target"
         id="1"
+        style={{
+          backgroundColor: "transparent",
+          marginRight: "5%",
+          border: "0px",
+          padding: "23%",
+          zIndex: 1,
+        }}
         position="left"
-        style={{ background: "black" }}
+        onMouseOver={(e) =>
+          myRef.current && (myRef.current.className = "rectangle")
+        }
+        onMouseLeave={(e) => myRef.current && (myRef.current.className = "")}
         isConnectable={true}
         connectionMode="loose"
       />
       <Handle
         type="source"
         id="2"
+        style={{
+          backgroundColor: "transparent",
+          marginRight: "5%",
+          border: "0px",
+          padding: "23%",
+          zIndex: 1,
+        }}
+        onMouseOver={(e) =>
+          myRef.current && (myRef.current.className = "rectangle")
+        }
+        onMouseLeave={(e) => myRef.current && (myRef.current.className = "")}
         position="right"
-        style={{ background: "black" }}
+        // style={{ background: "black" }}
         isConnectable={true}
         connectionMode="loose"
       />
       <Handle
         type="target"
         id="3"
+        style={{
+          backgroundColor: "transparent",
+          marginRight: "5%",
+          border: "0px",
+          padding: "23%",
+          zIndex: 1,
+        }}
+        onMouseOver={(e) =>
+          myRef.current && (myRef.current.className = "rectangle")
+        }
+        onMouseLeave={(e) => myRef.current && (myRef.current.className = "")}
         position="top"
-        style={{ background: "black" }}
+        // style={{ background: "black" }}
         isConnectable={true}
         connectionMode="loose"
       />
       <Handle
         type="source"
         id="4"
+        style={{
+          backgroundColor: "transparent",
+          marginRight: "5%",
+          border: "0px",
+          padding: "23%",
+          zIndex: 1,
+        }}
+        onMouseOver={(e) =>
+          myRef.current && (myRef.current.className = "rectangle")
+        }
+        onMouseLeave={(e) => myRef.current && (myRef.current.className = "")}
         position="bottom"
-        style={{ background: "black" }}
+        // style={{ background: "black" }}
         isConnectable={true}
         connectionMode="loose"
       />
       {/* <div style={{ paddingTop: 20 }}>
         {data.title.length >= 21 ? data.title.slice(0, 20) + "..." : data.title}
       </div> */}
-      <div
-        style={{
-          width: "93%",
-          // textAlign: "center",
-          paddingTop: 20,
-          overflowWrap: "break-word",
-          marginLeft: 10,
-          marginRight: 300,
-        }}
-      >
-        <Typography
-          variant="subtitle2"
-          gutterBottom
-          style={{
-            margin: "auto",
-          }}
-        >
-          {data.title}
-        </Typography>
-      </div>
-    </div>
+    </>
   );
 };
 
 const DiamondNodeComponent = ({ data }) => {
   const [hidden, setHidden] = useState(true);
+  const myRef = useRef(null);
   return (
-    <div>
-      <div style={{ transform: "rotate(45deg)" }}>
+    <>
+      <div
+        ref={myRef}
+        style={{
+          width: "80px",
+          position: "absolute",
+          height: "80px",
+          marginTop: "10%",
+          marginLeft: "10%",
+          zIndex: "0",
+          backgroundColor: "#f0f0f0",
+          border: `2px solid rgba(${data.color.r}, ${data.color.g}, ${data.color.b}, ${data.color.a})`,
+          transform: "rotate(-45deg)",
+          borderRadius: "10px",
+        }}
+      >
+        {" "}
+        {/* ADDED BY ME*/}
+        <div></div>
+        <Typography
+          className="Typography"
+          variant="subtitle2"
+          gutterBottom
+          align="center"
+          style={{ marginTop: "30%", transform: "rotate(45deg)" }}
+        >
+          {data.title}
+          {/* <span class="rotate">{data.title}</span> */}
+        </Typography>
+      </div>
+      <div style={{ backgroundColor: "transparent", marginTop: "-5%" }}>
         <Handle
-          type="target"
+          type="source"
           id="1"
           position="left"
-          style={{ background: "black" }}
-          isConnectable={true}
-          connectionMode="loose"
-        />
-        <Handle
-          type="source"
-          id="2"
-          position="right"
-          style={{ background: "black" }}
+          style={{
+            backgroundColor: "transparent",
+            marginRight: "5%",
+            border: "0px",
+            padding: "23%",
+            zIndex: 1,
+          }}
+          onMouseOver={(e) =>
+            myRef.current && (myRef.current.className = "my-container")
+          }
+          onMouseLeave={(e) => myRef.current && (myRef.current.className = "")}
           isConnectable={true}
           connectionMode="loose"
         />
         <Handle
           type="target"
-          id="3"
-          position="top"
-          style={{ background: "black" }}
+          id="2"
+          position="right"
+          style={{
+            backgroundColor: "transparent",
+            border: "0px",
+            padding: "23%",
+            zIndex: 1,
+          }}
+          onMouseOver={(e) =>
+            myRef.current && (myRef.current.className = "my-container")
+          }
+          onMouseLeave={(e) => myRef.current && (myRef.current.className = "")}
           isConnectable={true}
           connectionMode="loose"
         />
         <Handle
           type="source"
+          id="3"
+          position="top"
+          style={{
+            backgroundColor: "transparent",
+            border: "0px",
+            padding: "23%",
+            zIndex: 1,
+          }}
+          onMouseOver={(e) =>
+            myRef.current && (myRef.current.className = "my-container")
+          }
+          onMouseLeave={(e) => myRef.current && (myRef.current.className = "")}
+          isConnectable={true}
+          connectionMode="loose"
+        />
+        <Handle
+          type="target"
           id="4"
           position="bottom"
-          style={{ background: "black" }}
+          style={{
+            backgroundColor: "transparent",
+            border: "0px",
+            padding: "23%",
+            zIndex: 1,
+          }}
+          onMouseOver={(e) =>
+            myRef.current && (myRef.current.className = "my-container")
+          }
+          onMouseLeave={(e) => myRef.current && (myRef.current.className = "")}
           isConnectable={true}
           connectionMode="loose"
         />
         <div
           style={{
-            background: "#f0f0f0",
+            backgroundColor: "transparent",
             color: "black",
-            border: `2px solid rgba(${data.color.r}, ${data.color.g}, ${data.color.b}, ${data.color.a})`,
+            // border: `2px solid rgba(${data.color.r}, ${data.color.g}, ${data.color.b}, ${data.color.a})`,
+            // border: `2px solid white`,
             width: 100,
             minHeight: 100,
             textAlign: "center",
             borderRadius: "5px",
           }}
         >
-          <div style={{ transform: "rotate(-45deg)", marginTop: 35 }}>
+          <div
+            style={{ transform: "rotate(-45deg)", marginTop: "10%", zIndex: 0 }}
+          >
             {/* <div>
             {data.title.length >= 16
               ? data.title.slice(0, 15) + "..."
@@ -524,21 +726,11 @@ const DiamondNodeComponent = ({ data }) => {
                 marginLeft: 10,
                 marginRight: 300,
               }}
-            >
-              <Typography
-                variant="subtitle2"
-                gutterBottom
-                style={{
-                  margin: "auto",
-                }}
-              >
-                {data.title}
-              </Typography>
-            </div>
+            ></div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
@@ -555,6 +747,7 @@ const Canvas = ({
   const [elementCLicked, setElementClicked] = useState({});
   const [editModeTtitle, setEditModeTitle] = useState(false);
   const [editModeDescription, setEditModeDescription] = useState(false);
+  const [editModeDesc, setEditModeDesc] = useState(false);
   const [open, setOpen] = useState(false);
   const [openUpload, setOpenUpload] = React.useState(false);
   const [openNewNode, setOpenNewNode] = useState(false);
@@ -681,6 +874,8 @@ const Canvas = ({
       setCollapsable(element.data.isCollapsable);
       setAnimatedEdge(element.data.hasAnimatedEdge);
       setArrowEdge(element.data.hasArrowEdge);
+    } else {
+      setElementClicked(element);
     }
   };
 
@@ -886,9 +1081,11 @@ const Canvas = ({
           str = event.target.value;
         }
         element.data["title"] = str;
+        setElementClicked(element);
       }
     });
     setElements(newElements);
+
     updateNode(newElements);
     // const newElements = [...elements];
     // newElements.map((element) => {
@@ -909,6 +1106,7 @@ const Canvas = ({
     newElements.map((element) => {
       if (element.id === event.target.name) {
         element.data["description"] = event.target.value;
+        setElementClicked(element);
       }
     });
     setElements(newElements);
@@ -922,6 +1120,19 @@ const Canvas = ({
     // setElements(newElements);
     // // localStorage.setItem("elements", JSON.stringify(newElements));
     // updateNode();
+  };
+
+  const handleChangeDesc = (event) => {
+    const newElements = [...elements];
+    newElements.map((element) => {
+      if (element.id === event.target.name) {
+        element.data["desc"] = event.target.value;
+        setElementClicked(element);
+      }
+    });
+    console.log("new ele", newElements);
+    setElements(newElements);
+    updateNode(newElements);
   };
 
   const handleDelete = async () => {
@@ -943,6 +1154,10 @@ const Canvas = ({
 
   const handleClickDescription = () => {
     setEditModeDescription(true);
+  };
+
+  const handleClickDesc = () => {
+    setEditModeDesc(true);
   };
 
   const getNodeId = () => `randomnode_${+new Date() + Math.random()}`;
@@ -968,6 +1183,7 @@ const Canvas = ({
         hasAnimatedEdge: false,
         hasArrowEdge: false,
         tags: [],
+        desc: "description",
       },
       targetPosition: orientation === "horizontal" ? "left" : "top",
       sourcePosition: orientation === "horizontal" ? "right" : "bottom",
@@ -1518,6 +1734,7 @@ const Canvas = ({
                         let counter = 0;
                         data = data.slice(1);
                         data.map((element) => {
+                          console.log("0------0", element);
                           const checkedTags = checkTags(element[3]);
                           console.log(checkedTags, "7777777777777777777");
                           console.log(element[4]);
@@ -1550,6 +1767,7 @@ const Canvas = ({
                                 "diamond",
                               ].includes(element[4].toLowerCase())
                             ) {
+                              console.log("----");
                               if (Array.isArray(checkedTags)) {
                                 ids[element[0]] = getNodeId();
                                 jsonArr.push({
@@ -1573,6 +1791,7 @@ const Canvas = ({
                                   },
                                   isHidden: false,
                                   position: { x: 0, y: 0 },
+                                  desc: null,
                                 });
                                 if (element[7] === "TRUE") {
                                   animateds.push(ids[element[0]]);
@@ -1787,7 +2006,7 @@ const Canvas = ({
           </defs>
         </svg>
         {/* <div /> */}
-        {isEditMode && (
+        {isEditMode ? (
           <Drawer
             variant="permanent"
             anchor="right"
@@ -1832,6 +2051,39 @@ const Canvas = ({
                       endAdornment: (
                         <InputAdornment position="end">
                           <IconButton onClick={handleClickTitle}>
+                            <Edit />
+                          </IconButton>
+                        </InputAdornment>
+                      ),
+                    }}
+                  />
+                  <Typography variant="h6" style={{ marginTop: 40 }}>
+                    Edit Description
+                  </Typography>
+
+                  <TextField
+                    name={elementCLicked.id}
+                    defaultValue={elementCLicked.data.desc}
+                    margin="normal"
+                    rows={5}
+                    multiline
+                    onChange={handleChangeDesc}
+                    disabled={!editModeDesc}
+                    style={{ width: "90%" }}
+                    value={elementCLicked.data.desc}
+                    InputProps={{
+                      // classes: {
+                      //   disabled: {
+                      //     color: "black",
+                      //     borderBottom: 0,
+                      //     "&:before": {
+                      //       borderBottom: 0,
+                      //     },
+                      //   },
+                      // },
+                      endAdornment: (
+                        <InputAdornment position="end">
+                          <IconButton onClick={handleClickDesc}>
                             <Edit />
                           </IconButton>
                         </InputAdornment>
@@ -2114,6 +2366,84 @@ const Canvas = ({
                   >
                     <Delete />
                   </IconButton>
+                </div>
+              )}
+            </Grid>
+          </Drawer>
+        ) : (
+          <Drawer
+            variant="permanent"
+            anchor="right"
+            style={{ textAlign: "center" }}
+          >
+            <Grid
+              item
+              xs={12}
+              style={{ textAlign: "center", width: 250, overflow: "hidden" }}
+            >
+              {Object.keys(elementCLicked).length === 0 ? (
+                <Typography
+                  variant="h6"
+                  gutterBottom
+                  style={{ paddingTop: 380, paddingLeft: 10, paddingRight: 10 }}
+                >
+                  Double-click on any item to get a detailed view.
+                </Typography>
+              ) : (
+                <div>
+                  <Typography variant="h6" style={{ marginTop: 40 }}>
+                    Title
+                  </Typography>
+                  <TextField
+                    name={elementCLicked.id}
+                    defaultValue={elementCLicked.data.title}
+                    margin="normal"
+                    onChange={handleChangeTitle}
+                    disabled
+                    style={{ width: "90%" }}
+                    value={elementCLicked.data.title}
+                    InputProps={
+                      {
+                        // classes: {
+                        //   disabled: {
+                        //     color: "black",
+                        //     borderBottom: 0,
+                        //     "&:before": {
+                        //       borderBottom: 0,
+                        //     },
+                        //   },
+                        // },
+                      }
+                    }
+                  />
+                  <Typography variant="h6" style={{ marginTop: 40 }}>
+                    Description
+                  </Typography>
+
+                  <TextField
+                    name={elementCLicked.id}
+                    defaultValue={elementCLicked.data.desc}
+                    margin="normal"
+                    onChange={handleChangeDesc}
+                    disabled
+                    rows={5}
+                    multiline
+                    style={{ width: "90%" }}
+                    value={elementCLicked.data.desc}
+                    InputProps={
+                      {
+                        // classes: {
+                        //   disabled: {
+                        //     color: "black",
+                        //     borderBottom: 0,
+                        //     "&:before": {
+                        //       borderBottom: 0,
+                        //     },
+                        //   },
+                        // },
+                      }
+                    }
+                  />
                 </div>
               )}
             </Grid>
