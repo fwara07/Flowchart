@@ -105,8 +105,24 @@ const SideBar = ({
         if (Array.isArray(json.names)) {
           newNames = json.names;
         } else {
-          newNames = JSON.parse(json.names);
+          if (Array.isArray(JSON.parse(json.names))) {
+            newNames = JSON.parse(json.names);
+          } else {
+            newNames = JSON.parse(json.names).names;
+          }
         }
+
+        let newFiles;
+        if (Array.isArray(json.files)) {
+          newFiles = json.files;
+        } else {
+          if (Array.isArray(JSON.parse(json.files))) {
+            newFiles = JSON.parse(json.files);
+          } else {
+            newFiles = JSON.parse(json.files).files;
+          }
+        }
+
         console.log(newTags);
         console.log(newNames);
         console.log(JSON.parse(json.files));
