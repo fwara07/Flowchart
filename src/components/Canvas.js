@@ -182,10 +182,10 @@ const SpecialNodeComponent = ({ data }) => {
         position="left"
         style={{
           backgroundColor: handleColor,
-          marginRight: "5%",
-          border: "0px",
-          padding: "23%",
-          zIndex: 1,
+          // marginRight: "5%",
+          // border: "0px",
+          // padding: "23%",
+          // zIndex: 1,
         }}
         isConnectable={true}
         connectionMode="loose"
@@ -200,10 +200,10 @@ const SpecialNodeComponent = ({ data }) => {
         position="top"
         style={{
           backgroundColor: handleColor,
-          marginRight: "5%",
-          border: "0px",
-          padding: "23%",
-          zIndex: 1,
+          // marginRight: "5%",
+          // border: "0px",
+          // padding: "23%",
+          // zIndex: 1,
         }}
         isConnectable={true}
         connectionMode="loose"
@@ -218,10 +218,10 @@ const SpecialNodeComponent = ({ data }) => {
         position="right"
         style={{
           backgroundColor: handleColor,
-          marginRight: "5%",
-          border: "0px",
-          padding: "23%",
-          zIndex: 1,
+          // marginRight: "5%",
+          // border: "0px",
+          // padding: "23%",
+          // zIndex: 1,
         }}
         isConnectable={true}
         connectionMode="loose"
@@ -236,10 +236,10 @@ const SpecialNodeComponent = ({ data }) => {
         position="bottom"
         style={{
           backgroundColor: handleColor,
-          marginRight: "5%",
-          border: "0px",
-          padding: "23%",
-          zIndex: 1,
+          // marginRight: "5%",
+          // border: "0px",
+          // padding: "23%",
+          // zIndex: 1,
         }}
         isConnectable={true}
         connectionMode="loose"
@@ -418,10 +418,10 @@ const OvalNodeComponent = ({ data }) => {
         position="left"
         style={{
           backgroundColor: handleColor,
-          marginRight: "5%",
-          border: "0px",
-          padding: "23%",
-          zIndex: 1,
+          // marginRight: "5%",
+          // border: "0px",
+          // padding: "23%",
+          // zIndex: 1,
         }}
         // onMouseOver={(e) =>
         //   myRef.current && (myRef.current.className = "rectangle")
@@ -437,10 +437,10 @@ const OvalNodeComponent = ({ data }) => {
         isConnectable={true}
         style={{
           backgroundColor: handleColor,
-          marginRight: "5%",
-          border: "0px",
-          padding: "23%",
-          zIndex: 1,
+          // marginRight: "5%",
+          // border: "0px",
+          // padding: "23%",
+          // zIndex: 1,
         }}
         // onMouseOver={(e) =>
         //   myRef.current && (myRef.current.className = "rectangle")
@@ -454,10 +454,10 @@ const OvalNodeComponent = ({ data }) => {
         position="top"
         style={{
           backgroundColor: handleColor,
-          marginRight: "5%",
-          border: "0px",
-          padding: "23%",
-          zIndex: 1,
+          // marginRight: "5%",
+          // border: "0px",
+          // padding: "23%",
+          // zIndex: 1,
         }}
         // onMouseOver={(e) =>
         //   myRef.current && (myRef.current.className = "rectangle")
@@ -472,10 +472,10 @@ const OvalNodeComponent = ({ data }) => {
         position="bottom"
         style={{
           backgroundColor: handleColor,
-          marginRight: "5%",
-          border: "0px",
-          padding: "23%",
-          zIndex: 1,
+          // marginRight: "5%",
+          // border: "0px",
+          // padding: "23%",
+          // zIndex: 1,
         }}
         // onMouseOver={(e) =>
         //   myRef.current && (myRef.current.className = "rectangle")
@@ -532,10 +532,10 @@ const RectangleNodeComponent = ({ data }) => {
         id="1"
         style={{
           backgroundColor: handleColor,
-          marginRight: "5%",
-          border: "0px",
-          padding: "23%",
-          zIndex: 1,
+          // marginRight: "5%",
+          // border: "0px",
+          // padding: "23%",
+          // zIndex: 1,
         }}
         position="left"
         // onMouseOver={(e) =>
@@ -550,10 +550,10 @@ const RectangleNodeComponent = ({ data }) => {
         id="2"
         style={{
           backgroundColor: handleColor,
-          marginRight: "5%",
-          border: "0px",
-          padding: "23%",
-          zIndex: 1,
+          // marginRight: "5%",
+          // border: "0px",
+          // padding: "23%",
+          // zIndex: 1,
         }}
         // onMouseOver={(e) =>
         //   myRef.current && (myRef.current.className = "rectangle")
@@ -569,10 +569,10 @@ const RectangleNodeComponent = ({ data }) => {
         id="3"
         style={{
           backgroundColor: handleColor,
-          marginRight: "5%",
-          border: "0px",
-          padding: "23%",
-          zIndex: 1,
+          // marginRight: "5%",
+          // border: "0px",
+          // padding: "23%",
+          // zIndex: 1,
         }}
         // onMouseOver={(e) =>
         //   myRef.current && (myRef.current.className = "rectangle")
@@ -588,10 +588,10 @@ const RectangleNodeComponent = ({ data }) => {
         id="4"
         style={{
           backgroundColor: handleColor,
-          marginRight: "5%",
-          border: "0px",
-          padding: "23%",
-          zIndex: 1,
+          // marginRight: "5%",
+          // border: "0px",
+          // padding: "23%",
+          // zIndex: 1,
         }}
         // onMouseOver={(e) =>
         //   myRef.current && (myRef.current.className = "rectangle")
@@ -649,10 +649,10 @@ const DiamondNodeComponent = ({ data }) => {
           position="left"
           style={{
             backgroundColor: handleColor,
-            marginRight: "5%",
-            border: "0px",
-            padding: "23%",
-            zIndex: 1,
+            // marginRight: "5%",
+            // border: "0px",
+            // padding: "23%",
+            // zIndex: 1,
           }}
           // onMouseOver={(e) =>
           //   myRef.current && (myRef.current.className = "my-container")
@@ -667,9 +667,9 @@ const DiamondNodeComponent = ({ data }) => {
           position="right"
           style={{
             backgroundColor: handleColor,
-            border: "0px",
-            padding: "23%",
-            zIndex: 1,
+            // border: "0px",
+            // padding: "23%",
+            // zIndex: 1,
           }}
           // onMouseOver={(e) =>
           //   myRef.current && (myRef.current.className = "my-container")
@@ -684,9 +684,9 @@ const DiamondNodeComponent = ({ data }) => {
           position="top"
           style={{
             backgroundColor: handleColor,
-            border: "0px",
-            padding: "23%",
-            zIndex: 1,
+            // border: "0px",
+            // padding: "23%",
+            // zIndex: 1,
           }}
           // onMouseOver={(e) =>
           //   myRef.current && (myRef.current.className = "my-container")
@@ -701,9 +701,9 @@ const DiamondNodeComponent = ({ data }) => {
           position="bottom"
           style={{
             backgroundColor: handleColor,
-            border: "0px",
-            padding: "23%",
-            zIndex: 1,
+            // border: "0px",
+            // padding: "23%",
+            // zIndex: 1,
           }}
           // onMouseOver={(e) =>
           //   myRef.current && (myRef.current.className = "my-container")
@@ -2403,7 +2403,14 @@ const Canvas = ({
                   }}
                 >
                   <div>
-                    <Typography variant="h6" style={{ marginTop: 40 }}>
+                    <Typography
+                      variant="h4"
+                      style={{
+                        marginTop: 40,
+                        marginBottom: 10,
+                        fontWeight: "bolder",
+                      }}
+                    >
                       Title
                     </Typography>
                     <Typography variant="h6" gutterBottom>
@@ -2432,8 +2439,12 @@ const Canvas = ({
                       }
                     /> */}
                     <Typography
-                      variant="h6"
-                      style={{ marginTop: 40, fontWeight: "bolder" }}
+                      variant="h4"
+                      style={{
+                        marginTop: 40,
+                        marginBottom: 10,
+                        fontWeight: "bolder",
+                      }}
                     >
                       Description
                     </Typography>
