@@ -376,6 +376,7 @@ const SpecialNodeComponent = ({ data }) => {
 };
 
 const OvalNodeComponent = ({ data }) => {
+  let handleColor = "transparent";
   return (
     <>
       <div
@@ -610,7 +611,7 @@ const RectangleNodeComponent = ({ data }) => {
 
 const DiamondNodeComponent = ({ data }) => {
   const [hidden, setHidden] = useState(true);
-  const myRef = useRef(null);
+  let handleColor = "transparent";
   return (
     <>
       <div
@@ -2407,7 +2408,7 @@ const Canvas = ({
                       Title
                     </Typography>
                     <Typography variant="h6" gutterBottom>
-                      {elementClicked.data.title}
+                      {elementCLicked.data.title}
                     </Typography>
                     {/* <TextField
                       name={elementCLicked.id}
@@ -2438,7 +2439,7 @@ const Canvas = ({
                       Description
                     </Typography>
                     <Typography variant="h6" gutterBottom>
-                      {elementClicked.data.desc}
+                      {elementCLicked.data.desc}
                     </Typography>
                     {/* <TextField
                       name={elementCLicked.id}
