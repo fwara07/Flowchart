@@ -130,10 +130,12 @@ const SpecialNodeComponent = ({ data }) => {
   let handleColor = "transparent";
   return (
     <div
-      onMouseOver={(e) => {
+      onMouseEnter={(e) => {
+        console.log("black");
         handleColor = "black";
       }}
       onMouseLeave={(e) => {
+        console.log("transparent");
         handleColor = "transparent";
       }}
     >
@@ -189,7 +191,7 @@ const SpecialNodeComponent = ({ data }) => {
         }}
         isConnectable={true}
         connectionMode="loose"
-        // onMouseOver={(e) =>
+        // onMouseEnter={(e) =>
         //   myRef.current && (myRef.current.className = "rectangle")
         // }
         // onMouseLeave={(e) => myRef.current && (myRef.current.className = "")}
@@ -207,7 +209,7 @@ const SpecialNodeComponent = ({ data }) => {
         }}
         isConnectable={true}
         connectionMode="loose"
-        // onMouseOver={(e) =>
+        // onMouseEnter={(e) =>
         //   myRef.current && (myRef.current.className = "rectangle")
         // }
         // onMouseLeave={(e) => myRef.current && (myRef.current.className = "")}
@@ -225,7 +227,7 @@ const SpecialNodeComponent = ({ data }) => {
         }}
         isConnectable={true}
         connectionMode="loose"
-        // onMouseOver={(e) =>
+        // onMouseEnter={(e) =>
         //   myRef.current && (myRef.current.className = "rectangle")
         // }
         // onMouseLeave={(e) => myRef.current && (myRef.current.className = "")}
@@ -243,7 +245,7 @@ const SpecialNodeComponent = ({ data }) => {
         }}
         isConnectable={true}
         connectionMode="loose"
-        // onMouseOver={(e) =>
+        // onMouseEnter={(e) =>
         //   myRef.current && (myRef.current.className = "rectangle")
         // }
         // onMouseLeave={(e) => myRef.current && (myRef.current.className = "")}
@@ -380,7 +382,7 @@ const OvalNodeComponent = ({ data }) => {
   return (
     <>
       <div
-        onMouseOver={(e) => {
+        onMouseEnter={(e) => {
           handleColor = "black";
         }}
         onMouseLeave={(e) => {
@@ -423,7 +425,7 @@ const OvalNodeComponent = ({ data }) => {
           // padding: "23%",
           // zIndex: 1,
         }}
-        // onMouseOver={(e) =>
+        // onMouseEnter={(e) =>
         //   myRef.current && (myRef.current.className = "rectangle")
         // }
         // onMouseLeave={(e) => myRef.current && (myRef.current.className = "")}
@@ -442,7 +444,7 @@ const OvalNodeComponent = ({ data }) => {
           // padding: "23%",
           // zIndex: 1,
         }}
-        // onMouseOver={(e) =>
+        // onMouseEnter={(e) =>
         //   myRef.current && (myRef.current.className = "rectangle")
         // }
         // onMouseLeave={(e) => myRef.current && (myRef.current.className = "")}
@@ -459,7 +461,7 @@ const OvalNodeComponent = ({ data }) => {
           // padding: "23%",
           // zIndex: 1,
         }}
-        // onMouseOver={(e) =>
+        // onMouseEnter={(e) =>
         //   myRef.current && (myRef.current.className = "rectangle")
         // }
         // onMouseLeave={(e) => myRef.current && (myRef.current.className = "")}
@@ -477,7 +479,7 @@ const OvalNodeComponent = ({ data }) => {
           // padding: "23%",
           // zIndex: 1,
         }}
-        // onMouseOver={(e) =>
+        // onMouseEnter={(e) =>
         //   myRef.current && (myRef.current.className = "rectangle")
         // }
         // onMouseLeave={(e) => myRef.current && (myRef.current.className = "")}
@@ -496,7 +498,7 @@ const RectangleNodeComponent = ({ data }) => {
   return (
     <>
       <div
-        onMouseOver={(e) => {
+        onMouseEnter={(e) => {
           handleColor = "black";
         }}
         onMouseLeave={(e) => {
@@ -538,7 +540,7 @@ const RectangleNodeComponent = ({ data }) => {
           // zIndex: 1,
         }}
         position="left"
-        // onMouseOver={(e) =>
+        // onMouseEnter={(e) =>
         //   myRef.current && (myRef.current.className = "rectangle")
         // }
         // onMouseLeave={(e) => myRef.current && (myRef.current.className = "")}
@@ -555,7 +557,7 @@ const RectangleNodeComponent = ({ data }) => {
           // padding: "23%",
           // zIndex: 1,
         }}
-        // onMouseOver={(e) =>
+        // onMouseEnter={(e) =>
         //   myRef.current && (myRef.current.className = "rectangle")
         // }
         // onMouseLeave={(e) => myRef.current && (myRef.current.className = "")}
@@ -574,7 +576,7 @@ const RectangleNodeComponent = ({ data }) => {
           // padding: "23%",
           // zIndex: 1,
         }}
-        // onMouseOver={(e) =>
+        // onMouseEnter={(e) =>
         //   myRef.current && (myRef.current.className = "rectangle")
         // }
         // onMouseLeave={(e) => myRef.current && (myRef.current.className = "")}
@@ -593,7 +595,7 @@ const RectangleNodeComponent = ({ data }) => {
           // padding: "23%",
           // zIndex: 1,
         }}
-        // onMouseOver={(e) =>
+        // onMouseEnter={(e) =>
         //   myRef.current && (myRef.current.className = "rectangle")
         // }
         // onMouseLeave={(e) => myRef.current && (myRef.current.className = "")}
@@ -654,7 +656,7 @@ const DiamondNodeComponent = ({ data }) => {
             // padding: "23%",
             // zIndex: 1,
           }}
-          // onMouseOver={(e) =>
+          // onMouseEnter={(e) =>
           //   myRef.current && (myRef.current.className = "my-container")
           // }
           // onMouseLeave={(e) => myRef.current && (myRef.current.className = "")}
@@ -671,7 +673,7 @@ const DiamondNodeComponent = ({ data }) => {
             // padding: "23%",
             // zIndex: 1,
           }}
-          // onMouseOver={(e) =>
+          // onMouseEnter={(e) =>
           //   myRef.current && (myRef.current.className = "my-container")
           // }
           // onMouseLeave={(e) => myRef.current && (myRef.current.className = "")}
@@ -688,7 +690,7 @@ const DiamondNodeComponent = ({ data }) => {
             // padding: "23%",
             // zIndex: 1,
           }}
-          // onMouseOver={(e) =>
+          // onMouseEnter={(e) =>
           //   myRef.current && (myRef.current.className = "my-container")
           // }
           // onMouseLeave={(e) => myRef.current && (myRef.current.className = "")}
@@ -705,7 +707,7 @@ const DiamondNodeComponent = ({ data }) => {
             // padding: "23%",
             // zIndex: 1,
           }}
-          // onMouseOver={(e) =>
+          // onMouseEnter={(e) =>
           //   myRef.current && (myRef.current.className = "my-container")
           // }
           // onMouseLeave={(e) => myRef.current && (myRef.current.className = "")}
