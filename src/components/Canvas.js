@@ -1756,6 +1756,7 @@ const Canvas = ({
                         const edgeTypes = {};
                         const arrows = [];
                         const description = {};
+                        const arrowColors = {};
                         let counter = 0;
                         data = data.slice(1);
                         data.map((element) => {
@@ -1829,6 +1830,9 @@ const Canvas = ({
                                 if (element[9] === "TRUE") {
                                   arrows.push(ids[element[0]]);
                                 }
+                                if (element[10].startsWith("#")) {
+                                  arrowColors[ids[element[0]]] = element[10];
+                                }
                                 console.log(jsonArr);
                                 if (element[6].length > 0) {
                                   if (element[6].includes(",")) {
@@ -1880,7 +1884,15 @@ const Canvas = ({
                                           arrows.includes(ids[key]) === true
                                             ? true
                                             : false,
-                                        color: colorArrow,
+                                        color:
+                                          arrowColors[ids[key]] !== undefined
+                                            ? arrowColors[ids[key]]
+                                            : {
+                                                r: "187",
+                                                g: "187",
+                                                b: "192",
+                                                a: "100",
+                                              },
                                       },
                                       source: ids[key],
                                       target: ids[child],
@@ -1903,7 +1915,15 @@ const Canvas = ({
                                         arrows.includes(ids[key]) === true
                                           ? true
                                           : false,
-                                      color: colorArrow,
+                                      color:
+                                        arrowColors[ids[key]] !== undefined
+                                          ? arrowColors[ids[key]]
+                                          : {
+                                              r: "187",
+                                              g: "187",
+                                              b: "192",
+                                              a: "100",
+                                            },
                                     },
                                     source: ids[key],
                                     target: ids[children[key]],
