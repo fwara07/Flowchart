@@ -130,11 +130,11 @@ const SpecialNodeComponent = ({ data }) => {
   let handleColor = "transparent";
   return (
     <div
-      onMouseEnter={(e) => {
+      onMouseEnter={() => {
         console.log("black");
         handleColor = "black";
       }}
-      onMouseLeave={(e) => {
+      onMouseLeave={() => {
         console.log("transparent");
         handleColor = "transparent";
       }}
@@ -382,10 +382,10 @@ const OvalNodeComponent = ({ data }) => {
   return (
     <>
       <div
-        onMouseEnter={(e) => {
+        onMouseEnter={() => {
           handleColor = "black";
         }}
-        onMouseLeave={(e) => {
+        onMouseLeave={() => {
           handleColor = "transparent";
         }}
         style={{
@@ -498,10 +498,10 @@ const RectangleNodeComponent = ({ data }) => {
   return (
     <>
       <div
-        onMouseEnter={(e) => {
+        onMouseEnter={() => {
           handleColor = "black";
         }}
-        onMouseLeave={(e) => {
+        onMouseLeave={() => {
           handleColor = "transparent";
         }}
         style={{
