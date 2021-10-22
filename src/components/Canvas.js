@@ -127,16 +127,14 @@ const useStyles = makeStyles((theme) =>
 );
 
 const SpecialNodeComponent = ({ data }) => {
-  let handleColor = "transparent";
+  const [handleColor, setHandleColor] = useState("transparent");
   return (
     <div
       onMouseEnter={() => {
-        console.log("black");
-        handleColor = "black";
+        setHandleColor("black");
       }}
       onMouseLeave={() => {
-        console.log("transparent");
-        handleColor = "transparent";
+        setHandleColor("transparent");
       }}
     >
       <div
@@ -378,15 +376,15 @@ const SpecialNodeComponent = ({ data }) => {
 };
 
 const OvalNodeComponent = ({ data }) => {
-  let handleColor = "transparent";
+  const [handleColor, setHandleColor] = useState("transparent");
   return (
     <>
       <div
         onMouseEnter={() => {
-          handleColor = "black";
+          setHandleColor("black");
         }}
         onMouseLeave={() => {
-          handleColor = "transparent";
+          setHandleColor("transparent");
         }}
         style={{
           background: "#f0f0f0",
@@ -494,15 +492,15 @@ const OvalNodeComponent = ({ data }) => {
 };
 
 const RectangleNodeComponent = ({ data }) => {
-  let handleColor = "transparent";
+  const [handleColor, setHandleColor] = useState("transparent");
   return (
     <>
       <div
         onMouseEnter={() => {
-          handleColor = "black";
+          setHandleColor("black");
         }}
         onMouseLeave={() => {
-          handleColor = "transparent";
+          setHandleColor("transparent");
         }}
         style={{
           background: "#f0f0f0",
@@ -613,10 +611,16 @@ const RectangleNodeComponent = ({ data }) => {
 
 const DiamondNodeComponent = ({ data }) => {
   const [hidden, setHidden] = useState(true);
-  let handleColor = "transparent";
+  const [handleColor, setHandleColor] = useState("transparent");
   return (
     <>
       <div
+        onMouseEnter={() => {
+          setHandleColor("black");
+        }}
+        onMouseLeave={() => {
+          setHandleColor("transparent");
+        }}
         style={{
           width: "80px",
           position: "absolute",
