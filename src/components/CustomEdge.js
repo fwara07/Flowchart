@@ -35,8 +35,8 @@ export default function CustomEdge({
         });
   return (
     <>
-      {data.hasArrow && (
-        <defs>
+      <defs>
+        {data.hasArrow && (
           <marker
             className="react-flow__arrowhead"
             id={`marker-${id}`}
@@ -56,29 +56,29 @@ export default function CustomEdge({
               points="-5,-4 0,0 -5,4 -5,-4"
             />
           </marker>
-          <marker
-            className="react-flow__arrowhead"
-            id={`marker-start-${id}`}
-            markerWidth="25"
-            markerHeight="30"
-            viewBox="-10 -10 20 20"
-            orient="auto"
-            refX="0"
-            refY="0"
-          >
-            <polyline
-              // transform="translate(90)"
-              style={{ transform: "rotate(180deg)" }}
-              stroke={`rgba(${data.color.r}, ${data.color.g}, ${data.color.b}, ${data.color.a})`}
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="1"
-              fill={`rgba(${data.color.r}, ${data.color.g}, ${data.color.b}, ${data.color.a})`}
-              points="-5,-4 0,0 -5,4 -5,-4"
-            />
-          </marker>
-        </defs>
-      )}
+        )}
+        <marker
+          className="react-flow__arrowhead"
+          id={`marker-start-${id}`}
+          markerWidth="25"
+          markerHeight="30"
+          viewBox="-10 -10 20 20"
+          orient="auto"
+          refX="0"
+          refY="0"
+        >
+          <polyline
+            // transform="translate(90)"
+            style={{ transform: "rotate(180deg)" }}
+            stroke={`rgba(${data.color.r}, ${data.color.g}, ${data.color.b}, ${data.color.a})`}
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="1"
+            fill={`rgba(${data.color.r}, ${data.color.g}, ${data.color.b}, ${data.color.a})`}
+            points="-5,-4 0,0 -5,4 -5,-4"
+          />
+        </marker>
+      </defs>
       <path
         id={id}
         d={edgePath}
