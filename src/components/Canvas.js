@@ -143,7 +143,7 @@ const SpecialNodeComponent = ({ data }) => {
           borderColor: `rgba(${data.color.r}, ${data.color.g}, ${data.color.b}, ${data.color.a})`,
           color: "black",
           padding: 20,
-          margin: 20,
+
           border: `2px solid rgba(${data.color.r}, ${data.color.g}, ${data.color.b}, ${data.color.a})`,
           width: 150,
           minHeight: 10,
@@ -282,7 +282,7 @@ const SpecialNodeComponent = ({ data }) => {
           border: `2px solid rgba(${data.color.r}, ${data.color.g}, ${data.color.b}, ${data.color.a})`,
           color: "black",
           padding: 20,
-          margin: 20,
+
           minHeight: 40,
           borderRadius: "0px 0px 10px 10px",
           textAlign: "center",
@@ -393,7 +393,7 @@ const OvalNodeComponent = ({ data }) => {
           borderColor: `rgba(${data.color.r}, ${data.color.g}, ${data.color.b}, ${data.color.a})`,
           color: "black",
           padding: 20,
-          margin: 20,
+
           border: `2px solid rgba(${data.color.r}, ${data.color.g}, ${data.color.b}, ${data.color.a})`,
           width: 150,
           minHeight: 70,
@@ -510,7 +510,7 @@ const RectangleNodeComponent = ({ data }) => {
           borderColor: `rgba(${data.color.r}, ${data.color.g}, ${data.color.b}, ${data.color.a})`,
           color: "black",
           padding: 20,
-          margin: 20,
+
           border: `2px solid rgba(${data.color.r}, ${data.color.g}, ${data.color.b}, ${data.color.a})`,
           width: 150,
           minHeight: 70,
