@@ -2372,8 +2372,7 @@ const Canvas = ({
           </Drawer>
         ) : (
           <div>
-            {/* // {Object.keys(elementCLicked).length === 0 && ( */}
-            {Object.keys(elementCLicked).length === 0 && (
+            {Object.keys(elementCLicked).length > 0 && (
               <Drawer
                 variant="permanent"
                 anchor="right"
