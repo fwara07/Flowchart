@@ -615,7 +615,6 @@ const DiamondNodeComponent = ({ data }) => {
   return (
     <>
       <div
-        ref={myRef}
         style={{
           width: "80px",
           position: "absolute",
