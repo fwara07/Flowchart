@@ -2371,83 +2371,83 @@ const Canvas = ({
             </Grid>
           </Drawer>
         ) : (
-          <Drawer
-            variant="permanent"
-            anchor="right"
-            style={{ textAlign: "center" }}
-          >
-            <Grid
-              item
-              xs={12}
-              style={{ textAlign: "center", width: 250, overflow: "hidden" }}
-            >
-              {Object.keys(elementCLicked).length === 0 ? (
-                <Typography
-                  variant="h6"
-                  gutterBottom
-                  style={{ paddingTop: 380, paddingLeft: 10, paddingRight: 10 }}
+          <div>
+            {/* // {Object.keys(elementCLicked).length === 0 && ( */}
+            {Object.keys(elementCLicked).length === 0 && (
+              <Drawer
+                variant="permanent"
+                anchor="right"
+                style={{ textAlign: "center" }}
+              >
+                <Grid
+                  item
+                  xs={12}
+                  style={{
+                    textAlign: "center",
+                    width: 250,
+                    overflow: "hidden",
+                  }}
                 >
-                  Double-click on any item to get a detailed view.
-                </Typography>
-              ) : (
-                <div>
-                  <Typography variant="h6" style={{ marginTop: 40 }}>
-                    Title
-                  </Typography>
-                  <TextField
-                    name={elementCLicked.id}
-                    defaultValue={elementCLicked.data.title}
-                    margin="normal"
-                    onChange={handleChangeTitle}
-                    disabled
-                    style={{ width: "90%" }}
-                    value={elementCLicked.data.title}
-                    InputProps={
-                      {
-                        // classes: {
-                        //   disabled: {
-                        //     color: "black",
-                        //     borderBottom: 0,
-                        //     "&:before": {
-                        //       borderBottom: 0,
-                        //     },
-                        //   },
-                        // },
+                  <div>
+                    <Typography variant="h6" style={{ marginTop: 40 }}>
+                      Title
+                    </Typography>
+                    <TextField
+                      name={elementCLicked.id}
+                      defaultValue={elementCLicked.data.title}
+                      margin="normal"
+                      onChange={handleChangeTitle}
+                      disabled
+                      style={{ width: "90%" }}
+                      value={elementCLicked.data.title}
+                      InputProps={
+                        {
+                          // classes: {
+                          //   disabled: {
+                          //     color: "black",
+                          //     borderBottom: 0,
+                          //     "&:before": {
+                          //       borderBottom: 0,
+                          //     },
+                          //   },
+                          // },
+                        }
                       }
-                    }
-                  />
-                  <Typography variant="h6" style={{ marginTop: 40 }}>
-                    Description
-                  </Typography>
+                    />
+                    <Typography variant="h6" style={{ marginTop: 40 }}>
+                      Description
+                    </Typography>
 
-                  <TextField
-                    name={elementCLicked.id}
-                    defaultValue={elementCLicked.data.desc}
-                    margin="normal"
-                    onChange={handleChangeDesc}
-                    disabled
-                    rows={5}
-                    multiline
-                    style={{ width: "90%" }}
-                    value={elementCLicked.data.desc}
-                    InputProps={
-                      {
-                        // classes: {
-                        //   disabled: {
-                        //     color: "black",
-                        //     borderBottom: 0,
-                        //     "&:before": {
-                        //       borderBottom: 0,
-                        //     },
-                        //   },
-                        // },
+                    <TextField
+                      name={elementCLicked.id}
+                      defaultValue={elementCLicked.data.desc}
+                      margin="normal"
+                      onChange={handleChangeDesc}
+                      disabled
+                      rows={5}
+                      multiline
+                      style={{ width: "90%" }}
+                      value={elementCLicked.data.desc}
+                      InputProps={
+                        {
+                          // classes: {
+                          //   disabled: {
+                          //     color: "black",
+                          //     borderBottom: 0,
+                          //     "&:before": {
+                          //       borderBottom: 0,
+                          //     },
+                          //   },
+                          // },
+                        }
                       }
-                    }
-                  />
-                </div>
-              )}
-            </Grid>
-          </Drawer>
+                    />
+                  </div>
+                </Grid>
+              </Drawer>
+            )}
+          </div>
+          // )}
         )}
       </>
     );
