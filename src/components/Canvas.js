@@ -631,6 +631,7 @@ const DiamondNodeComponent = ({ data }) => {
           height: "80px",
           marginTop: "10%",
           marginLeft: "10%",
+          pading: 20,
           zIndex: "0",
           backgroundColor: "#f0f0f0",
           border: `2px solid rgba(${data.color.r}, ${data.color.g}, ${data.color.b}, ${data.color.a})`,
@@ -652,7 +653,13 @@ const DiamondNodeComponent = ({ data }) => {
           {/* <span class="rotate">{data.title}</span> */}
         </Typography>
       </div>
-      <div style={{ backgroundColor: "transparent", marginTop: "-5%" }}>
+      <div
+        style={{
+          backgroundColor: "transparent",
+          marginTop: "-5%",
+          padding: 20,
+        }}
+      >
         <Handle
           type="source"
           id="1"
