@@ -142,7 +142,7 @@ const SpecialNodeComponent = ({ data }) => {
           background: "#f0f0f0",
           borderColor: `rgba(${data.color.r}, ${data.color.g}, ${data.color.b}, ${data.color.a})`,
           color: "black",
-          padding: 10,
+          padding: 20,
           border: `2px solid rgba(${data.color.r}, ${data.color.g}, ${data.color.b}, ${data.color.a})`,
           width: 150,
           minHeight: 10,
@@ -183,7 +183,7 @@ const SpecialNodeComponent = ({ data }) => {
         style={{
           backgroundColor: handleColor,
           // marginRight: "5%",
-          // border: "0px",
+          border: "0px",
           // padding: "23%",
           // zIndex: 1,
         }}
@@ -201,7 +201,7 @@ const SpecialNodeComponent = ({ data }) => {
         style={{
           backgroundColor: handleColor,
           // marginRight: "5%",
-          // border: "0px",
+          border: "0px",
           // padding: "23%",
           // zIndex: 1,
         }}
@@ -219,7 +219,7 @@ const SpecialNodeComponent = ({ data }) => {
         style={{
           backgroundColor: handleColor,
           // marginRight: "5%",
-          // border: "0px",
+          border: "0px",
           // padding: "23%",
           // zIndex: 1,
         }}
@@ -237,7 +237,7 @@ const SpecialNodeComponent = ({ data }) => {
         style={{
           backgroundColor: handleColor,
           // marginRight: "5%",
-          // border: "0px",
+          border: "0px",
           // padding: "23%",
           // zIndex: 1,
         }}
@@ -390,7 +390,7 @@ const OvalNodeComponent = ({ data }) => {
           background: "#f0f0f0",
           borderColor: `rgba(${data.color.r}, ${data.color.g}, ${data.color.b}, ${data.color.a})`,
           color: "black",
-          padding: 10,
+          padding: 20,
           border: `2px solid rgba(${data.color.r}, ${data.color.g}, ${data.color.b}, ${data.color.a})`,
           width: 150,
           minHeight: 70,
@@ -419,7 +419,7 @@ const OvalNodeComponent = ({ data }) => {
         style={{
           backgroundColor: handleColor,
           // marginRight: "5%",
-          // border: "0px",
+          border: "0px",
           // padding: "23%",
           // zIndex: 1,
         }}
@@ -438,7 +438,7 @@ const OvalNodeComponent = ({ data }) => {
         style={{
           backgroundColor: handleColor,
           // marginRight: "5%",
-          // border: "0px",
+          border: "0px",
           // padding: "23%",
           // zIndex: 1,
         }}
@@ -455,7 +455,7 @@ const OvalNodeComponent = ({ data }) => {
         style={{
           backgroundColor: handleColor,
           // marginRight: "5%",
-          // border: "0px",
+          border: "0px",
           // padding: "23%",
           // zIndex: 1,
         }}
@@ -473,7 +473,7 @@ const OvalNodeComponent = ({ data }) => {
         style={{
           backgroundColor: handleColor,
           // marginRight: "5%",
-          // border: "0px",
+          border: "0px",
           // padding: "23%",
           // zIndex: 1,
         }}
@@ -506,7 +506,7 @@ const RectangleNodeComponent = ({ data }) => {
           background: "#f0f0f0",
           borderColor: `rgba(${data.color.r}, ${data.color.g}, ${data.color.b}, ${data.color.a})`,
           color: "black",
-          padding: 10,
+          padding: 20,
           border: `2px solid rgba(${data.color.r}, ${data.color.g}, ${data.color.b}, ${data.color.a})`,
           width: 150,
           minHeight: 70,
@@ -533,7 +533,7 @@ const RectangleNodeComponent = ({ data }) => {
         style={{
           backgroundColor: handleColor,
           // marginRight: "5%",
-          // border: "0px",
+          border: "0px",
           // padding: "23%",
           // zIndex: 1,
         }}
@@ -551,7 +551,7 @@ const RectangleNodeComponent = ({ data }) => {
         style={{
           backgroundColor: handleColor,
           // marginRight: "5%",
-          // border: "0px",
+          border: "0px",
           // padding: "23%",
           // zIndex: 1,
         }}
@@ -570,7 +570,7 @@ const RectangleNodeComponent = ({ data }) => {
         style={{
           backgroundColor: handleColor,
           // marginRight: "5%",
-          // border: "0px",
+          border: "0px",
           // padding: "23%",
           // zIndex: 1,
         }}
@@ -589,7 +589,7 @@ const RectangleNodeComponent = ({ data }) => {
         style={{
           backgroundColor: handleColor,
           // marginRight: "5%",
-          // border: "0px",
+          border: "0px",
           // padding: "23%",
           // zIndex: 1,
         }}
@@ -656,7 +656,7 @@ const DiamondNodeComponent = ({ data }) => {
           style={{
             backgroundColor: handleColor,
             // marginRight: "5%",
-            // border: "0px",
+            border: "0px",
             // padding: "23%",
             // zIndex: 1,
           }}
@@ -673,7 +673,7 @@ const DiamondNodeComponent = ({ data }) => {
           position="right"
           style={{
             backgroundColor: handleColor,
-            // border: "0px",
+            border: "0px",
             // padding: "23%",
             // zIndex: 1,
           }}
@@ -690,7 +690,7 @@ const DiamondNodeComponent = ({ data }) => {
           position="top"
           style={{
             backgroundColor: handleColor,
-            // border: "0px",
+            border: "0px",
             // padding: "23%",
             // zIndex: 1,
           }}
@@ -707,7 +707,7 @@ const DiamondNodeComponent = ({ data }) => {
           position="bottom"
           style={{
             backgroundColor: handleColor,
-            // border: "0px",
+            border: "0px",
             // padding: "23%",
             // zIndex: 1,
           }}
