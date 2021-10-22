@@ -127,11 +127,17 @@ const useStyles = makeStyles((theme) =>
 );
 
 const SpecialNodeComponent = ({ data }) => {
-  let myRef = useRef(null);
+  let handleColor = "transparent";
   return (
-    <div>
+    <div
+      onMouseOver={(e) => {
+        handleColor = "black";
+      }}
+      onMouseLeave={(e) => {
+        handleColor = "transparent";
+      }}
+    >
       <div
-        ref={myRef}
         style={{
           background: "#f0f0f0",
           borderColor: `rgba(${data.color.r}, ${data.color.g}, ${data.color.b}, ${data.color.a})`,
@@ -175,7 +181,7 @@ const SpecialNodeComponent = ({ data }) => {
         id="1"
         position="left"
         style={{
-          backgroundColor: "transparent",
+          backgroundColor: handleColor,
           marginRight: "5%",
           border: "0px",
           padding: "23%",
@@ -183,17 +189,17 @@ const SpecialNodeComponent = ({ data }) => {
         }}
         isConnectable={true}
         connectionMode="loose"
-        onMouseOver={(e) =>
-          myRef.current && (myRef.current.className = "rectangle")
-        }
-        onMouseLeave={(e) => myRef.current && (myRef.current.className = "")}
+        // onMouseOver={(e) =>
+        //   myRef.current && (myRef.current.className = "rectangle")
+        // }
+        // onMouseLeave={(e) => myRef.current && (myRef.current.className = "")}
       />
       <Handle
         type="source"
         id="2"
         position="top"
         style={{
-          backgroundColor: "transparent",
+          backgroundColor: handleColor,
           marginRight: "5%",
           border: "0px",
           padding: "23%",
@@ -201,17 +207,17 @@ const SpecialNodeComponent = ({ data }) => {
         }}
         isConnectable={true}
         connectionMode="loose"
-        onMouseOver={(e) =>
-          myRef.current && (myRef.current.className = "rectangle")
-        }
-        onMouseLeave={(e) => myRef.current && (myRef.current.className = "")}
+        // onMouseOver={(e) =>
+        //   myRef.current && (myRef.current.className = "rectangle")
+        // }
+        // onMouseLeave={(e) => myRef.current && (myRef.current.className = "")}
       />
       <Handle
         type="target"
         id="3"
         position="right"
         style={{
-          backgroundColor: "transparent",
+          backgroundColor: handleColor,
           marginRight: "5%",
           border: "0px",
           padding: "23%",
@@ -219,17 +225,17 @@ const SpecialNodeComponent = ({ data }) => {
         }}
         isConnectable={true}
         connectionMode="loose"
-        onMouseOver={(e) =>
-          myRef.current && (myRef.current.className = "rectangle")
-        }
-        onMouseLeave={(e) => myRef.current && (myRef.current.className = "")}
+        // onMouseOver={(e) =>
+        //   myRef.current && (myRef.current.className = "rectangle")
+        // }
+        // onMouseLeave={(e) => myRef.current && (myRef.current.className = "")}
       />
       <Handle
         type="source"
         id="4"
         position="bottom"
         style={{
-          backgroundColor: "transparent",
+          backgroundColor: handleColor,
           marginRight: "5%",
           border: "0px",
           padding: "23%",
@@ -237,10 +243,10 @@ const SpecialNodeComponent = ({ data }) => {
         }}
         isConnectable={true}
         connectionMode="loose"
-        onMouseOver={(e) =>
-          myRef.current && (myRef.current.className = "rectangle")
-        }
-        onMouseLeave={(e) => myRef.current && (myRef.current.className = "")}
+        // onMouseOver={(e) =>
+        //   myRef.current && (myRef.current.className = "rectangle")
+        // }
+        // onMouseLeave={(e) => myRef.current && (myRef.current.className = "")}
       />
       {/* <div>
           {data.title.length >= 21
@@ -370,11 +376,15 @@ const SpecialNodeComponent = ({ data }) => {
 };
 
 const OvalNodeComponent = ({ data }) => {
-  let myRef = useRef(null);
   return (
     <>
       <div
-        ref={myRef}
+        onMouseOver={(e) => {
+          handleColor = "black";
+        }}
+        onMouseLeave={(e) => {
+          handleColor = "transparent";
+        }}
         style={{
           background: "#f0f0f0",
           borderColor: `rgba(${data.color.r}, ${data.color.g}, ${data.color.b}, ${data.color.a})`,
@@ -406,16 +416,16 @@ const OvalNodeComponent = ({ data }) => {
         id="1"
         position="left"
         style={{
-          backgroundColor: "transparent",
+          backgroundColor: handleColor,
           marginRight: "5%",
           border: "0px",
           padding: "23%",
           zIndex: 1,
         }}
-        onMouseOver={(e) =>
-          myRef.current && (myRef.current.className = "rectangle")
-        }
-        onMouseLeave={(e) => myRef.current && (myRef.current.className = "")}
+        // onMouseOver={(e) =>
+        //   myRef.current && (myRef.current.className = "rectangle")
+        // }
+        // onMouseLeave={(e) => myRef.current && (myRef.current.className = "")}
         isConnectable={true}
         connectionMode="loose"
       />
@@ -425,16 +435,16 @@ const OvalNodeComponent = ({ data }) => {
         position="right"
         isConnectable={true}
         style={{
-          backgroundColor: "transparent",
+          backgroundColor: handleColor,
           marginRight: "5%",
           border: "0px",
           padding: "23%",
           zIndex: 1,
         }}
-        onMouseOver={(e) =>
-          myRef.current && (myRef.current.className = "rectangle")
-        }
-        onMouseLeave={(e) => myRef.current && (myRef.current.className = "")}
+        // onMouseOver={(e) =>
+        //   myRef.current && (myRef.current.className = "rectangle")
+        // }
+        // onMouseLeave={(e) => myRef.current && (myRef.current.className = "")}
         connectionMode="loose"
       />
       <Handle
@@ -442,16 +452,16 @@ const OvalNodeComponent = ({ data }) => {
         id="3"
         position="top"
         style={{
-          backgroundColor: "transparent",
+          backgroundColor: handleColor,
           marginRight: "5%",
           border: "0px",
           padding: "23%",
           zIndex: 1,
         }}
-        onMouseOver={(e) =>
-          myRef.current && (myRef.current.className = "rectangle")
-        }
-        onMouseLeave={(e) => myRef.current && (myRef.current.className = "")}
+        // onMouseOver={(e) =>
+        //   myRef.current && (myRef.current.className = "rectangle")
+        // }
+        // onMouseLeave={(e) => myRef.current && (myRef.current.className = "")}
         isConnectable={true}
         connectionMode="loose"
       />
@@ -460,16 +470,16 @@ const OvalNodeComponent = ({ data }) => {
         id="4"
         position="bottom"
         style={{
-          backgroundColor: "transparent",
+          backgroundColor: handleColor,
           marginRight: "5%",
           border: "0px",
           padding: "23%",
           zIndex: 1,
         }}
-        onMouseOver={(e) =>
-          myRef.current && (myRef.current.className = "rectangle")
-        }
-        onMouseLeave={(e) => myRef.current && (myRef.current.className = "")}
+        // onMouseOver={(e) =>
+        //   myRef.current && (myRef.current.className = "rectangle")
+        // }
+        // onMouseLeave={(e) => myRef.current && (myRef.current.className = "")}
         isConnectable={true}
         connectionMode="loose"
       />
@@ -481,11 +491,16 @@ const OvalNodeComponent = ({ data }) => {
 };
 
 const RectangleNodeComponent = ({ data }) => {
-  let myRef = useRef(null);
+  let handleColor = "transparent";
   return (
     <>
       <div
-        ref={myRef}
+        onMouseOver={(e) => {
+          handleColor = "black";
+        }}
+        onMouseLeave={(e) => {
+          handleColor = "transparent";
+        }}
         style={{
           background: "#f0f0f0",
           borderColor: `rgba(${data.color.r}, ${data.color.g}, ${data.color.b}, ${data.color.a})`,
@@ -515,17 +530,17 @@ const RectangleNodeComponent = ({ data }) => {
         type="target"
         id="1"
         style={{
-          backgroundColor: "transparent",
+          backgroundColor: handleColor,
           marginRight: "5%",
           border: "0px",
           padding: "23%",
           zIndex: 1,
         }}
         position="left"
-        onMouseOver={(e) =>
-          myRef.current && (myRef.current.className = "rectangle")
-        }
-        onMouseLeave={(e) => myRef.current && (myRef.current.className = "")}
+        // onMouseOver={(e) =>
+        //   myRef.current && (myRef.current.className = "rectangle")
+        // }
+        // onMouseLeave={(e) => myRef.current && (myRef.current.className = "")}
         isConnectable={true}
         connectionMode="loose"
       />
@@ -533,16 +548,16 @@ const RectangleNodeComponent = ({ data }) => {
         type="source"
         id="2"
         style={{
-          backgroundColor: "transparent",
+          backgroundColor: handleColor,
           marginRight: "5%",
           border: "0px",
           padding: "23%",
           zIndex: 1,
         }}
-        onMouseOver={(e) =>
-          myRef.current && (myRef.current.className = "rectangle")
-        }
-        onMouseLeave={(e) => myRef.current && (myRef.current.className = "")}
+        // onMouseOver={(e) =>
+        //   myRef.current && (myRef.current.className = "rectangle")
+        // }
+        // onMouseLeave={(e) => myRef.current && (myRef.current.className = "")}
         position="right"
         // style={{ background: "black" }}
         isConnectable={true}
@@ -552,16 +567,16 @@ const RectangleNodeComponent = ({ data }) => {
         type="target"
         id="3"
         style={{
-          backgroundColor: "transparent",
+          backgroundColor: handleColor,
           marginRight: "5%",
           border: "0px",
           padding: "23%",
           zIndex: 1,
         }}
-        onMouseOver={(e) =>
-          myRef.current && (myRef.current.className = "rectangle")
-        }
-        onMouseLeave={(e) => myRef.current && (myRef.current.className = "")}
+        // onMouseOver={(e) =>
+        //   myRef.current && (myRef.current.className = "rectangle")
+        // }
+        // onMouseLeave={(e) => myRef.current && (myRef.current.className = "")}
         position="top"
         // style={{ background: "black" }}
         isConnectable={true}
@@ -571,16 +586,16 @@ const RectangleNodeComponent = ({ data }) => {
         type="source"
         id="4"
         style={{
-          backgroundColor: "transparent",
+          backgroundColor: handleColor,
           marginRight: "5%",
           border: "0px",
           padding: "23%",
           zIndex: 1,
         }}
-        onMouseOver={(e) =>
-          myRef.current && (myRef.current.className = "rectangle")
-        }
-        onMouseLeave={(e) => myRef.current && (myRef.current.className = "")}
+        // onMouseOver={(e) =>
+        //   myRef.current && (myRef.current.className = "rectangle")
+        // }
+        // onMouseLeave={(e) => myRef.current && (myRef.current.className = "")}
         position="bottom"
         // style={{ background: "black" }}
         isConnectable={true}
@@ -633,16 +648,16 @@ const DiamondNodeComponent = ({ data }) => {
           id="1"
           position="left"
           style={{
-            backgroundColor: "transparent",
+            backgroundColor: handleColor,
             marginRight: "5%",
             border: "0px",
             padding: "23%",
             zIndex: 1,
           }}
-          onMouseOver={(e) =>
-            myRef.current && (myRef.current.className = "my-container")
-          }
-          onMouseLeave={(e) => myRef.current && (myRef.current.className = "")}
+          // onMouseOver={(e) =>
+          //   myRef.current && (myRef.current.className = "my-container")
+          // }
+          // onMouseLeave={(e) => myRef.current && (myRef.current.className = "")}
           isConnectable={true}
           connectionMode="loose"
         />
@@ -651,15 +666,15 @@ const DiamondNodeComponent = ({ data }) => {
           id="2"
           position="right"
           style={{
-            backgroundColor: "transparent",
+            backgroundColor: handleColor,
             border: "0px",
             padding: "23%",
             zIndex: 1,
           }}
-          onMouseOver={(e) =>
-            myRef.current && (myRef.current.className = "my-container")
-          }
-          onMouseLeave={(e) => myRef.current && (myRef.current.className = "")}
+          // onMouseOver={(e) =>
+          //   myRef.current && (myRef.current.className = "my-container")
+          // }
+          // onMouseLeave={(e) => myRef.current && (myRef.current.className = "")}
           isConnectable={true}
           connectionMode="loose"
         />
@@ -668,15 +683,15 @@ const DiamondNodeComponent = ({ data }) => {
           id="3"
           position="top"
           style={{
-            backgroundColor: "transparent",
+            backgroundColor: handleColor,
             border: "0px",
             padding: "23%",
             zIndex: 1,
           }}
-          onMouseOver={(e) =>
-            myRef.current && (myRef.current.className = "my-container")
-          }
-          onMouseLeave={(e) => myRef.current && (myRef.current.className = "")}
+          // onMouseOver={(e) =>
+          //   myRef.current && (myRef.current.className = "my-container")
+          // }
+          // onMouseLeave={(e) => myRef.current && (myRef.current.className = "")}
           isConnectable={true}
           connectionMode="loose"
         />
@@ -685,15 +700,15 @@ const DiamondNodeComponent = ({ data }) => {
           id="4"
           position="bottom"
           style={{
-            backgroundColor: "transparent",
+            backgroundColor: handleColor,
             border: "0px",
             padding: "23%",
             zIndex: 1,
           }}
-          onMouseOver={(e) =>
-            myRef.current && (myRef.current.className = "my-container")
-          }
-          onMouseLeave={(e) => myRef.current && (myRef.current.className = "")}
+          // onMouseOver={(e) =>
+          //   myRef.current && (myRef.current.className = "my-container")
+          // }
+          // onMouseLeave={(e) => myRef.current && (myRef.current.className = "")}
           isConnectable={true}
           connectionMode="loose"
         />
@@ -2391,7 +2406,10 @@ const Canvas = ({
                     <Typography variant="h6" style={{ marginTop: 40 }}>
                       Title
                     </Typography>
-                    <TextField
+                    <Typography variant="h6" gutterBottom>
+                      {elementClicked.data.title}
+                    </Typography>
+                    {/* <TextField
                       name={elementCLicked.id}
                       defaultValue={elementCLicked.data.title}
                       margin="normal"
@@ -2412,12 +2430,17 @@ const Canvas = ({
                           // },
                         }
                       }
-                    />
-                    <Typography variant="h6" style={{ marginTop: 40 }}>
+                    /> */}
+                    <Typography
+                      variant="h6"
+                      style={{ marginTop: 40, fontWeight: "bolder" }}
+                    >
                       Description
                     </Typography>
-
-                    <TextField
+                    <Typography variant="h6" gutterBottom>
+                      {elementClicked.data.desc}
+                    </Typography>
+                    {/* <TextField
                       name={elementCLicked.id}
                       defaultValue={elementCLicked.data.desc}
                       margin="normal"
@@ -2440,7 +2463,7 @@ const Canvas = ({
                           // },
                         }
                       }
-                    />
+                    /> */}
                   </div>
                 </Grid>
               </Drawer>
