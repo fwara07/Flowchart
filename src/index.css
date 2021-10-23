@@ -4,3 +4,70 @@ body {
   overflow: hidden;
   font-family: "Open Sans";
 }
+
+.my-container:before,
+.my-container:after,
+.my-container *:first-child:before,
+.my-container *:first-child:after {
+  content: "";
+  height: 5px;
+  width: 5px;
+  position: absolute;
+  background: black;
+  border-radius: 50%;
+}
+.my-container:after {
+  right: 0;
+  top: 0;
+}
+.my-container *:first-child:before {
+  left: 0;
+  bottom: 0;
+}
+.my-container *:first-child:after {
+  bottom: 0;
+  right: 0;
+}
+
+.contain :hover + .my-container {
+  background: black !important;
+}
+
+.rectangle:before,
+.rectangle:after,
+.rectangle *:first-child:before,
+.rectangle *:first-child:after {
+  content: "";
+  height: 5px;
+  width: 5px;
+  position: absolute;
+  background: black;
+  border-radius: 50%;
+}
+.rectangle:after {
+  right: 0;
+  top: 50%;
+}
+.rectangle:before {
+  left: 50%;
+  top: 0;
+}
+.rectangle *:first-child:before {
+  left: 0;
+  bottom: 50%;
+}
+.rectangle *:first-child:after {
+  bottom: 0;
+  right: 50%;
+}
+
+.hide {
+  display: none;
+}
+
+.rotateNone {
+  transform: rotate(0deg);
+}
+.rotate270 {
+  transform: rotate(-270deg);
+}
