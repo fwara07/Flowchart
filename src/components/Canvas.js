@@ -2132,30 +2132,31 @@ const Canvas = ({
                     name={elementCLicked.id}
                     defaultValue={elementCLicked.data.desc}
                     margin="normal"
-                    rows={5}
+                    rows={4}
                     multiline
+                    variant="filled"
                     onChange={handleChangeDesc}
-                    disabled={!editModeDesc}
+                    // disabled={!editModeDesc}
                     style={{ width: "90%" }}
                     value={elementCLicked.data.desc}
-                    InputProps={{
-                      // classes: {
-                      //   disabled: {
-                      //     color: "black",
-                      //     borderBottom: 0,
-                      //     "&:before": {
-                      //       borderBottom: 0,
-                      //     },
-                      //   },
-                      // },
-                      endAdornment: (
-                        <InputAdornment position="end">
-                          <IconButton onClick={handleClickDesc}>
-                            <Edit />
-                          </IconButton>
-                        </InputAdornment>
-                      ),
-                    }}
+                    // InputProps={{
+                    //   // classes: {
+                    //   //   disabled: {
+                    //   //     color: "black",
+                    //   //     borderBottom: 0,
+                    //   //     "&:before": {
+                    //   //       borderBottom: 0,
+                    //   //     },
+                    //   //   },
+                    //   // },
+                    //   endAdornment: (
+                    //     <InputAdornment position="end">
+                    //       <IconButton onClick={handleClickDesc}>
+                    //         <Edit />
+                    //       </IconButton>
+                    //     </InputAdornment>
+                    //   ),
+                    // }}
                   />
                   {elementCLicked.type === "special" && (
                     <>
