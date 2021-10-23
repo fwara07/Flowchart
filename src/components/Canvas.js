@@ -192,7 +192,7 @@ const SpecialNodeComponent = ({ data }) => {
         onMouseLeave={(e) => myRef.current && (myRef.current.className = "")}
       />
       <Handle
-        type="source"
+        type="target"
         id="2"
         position="top"
         style={{
@@ -210,7 +210,7 @@ const SpecialNodeComponent = ({ data }) => {
         onMouseLeave={(e) => myRef.current && (myRef.current.className = "")}
       />
       <Handle
-        type="source"
+        type="target"
         id="3"
         position="right"
         style={{
@@ -450,7 +450,7 @@ const OvalNodeComponent = ({ data }) => {
         connectionMode="loose"
       />
       <Handle
-        type="source"
+        type="target"
         id="2"
         position="right"
         isConnectable={true}
@@ -468,7 +468,7 @@ const OvalNodeComponent = ({ data }) => {
         connectionMode="loose"
       />
       <Handle
-        type="source"
+        type="target"
         id="3"
         position="top"
         style={{
@@ -560,7 +560,7 @@ const RectangleNodeComponent = ({ data }) => {
         connectionMode="loose"
       />
       <Handle
-        type="source"
+        type="target"
         id="2"
         style={{
           backgroundColor: "transparent",
@@ -579,7 +579,7 @@ const RectangleNodeComponent = ({ data }) => {
         connectionMode="loose"
       />
       <Handle
-        type="source"
+        type="target"
         id="3"
         style={{
           backgroundColor: "transparent",
@@ -677,7 +677,7 @@ const DiamondNodeComponent = ({ data }) => {
           connectionMode="loose"
         />
         <Handle
-          type="source"
+          type="target"
           id="2"
           position="right"
           style={{
@@ -694,7 +694,7 @@ const DiamondNodeComponent = ({ data }) => {
           connectionMode="loose"
         />
         <Handle
-          type="source"
+          type="target"
           id="3"
           position="top"
           style={{
