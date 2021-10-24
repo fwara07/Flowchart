@@ -1780,7 +1780,7 @@ const Canvas = ({
               </>
             )}
           </Grid>
-          <Grid item xs={4}>
+          <Grid item xs={3}>
             {/* <Grid container direction="row"> */}
             <Typography variant="h6" style={{ fontWeight: "bold" }}>
               {`Project: ${currentFile.parentId}`}
@@ -1791,7 +1791,7 @@ const Canvas = ({
             {/* </Grid> */}
           </Grid>
           {!legendVisibility && selectLegend()}
-          <Grid item xs={6} style={{ textAlign: "center" }}>
+          <Grid item xs={5} style={{ textAlign: "center" }}>
             <Typography component="div">
               <Grid
                 component="label"
@@ -2207,7 +2207,7 @@ const Canvas = ({
             <Grid
               item
               xs={12}
-              style={{ textAlign: "center", width: 250, overflowY: "scroll" }}
+              style={{ textAlign: "center", width: 250, overflowY: "auto" }}
             >
               {Object.keys(elementCLicked).length === 0 ? (
                 <Typography
@@ -2579,7 +2579,7 @@ const Canvas = ({
                   style={{
                     textAlign: "center",
                     width: 250,
-                    overflowY: "scroll",
+                    overflowY: "auto",
                   }}
                 >
                   <div>
