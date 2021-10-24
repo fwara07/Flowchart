@@ -33,6 +33,7 @@ export default function CustomEdge({
           targetY,
           targetPosition,
         });
+  console.log(targetPosition);
   return (
     <>
       <defs>
