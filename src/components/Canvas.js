@@ -774,6 +774,7 @@ const Canvas = ({
 }) => {
   realOrientation = orientation;
   const [elements, setElements] = useState([]);
+  const [error, setError] = useState({ value: false, msg: "" });
   const [elementCLicked, setElementClicked] = useState({});
   const [editModeTtitle, setEditModeTitle] = useState(false);
   const [editModeDescription, setEditModeDescription] = useState(false);
