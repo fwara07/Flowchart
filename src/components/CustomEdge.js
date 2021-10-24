@@ -89,33 +89,21 @@ export default function CustomEdge({
           stroke: `rgba(${data.color.r}, ${data.color.g}, ${data.color.b}, ${data.color.a})`,
         }}
         // markerEnd={
-        //   data.hasArrow
-        //     ? targetPosition === "top"
-        //       ? `url(#marker-${id})`
-        //       : null
-        //     : `url(#marker-${id})`
-        // }
-        markerEnd={
-          targetPosition === "top"
-            ? `url(#marker-${id})`
-            : data.hasArrow
-            ? `url(#marker${id})`
-            : null
-        }
-        // markerStart={
-        //   data.hasArrow
-        //     ? targetPosition === "left"
-        //       ? `url(#marker-start-${id})`
-        //       : null
+        //   targetPosition === "top"
+        //     ? `url(#marker-${id})`
+        //     : data.hasArrow
+        //     ? `url(#marker${id})`
         //     : null
         // }
-        markerStart={
-          targetPosition === "left"
-            ? `url(#marker-start-${id})`
-            : data.hasArrow
-            ? `url(#marker-start-${id})`
-            : null
-        }
+        markerEnd={`url(#marker-${id})`}
+        // markerStart={
+        //   targetPosition === "left"
+        //     ? `url(#marker-start-${id})`
+        //     : data.hasArrow
+        //     ? `url(#marker-start-${id})`
+        //     : null
+        // }
+        markerStart={data.hasArrow && `url(#marker-start-${id})`}
       />
     </>
   );
