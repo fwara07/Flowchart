@@ -36,10 +36,29 @@ export default function CustomEdge({
   return (
     <>
       <defs>
+        <marker
+          className="react-flow__arrowhead"
+          id={`marker-${id}`}
+          markerWidth="25"
+          markerHeight="30"
+          viewBox="-10 -10 20 20"
+          orient="auto"
+          refX="0"
+          refY="0"
+        >
+          <polyline
+            stroke={`rgba(${data.color.r}, ${data.color.g}, ${data.color.b}, ${data.color.a})`}
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="1"
+            fill={`rgba(${data.color.r}, ${data.color.g}, ${data.color.b}, ${data.color.a})`}
+            points="-5,-4 0,0 -5,4 -5,-4"
+          />
+        </marker>
         {data.hasArrow && (
           <marker
             className="react-flow__arrowhead"
-            id={`marker-${id}`}
+            id={`marker-start-${id}`}
             markerWidth="25"
             markerHeight="30"
             viewBox="-10 -10 20 20"
@@ -48,6 +67,8 @@ export default function CustomEdge({
             refY="0"
           >
             <polyline
+              // transform="translate(90)"
+              style={{ transform: "rotate(180deg)" }}
               stroke={`rgba(${data.color.r}, ${data.color.g}, ${data.color.b}, ${data.color.a})`}
               strokeLinecap="round"
               strokeLinejoin="round"
@@ -57,27 +78,6 @@ export default function CustomEdge({
             />
           </marker>
         )}
-        <marker
-          className="react-flow__arrowhead"
-          id={`marker-start-${id}`}
-          markerWidth="25"
-          markerHeight="30"
-          viewBox="-10 -10 20 20"
-          orient="auto"
-          refX="0"
-          refY="0"
-        >
-          <polyline
-            // transform="translate(90)"
-            style={{ transform: "rotate(180deg)" }}
-            stroke={`rgba(${data.color.r}, ${data.color.g}, ${data.color.b}, ${data.color.a})`}
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="1"
-            fill={`rgba(${data.color.r}, ${data.color.g}, ${data.color.b}, ${data.color.a})`}
-            points="-5,-4 0,0 -5,4 -5,-4"
-          />
-        </marker>
       </defs>
       <path
         id={id}
@@ -90,7 +90,7 @@ export default function CustomEdge({
           stroke: `rgba(${data.color.r}, ${data.color.g}, ${data.color.b}, ${data.color.a})`,
         }}
         markerEnd={`url(#marker-${id})`}
-        markerStart={`url(#marker-start-${id})`}
+        markerStart={data.hasArrow && `url(#marker-start-${id})`}
       />
     </>
   );

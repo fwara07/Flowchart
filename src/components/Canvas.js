@@ -1798,7 +1798,7 @@ const Canvas = ({
                 container
                 alignItems="center"
                 spacing={1}
-                style={{ paddingTop: 20, paddingLeft: 90 }}
+                style={{ paddingTop: 20, paddingLeft: 40 }}
               >
                 <Grid item>View</Grid>
                 <Grid item>
