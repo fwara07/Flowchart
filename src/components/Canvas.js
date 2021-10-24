@@ -2202,14 +2202,12 @@ const Canvas = ({
             anchor="right"
             style={{
               textAlign: "center",
-              overflowY: "scroll",
-              maxHeight: "100vh",
             }}
           >
             <Grid
               item
               xs={12}
-              style={{ textAlign: "center", width: 250, overflow: "hidden" }}
+              style={{ textAlign: "center", width: 250, overflowY: "scroll" }}
             >
               {Object.keys(elementCLicked).length === 0 ? (
                 <Typography
@@ -2573,8 +2571,6 @@ const Canvas = ({
                 anchor="right"
                 style={{
                   textAlign: "center",
-                  overflowY: "scroll",
-                  maxHeight: "100vh",
                 }}
               >
                 <Grid
@@ -2583,7 +2579,7 @@ const Canvas = ({
                   style={{
                     textAlign: "center",
                     width: 250,
-                    overflow: "hidden",
+                    overflowY: "scroll",
                   }}
                 >
                   <div>
