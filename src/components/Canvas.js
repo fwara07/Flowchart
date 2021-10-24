@@ -779,9 +779,12 @@ const Canvas = ({
   const [editModeDescription, setEditModeDescription] = useState(false);
   const [editModeDesc, setEditModeDesc] = useState(false);
   const [open, setOpen] = useState(false);
+  const [legend, setLegend] = useState({ color: "#846090", title: "" });
   const [openUpload, setOpenUpload] = React.useState(false);
   const [openNewNode, setOpenNewNode] = useState(false);
+  const [openNewLegend, setOpenNewLegend] = useState(false);
   const [tag, setTag] = useState("");
+  const [legendVisibility, setLegendVisibility] = useState(false);
   const [displayColorPicker, setDisplayColorPicker] = useState(false);
   const [displayColorPickerArrow, setDisplayColorPickerArrow] = useState(false);
   const [color, setColor] = useState({
@@ -1398,6 +1401,115 @@ const Canvas = ({
     updateNode(newElements);
   };
 
+  const handleChangeLegendTitle = (e) => {
+    setLegend({ color: legend.color, title: e.target.value });
+  };
+
+  const selectLegend = () => {
+    let colors = [
+      { color: "#846090", name: "c846090" },
+      { color: "#31688E", name: "c31688E" },
+      { color: "#42B879", name: "c42B879" },
+      { color: "#FEE83A", name: "cFEE83A" },
+    ];
+
+    return (
+      <Grid item xs={2} style={{ textAlign: "start" }}>
+        <Button
+          variant="outlined"
+          color="primary"
+          startIcon={<Add />}
+          style={{
+            textAlign: "start",
+            marginTop: 20,
+          }}
+          onClick={() => setOpenNewLegend(true)}
+        >
+          Add legend
+        </Button>
+        <Dialog
+          open={openNewLegend}
+          onClose={handleClose}
+          aria-labelledby="form-dialog-title"
+          // style={{ overflow: "hidden" }}
+        >
+          <DialogTitle id="form-dialog-title" style={{ textAlign: "center" }}>
+            Select a Legend
+          </DialogTitle>
+          <DialogContent>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "space-between",
+                width: "80%",
+              }}
+            >
+              {colors.map((col) => (
+                <div
+                  className={col.color == legend.color ? "bordered" : col.name}
+                  style={{
+                    backgroundColor: col.color,
+                    borderRadius: "100%",
+                    width: 20,
+                    height: 20,
+                  }}
+                  onClick={() => {
+                    setLegend({ color: col.color, title: legend.title });
+                  }}
+                ></div>
+              ))}
+            </div>
+            <TextField
+              name={elementCLicked.id}
+              defaultValue={legend.title}
+              placeholder="Legend name"
+              margin="normal"
+              onChange={handleChangeLegendTitle}
+              style={{ width: "90%" }}
+              value={legend.title}
+              error={error.value ? true : false}
+              helperText={error.value && error.msg}
+              InputProps={
+                {
+                  // classes: {
+                  //   disabled: {
+                  //     color: "black",
+                  //     borderBottom: 0,
+                  //     "&:before": {
+                  //       borderBottom: 0,
+                  //     },
+                  //   },
+                  // },
+                }
+              }
+            />
+            <Button
+              variant="contained"
+              color="primary"
+              style={{ marginLeft: "60%" }}
+              onClick={() => {
+                addLegend();
+              }}
+            >
+              Save
+            </Button>
+          </DialogContent>
+        </Dialog>
+      </Grid>
+    );
+  };
+
+  const addLegend = () => {
+    if (legend.title == "")
+      setError({ value: true, msg: "Please enter the name of the legend" });
+    else {
+      setError({ value: false, msg: "" });
+      setOpenNewLegend(false);
+      setLegendVisibility(true);
+    }
+  };
+
   const hexToRgb = (hex) => {
     console.log(hex);
     var c;
@@ -1677,6 +1789,7 @@ const Canvas = ({
             </Typography>
             {/* </Grid> */}
           </Grid>
+          {!legendVisibility && selectLegend()}
           <Grid item xs={6} style={{ textAlign: "center" }}>
             <Typography component="div">
               <Grid
@@ -2045,6 +2158,15 @@ const Canvas = ({
                 nodeBorderRadius={2}
               />
               <Controls />
+              {legend.title !== "" && legendVisibility && (
+                <div className={"legendBox"}>
+                  <div
+                    className={"legendColor"}
+                    style={{ backgroundColor: legend.color }}
+                  ></div>
+                  <div style={{ marginLeft: "10%" }}>{legend.title}</div>
+                </div>
+              )}
               <Background color="#aaa" gap={16} />
             </ReactFlow>
           </div>
