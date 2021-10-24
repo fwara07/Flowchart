@@ -110,10 +110,10 @@ export default function CustomEdge({
         // }
         markerStart={
           targetPosition === "left"
-            ? null
+            ? `url(#marker-start-${id})`
             : data.hasArrow
             ? `url(#marker-start-${id})`
-            : `url(#marker-start-${id})`
+            : null
         }
       />
     </>
