@@ -2200,7 +2200,11 @@ const Canvas = ({
           <Drawer
             variant="permanent"
             anchor="right"
-            style={{ textAlign: "center", overflowY: "scroll" }}
+            style={{
+              textAlign: "center",
+              overflowY: "scroll",
+              maxHeight: "100vh",
+            }}
           >
             <Grid
               item
@@ -2567,7 +2571,11 @@ const Canvas = ({
               <Drawer
                 variant="permanent"
                 anchor="right"
-                style={{ textAlign: "center", overflowY: "scroll" }}
+                style={{
+                  textAlign: "center",
+                  overflowY: "scroll",
+                  maxHeight: "100vh",
+                }}
               >
                 <Grid
                   item
