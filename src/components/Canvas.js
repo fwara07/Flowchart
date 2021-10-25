@@ -859,6 +859,8 @@ const Canvas = ({
   orientation,
 }) => {
   realOrientation = orientation;
+  const startLegendObj = {};
+  startLegendObj[currentFile.id] = [];
   const [elements, setElements] = useState([]);
   const [error, setError] = useState({ value: false, msg: "" });
   const [elementCLicked, setElementClicked] = useState({});
@@ -870,7 +872,7 @@ const Canvas = ({
   const [legends, setLegends] = useState(
     localStorage.getItem("legend") != null
       ? JSON.parse(localStorage.getItem("legend"))
-      : []
+      : startLegendObj
   );
   const [openUpload, setOpenUpload] = React.useState(false);
   const [openNewNode, setOpenNewNode] = useState(false);
