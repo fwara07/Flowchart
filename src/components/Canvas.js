@@ -1018,7 +1018,8 @@ const Canvas = ({
   };
 
   const onNodeClick = async (event, element) => {
-    if (isEditMode === false) {
+    console.log("test");
+    if (!isEditMode) {
       console.log(element);
       if (element.data.isCollapsable) {
         let newElements = [...elements];
