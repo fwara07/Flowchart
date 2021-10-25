@@ -2163,7 +2163,10 @@ const Canvas = ({
               // elements={filteredElements}
               onElementsRemove={onElementsRemove}
               onNodeDoubleClick={onElementDoubleClick}
-              onElementClick={onNodeClick}
+              // onElementClick={onNodeClick}
+              onElementClick={() => {
+                alert("test");
+              }}
               onDrop={onDrop}
               onDragOver={onDragOver}
               onNodeDragStop={onNodeDragStop}
