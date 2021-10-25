@@ -1591,7 +1591,7 @@ const Canvas = ({
     else {
       setError({ value: false, msg: "" });
       setOpenNewLegend(false);
-      const newLegend = [...legends[currentFile.id]];
+      const newLegend = [...legends];
       newLegend[currentFile.id] = [...legends[currentFile.id], legend];
       setLegends(newLegend);
       localStorage.setItem("legend", JSON.stringify(newLegend));
