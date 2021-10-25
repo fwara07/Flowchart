@@ -995,7 +995,7 @@ const Canvas = ({
     await setElements(edge);
   };
 
-  const onElementClick = async (event, element) => {
+  const onElementDoubleClick = async (event, element) => {
     if (isEditMode) {
       setElementClicked(element);
       setCollapsable(element.data.isCollapsable);
@@ -2162,7 +2162,7 @@ const Canvas = ({
               }
               // elements={filteredElements}
               onElementsRemove={onElementsRemove}
-              onNodeDoubleClick={onElementClick}
+              onNodeDoubleClick={onElementDoubleClick}
               onElementClick={onNodeClick}
               onDrop={onDrop}
               onDragOver={onDragOver}
