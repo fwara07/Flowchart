@@ -69,13 +69,17 @@ body {
   transform: rotate(0deg);
 }
 .rotate270 {
-  transform: rotate(-270deg);
+  transform: rotate(180deg);
 }
 
 .c846090:hover,
 .c31688E:hover,
 .c42B879:hover,
-.cFEE83A:hover {
+.cFEE83A:hover,
+.cEE6548:hover,
+.c6CDADC:hover,
+.cFFB54C:hover,
+.cE370B1:hover {
   border: 3px solid #7f7f7f;
 }
 .bordered {
@@ -84,13 +88,12 @@ body {
 .legendBox {
   background-color: white;
   position: absolute;
-  margin-top: 50%;
+  margin-bottom: 20%;
+  margin-top: 47%;
   margin-left: 5%;
   padding: 1%;
   border-radius: 10px;
   box-shadow: 0px 0px 8px 2px #b9b9b9;
-  display: flex;
-  flex-direction: row;
   min-width: 10%;
   z-index: 100;
 }

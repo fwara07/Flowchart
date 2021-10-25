@@ -867,7 +867,11 @@ const Canvas = ({
   const [editModeDesc, setEditModeDesc] = useState(false);
   const [open, setOpen] = useState(false);
   const [legend, setLegend] = useState({ color: "#846090", title: "" });
-  const [legends, setLegends] = useState([]);
+  const [legends, setLegends] = useState(
+    localStorage.getItem("legend") != null
+      ? JSON.parse(localStorage.getItem("legend"))
+      : []
+  );
   const [openUpload, setOpenUpload] = React.useState(false);
   const [openNewNode, setOpenNewNode] = useState(false);
   const [openNewLegend, setOpenNewLegend] = useState(false);
@@ -1585,7 +1589,10 @@ const Canvas = ({
     else {
       setError({ value: false, msg: "" });
       setOpenNewLegend(false);
-      setLegends([...legends, legend]);
+      const newLegend = [...legends[currentFile.id]];
+      newLegend[currentFile.id] = [...legends, legend];
+      setLegends(newLegend);
+      localStorage.setItem("legend", JSON.stringify(newLegend));
       setLegend({ color: "#846090", title: "" });
     }
   };
@@ -2240,9 +2247,9 @@ const Canvas = ({
                 nodeBorderRadius={2}
               />
               <Controls />
-              {legends.length != 0 && (
+              {legends[currentFile.id].length != 0 && (
                 <div className={"legendBox"}>
-                  {legends.map((leg) => (
+                  {legends[currentFile.id].map((leg) => (
                     <div style={{ display: "flex", flexDirection: "row" }}>
                       <div
                         className={"legendColor"}
