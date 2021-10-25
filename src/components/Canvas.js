@@ -1018,7 +1018,6 @@ const Canvas = ({
   };
 
   const onNodeClick = async (event, element) => {
-    alert("test");
     if (!isEditMode) {
       console.log(element);
       if (element.data.isCollapsable) {
@@ -2163,10 +2162,7 @@ const Canvas = ({
               // elements={filteredElements}
               onElementsRemove={onElementsRemove}
               onNodeDoubleClick={onElementDoubleClick}
-              // onElementClick={onNodeClick}
-              onElementClick={() => {
-                alert("test");
-              }}
+              onElementClick={onNodeClick}
               onDrop={onDrop}
               onDragOver={onDragOver}
               onNodeDragStop={onNodeDragStop}
