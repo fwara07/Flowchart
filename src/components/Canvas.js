@@ -1019,6 +1019,7 @@ const Canvas = ({
 
   const onNodeClick = async (event, element) => {
     if (isEditMode === false) {
+      console.log(element);
       if (element.data.isCollapsable) {
         let newElements = [...elements];
         const children = getOutgoers(element, elements);
@@ -1067,61 +1068,6 @@ const Canvas = ({
           }
           console.log(newElements);
           setElements(newElements);
-          // let _elements;
-          // if (Object.keys(targetElements).length > 0) {
-          //   _elements = JSON.parse(JSON.stringify(toggledElements));
-          // } else {
-          //   _elements = JSON.parse(JSON.stringify(elements));
-          // }
-          // if (!targetElements[element.id]) {
-          //   const targets = [];
-          //   _elements.forEach((elem) => {
-          //     if (elem["source"] !== undefined && elem.source === element.id) {
-          //       targets.push(elem.target);
-          //     }
-          //   });
-          //   console.log("targets", targets);
-          //   console.log("elements", _elements);
-          //   let firstLevelChildren;
-          //   firstLevelChildren = _elements.filter(
-          //     (elem) => elem.source !== element.id
-          //   );
-          //   // console.log('first-level-children-1', firstLevelChildren);
-          //   firstLevelChildren = firstLevelChildren.filter(
-          //     (elem) => !targets.includes(elem.id)
-          //   );
-          //   // console.log('first-level-children-2', firstLevelChildren);
-          //   firstLevelChildren.forEach((elem) => {
-          //     if (elem["source"] !== undefined && targets.includes(elem.source)) {
-          //       targets.push(elem.target);
-          //     }
-          //   });
-          //   setTargetElements({
-          //     [element.id]: targets,
-          //   });
-          //   firstLevelChildren = firstLevelChildren.filter(
-          //     (elem) => !targets.includes(elem.source)
-          //   );
-          //   // console.log('first-level-children-3', firstLevelChildren);
-          //   firstLevelChildren = firstLevelChildren.filter(
-          //     (elem) => !targets.includes(elem.id)
-          //   );
-          //   console.log("first-level-children-final", firstLevelChildren);
-          //   setToggledElements(firstLevelChildren);
-          // } else {
-          //   const firstLevelChildren = _elements.filter(
-          //     (elem) =>
-          //       elem.source === element.id ||
-          //       targetElements[element.id].includes(elem.id) ||
-          //       targetElements[element.id].includes(elem.source)
-          //   );
-          //   console.log("first-level-children", firstLevelChildren);
-          //   setToggledElements([...toggledElements, ...firstLevelChildren]);
-          //   const _targetElements = JSON.parse(JSON.stringify(targetElements));
-          //   delete _targetElements[element.id];
-          //   setTargetElements(_targetElements);
-          // }
-          // setElementClicked(element);
         }
       }
     }
