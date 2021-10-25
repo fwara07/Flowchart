@@ -128,9 +128,16 @@ const useStyles = makeStyles((theme) =>
 
 const SpecialNodeComponent = ({ data }) => {
   let myRef = useRef(null);
-  let keys = useRef(null);
-  let values = useRef(null);
-  let expand_collapse = useRef(null);
+  let keys_top = useRef(null);
+  let values_top = useRef(null);
+  let expand_collapse_top = useRef(null);
+  let grid_top = useRef(null);
+  let properties_top = useRef(null);
+  let keys_bottom = useRef(null);
+  let values_bottom = useRef(null);
+  let expand_collapse_bottom = useRef(null);
+  let grid_bottom = useRef(null);
+  let properties_bottom = useRef(null);
   return (
     <div>
       <div
@@ -245,31 +252,6 @@ const SpecialNodeComponent = ({ data }) => {
         }
         onMouseLeave={(e) => myRef.current && (myRef.current.className = "")}
       />
-      {/* <div>
-          {data.title.length >= 21
-            ? data.title.slice(0, 20) + "..."
-            : data.title}
-        </div> */}
-
-      {/* <div
-          style={{
-            width: "93%",
-            // textAlign: "center",
-            overflowWrap: "break-word",
-            marginLeft: 10,
-            marginRight: 300,
-          }}
-        >
-          <Typography
-            variant="subtitle2"
-            gutterBottom
-            style={{
-              margin: "auto",
-            }}
-          >
-            {data.title}
-          </Typography>
-        </div> */}
       <div
         style={{
           width: "93%",
@@ -283,13 +265,6 @@ const SpecialNodeComponent = ({ data }) => {
           textAlign: "center",
         }}
       >
-        {/* <div>
-          <Typography variant="caption">
-            {data.description.length >= 23
-              ? data.description.slice(0, 22) + "..."
-              : data.description}
-          </Typography>
-        </div> */}
         <div
           style={{
             width: "93%",
@@ -300,78 +275,189 @@ const SpecialNodeComponent = ({ data }) => {
             marginRight: 300,
           }}
         >
-          <div>
-            <button
-              ref={expand_collapse}
-              style={{
-                position: "absolute",
-                zIndex: 2,
-                marginTop: "3%",
-                marginLeft: "-35%",
-                border: "0px solid",
-                color: "#4156B5",
-                fontSize: 18,
-              }}
-              onClick={() => {
-                if (keys.current.className == "hide") {
-                  keys.current.className = "";
-                  values.current.className = "";
-                  expand_collapse.current.className = "rotate270";
-                } else {
-                  keys.current.className = "hide";
-                  values.current.className = "hide";
-                  expand_collapse.current.className = "rotateNone";
-                }
-              }}
-            >
-              {"➤"}
-            </button>
-          </div>
-          <Grid
-            container
-            direction="row"
-            spacing={1}
-            justifyContent="center"
-            alignItems="center"
-          >
-            {/* <div style={{ paddingLeft: 35, paddingRight: 10 }}>key</div> */}
-            <div ref={keys} style={{ textAlign: "center" }}>
-              {data.description.map((pair) => {
-                return (
-                  <Typography
-                    variant="subtitle2"
-                    gutterBottom
+          {data.description.length != 1 && (
+            <>
+              <button
+                ref={expand_collapse_top}
+                style={{
+                  zIndex: 2,
+                  border: "0px solid",
+                  color: "#9F9F9F",
+                  fontSize: 18,
+                  marginTop: "0%",
+                  marginLeft: "30%",
+                  position: "absolute",
+                  backgroundColor: "transparent",
+                }}
+                onClick={() => {
+                  if (keys_top.current.className == "hide") {
+                    grid_top.current.className = "";
+                    keys_top.current.className = "";
+                    values_top.current.className = "";
+                    expand_collapse_top.current.className = "rotate270";
+                    properties_top.current.className = "hide";
+                  } else {
+                    grid_top.current.className = "hide";
+                    keys_top.current.className = "hide";
+                    values_top.current.className = "hide";
+                    expand_collapse_top.current.className = "rotateNone";
+                    properties_top.current.className = "";
+                  }
+                }}
+              >
+                {"▲"}
+              </button>
+              <div ref={grid_top}>
+                <Grid
+                  container
+                  direction="row"
+                  spacing={1}
+                  justifyContent="center"
+                  alignItems="center"
+                >
+                  <div ref={keys_top} style={{ textAlign: "center" }}>
+                    {data.description.slice(0, 6).map((pair) => {
+                      return (
+                        <Typography
+                          variant="subtitle2"
+                          gutterBottom
+                          style={{
+                            paddingRight: 10,
+                          }}
+                        >
+                          {pair.key}
+                        </Typography>
+                      );
+                    })}
+                  </div>
+                  <Divider
+                    orientation="vertical"
+                    style={{ minHeight: 50, textAlign: "center" }}
+                    flexItem
+                  />
+                  <div ref={values_top} style={{ textAlign: "center" }}>
+                    {data.description.slice(0, 6).map((pair) => {
+                      return (
+                        <Typography
+                          variant="subtitle2"
+                          gutterBottom
+                          style={{
+                            paddingLeft: 10,
+                          }}
+                        >
+                          {pair.value}
+                        </Typography>
+                      );
+                    })}
+                  </div>
+                </Grid>
+              </div>
+              <div
+                ref={properties_top}
+                className={"hide"}
+                style={{ marginTop: "auto" }}
+              >
+                Properties
+              </div>
+              {data.description.length > 6 && (
+                <>
+                  <button
+                    ref={expand_collapse_bottom}
                     style={{
-                      paddingRight: 10,
+                      zIndex: 2,
+                      border: "0px solid",
+                      color: "#9F9F9F",
+                      fontSize: 18,
+                      marginTop: "0%",
+                      marginLeft: "30%",
+                      position: "absolute",
+                      backgroundColor: "transparent",
+                    }}
+                    onClick={() => {
+                      if (keys_bottom.current.className == "hide") {
+                        grid_bottom.current.className = "";
+                        keys_bottom.current.className = "";
+                        values_bottom.current.className = "";
+                        expand_collapse_bottom.current.className = "rotate270";
+                        properties_bottom.current.className = "hide";
+                      } else {
+                        grid_bottom.current.className = "hide";
+                        keys_bottom.current.className = "hide";
+                        values_bottom.current.className = "hide";
+                        expand_collapse_bottom.current.className = "rotateNone";
+                        properties_bottom.current.className = "";
+                      }
                     }}
                   >
-                    {pair.key}
-                  </Typography>
-                );
-              })}
-            </div>
-            <Divider
-              orientation="vertical"
-              style={{ minHeight: 50, textAlign: "center" }}
-              flexItem
-            />
-            <div ref={values} style={{ textAlign: "center" }}>
-              {data.description.map((pair) => {
-                return (
-                  <Typography
-                    variant="subtitle2"
-                    gutterBottom
+                    {"▲"}
+                  </button>
+                  <div ref={grid_bottom}>
+                    <Grid
+                      container
+                      direction="row"
+                      spacing={1}
+                      justifyContent="center"
+                      alignItems="center"
+                      style={{
+                        borderTop: "2px solid #C1E5FC",
+                        marginTop: "2%",
+                      }}
+                    >
+                      <div ref={keys_bottom} style={{ textAlign: "center" }}>
+                        {data.description
+                          .slice(6, data.description.length)
+                          .map((pair) => {
+                            return (
+                              <Typography
+                                variant="subtitle2"
+                                gutterBottom
+                                style={{
+                                  paddingRight: 10,
+                                }}
+                              >
+                                {pair.key}
+                              </Typography>
+                            );
+                          })}
+                      </div>
+                      <Divider
+                        orientation="vertical"
+                        style={{ minHeight: 50, textAlign: "center" }}
+                        flexItem
+                      />
+                      <div ref={values_bottom} style={{ textAlign: "center" }}>
+                        {data.description
+                          .slice(6, data.description.length)
+                          .map((pair) => {
+                            return (
+                              <Typography
+                                variant="subtitle2"
+                                gutterBottom
+                                style={{
+                                  paddingLeft: 10,
+                                }}
+                              >
+                                {pair.value}
+                              </Typography>
+                            );
+                          })}
+                      </div>
+                    </Grid>
+                  </div>
+                  <div
+                    ref={properties_bottom}
+                    className={"hide"}
                     style={{
-                      paddingLeft: 10,
+                      marginTop: "auto",
+                      borderTop: "2px solid #C1E5FC",
                     }}
                   >
-                    {pair.value}
-                  </Typography>
-                );
-              })}
-            </div>
-            {/* <div style={{ paddingLeft: 10 }}>Value</div> */}
-          </Grid>
+                    Properties
+                  </div>
+                </>
+              )}
+            </>
+          )}
           {/* <Typography
             variant="subtitle2"
             gutterBottom
@@ -781,11 +867,11 @@ const Canvas = ({
   const [editModeDesc, setEditModeDesc] = useState(false);
   const [open, setOpen] = useState(false);
   const [legend, setLegend] = useState({ color: "#846090", title: "" });
+  const [legends, setLegends] = useState([]);
   const [openUpload, setOpenUpload] = React.useState(false);
   const [openNewNode, setOpenNewNode] = useState(false);
   const [openNewLegend, setOpenNewLegend] = useState(false);
   const [tag, setTag] = useState("");
-  const [legendVisibility, setLegendVisibility] = useState(false);
   const [displayColorPicker, setDisplayColorPicker] = useState(false);
   const [displayColorPickerArrow, setDisplayColorPickerArrow] = useState(false);
   const [color, setColor] = useState({
@@ -810,6 +896,7 @@ const Canvas = ({
   const reactFlowWrapper = useRef(null);
   const [reactFlowInstance, setReactFlowInstance] = useState(null);
   const [openNewField, setOpenNewField] = useState(false);
+
   const [field, setField] = useState({ key: "", value: "" });
   console.log();
   const [hasArrowEdge, setArrowEdge] = useState(
@@ -1412,6 +1499,10 @@ const Canvas = ({
       { color: "#31688E", name: "c31688E" },
       { color: "#42B879", name: "c42B879" },
       { color: "#FEE83A", name: "cFEE83A" },
+      { color: "#EE6548", name: "cEE6548" },
+      { color: "#6CDADC", name: "c6CDADC" },
+      { color: "#FFB54C", name: "cFFB54C" },
+      { color: "#E370B1", name: "cE370B1" },
     ];
 
     return (
@@ -1471,19 +1562,6 @@ const Canvas = ({
               value={legend.title}
               error={error.value ? true : false}
               helperText={error.value && error.msg}
-              InputProps={
-                {
-                  // classes: {
-                  //   disabled: {
-                  //     color: "black",
-                  //     borderBottom: 0,
-                  //     "&:before": {
-                  //       borderBottom: 0,
-                  //     },
-                  //   },
-                  // },
-                }
-              }
             />
             <Button
               variant="contained"
@@ -1507,507 +1585,538 @@ const Canvas = ({
     else {
       setError({ value: false, msg: "" });
       setOpenNewLegend(false);
-      setLegendVisibility(true);
+      setLegends([...legends, legend]);
+      setLegend({ color: "#846090", title: "" });
     }
-  };
 
-  const hexToRgb = (hex) => {
-    console.log(hex);
-    var c;
-    if (/^#([A-Fa-f0-9]{3}){1,2}$/.test(hex)) {
-      console.log("yayyyyyyyyyyyyy");
-      c = hex.substring(1).split("");
-      if (c.length == 3) {
-        c = [c[0], c[0], c[1], c[1], c[2], c[2]];
+    const hexToRgb = (hex) => {
+      console.log(hex);
+      var c;
+      if (/^#([A-Fa-f0-9]{3}){1,2}$/.test(hex)) {
+        console.log("yayyyyyyyyyyyyy");
+        c = hex.substring(1).split("");
+        if (c.length == 3) {
+          c = [c[0], c[0], c[1], c[1], c[2], c[2]];
+        }
+        c = "0x" + c.join("");
+        return { r: (c >> 16) & 255, g: (c >> 8) & 255, b: c & 255, a: 1 };
       }
-      c = "0x" + c.join("");
-      return { r: (c >> 16) & 255, g: (c >> 8) & 255, b: c & 255, a: 1 };
-    }
-    return {
-      r: "193",
-      g: "230",
-      b: "255",
-      a: "100",
-    };
-  };
-
-  const parseDescription = (des) => {
-    const lst = des.split(",");
-    const finalLst = [];
-    lst.map((pair) => {
-      const newPair = pair.split(":");
-      finalLst.push({ key: newPair[0], value: newPair[1] });
-    });
-    return finalLst;
-  };
-
-  const submitField = () => {
-    const newElements = [...elements];
-    newElements.map((element) => {
-      if (element.id === elementCLicked.id) {
-        element.data.description.push(field);
-      }
-    });
-    setElements(newElements);
-    updateNode(newElements);
-    setOpenNewField(false);
-  };
-
-  const hexToRgbA = (hex) => {
-    var c;
-    if (/^#([A-Fa-f0-9]{3}){1,2}$/.test(hex)) {
-      c = hex.substring(1).split("");
-      if (c.length == 3) {
-        c = [c[0], c[0], c[1], c[1], c[2], c[2]];
-      }
-      c = "0x" + c.join("");
       return {
-        r: (c >> 16) & 255,
-        g: (c >> 8) & 255,
-        b: c & 255,
-        a: "1",
+        r: "193",
+        g: "230",
+        b: "255",
+        a: "100",
       };
-    }
-  };
+    };
 
-  const handleChangeAnimated = () => {
-    const edges = getConnectedEdges([elementCLicked], elements);
-    const newElements = [...elements];
-    let elementClickedIndex;
-    edges.map((edge) => {
-      newElements.map((element, index) => {
-        if (isEdge(element)) {
-          if (element.id === edge.id) {
-            console.log(element);
-            element.animated = !hasAnimatedEdge;
-          }
-        } else {
-          if (element.id === elementCLicked.id) {
-            elementClickedIndex = index;
-          }
+    const parseDescription = (des) => {
+      const lst = des.split(",");
+      const finalLst = [];
+      lst.map((pair) => {
+        const newPair = pair.split(":");
+        finalLst.push({ key: newPair[0], value: newPair[1] });
+      });
+      return finalLst;
+    };
+
+    const submitField = () => {
+      const newElements = [...elements];
+      newElements.map((element) => {
+        if (element.id === elementCLicked.id) {
+          element.data.description.push(field);
         }
       });
-    });
-    newElements[elementClickedIndex].data.hasAnimatedEdge =
-      !newElements[elementClickedIndex].data.hasAnimatedEdge;
-    setAnimatedEdge(!hasAnimatedEdge);
-    setElements(newElements);
-    updateNode(newElements);
-  };
+      setElements(newElements);
+      updateNode(newElements);
+      setOpenNewField(false);
+    };
 
-  const checkTags = (tags2Check) => {
-    console.log(tags);
-    if (tags2Check.length === 0) {
-      return [];
-    } else {
-      const newTags = tags2Check.split(",");
-      if (tags.length === 0) {
+    const hexToRgbA = (hex) => {
+      var c;
+      if (/^#([A-Fa-f0-9]{3}){1,2}$/.test(hex)) {
+        c = hex.substring(1).split("");
+        if (c.length == 3) {
+          c = [c[0], c[0], c[1], c[1], c[2], c[2]];
+        }
+        c = "0x" + c.join("");
         return {
-          value: true,
-          msg: "One or more of the tags provided does not exist.",
+          r: (c >> 16) & 255,
+          g: (c >> 8) & 255,
+          b: c & 255,
+          a: "1",
         };
       }
-      newTags.map((tag) => {
-        if (!tags.includes(tag)) {
+    };
+
+    const handleChangeAnimated = () => {
+      const edges = getConnectedEdges([elementCLicked], elements);
+      const newElements = [...elements];
+      let elementClickedIndex;
+      edges.map((edge) => {
+        newElements.map((element, index) => {
+          if (isEdge(element)) {
+            if (element.id === edge.id) {
+              console.log(element);
+              element.animated = !hasAnimatedEdge;
+            }
+          } else {
+            if (element.id === elementCLicked.id) {
+              elementClickedIndex = index;
+            }
+          }
+        });
+      });
+      newElements[elementClickedIndex].data.hasAnimatedEdge =
+        !newElements[elementClickedIndex].data.hasAnimatedEdge;
+      setAnimatedEdge(!hasAnimatedEdge);
+      setElements(newElements);
+      updateNode(newElements);
+    };
+
+    const checkTags = (tags2Check) => {
+      console.log(tags);
+      if (tags2Check.length === 0) {
+        return [];
+      } else {
+        const newTags = tags2Check.split(",");
+        if (tags.length === 0) {
           return {
             value: true,
             msg: "One or more of the tags provided does not exist.",
           };
         }
-      });
-      return newTags;
-    }
-  };
-
-  console.log("elements", elements);
-
-  let filteredElements;
-
-  if (elements.length === 0) {
-    filteredElements = [];
-  } else {
-    console.log(elements, "***********************88");
-    filteredElements = elements.filter((data) => {
-      return data.node === currentFile.id || data.source;
-    });
-    filteredElements.sort((a, b) => {
-      if (a.hasOwnProperty("data") && b.hasOwnProperty("data")) {
-        return parseInt(a.id.slice(11, 24)) - parseInt(b.id.slice(11, 24));
+        newTags.map((tag) => {
+          if (!tags.includes(tag)) {
+            return {
+              value: true,
+              msg: "One or more of the tags provided does not exist.",
+            };
+          }
+        });
+        return newTags;
       }
-    });
-  }
-  if (!isEditMode) {
-    filteredElements = getLayoutedElements(
-      filteredElements,
-      orientation === "vertical" ? "TB" : "LR"
-    );
-  }
-  console.log(filteredElements);
-  console.log(elements);
-  const classes = useStyles();
+    };
 
-  if (currentFile === null) {
-    return <div></div>;
-  } else {
-    return (
-      <>
-        <Grid container direction="row" spacing={1} style={{ width: "80%" }}>
-          <Grid item xs={2} style={{ textAlign: "start" }}>
-            {isEditMode && (
-              <>
-                <Button
-                  variant="outlined"
-                  color="primary"
-                  startIcon={<Add />}
-                  style={{
-                    textAlign: "start",
-                    marginTop: 20,
-                  }}
-                  onClick={() => setOpenNewNode(true)}
-                >
-                  New Node
-                </Button>
-                <Dialog
-                  open={openNewNode}
-                  onClose={handleClose}
-                  aria-labelledby="form-dialog-title"
-                  // style={{ overflow: "hidden" }}
-                >
-                  <DialogTitle
-                    id="form-dialog-title"
-                    style={{ textAlign: "center" }}
-                  >
-                    Select a Shape
-                  </DialogTitle>
-                  <DialogContent>
-                    <Grid container direction="column" spacing={1}>
-                      <Grid container direction="row" spacing={1}>
-                        <Grid item xs={6}>
-                          <div
-                            onClick={() => {
-                              addNode("special");
-                              setOpenNewNode(false);
-                            }}
-                          >
-                            <div
-                              style={{
-                                background: "#ADD8E6",
-                                color: "black",
-                                padding: 10,
-                                border: "1px solid black",
-                                width: 100,
-                                height: 10,
-                                borderRadius: "10px 10px 0px 0px",
-                                textAlign: "center",
-                                cursor: "pointer",
-                              }}
-                            ></div>
-                            <div
-                              style={{
-                                background: "white",
-                                border: "1px solid black",
-                                color: "black",
-                                padding: 10,
-                                width: 100,
-                                height: 40,
-                                borderRadius: "0px 0px 10px 10px",
-                                textAlign: "center",
-                                marginRight: "20px",
-                                cursor: "pointer",
-                              }}
-                            ></div>
-                          </div>
-                        </Grid>
-                        <Grid item xs={6}>
-                          <div
-                            style={{
-                              border: "1px solid black",
-                              height: "90px",
-                              width: "130px",
-                              borderRadius: "50px",
-                              marginLeft: "10px",
-                              cursor: "pointer",
-                            }}
-                            onClick={() => {
-                              addNode("oval");
-                              setOpenNewNode(false);
-                            }}
-                          ></div>
-                        </Grid>
-                      </Grid>
-                      <Grid
-                        container
-                        direction="row"
-                        spacing={1}
-                        style={{ paddingTop: "30px", paddingBottom: "20px" }}
-                      >
-                        <Grid item xs={6}>
-                          <div
-                            style={{
-                              border: "1px solid black",
-                              height: "80px",
-                              width: "130px",
-                              borderRadius: "10px",
-                              cursor: "pointer",
-                            }}
-                            onClick={() => {
-                              addNode("rectangle");
-                              setOpenNewNode(false);
-                            }}
-                          ></div>
-                        </Grid>
-                        <Grid item xs={6}>
-                          <div
-                            style={{
-                              border: "1px solid black",
-                              height: "80px",
-                              width: "80px",
-                              borderRadius: "5px",
-                              transform: "rotate(45deg)",
-                              marginLeft: "30px",
-                              cursor: "pointer",
-                            }}
-                            onClick={() => {
-                              addNode("diamond");
-                              setOpenNewNode(false);
-                            }}
-                          ></div>
-                        </Grid>
-                      </Grid>
-                    </Grid>
-                  </DialogContent>
-                </Dialog>
-              </>
-            )}
-          </Grid>
-          <Grid item xs={3}>
-            {/* <Grid container direction="row"> */}
-            <Typography variant="h6" style={{ fontWeight: "bold" }}>
-              {`Project: ${currentFile.parentId}`}
-            </Typography>
-            <Typography variant="h6">
-              {`Sub Process: ${currentFile.text}`}
-            </Typography>
-            {/* </Grid> */}
-          </Grid>
-          {!legendVisibility && selectLegend()}
-          <Grid item xs={5} style={{ textAlign: "center" }}>
-            <Typography component="div">
-              <Grid
-                component="label"
-                container
-                alignItems="center"
-                spacing={1}
-                style={{ paddingTop: 20, paddingLeft: 40 }}
-              >
-                <Grid item>View</Grid>
-                <Grid item>
-                  <Switch
+    console.log("elements", elements);
+
+    let filteredElements;
+
+    if (elements.length === 0) {
+      filteredElements = [];
+    } else {
+      console.log(elements, "***********************88");
+      filteredElements = elements.filter((data) => {
+        return data.node === currentFile.id || data.source;
+      });
+      filteredElements.sort((a, b) => {
+        if (a.hasOwnProperty("data") && b.hasOwnProperty("data")) {
+          return parseInt(a.id.slice(11, 24)) - parseInt(b.id.slice(11, 24));
+        }
+      });
+    }
+    if (!isEditMode) {
+      filteredElements = getLayoutedElements(
+        filteredElements,
+        orientation === "vertical" ? "TB" : "LR"
+      );
+    }
+    console.log(filteredElements);
+    console.log(elements);
+    const classes = useStyles();
+
+    if (currentFile === null) {
+      return <div></div>;
+    } else {
+      return (
+        <>
+          <Grid container direction="row" spacing={1} style={{ width: "80%" }}>
+            <Grid item xs={2} style={{ textAlign: "start" }}>
+              {isEditMode && (
+                <>
+                  <Button
+                    variant="outlined"
                     color="primary"
-                    checked={isEditMode}
-                    onChange={handleChangeSwitch}
-                    name="checked"
-                  />
-                </Grid>
-                <Grid item>Edit</Grid>
-                {isEditMode && (
+                    startIcon={<Add />}
+                    style={{
+                      textAlign: "start",
+                      marginTop: 20,
+                    }}
+                    onClick={() => setOpenNewNode(true)}
+                  >
+                    New Node
+                  </Button>
+                  <Dialog
+                    open={openNewNode}
+                    onClose={handleClose}
+                    aria-labelledby="form-dialog-title"
+                    // style={{ overflow: "hidden" }}
+                  >
+                    <DialogTitle
+                      id="form-dialog-title"
+                      style={{ textAlign: "center" }}
+                    >
+                      Select a Shape
+                    </DialogTitle>
+                    <DialogContent>
+                      <Grid container direction="column" spacing={1}>
+                        <Grid container direction="row" spacing={1}>
+                          <Grid item xs={6}>
+                            <div
+                              onClick={() => {
+                                addNode("special");
+                                setOpenNewNode(false);
+                              }}
+                            >
+                              <div
+                                style={{
+                                  background: "#ADD8E6",
+                                  color: "black",
+                                  padding: 10,
+                                  border: "1px solid black",
+                                  width: 100,
+                                  height: 10,
+                                  borderRadius: "10px 10px 0px 0px",
+                                  textAlign: "center",
+                                  cursor: "pointer",
+                                }}
+                              ></div>
+                              <div
+                                style={{
+                                  background: "white",
+                                  border: "1px solid black",
+                                  color: "black",
+                                  padding: 10,
+                                  width: 100,
+                                  height: 40,
+                                  borderRadius: "0px 0px 10px 10px",
+                                  textAlign: "center",
+                                  marginRight: "20px",
+                                  cursor: "pointer",
+                                }}
+                              ></div>
+                            </div>
+                          </Grid>
+                          <Grid item xs={6}>
+                            <div
+                              style={{
+                                border: "1px solid black",
+                                height: "90px",
+                                width: "130px",
+                                borderRadius: "50px",
+                                marginLeft: "10px",
+                                cursor: "pointer",
+                              }}
+                              onClick={() => {
+                                addNode("oval");
+                                setOpenNewNode(false);
+                              }}
+                            ></div>
+                          </Grid>
+                        </Grid>
+                        <Grid
+                          container
+                          direction="row"
+                          spacing={1}
+                          style={{ paddingTop: "30px", paddingBottom: "20px" }}
+                        >
+                          <Grid item xs={6}>
+                            <div
+                              style={{
+                                border: "1px solid black",
+                                height: "80px",
+                                width: "130px",
+                                borderRadius: "10px",
+                                cursor: "pointer",
+                              }}
+                              onClick={() => {
+                                addNode("rectangle");
+                                setOpenNewNode(false);
+                              }}
+                            ></div>
+                          </Grid>
+                          <Grid item xs={6}>
+                            <div
+                              style={{
+                                border: "1px solid black",
+                                height: "80px",
+                                width: "80px",
+                                borderRadius: "5px",
+                                transform: "rotate(45deg)",
+                                marginLeft: "30px",
+                                cursor: "pointer",
+                              }}
+                              onClick={() => {
+                                addNode("diamond");
+                                setOpenNewNode(false);
+                              }}
+                            ></div>
+                          </Grid>
+                        </Grid>
+                      </Grid>
+                    </DialogContent>
+                  </Dialog>
+                </>
+              )}
+            </Grid>
+            <Grid item xs={3}>
+              {/* <Grid container direction="row"> */}
+              <Typography variant="h6" style={{ fontWeight: "bold" }}>
+                {`Project: ${currentFile.parentId}`}
+              </Typography>
+              <Typography variant="h6">
+                {`Sub Process: ${currentFile.text}`}
+              </Typography>
+              {/* </Grid> */}
+            </Grid>
+            {!legendVisibility && selectLegend()}
+            <Grid item xs={5} style={{ textAlign: "center" }}>
+              <Typography component="div">
+                <Grid
+                  component="label"
+                  container
+                  alignItems="center"
+                  spacing={1}
+                  style={{ paddingTop: 20, paddingLeft: 40 }}
+                >
+                  <Grid item>View</Grid>
+                  <Grid item>
+                    <Switch
+                      color="primary"
+                      checked={isEditMode}
+                      onChange={handleChangeSwitch}
+                      name="checked"
+                    />
+                  </Grid>
+                  <Grid item>Edit</Grid>
+                  {isEditMode && (
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      style={{ marginLeft: 60 }}
+                      onClick={() => {
+                        // console.log(
+                        //   elements,
+                        //   "t8934ufjhn888ewhyobfo8ulh74uilw748ofulufo47fuligo7t357grlgt57grsg7rsty7osrlgwyot7rswy7hsgywo7hrlgwy7oglyo4rhgyotrglyo4rgyot7r"
+                        // );
+                        updateNode([...elements]);
+                      }}
+                    >
+                      Save
+                    </Button>
+                  )}
                   <Button
                     variant="contained"
                     color="primary"
-                    style={{ marginLeft: 60 }}
+                    style={{ marginLeft: isEditMode ? 10 : 30 }}
+                    startIcon={<CloudUploadIcon />}
                     onClick={() => {
-                      // console.log(
-                      //   elements,
-                      //   "t8934ufjhn888ewhyobfo8ulh74uilw748ofulufo47fuligo7t357grlgt57grsg7rsty7osrlgwyot7rswy7hsgywo7hrlgwy7oglyo4rhgyotrglyo4rgyot7r"
-                      // );
-                      updateNode([...elements]);
+                      setOpenUpload(true);
                     }}
                   >
-                    Save
+                    Import CSV
                   </Button>
-                )}
-                <Button
-                  variant="contained"
-                  color="primary"
-                  style={{ marginLeft: isEditMode ? 10 : 30 }}
-                  startIcon={<CloudUploadIcon />}
-                  onClick={() => {
-                    setOpenUpload(true);
-                  }}
-                >
-                  Import CSV
-                </Button>
-                <DropzoneDialogBase
-                  clearOnUnmount={true}
-                  filesLimit={1}
-                  dialogTitle={
-                    <>
-                      {console.log(renderAlert)}
-                      {renderAlert.value && (
-                        <Alert severity="error">{renderAlert.msg}</Alert>
-                      )}
-                      <span>Upload file</span>
-                      <IconButton
-                        style={{
-                          right: "12px",
-                          top: "8px",
-                          position: "absolute",
-                        }}
-                        onClick={() => setOpenUpload(false)}
-                      >
-                        <CloseIcon />
-                      </IconButton>
-                    </>
-                  }
-                  acceptedFiles={[".csv"]}
-                  fileObjects={fileObjects}
-                  cancelButtonText={"cancel"}
-                  showAlerts={["error", "info"]}
-                  submitButtonText={"submit"}
-                  maxFileSize={5000000}
-                  open={openUpload}
-                  onAdd={(newFileObjs) => {
-                    console.log("onAdd", newFileObjs);
-                    if (fileObjects.length === 0) {
-                      setFileObjects([].concat(fileObjects, newFileObjs));
+                  <DropzoneDialogBase
+                    clearOnUnmount={true}
+                    filesLimit={1}
+                    dialogTitle={
+                      <>
+                        {console.log(renderAlert)}
+                        {renderAlert.value && (
+                          <Alert severity="error">{renderAlert.msg}</Alert>
+                        )}
+                        <span>Upload file</span>
+                        <IconButton
+                          style={{
+                            right: "12px",
+                            top: "8px",
+                            position: "absolute",
+                          }}
+                          onClick={() => setOpenUpload(false)}
+                        >
+                          <CloseIcon />
+                        </IconButton>
+                      </>
                     }
-                  }}
-                  onDelete={(deleteFileObj) => {
-                    const newFilesObjects = [...fileObjects].filter(
-                      (item) => item !== deleteFileObj
-                    );
-                    setFileObjects(newFilesObjects);
-                    console.log("onDelete", deleteFileObj);
-                  }}
-                  onClose={() => setOpenUpload(false)}
-                  onSave={() => {
-                    console.log(fileObjects[0]);
-                    Papa.parse(fileObjects[0].file, {
-                      complete: function (results) {
-                        let data = results.data;
-                        let jsonArr = [];
-                        const ids = {};
-                        const children = {};
-                        const animateds = [];
-                        const edgeTypes = {};
-                        const arrows = [];
-                        const description = {};
-                        const arrowColors = {};
-                        let counter = 0;
-                        data = data.slice(1);
-                        data.map((element) => {
-                          console.log("0------0", element);
-                          const checkedTags = checkTags(element[3]);
-                          console.log(checkedTags, "7777777777777777777");
-                          console.log(element[4]);
-                          console.log(element[0]);
-                          console.log(element[0].includes("."));
-                          if (element[0].includes(".")) {
-                            counter = counter + 1;
-                            const lst =
-                              description[ids[element[0].split(".")[0]]] !==
-                              undefined
-                                ? [
-                                    ...description[
-                                      ids[element[0].split(".")[0]]
-                                    ],
-                                  ]
-                                : [];
-                            lst.push({
-                              key: element[1],
-                              value: element[2],
-                            });
-                            description[ids[element[0].split(".")[0]]] = [
-                              ...lst,
-                            ];
-                          } else {
-                            if (
-                              [
-                                "special",
-                                "oval",
-                                "rectangle",
-                                "diamond",
-                              ].includes(element[4].toLowerCase())
-                            ) {
-                              console.log("----");
-                              if (Array.isArray(checkedTags)) {
-                                ids[element[0]] = getNodeId();
-                                jsonArr.push({
-                                  id: ids[element[0]],
-                                  node: currentFile.id,
-                                  type: element[4],
-                                  data: {
-                                    title: element[1],
-                                    description: null,
-                                    color: element[2].startsWith("#")
-                                      ? hexToRgb(element[2])
-                                      : {
-                                          r: "193",
-                                          g: "230",
-                                          b: "255",
-                                          a: "100",
-                                        },
-                                    tags: checkedTags,
-                                    isCollapsable:
-                                      element[5] === "TRUE" ? true : false,
-                                  },
-                                  isHidden: false,
-                                  position: { x: 0, y: 0 },
-                                  desc: null,
-                                });
-                                if (element[7] === "TRUE") {
-                                  animateds.push(ids[element[0]]);
-                                }
-                                if (element[8] === "step") {
-                                  edgeTypes[ids[element[0]]] = "step";
-                                } else {
-                                  edgeTypes[ids[element[0]]] = "curved";
-                                }
-                                if (element[9] === "TRUE") {
-                                  arrows.push(ids[element[0]]);
-                                }
-                                if (element[10].startsWith("#")) {
-                                  arrowColors[ids[element[0]]] = element[10];
-                                }
-                                console.log(jsonArr);
-                                if (element[6].length > 0) {
-                                  if (element[6].includes(",")) {
-                                    const csvChildren = element[6].split(",");
-                                    children[element[0]] = csvChildren;
+                    acceptedFiles={[".csv"]}
+                    fileObjects={fileObjects}
+                    cancelButtonText={"cancel"}
+                    showAlerts={["error", "info"]}
+                    submitButtonText={"submit"}
+                    maxFileSize={5000000}
+                    open={openUpload}
+                    onAdd={(newFileObjs) => {
+                      console.log("onAdd", newFileObjs);
+                      if (fileObjects.length === 0) {
+                        setFileObjects([].concat(fileObjects, newFileObjs));
+                      }
+                    }}
+                    onDelete={(deleteFileObj) => {
+                      const newFilesObjects = [...fileObjects].filter(
+                        (item) => item !== deleteFileObj
+                      );
+                      setFileObjects(newFilesObjects);
+                      console.log("onDelete", deleteFileObj);
+                    }}
+                    onClose={() => setOpenUpload(false)}
+                    onSave={() => {
+                      console.log(fileObjects[0]);
+                      Papa.parse(fileObjects[0].file, {
+                        complete: function (results) {
+                          let data = results.data;
+                          let jsonArr = [];
+                          const ids = {};
+                          const children = {};
+                          const animateds = [];
+                          const edgeTypes = {};
+                          const arrows = [];
+                          const description = {};
+                          const arrowColors = {};
+                          let counter = 0;
+                          data = data.slice(1);
+                          data.map((element) => {
+                            console.log("0------0", element);
+                            const checkedTags = checkTags(element[3]);
+                            console.log(checkedTags, "7777777777777777777");
+                            console.log(element[4]);
+                            console.log(element[0]);
+                            console.log(element[0].includes("."));
+                            if (element[0].includes(".")) {
+                              counter = counter + 1;
+                              const lst =
+                                description[ids[element[0].split(".")[0]]] !==
+                                undefined
+                                  ? [
+                                      ...description[
+                                        ids[element[0].split(".")[0]]
+                                      ],
+                                    ]
+                                  : [];
+                              lst.push({
+                                key: element[1],
+                                value: element[2],
+                              });
+                              description[ids[element[0].split(".")[0]]] = [
+                                ...lst,
+                              ];
+                            } else {
+                              if (
+                                [
+                                  "special",
+                                  "oval",
+                                  "rectangle",
+                                  "diamond",
+                                ].includes(element[4].toLowerCase())
+                              ) {
+                                console.log("----");
+                                if (Array.isArray(checkedTags)) {
+                                  ids[element[0]] = getNodeId();
+                                  jsonArr.push({
+                                    id: ids[element[0]],
+                                    node: currentFile.id,
+                                    type: element[4],
+                                    data: {
+                                      title: element[1],
+                                      description: null,
+                                      color: element[2].startsWith("#")
+                                        ? hexToRgb(element[2])
+                                        : {
+                                            r: "193",
+                                            g: "230",
+                                            b: "255",
+                                            a: "100",
+                                          },
+                                      tags: checkedTags,
+                                      isCollapsable:
+                                        element[5] === "TRUE" ? true : false,
+                                    },
+                                    isHidden: false,
+                                    position: { x: 0, y: 0 },
+                                    desc: null,
+                                  });
+                                  if (element[7] === "TRUE") {
+                                    animateds.push(ids[element[0]]);
                                   }
+                                  if (element[8] === "step") {
+                                    edgeTypes[ids[element[0]]] = "step";
+                                  } else {
+                                    edgeTypes[ids[element[0]]] = "curved";
+                                  }
+                                  if (element[9] === "TRUE") {
+                                    arrows.push(ids[element[0]]);
+                                  }
+                                  if (element[10].startsWith("#")) {
+                                    arrowColors[ids[element[0]]] = element[10];
+                                  }
+                                  console.log(jsonArr);
+                                  if (element[6].length > 0) {
+                                    if (element[6].includes(",")) {
+                                      const csvChildren = element[6].split(",");
+                                      children[element[0]] = csvChildren;
+                                    }
+                                  }
+                                } else {
+                                  console.log(checkedTags);
+                                  // setRenderAlert(checkedTags);
+                                  setRenderAlert({
+                                    value: true,
+                                    msg: "One or more of the tags provided does not exist.",
+                                  });
                                 }
                               } else {
-                                console.log(checkedTags);
-                                // setRenderAlert(checkedTags);
+                                console.log("test");
                                 setRenderAlert({
                                   value: true,
-                                  msg: "One or more of the tags provided does not exist.",
+                                  msg: "A type of shape in the file does not exist.",
                                 });
                               }
-                            } else {
-                              console.log("test");
-                              setRenderAlert({
-                                value: true,
-                                msg: "A type of shape in the file does not exist.",
-                              });
                             }
-                          }
-                        });
-                        console.log(jsonArr);
-                        console.log(description);
-                        jsonArr.map((element) => {
-                          element.data.description = description[element.id];
-                        });
-                        console.log("Finished:", results.data);
-                        console.log("onSave", fileObjects);
-                        console.log(jsonArr.length);
-                        if (jsonArr.length === data.length - counter) {
-                          console.log(ids);
-                          console.log(children);
-                          for (var key in children) {
-                            if (children.hasOwnProperty(key)) {
-                              if (Array.isArray(children[key])) {
-                                children[key].map((child) => {
+                          });
+                          console.log(jsonArr);
+                          console.log(description);
+                          jsonArr.map((element) => {
+                            element.data.description = description[element.id];
+                          });
+                          console.log("Finished:", results.data);
+                          console.log("onSave", fileObjects);
+                          console.log(jsonArr.length);
+                          if (jsonArr.length === data.length - counter) {
+                            console.log(ids);
+                            console.log(children);
+                            for (var key in children) {
+                              if (children.hasOwnProperty(key)) {
+                                if (Array.isArray(children[key])) {
+                                  children[key].map((child) => {
+                                    const edge = addEdge(
+                                      {
+                                        animated: animateds.includes(ids[key])
+                                          ? true
+                                          : false,
+                                        type: "customEdge",
+                                        data: {
+                                          type: edgeTypes[ids[key]],
+                                          hasArrow:
+                                            arrows.includes(ids[key]) === true
+                                              ? true
+                                              : false,
+                                          color:
+                                            arrowColors[ids[key]] !== undefined
+                                              ? hexToRgbA(arrowColors[ids[key]])
+                                              : {
+                                                  r: "187",
+                                                  g: "187",
+                                                  b: "192",
+                                                  a: "100",
+                                                },
+                                        },
+                                        source: ids[key],
+                                        target: ids[child],
+                                      },
+                                      jsonArr
+                                    );
+                                    console.log(edge);
+                                    jsonArr = edge;
+                                  });
+                                } else {
                                   const edge = addEdge(
                                     {
                                       animated: animateds.includes(ids[key])
@@ -2031,572 +2140,559 @@ const Canvas = ({
                                               },
                                       },
                                       source: ids[key],
-                                      target: ids[child],
+                                      target: ids[children[key]],
                                     },
                                     jsonArr
                                   );
                                   console.log(edge);
                                   jsonArr = edge;
-                                });
-                              } else {
-                                const edge = addEdge(
-                                  {
-                                    animated: animateds.includes(ids[key])
-                                      ? true
-                                      : false,
-                                    type: "customEdge",
-                                    data: {
-                                      type: edgeTypes[ids[key]],
-                                      hasArrow:
-                                        arrows.includes(ids[key]) === true
-                                          ? true
-                                          : false,
-                                      color:
-                                        arrowColors[ids[key]] !== undefined
-                                          ? hexToRgbA(arrowColors[ids[key]])
-                                          : {
-                                              r: "187",
-                                              g: "187",
-                                              b: "192",
-                                              a: "100",
-                                            },
-                                    },
-                                    source: ids[key],
-                                    target: ids[children[key]],
-                                  },
-                                  jsonArr
-                                );
-                                console.log(edge);
-                                jsonArr = edge;
+                                }
                               }
                             }
+                            const layoutedElements =
+                              getLayoutedElements(jsonArr);
+                            setElements(layoutedElements);
+                            updateNode(layoutedElements);
+                            console.log(jsonArr);
+                            setCsv(true);
+                            setOpenUpload(false);
                           }
-                          const layoutedElements = getLayoutedElements(jsonArr);
-                          setElements(layoutedElements);
-                          updateNode(layoutedElements);
-                          console.log(jsonArr);
-                          setCsv(true);
-                          setOpenUpload(false);
-                        }
-                      },
-                    });
-                  }}
-                  showPreviewsInDropzone={false}
-                  useChipsForPreview
-                  previewGridProps={{
-                    container: { spacing: 1, direction: "row" },
-                  }}
-                  previewChipProps={{ classes: { root: classes.previewChip } }}
-                  showFileNamesInPreview={true}
-                />
-                <Snackbar
-                  open={renderAlert.value}
-                  autoHideDuration={5000}
-                  onClose={() => setRenderAlert({ value: false, msg: "" })}
-                >
-                  <Alert
+                        },
+                      });
+                    }}
+                    showPreviewsInDropzone={false}
+                    useChipsForPreview
+                    previewGridProps={{
+                      container: { spacing: 1, direction: "row" },
+                    }}
+                    previewChipProps={{
+                      classes: { root: classes.previewChip },
+                    }}
+                    showFileNamesInPreview={true}
+                  />
+                  <Snackbar
+                    open={renderAlert.value}
+                    autoHideDuration={5000}
                     onClose={() => setRenderAlert({ value: false, msg: "" })}
-                    severity="error"
                   >
-                    {renderAlert.msg}
-                  </Alert>
-                </Snackbar>
-              </Grid>
-            </Typography>
-          </Grid>
-        </Grid>
-        <Divider orientation="horizontal" />
-        <ReactFlowProvider>
-          <div className="reactflow-wrapper" ref={reactFlowWrapper}>
-            <ReactFlow
-              nodeTypes={{
-                special: SpecialNodeComponent,
-                oval: OvalNodeComponent,
-                rectangle: RectangleNodeComponent,
-                diamond: DiamondNodeComponent,
-              }}
-              edgeTypes={{
-                customEdge: CustomEdge,
-              }}
-              elements={
-                Object.keys(targetElements).length !== 0
-                  ? toggledElements
-                  : filteredElements
-              }
-              // elements={filteredElements}
-              onElementsRemove={onElementsRemove}
-              onNodeDoubleClick={onElementClick}
-              onElementClick={onNodeClick}
-              onDrop={onDrop}
-              onDragOver={onDragOver}
-              onNodeDragStop={onNodeDragStop}
-              connectionLineType={edgeType}
-              onPaneContextMenu={() => setOpenNewNode(true)}
-              onConnect={onConnect}
-              onLoad={onLoad}
-              snapToGrid={false}
-              // snapGrid={[15, 15]}
-              paneMoveable={true}
-              style={{ height: "90vh", width: isEditMode ? "84%" : "95%" }}
-            >
-              <MiniMap
-                nodeStrokeColor={(n) => {
-                  if (n.style?.background) return n.style.background;
-                  if (n.type === "special") return "#0041d0";
-                  if (n.type === "oval") return "#008000";
-                  if (n.type === "rectangle") return "#8A2BE2";
-                  if (n.type === "diamond") return "#00008b";
-                  if (n.type === "output") return "#ff0072";
-                  if (n.type === "default") return "#1a192b";
-
-                  return "#eee";
-                }}
-                nodeColor={(n) => {
-                  if (n.style?.background) return n.style.background;
-
-                  return "#fff";
-                }}
-                nodeBorderRadius={2}
-              />
-              <Controls />
-              {legend.title !== "" && legendVisibility && (
-                <div className={"legendBox"}>
-                  <div
-                    className={"legendColor"}
-                    style={{ backgroundColor: legend.color }}
-                  ></div>
-                  <div style={{ marginLeft: "10%" }}>{legend.title}</div>
-                </div>
-              )}
-              <Background color="#aaa" gap={16} />
-            </ReactFlow>
-          </div>
-        </ReactFlowProvider>
-        <svg width="0" height="0">
-          <defs>
-            <marker
-              className="react-flow__arrowhead"
-              id="my-marker"
-              markerWidth="25"
-              markerHeight="25"
-              viewBox="-10 -10 20 20"
-              orient="auto"
-              refX="0"
-              refY="0"
-            >
-              <polyline
-                stroke="#BBBBC0"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="1"
-                fill="#BBBBC0"
-                points="-5,-4 0,0 -5,4 -5,-4"
-              />
-            </marker>
-          </defs>
-        </svg>
-        {/* <div /> */}
-        {isEditMode ? (
-          <Drawer
-            variant="permanent"
-            anchor="right"
-            style={{
-              textAlign: "center",
-            }}
-          >
-            <Grid
-              item
-              xs={12}
-              style={{ textAlign: "center", width: 250, overflowY: "auto" }}
-            >
-              {Object.keys(elementCLicked).length === 0 ? (
-                <Typography
-                  variant="h6"
-                  gutterBottom
-                  style={{ paddingTop: 380, paddingLeft: 10, paddingRight: 10 }}
-                >
-                  Double-click on any item to get a detailed view.
-                </Typography>
-              ) : (
-                <div>
-                  <Typography variant="h6" style={{ marginTop: 40 }}>
-                    Edit Title
-                  </Typography>
-                  <TextField
-                    name={elementCLicked.id}
-                    defaultValue={elementCLicked.data.title}
-                    margin="normal"
-                    onChange={handleChangeTitle}
-                    disabled={!editModeTtitle}
-                    style={{ width: "90%" }}
-                    value={elementCLicked.data.title}
-                    InputProps={{
-                      // classes: {
-                      //   disabled: {
-                      //     color: "black",
-                      //     borderBottom: 0,
-                      //     "&:before": {
-                      //       borderBottom: 0,
-                      //     },
-                      //   },
-                      // },
-                      endAdornment: (
-                        <InputAdornment position="end">
-                          <IconButton onClick={handleClickTitle}>
-                            <Edit />
-                          </IconButton>
-                        </InputAdornment>
-                      ),
-                    }}
-                  />
-                  <Typography variant="h6" style={{ marginTop: 40 }}>
-                    Edit Description
-                  </Typography>
-
-                  <TextField
-                    name={elementCLicked.id}
-                    defaultValue={elementCLicked.data.desc}
-                    margin="normal"
-                    rows={4}
-                    multiline
-                    variant="filled"
-                    onChange={handleChangeDesc}
-                    // disabled={!editModeDesc}
-                    style={{ width: "90%" }}
-                    value={elementCLicked.data.desc}
-                    // InputProps={{
-                    //   // classes: {
-                    //   //   disabled: {
-                    //   //     color: "black",
-                    //   //     borderBottom: 0,
-                    //   //     "&:before": {
-                    //   //       borderBottom: 0,
-                    //   //     },
-                    //   //   },
-                    //   // },
-                    //   endAdornment: (
-                    //     <InputAdornment position="end">
-                    //       <IconButton onClick={handleClickDesc}>
-                    //         <Edit />
-                    //       </IconButton>
-                    //     </InputAdornment>
-                    //   ),
-                    // }}
-                  />
-                  {elementCLicked.type === "special" && (
-                    <>
-                      <Typography variant="h6" style={{ marginTop: 20 }}>
-                        Add Field
-                      </Typography>
-                      <Button
-                        variant="outlined"
-                        startIcon={<AddIcon />}
-                        color="secondary"
-                        onClick={() => setOpenNewField(true)}
-                      >
-                        Add
-                      </Button>
-                      <Dialog
-                        open={openNewField}
-                        onClose={handleCloseField}
-                        aria-labelledby="form-dialog-title"
-                      >
-                        <DialogTitle id="form-dialog-title">
-                          Add New Field
-                        </DialogTitle>
-                        <DialogContent>
-                          <div style={{ textAlign: "center" }}>
-                            <TextField
-                              style={{ width: "40%", marginRigh: 10 }}
-                              label="Key"
-                              id="outlined-size-small"
-                              defaultValue="Key"
-                              variant="outlined"
-                              size="small"
-                              onChange={(event) => {
-                                const newField = { ...field };
-                                newField.key = event.target.value;
-                                setField(newField);
-                              }}
-                            />
-                            <TextField
-                              style={{ width: "40%", marginLeft: 10 }}
-                              label="Value"
-                              id="outlined-size-normal"
-                              defaultValue="Value"
-                              onChange={(event) => {
-                                const newField = { ...field };
-                                newField.value = event.target.value;
-                                setField(newField);
-                              }}
-                              variant="outlined"
-                              size="small"
-                            />
-                          </div>
-                        </DialogContent>
-                        <DialogActions>
-                          <Button onClick={handleCloseField} color="primary">
-                            Cancel
-                          </Button>
-                          <Button onClick={submitField} color="primary">
-                            Add
-                          </Button>
-                        </DialogActions>
-                      </Dialog>
-                    </>
-                  )}
-                  <Divider style={{ marginTop: 10 }} />
-                  <Button
-                    variant="outlined"
-                    color="primary"
-                    startIcon={<AddIcon size="medium" />}
-                    onClick={() => setOpen(true)}
-                    style={{ marginTop: 20 }}
-                  >
-                    Add Tag
-                  </Button>
-                  <Dialog
-                    open={open}
-                    onClose={handleClose}
-                    aria-labelledby="form-dialog-title"
-                  >
-                    <DialogTitle id="form-dialog-title">Add Tag</DialogTitle>
-                    <DialogContent>
-                      <Select
-                        labelId="demo-simple-select-placeholder-label-label"
-                        id="demo-simple-select-placeholder-label"
-                        value={tag}
-                        onChange={handleChangeTag}
-                        fullWidth
-                        displayEmpty
-                      >
-                        <MenuItem value="">
-                          <em>None</em>
-                        </MenuItem>
-                        {localStorage.getItem("tags") !== null &&
-                        JSON.parse(localStorage.getItem("tags")).length > 0 ? (
-                          JSON.parse(localStorage.getItem("tags")).map(
-                            (tag) => {
-                              return <MenuItem value={tag}>{tag}</MenuItem>;
-                            }
-                          )
-                        ) : (
-                          <div></div>
-                        )}
-                      </Select>
-                    </DialogContent>
-                    <DialogActions>
-                      <Button onClick={handleClose} color="primary">
-                        Cancel
-                      </Button>
-                      <Button onClick={submitTag} color="primary">
-                        Add
-                      </Button>
-                    </DialogActions>
-                  </Dialog>
-                  <Divider style={{ marginTop: 20, marginBottom: 10 }} />
-                  {elementCLicked.data.tags.length > 0 &&
-                    elementCLicked.data.tags.map((tag) => (
-                      <Chip
-                        label={tag}
-                        color="secondary"
-                        style={{ marginBottom: 10 }}
-                      />
-                    ))}
-
-                  <Divider orientation="horizontal" style={{ marginTop: 10 }} />
-                  <Typography component="div">
-                    <Grid
-                      component="label"
-                      container
-                      alignItems="center"
-                      spacing={1}
-                      style={{ paddingTop: 20, paddingLeft: 40 }}
+                    <Alert
+                      onClose={() => setRenderAlert({ value: false, msg: "" })}
+                      severity="error"
                     >
-                      <Grid item>
-                        <Switch
-                          color="primary"
-                          checked={isCollapsable}
-                          onClick={() => handleChangeCollapsable()}
-                          name="checked2"
-                        />
-                      </Grid>
-                      <Grid item>Collapsable</Grid>
-                    </Grid>
-                  </Typography>
-                  <Divider orientation="horizontal" style={{ marginTop: 10 }} />
-                  <Grid
-                    item
-                    xs={12}
+                      {renderAlert.msg}
+                    </Alert>
+                  </Snackbar>
+                </Grid>
+              </Typography>
+            </Grid>
+          </Grid>
+          <Divider orientation="horizontal" />
+          <ReactFlowProvider>
+            <div className="reactflow-wrapper" ref={reactFlowWrapper}>
+              <ReactFlow
+                nodeTypes={{
+                  special: SpecialNodeComponent,
+                  oval: OvalNodeComponent,
+                  rectangle: RectangleNodeComponent,
+                  diamond: DiamondNodeComponent,
+                }}
+                edgeTypes={{
+                  customEdge: CustomEdge,
+                }}
+                elements={
+                  Object.keys(targetElements).length !== 0
+                    ? toggledElements
+                    : filteredElements
+                }
+                // elements={filteredElements}
+                onElementsRemove={onElementsRemove}
+                onNodeDoubleClick={onElementClick}
+                onElementClick={onNodeClick}
+                onDrop={onDrop}
+                onDragOver={onDragOver}
+                onNodeDragStop={onNodeDragStop}
+                connectionLineType={edgeType}
+                onPaneContextMenu={() => setOpenNewNode(true)}
+                onConnect={onConnect}
+                onLoad={onLoad}
+                snapToGrid={false}
+                // snapGrid={[15, 15]}
+                paneMoveable={true}
+                style={{ height: "90vh", width: isEditMode ? "84%" : "95%" }}
+              >
+                <MiniMap
+                  nodeStrokeColor={(n) => {
+                    if (n.style?.background) return n.style.background;
+                    if (n.type === "special") return "#0041d0";
+                    if (n.type === "oval") return "#008000";
+                    if (n.type === "rectangle") return "#8A2BE2";
+                    if (n.type === "diamond") return "#00008b";
+                    if (n.type === "output") return "#ff0072";
+                    if (n.type === "default") return "#1a192b";
+
+                    return "#eee";
+                  }}
+                  nodeColor={(n) => {
+                    if (n.style?.background) return n.style.background;
+
+                    return "#fff";
+                  }}
+                  nodeBorderRadius={2}
+                />
+                <Controls />
+                {legends.length != 0 && (
+                  <div className={"legendBox"}>
+                    {legends.map((leg) => (
+                      <div style={{ display: "flex", flexDirection: "row" }}>
+                        <div
+                          className={"legendColor"}
+                          style={{ backgroundColor: leg.color }}
+                        ></div>
+                        <div style={{ marginLeft: "10%" }}>{leg.title}</div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+                <Background color="#aaa" gap={16} />
+              </ReactFlow>
+            </div>
+          </ReactFlowProvider>
+          <svg width="0" height="0">
+            <defs>
+              <marker
+                className="react-flow__arrowhead"
+                id="my-marker"
+                markerWidth="25"
+                markerHeight="25"
+                viewBox="-10 -10 20 20"
+                orient="auto"
+                refX="0"
+                refY="0"
+              >
+                <polyline
+                  stroke="#BBBBC0"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="1"
+                  fill="#BBBBC0"
+                  points="-5,-4 0,0 -5,4 -5,-4"
+                />
+              </marker>
+            </defs>
+          </svg>
+          {/* <div /> */}
+          {isEditMode ? (
+            <Drawer
+              variant="permanent"
+              anchor="right"
+              style={{
+                textAlign: "center",
+              }}
+            >
+              <Grid
+                item
+                xs={12}
+                style={{ textAlign: "center", width: 250, overflowY: "auto" }}
+              >
+                {Object.keys(elementCLicked).length === 0 ? (
+                  <Typography
+                    variant="h6"
+                    gutterBottom
                     style={{
-                      textAlign: "center",
-                      maxHeight: "100%",
-                      overflow: "auto",
+                      paddingTop: 380,
+                      paddingLeft: 10,
+                      paddingRight: 10,
                     }}
                   >
+                    Double-click on any item to get a detailed view.
+                  </Typography>
+                ) : (
+                  <div>
+                    <Typography variant="h6" style={{ marginTop: 40 }}>
+                      Edit Title
+                    </Typography>
+                    <TextField
+                      name={elementCLicked.id}
+                      defaultValue={elementCLicked.data.title}
+                      margin="normal"
+                      onChange={handleChangeTitle}
+                      disabled={!editModeTtitle}
+                      style={{ width: "90%" }}
+                      value={elementCLicked.data.title}
+                      InputProps={{
+                        // classes: {
+                        //   disabled: {
+                        //     color: "black",
+                        //     borderBottom: 0,
+                        //     "&:before": {
+                        //       borderBottom: 0,
+                        //     },
+                        //   },
+                        // },
+                        endAdornment: (
+                          <InputAdornment position="end">
+                            <IconButton onClick={handleClickTitle}>
+                              <Edit />
+                            </IconButton>
+                          </InputAdornment>
+                        ),
+                      }}
+                    />
+                    <Typography variant="h6" style={{ marginTop: 40 }}>
+                      Edit Description
+                    </Typography>
+
+                    <TextField
+                      name={elementCLicked.id}
+                      defaultValue={elementCLicked.data.desc}
+                      margin="normal"
+                      rows={4}
+                      multiline
+                      variant="filled"
+                      onChange={handleChangeDesc}
+                      // disabled={!editModeDesc}
+                      style={{ width: "90%" }}
+                      value={elementCLicked.data.desc}
+                      // InputProps={{
+                      //   // classes: {
+                      //   //   disabled: {
+                      //   //     color: "black",
+                      //   //     borderBottom: 0,
+                      //   //     "&:before": {
+                      //   //       borderBottom: 0,
+                      //   //     },
+                      //   //   },
+                      //   // },
+                      //   endAdornment: (
+                      //     <InputAdornment position="end">
+                      //       <IconButton onClick={handleClickDesc}>
+                      //         <Edit />
+                      //       </IconButton>
+                      //     </InputAdornment>
+                      //   ),
+                      // }}
+                    />
+                    {elementCLicked.type === "special" && (
+                      <>
+                        <Typography variant="h6" style={{ marginTop: 20 }}>
+                          Add Field
+                        </Typography>
+                        <Button
+                          variant="outlined"
+                          startIcon={<AddIcon />}
+                          color="secondary"
+                          onClick={() => setOpenNewField(true)}
+                        >
+                          Add
+                        </Button>
+                        <Dialog
+                          open={openNewField}
+                          onClose={handleCloseField}
+                          aria-labelledby="form-dialog-title"
+                        >
+                          <DialogTitle id="form-dialog-title">
+                            Add New Field
+                          </DialogTitle>
+                          <DialogContent>
+                            <div style={{ textAlign: "center" }}>
+                              <TextField
+                                style={{ width: "40%", marginRigh: 10 }}
+                                label="Key"
+                                id="outlined-size-small"
+                                defaultValue="Key"
+                                variant="outlined"
+                                size="small"
+                                onChange={(event) => {
+                                  const newField = { ...field };
+                                  newField.key = event.target.value;
+                                  setField(newField);
+                                }}
+                              />
+                              <TextField
+                                style={{ width: "40%", marginLeft: 10 }}
+                                label="Value"
+                                id="outlined-size-normal"
+                                defaultValue="Value"
+                                onChange={(event) => {
+                                  const newField = { ...field };
+                                  newField.value = event.target.value;
+                                  setField(newField);
+                                }}
+                                variant="outlined"
+                                size="small"
+                              />
+                            </div>
+                          </DialogContent>
+                          <DialogActions>
+                            <Button onClick={handleCloseField} color="primary">
+                              Cancel
+                            </Button>
+                            <Button onClick={submitField} color="primary">
+                              Add
+                            </Button>
+                          </DialogActions>
+                        </Dialog>
+                      </>
+                    )}
+                    <Divider style={{ marginTop: 10 }} />
+                    <Button
+                      variant="outlined"
+                      color="primary"
+                      startIcon={<AddIcon size="medium" />}
+                      onClick={() => setOpen(true)}
+                      style={{ marginTop: 20 }}
+                    >
+                      Add Tag
+                    </Button>
+                    <Dialog
+                      open={open}
+                      onClose={handleClose}
+                      aria-labelledby="form-dialog-title"
+                    >
+                      <DialogTitle id="form-dialog-title">Add Tag</DialogTitle>
+                      <DialogContent>
+                        <Select
+                          labelId="demo-simple-select-placeholder-label-label"
+                          id="demo-simple-select-placeholder-label"
+                          value={tag}
+                          onChange={handleChangeTag}
+                          fullWidth
+                          displayEmpty
+                        >
+                          <MenuItem value="">
+                            <em>None</em>
+                          </MenuItem>
+                          {localStorage.getItem("tags") !== null &&
+                          JSON.parse(localStorage.getItem("tags")).length >
+                            0 ? (
+                            JSON.parse(localStorage.getItem("tags")).map(
+                              (tag) => {
+                                return <MenuItem value={tag}>{tag}</MenuItem>;
+                              }
+                            )
+                          ) : (
+                            <div></div>
+                          )}
+                        </Select>
+                      </DialogContent>
+                      <DialogActions>
+                        <Button onClick={handleClose} color="primary">
+                          Cancel
+                        </Button>
+                        <Button onClick={submitTag} color="primary">
+                          Add
+                        </Button>
+                      </DialogActions>
+                    </Dialog>
+                    <Divider style={{ marginTop: 20, marginBottom: 10 }} />
+                    {elementCLicked.data.tags.length > 0 &&
+                      elementCLicked.data.tags.map((tag) => (
+                        <Chip
+                          label={tag}
+                          color="secondary"
+                          style={{ marginBottom: 10 }}
+                        />
+                      ))}
+
+                    <Divider
+                      orientation="horizontal"
+                      style={{ marginTop: 10 }}
+                    />
+                    <Typography component="div">
+                      <Grid
+                        component="label"
+                        container
+                        alignItems="center"
+                        spacing={1}
+                        style={{ paddingTop: 20, paddingLeft: 40 }}
+                      >
+                        <Grid item>
+                          <Switch
+                            color="primary"
+                            checked={isCollapsable}
+                            onClick={() => handleChangeCollapsable()}
+                            name="checked2"
+                          />
+                        </Grid>
+                        <Grid item>Collapsable</Grid>
+                      </Grid>
+                    </Typography>
+                    <Divider
+                      orientation="horizontal"
+                      style={{ marginTop: 10 }}
+                    />
+                    <Grid
+                      item
+                      xs={12}
+                      style={{
+                        textAlign: "center",
+                        maxHeight: "100%",
+                        overflow: "auto",
+                      }}
+                    >
+                      <div style={{ paddingLeft: 20, paddingTop: 20 }}>
+                        <Grid item xs={12}>
+                          <Typography variant="subtitle1" gutterBottom>
+                            Node Color
+                          </Typography>
+                          <div style={styles.swatch} onClick={handleClickColor}>
+                            <div style={styles.color} />
+                          </div>
+                          {displayColorPicker ? (
+                            <div style={styles.popover}>
+                              <div
+                                style={styles.cover}
+                                onClick={handleCloseColor}
+                              />
+                              <SketchPicker
+                                color={color}
+                                onChange={handleChangeColor}
+                              />
+                            </div>
+                          ) : null}
+                        </Grid>
+                      </div>
+                    </Grid>
+                    <Divider style={{ marginTop: 20, marginBottom: 10 }} />
+                    <Grid
+                      item
+                      xs={12}
+                      style={{
+                        textAlign: "start",
+                        maxHeight: "100%",
+                        overflow: "auto",
+                      }}
+                    >
+                      <FormControl
+                        variant="outlined"
+                        style={{ width: 150, marginTop: 30, marginLeft: 20 }}
+                      >
+                        <InputLabel id="demo-simple-select-outlined-label">
+                          EdgeType
+                        </InputLabel>
+                        <Select
+                          style={{ fontSize: 15 }}
+                          labelId="demo-simple-select-outlined-label"
+                          id="demo-simple-select-outlined"
+                          onChange={handleChangeEdgeType}
+                          variant="outlined"
+                          label="EdgeType"
+                          defaultValue="smoothstep"
+                          displayEmpty={true}
+                        >
+                          <MenuItem value="smoothstep">Step Edge</MenuItem>
+                          <MenuItem value="default">Curved Edge</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </Grid>
+                    <Typography component="div">
+                      <Grid
+                        component="label"
+                        container
+                        alignItems="center"
+                        spacing={1}
+                        style={{ paddingTop: 20, paddingLeft: 40 }}
+                      >
+                        <Grid item>
+                          <Switch
+                            color="primary"
+                            checked={hasAnimatedEdge}
+                            onClick={() => handleChangeAnimated()}
+                            name="checked3"
+                          />
+                        </Grid>
+                        <Grid item>Animated</Grid>
+                      </Grid>
+                    </Typography>
+                    <Typography component="div">
+                      <Grid
+                        component="label"
+                        container
+                        alignItems="center"
+                        spacing={1}
+                        style={{ paddingTop: 20, paddingLeft: 40 }}
+                      >
+                        <Grid item>
+                          <Switch
+                            color="primary"
+                            checked={hasArrowEdge}
+                            onClick={() => handleChangeArrow()}
+                            name="checked4"
+                          />
+                        </Grid>
+                        <Grid item>Arrow</Grid>
+                      </Grid>
+                    </Typography>
                     <div style={{ paddingLeft: 20, paddingTop: 20 }}>
                       <Grid item xs={12}>
                         <Typography variant="subtitle1" gutterBottom>
-                          Node Color
+                          Arrow Color
                         </Typography>
-                        <div style={styles.swatch} onClick={handleClickColor}>
-                          <div style={styles.color} />
+                        <div
+                          style={stylesArrow.swatch}
+                          onClick={handleClickColorArrow}
+                        >
+                          <div style={stylesArrow.color} />
                         </div>
-                        {displayColorPicker ? (
-                          <div style={styles.popover}>
+                        {displayColorPickerArrow ? (
+                          <div style={stylesArrow.popover}>
                             <div
-                              style={styles.cover}
-                              onClick={handleCloseColor}
+                              style={stylesArrow.cover}
+                              onClick={handleCloseColorArrow}
                             />
                             <SketchPicker
-                              color={color}
-                              onChange={handleChangeColor}
+                              color={colorArrow}
+                              onChange={handleChangeColorArrow}
                             />
                           </div>
                         ) : null}
                       </Grid>
                     </div>
-                  </Grid>
-                  <Divider style={{ marginTop: 20, marginBottom: 10 }} />
+                    <Divider style={{ marginTop: 20, marginBottom: 10 }} />
+                    <IconButton
+                      style={{ color: "red" }}
+                      onClick={() => handleDelete()}
+                    >
+                      <Delete />
+                    </IconButton>
+                  </div>
+                )}
+              </Grid>
+            </Drawer>
+          ) : (
+            <div>
+              {Object.keys(elementCLicked).length > 0 && (
+                <Drawer
+                  variant="permanent"
+                  anchor="right"
+                  style={{
+                    textAlign: "center",
+                  }}
+                >
                   <Grid
                     item
                     xs={12}
                     style={{
-                      textAlign: "start",
-                      maxHeight: "100%",
-                      overflow: "auto",
+                      textAlign: "center",
+                      width: 250,
+                      overflowY: "auto",
                     }}
                   >
-                    <FormControl
-                      variant="outlined"
-                      style={{ width: 150, marginTop: 30, marginLeft: 20 }}
-                    >
-                      <InputLabel id="demo-simple-select-outlined-label">
-                        EdgeType
-                      </InputLabel>
-                      <Select
-                        style={{ fontSize: 15 }}
-                        labelId="demo-simple-select-outlined-label"
-                        id="demo-simple-select-outlined"
-                        onChange={handleChangeEdgeType}
-                        variant="outlined"
-                        label="EdgeType"
-                        defaultValue="smoothstep"
-                        displayEmpty={true}
+                    <div>
+                      <Typography
+                        variant="h4"
+                        style={{
+                          marginTop: 40,
+                          marginBottom: 10,
+                          fontWeight: "bolder",
+                        }}
                       >
-                        <MenuItem value="smoothstep">Step Edge</MenuItem>
-                        <MenuItem value="default">Curved Edge</MenuItem>
-                      </Select>
-                    </FormControl>
-                  </Grid>
-                  <Typography component="div">
-                    <Grid
-                      component="label"
-                      container
-                      alignItems="center"
-                      spacing={1}
-                      style={{ paddingTop: 20, paddingLeft: 40 }}
-                    >
-                      <Grid item>
-                        <Switch
-                          color="primary"
-                          checked={hasAnimatedEdge}
-                          onClick={() => handleChangeAnimated()}
-                          name="checked3"
-                        />
-                      </Grid>
-                      <Grid item>Animated</Grid>
-                    </Grid>
-                  </Typography>
-                  <Typography component="div">
-                    <Grid
-                      component="label"
-                      container
-                      alignItems="center"
-                      spacing={1}
-                      style={{ paddingTop: 20, paddingLeft: 40 }}
-                    >
-                      <Grid item>
-                        <Switch
-                          color="primary"
-                          checked={hasArrowEdge}
-                          onClick={() => handleChangeArrow()}
-                          name="checked4"
-                        />
-                      </Grid>
-                      <Grid item>Arrow</Grid>
-                    </Grid>
-                  </Typography>
-                  <div style={{ paddingLeft: 20, paddingTop: 20 }}>
-                    <Grid item xs={12}>
-                      <Typography variant="subtitle1" gutterBottom>
-                        Arrow Color
+                        Title
                       </Typography>
-                      <div
-                        style={stylesArrow.swatch}
-                        onClick={handleClickColorArrow}
-                      >
-                        <div style={stylesArrow.color} />
-                      </div>
-                      {displayColorPickerArrow ? (
-                        <div style={stylesArrow.popover}>
-                          <div
-                            style={stylesArrow.cover}
-                            onClick={handleCloseColorArrow}
-                          />
-                          <SketchPicker
-                            color={colorArrow}
-                            onChange={handleChangeColorArrow}
-                          />
-                        </div>
-                      ) : null}
-                    </Grid>
-                  </div>
-                  <Divider style={{ marginTop: 20, marginBottom: 10 }} />
-                  <IconButton
-                    style={{ color: "red" }}
-                    onClick={() => handleDelete()}
-                  >
-                    <Delete />
-                  </IconButton>
-                </div>
-              )}
-            </Grid>
-          </Drawer>
-        ) : (
-          <div>
-            {Object.keys(elementCLicked).length > 0 && (
-              <Drawer
-                variant="permanent"
-                anchor="right"
-                style={{
-                  textAlign: "center",
-                }}
-              >
-                <Grid
-                  item
-                  xs={12}
-                  style={{
-                    textAlign: "center",
-                    width: 250,
-                    overflowY: "auto",
-                  }}
-                >
-                  <div>
-                    <Typography
-                      variant="h4"
-                      style={{
-                        marginTop: 40,
-                        marginBottom: 10,
-                        fontWeight: "bolder",
-                      }}
-                    >
-                      Title
-                    </Typography>
-                    <Typography variant="h6" gutterBottom>
-                      {elementCLicked.data.title}
-                    </Typography>
-                    {/* <TextField
+                      <Typography variant="h6" gutterBottom>
+                        {elementCLicked.data.title}
+                      </Typography>
+                      {/* <TextField
                       name={elementCLicked.id}
                       defaultValue={elementCLicked.data.title}
                       margin="normal"
@@ -2618,20 +2714,20 @@ const Canvas = ({
                         }
                       }
                     /> */}
-                    <Typography
-                      variant="h4"
-                      style={{
-                        marginTop: 40,
-                        marginBottom: 10,
-                        fontWeight: "bolder",
-                      }}
-                    >
-                      Description
-                    </Typography>
-                    <Typography variant="h6" gutterBottom>
-                      {elementCLicked.data.desc}
-                    </Typography>
-                    {/* <TextField
+                      <Typography
+                        variant="h4"
+                        style={{
+                          marginTop: 40,
+                          marginBottom: 10,
+                          fontWeight: "bolder",
+                        }}
+                      >
+                        Description
+                      </Typography>
+                      <Typography variant="h6" gutterBottom>
+                        {elementCLicked.data.desc}
+                      </Typography>
+                      {/* <TextField
                       name={elementCLicked.id}
                       defaultValue={elementCLicked.data.desc}
                       margin="normal"
@@ -2655,16 +2751,17 @@ const Canvas = ({
                         }
                       }
                     /> */}
-                  </div>
-                </Grid>
-              </Drawer>
-            )}
-          </div>
-          // )}
-        )}
-      </>
-    );
-  }
+                    </div>
+                  </Grid>
+                </Drawer>
+              )}
+            </div>
+            // )}
+          )}
+        </>
+      );
+    }
+  };
 };
 
 export default Canvas;
