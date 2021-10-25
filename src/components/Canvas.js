@@ -1592,7 +1592,7 @@ const Canvas = ({
       setError({ value: false, msg: "" });
       setOpenNewLegend(false);
       const newLegend = [...legends[currentFile.id]];
-      newLegend[currentFile.id] = [...legends, legend];
+      newLegend[currentFile.id] = [...legends[currentFile.id], legend];
       setLegends(newLegend);
       localStorage.setItem("legend", JSON.stringify(newLegend));
       setLegend({ color: "#846090", title: "" });
