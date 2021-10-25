@@ -1018,7 +1018,7 @@ const Canvas = ({
   };
 
   const onNodeClick = async (event, element) => {
-    console.log("test");
+    alert("test");
     if (!isEditMode) {
       console.log(element);
       if (element.data.isCollapsable) {
