@@ -316,7 +316,7 @@ const SpecialNodeComponent = ({ data }) => {
                   alignItems="center"
                 >
                   <div ref={keys_top} style={{ textAlign: "center" }}>
-                    {data.description.slice(0, 6).map((pair) => {
+                    {data.description.slice(0, 5).map((pair) => {
                       return (
                         <Typography
                           variant="subtitle2"
@@ -336,7 +336,7 @@ const SpecialNodeComponent = ({ data }) => {
                     flexItem
                   />
                   <div ref={values_top} style={{ textAlign: "center" }}>
-                    {data.description.slice(0, 6).map((pair) => {
+                    {data.description.slice(0, 5).map((pair) => {
                       return (
                         <Typography
                           variant="subtitle2"
@@ -359,7 +359,7 @@ const SpecialNodeComponent = ({ data }) => {
               >
                 Properties
               </div>
-              {data.description.length > 6 && (
+              {data.description.length > 5 && (
                 <>
                   <button
                     ref={expand_collapse_bottom}
@@ -405,7 +405,7 @@ const SpecialNodeComponent = ({ data }) => {
                     >
                       <div ref={keys_bottom} style={{ textAlign: "center" }}>
                         {data.description
-                          .slice(6, data.description.length)
+                          .slice(5, data.description.length)
                           .map((pair) => {
                             return (
                               <Typography
@@ -427,7 +427,7 @@ const SpecialNodeComponent = ({ data }) => {
                       />
                       <div ref={values_bottom} style={{ textAlign: "center" }}>
                         {data.description
-                          .slice(6, data.description.length)
+                          .slice(5, data.description.length)
                           .map((pair) => {
                             return (
                               <Typography
