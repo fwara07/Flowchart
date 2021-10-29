@@ -46,7 +46,7 @@ The backend should successfully be running now at the following url:
 
 However, to make it the two work together, you must change up the code a little.
 
-###Navigate back to the fronted folder, and follow the following steps:
+### Navigate back to the fronted folder, and follow the following steps:
 
 First, open up your preffered code editor, and navigate to `App.js`, `Sidebar.js` and `Canvas.js`.
 
