@@ -2196,19 +2196,20 @@ const Canvas = ({
                 nodeBorderRadius={2}
               />
               <Controls />
-              {legends[currentFile.id].length != 0 && (
-                <div className={"legendBox"}>
-                  {legends[currentFile.id].map((leg) => (
-                    <div style={{ display: "flex", flexDirection: "row" }}>
-                      <div
-                        className={"legendColor"}
-                        style={{ backgroundColor: leg.color }}
-                      ></div>
-                      <div style={{ marginLeft: "10%" }}>{leg.title}</div>
-                    </div>
-                  ))}
-                </div>
-              )}
+              {legends.hasOwnProperty(currentFile.id) &&
+                legends[currentFile.id].length != 0 && (
+                  <div className={"legendBox"}>
+                    {legends[currentFile.id].map((leg) => (
+                      <div style={{ display: "flex", flexDirection: "row" }}>
+                        <div
+                          className={"legendColor"}
+                          style={{ backgroundColor: leg.color }}
+                        ></div>
+                        <div style={{ marginLeft: "10%" }}>{leg.title}</div>
+                      </div>
+                    ))}
+                  </div>
+                )}
               <Background color="#aaa" gap={16} />
             </ReactFlow>
           </div>
