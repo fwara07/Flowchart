@@ -302,6 +302,13 @@ const SideBar = ({
   };
 
   const deleteItem = () => {
+    if (currentFile.hasOwnProperty("parentId")) {
+      if (localStorage.getItem("legend") !== null) {
+        const legend = JSON.parse(localStorage.getItem("legend"));
+        delete legend[currentFile.id];
+        localStorage.setItem("legend", JSON.stringify(legend));
+      }
+    }
     const newFiles = [...files];
     const index = files.findIndex((element) => element === currentFile);
     newFiles.splice(index, 1);
