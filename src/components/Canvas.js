@@ -1656,6 +1656,7 @@ const Canvas = ({
   console.log("elements", elements);
 
   let filteredElements;
+  console.log(currentFile);
 
   if (elements.length === 0) {
     filteredElements = [];
