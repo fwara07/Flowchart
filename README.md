@@ -1,70 +1,59 @@
-# Getting Started with Create React App
+# How to run this project on a local computer
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## Runing the frontend
 
-In the project directory, you can run:
+Open up a terminal, and use the command `git clone https://github.com/fwara07/flowchart.git` to clone this repository.
+
+Next, use the `cd` command to get into the cloned folder.
+
+Once in the folder, use the command `npm install` to install all the dependencies.
+
+Once the install is done, use the following command to start the frontend:
 
 ### `npm start`
 
-Runs the app in the development mode.\
+**Note: you muse have Node.js install for these commands to work**
+
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 The page will reload if you make edits.\
 You will also see any lint errors in the console.
 
-### `npm test`
+## Running the backend
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+The backend is already being hosted, but if you would like faster performance, then installing it localy would be the best option.
 
-### `npm run build`
+To install it locally, install the followig zip file:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### [flowchart_backend.zip](https://github.com/fwara07/flowchart/files/7438113/flowchart_backend.zip)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+After the installation, `cd` into the downloaded directory and run the following command using a command prompt:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### `pip install pipenv`
+### `pipenv shell`
+### `pipenv install`
+### `python manage.py makemigeations`
+### `python manage.py migrate`
+### `python manage.py runserver`
 
-### `npm run eject`
+**Note: Python must be installed, for the commands above to work.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+The backend should successfully be running now at the following url:
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### [http://localhost:3000](http://localhost:3000)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+However, to make it the two work together, you must change up the code a little.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+### Navigate back to the fronted folder, and follow the following steps:
 
-## Learn More
+First, open up your preffered code editor, and navigate to `App.js`, `Sidebar.js` and `Canvas.js`.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+On each of the files, there will be a variable called `apiUrl` in the first few lines of the file.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Once there, change the variable value to `http://127.0.0.1:8000`.
 
-### Code Splitting
+Repeat this process witht the rest of the filrs mention above.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### The application should successfully be running now!
