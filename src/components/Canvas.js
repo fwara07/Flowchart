@@ -720,6 +720,7 @@ const DiamondNodeComponent = ({ data }) => {
           width: "80px",
           position: "absolute",
           height: "80px",
+          paddgin: 20,
           marginTop: "10%",
           marginLeft: "10%",
           zIndex: "0",
