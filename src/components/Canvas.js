@@ -861,6 +861,8 @@ const Canvas = ({
   realOrientation = orientation;
   const startLegendObj = {};
   startLegendObj[currentFile.id] = [];
+  console.log(JSON.parse(localStorage.getItem("legend")));
+  console.log(startLegendObj);
   const [elements, setElements] = useState([]);
   const [error, setError] = useState({ value: false, msg: "" });
   const [elementCLicked, setElementClicked] = useState({});
