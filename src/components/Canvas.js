@@ -1698,7 +1698,10 @@ const Canvas = ({
       if (isNode(node, nodes)) {
         console.log(node);
         var itemText = (node.data.desc + node.data.title).toLowerCase();
-        if (node.data.description !== null) {
+        if (
+          node.data.description !== null ||
+          node.data.description !== undefined
+        ) {
           let descArr = "";
           node.data.description.map((pair) => {
             descArr = descArr + pair.key + pair.value;
