@@ -2172,7 +2172,7 @@ const Canvas = ({
               onClose={handleClose}
             >
               <MenuItem onClick={handleCloseMenu}>Profile</MenuItem>
-              <MenuItem onClick={handleClosemenu}>My account</MenuItem>
+              <MenuItem onClick={handleCloseMenu}>My account</MenuItem>
               <MenuItem onClick={handleCloseMenu}>Logout</MenuItem>
             </Menu>
           </Grid>
