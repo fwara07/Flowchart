@@ -23,6 +23,7 @@ import {
   Menu,
 } from "@material-ui/core";
 import React, { useState, useEffect, useRef } from "react";
+import SearchField from "react-search-field";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import AddIcon from "@material-ui/icons/Add";
 import CloudUploadIcon from "@material-ui/icons/CloudUpload";
@@ -1437,6 +1438,26 @@ const Canvas = ({
     },
   });
 
+  const searchNodes = (value, event) => {
+    const nodes = [...elements];
+    nodes.filter((node) => {
+      if (isNode(node, nodes)) {
+        var itemText = (node.data.desc + node.data.title).toLowerCase();
+        if (node.data.description !== null) {
+          let descArr = "";
+          node.data.description.map((pair) => {
+            descArr = descArr + pair.key + pair.value;
+          });
+          itemText = itemText + descArr;
+        }
+        return itemText.indexOf(value) !== -1;
+      } else {
+        return false;
+      }
+    });
+    setElements(nodes);
+  };
+
   const handleChangeSwitch = () => {
     setFirstTime(true);
     setEditMode(!isEditMode);
@@ -1871,6 +1892,7 @@ const Canvas = ({
                     Save
                   </Button>
                 )}
+                <SearchField placeholder="Search item" onChange={searchNodes} />
                 {/* <Button
                   variant="contained"
                   color="primary"
