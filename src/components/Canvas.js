@@ -1483,7 +1483,7 @@ const Canvas = ({
         </MenuItem>
         <Dialog
           open={openNewLegend}
-          onClose={() => setOpenNewNode(false)}
+          onClose={() => setOpenNewLegend(false)}
           aria-labelledby="form-dialog-title"
           // style={{ overflow: "hidden" }}
         >
