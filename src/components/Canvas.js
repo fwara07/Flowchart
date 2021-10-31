@@ -1694,6 +1694,7 @@ const Canvas = ({
   const searchNodes = (value, event) => {
     console.log(value);
     const nodes = [...elements];
+    let searchedEArr = [];
     const newNodes = nodes.filter((node) => {
       if (isNode(node, nodes)) {
         console.log(node);
@@ -1712,16 +1713,7 @@ const Canvas = ({
         console.log(itemText.indexOf(value) !== -1);
         if (itemText.indexOf(value) !== -1) {
           const edges = getConnectedEdges([node], nodes);
-          console.log(edges);
-          edges.map((edge) => {
-            nodes.map((element) => {
-              if (element === edge) {
-                console.log(element);
-                console.log(edge);
-                node.isHidden = false;
-              }
-            });
-          });
+          searchedEArr = searchedEArr.concat(edges);
           node.isHidden = false;
           return true;
         }
@@ -1731,6 +1723,11 @@ const Canvas = ({
       } else {
         node.isHidden = true;
         return true;
+      }
+    });
+    const finalNodes = newNodes.filter((node) => {
+      if (searchedEArr.includes(node)) {
+        node.isHidden = false;
       }
     });
     console.log(newNodes);
