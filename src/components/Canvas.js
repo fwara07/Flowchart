@@ -1474,17 +1474,16 @@ const Canvas = ({
     return (
       <Grid item xs={2} style={{ textAlign: "start" }}>
         <MenuItem
-          style={{
-            textAlign: "start",
-            marginTop: 20,
+          onClick={() => {
+            setOpenNewLegend(true);
+            handleCloseMenu();
           }}
-          onClick={() => setOpenNewLegend(true)}
         >
           Add legend
         </MenuItem>
         <Dialog
           open={openNewLegend}
-          onClose={handleClose}
+          onClose={() => setOpenNewNode(false)}
           aria-labelledby="form-dialog-title"
           // style={{ overflow: "hidden" }}
         >
@@ -2186,6 +2185,263 @@ const Canvas = ({
                 Add Legend
               </MenuItem> */}
             </Menu>
+            <DropzoneDialogBase
+              clearOnUnmount={true}
+              filesLimit={1}
+              dialogTitle={
+                <>
+                  {console.log(renderAlert)}
+                  {renderAlert.value && (
+                    <Alert severity="error">{renderAlert.msg}</Alert>
+                  )}
+                  <span>Upload file</span>
+                  <IconButton
+                    style={{
+                      right: "12px",
+                      top: "8px",
+                      position: "absolute",
+                    }}
+                    onClick={() => setOpenUpload(false)}
+                  >
+                    <CloseIcon />
+                  </IconButton>
+                </>
+              }
+              acceptedFiles={[".csv"]}
+              fileObjects={fileObjects}
+              cancelButtonText={"cancel"}
+              showAlerts={["error", "info"]}
+              submitButtonText={"submit"}
+              maxFileSize={5000000}
+              open={openUpload}
+              onAdd={(newFileObjs) => {
+                console.log("onAdd", newFileObjs);
+                if (fileObjects.length === 0) {
+                  setFileObjects([].concat(fileObjects, newFileObjs));
+                }
+              }}
+              onDelete={(deleteFileObj) => {
+                const newFilesObjects = [...fileObjects].filter(
+                  (item) => item !== deleteFileObj
+                );
+                setFileObjects(newFilesObjects);
+                console.log("onDelete", deleteFileObj);
+              }}
+              onClose={() => setOpenUpload(false)}
+              onSave={() => {
+                console.log(fileObjects[0]);
+                Papa.parse(fileObjects[0].file, {
+                  complete: function (results) {
+                    let data = results.data;
+                    let jsonArr = [];
+                    const ids = {};
+                    const children = {};
+                    const animateds = [];
+                    const edgeTypes = {};
+                    const arrows = [];
+                    const description = {};
+                    const arrowColors = {};
+                    let counter = 0;
+                    data = data.slice(1);
+                    data.map((element) => {
+                      console.log("0------0", element);
+                      const checkedTags = checkTags(element[3]);
+                      console.log(checkedTags, "7777777777777777777");
+                      console.log(element[4]);
+                      console.log(element[0]);
+                      console.log(element[0].includes("."));
+                      if (element[0].includes(".")) {
+                        counter = counter + 1;
+                        const lst =
+                          description[ids[element[0].split(".")[0]]] !==
+                          undefined
+                            ? [...description[ids[element[0].split(".")[0]]]]
+                            : [];
+                        lst.push({
+                          key: element[1],
+                          value: element[2],
+                        });
+                        description[ids[element[0].split(".")[0]]] = [...lst];
+                      } else {
+                        if (
+                          ["special", "oval", "rectangle", "diamond"].includes(
+                            element[4].toLowerCase()
+                          )
+                        ) {
+                          console.log("----");
+                          if (Array.isArray(checkedTags)) {
+                            ids[element[0]] = getNodeId();
+                            jsonArr.push({
+                              id: ids[element[0]],
+                              node: currentFile.id,
+                              type: element[4],
+                              data: {
+                                title: element[1],
+                                description: null,
+                                color: element[2].startsWith("#")
+                                  ? hexToRgb(element[2])
+                                  : {
+                                      r: "193",
+                                      g: "230",
+                                      b: "255",
+                                      a: "100",
+                                    },
+                                tags: checkedTags,
+                                isCollapsable:
+                                  element[5] === "TRUE" ? true : false,
+                              },
+                              isHidden: false,
+                              position: { x: 0, y: 0 },
+                              desc: null,
+                            });
+                            if (element[7] === "TRUE") {
+                              animateds.push(ids[element[0]]);
+                            }
+                            if (element[8] === "step") {
+                              edgeTypes[ids[element[0]]] = "step";
+                            } else {
+                              edgeTypes[ids[element[0]]] = "curved";
+                            }
+                            if (element[9] === "TRUE") {
+                              arrows.push(ids[element[0]]);
+                            }
+                            if (element[10].startsWith("#")) {
+                              arrowColors[ids[element[0]]] = element[10];
+                            }
+                            console.log(jsonArr);
+                            if (element[6].length > 0) {
+                              if (element[6].includes(",")) {
+                                const csvChildren = element[6].split(",");
+                                children[element[0]] = csvChildren;
+                              }
+                            }
+                          } else {
+                            console.log(checkedTags);
+                            // setRenderAlert(checkedTags);
+                            setRenderAlert({
+                              value: true,
+                              msg: "One or more of the tags provided does not exist.",
+                            });
+                          }
+                        } else {
+                          console.log("test");
+                          setRenderAlert({
+                            value: true,
+                            msg: "A type of shape in the file does not exist.",
+                          });
+                        }
+                      }
+                    });
+                    console.log(jsonArr);
+                    console.log(description);
+                    jsonArr.map((element) => {
+                      element.data.description = description[element.id];
+                    });
+                    console.log("Finished:", results.data);
+                    console.log("onSave", fileObjects);
+                    console.log(jsonArr.length);
+                    if (jsonArr.length === data.length - counter) {
+                      console.log(ids);
+                      console.log(children);
+                      for (var key in children) {
+                        if (children.hasOwnProperty(key)) {
+                          if (Array.isArray(children[key])) {
+                            children[key].map((child) => {
+                              const edge = addEdge(
+                                {
+                                  animated: animateds.includes(ids[key])
+                                    ? true
+                                    : false,
+                                  type: "customEdge",
+                                  data: {
+                                    type: edgeTypes[ids[key]],
+                                    hasArrow:
+                                      arrows.includes(ids[key]) === true
+                                        ? true
+                                        : false,
+                                    color:
+                                      arrowColors[ids[key]] !== undefined
+                                        ? hexToRgbA(arrowColors[ids[key]])
+                                        : {
+                                            r: "187",
+                                            g: "187",
+                                            b: "192",
+                                            a: "100",
+                                          },
+                                  },
+                                  source: ids[key],
+                                  target: ids[child],
+                                },
+                                jsonArr
+                              );
+                              console.log(edge);
+                              jsonArr = edge;
+                            });
+                          } else {
+                            const edge = addEdge(
+                              {
+                                animated: animateds.includes(ids[key])
+                                  ? true
+                                  : false,
+                                type: "customEdge",
+                                data: {
+                                  type: edgeTypes[ids[key]],
+                                  hasArrow:
+                                    arrows.includes(ids[key]) === true
+                                      ? true
+                                      : false,
+                                  color:
+                                    arrowColors[ids[key]] !== undefined
+                                      ? hexToRgbA(arrowColors[ids[key]])
+                                      : {
+                                          r: "187",
+                                          g: "187",
+                                          b: "192",
+                                          a: "100",
+                                        },
+                                },
+                                source: ids[key],
+                                target: ids[children[key]],
+                              },
+                              jsonArr
+                            );
+                            console.log(edge);
+                            jsonArr = edge;
+                          }
+                        }
+                      }
+                      const layoutedElements = getLayoutedElements(jsonArr);
+                      setElements(layoutedElements);
+                      updateNode(layoutedElements);
+                      console.log(jsonArr);
+                      setCsv(true);
+                      setOpenUpload(false);
+                    }
+                  },
+                });
+              }}
+              showPreviewsInDropzone={false}
+              useChipsForPreview
+              previewGridProps={{
+                container: { spacing: 1, direction: "row" },
+              }}
+              previewChipProps={{
+                classes: { root: classes.previewChip },
+              }}
+              showFileNamesInPreview={true}
+            />
+            <Snackbar
+              open={renderAlert.value}
+              autoHideDuration={5000}
+              onClose={() => setRenderAlert({ value: false, msg: "" })}
+            >
+              <Alert
+                onClose={() => setRenderAlert({ value: false, msg: "" })}
+                severity="error"
+              >
+                {renderAlert.msg}
+              </Alert>
+            </Snackbar>
           </Grid>
         </Grid>
         <Divider orientation="horizontal" />
