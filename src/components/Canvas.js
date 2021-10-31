@@ -1439,6 +1439,7 @@ const Canvas = ({
   });
 
   const searchNodes = (value, event) => {
+    console.log(value);
     const nodes = [...elements];
     nodes.filter((node) => {
       if (isNode(node, nodes)) {
