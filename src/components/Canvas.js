@@ -2177,14 +2177,14 @@ const Canvas = ({
               >
                 Import CSV
               </MenuItem>
-              <MenuItem
+              {selectLegend()}
+              {/* <MenuItem
                 onClick={() => {
-                  selectLegend();
                   handleCloseMenu();
                 }}
               >
                 Add Legend
-              </MenuItem>
+              </MenuItem> */}
             </Menu>
           </Grid>
         </Grid>
