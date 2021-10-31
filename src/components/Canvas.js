@@ -1730,8 +1730,8 @@ const Canvas = ({
         node.isHidden = false;
       }
     });
-    console.log(newNodes);
-    setElements(newNodes);
+    console.log(finalNodes);
+    setElements(finalNodes);
   };
 
   if (currentFile === null) {
