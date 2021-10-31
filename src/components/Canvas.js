@@ -1473,10 +1473,7 @@ const Canvas = ({
 
     return (
       <Grid item xs={2} style={{ textAlign: "start" }}>
-        <Button
-          variant="outlined"
-          color="primary"
-          startIcon={<Add />}
+        <MenuItem
           style={{
             textAlign: "start",
             marginTop: 20,
@@ -1484,7 +1481,7 @@ const Canvas = ({
           onClick={() => setOpenNewLegend(true)}
         >
           Add legend
-        </Button>
+        </MenuItem>
         <Dialog
           open={openNewLegend}
           onClose={handleClose}
@@ -1840,7 +1837,7 @@ const Canvas = ({
             {/* </Grid> */}
           </Grid>
           {/* {selectLegend()} */}
-          <Grid item xs={4} style={{ textAlign: "center" }}>
+          <Grid item xs={5} style={{ textAlign: "center" }}>
             <Typography component="div">
               <Grid
                 component="label"
@@ -2155,7 +2152,7 @@ const Canvas = ({
               </Grid>
             </Typography>
           </Grid>
-          <Grid item xs={2} style={{ textAlign: "end" }}>
+          <Grid item xs={1} style={{ textAlign: "end" }}>
             <IconButton
               // style={{ paddingLeft: 30 }}
               aria-label="more"
@@ -2172,8 +2169,22 @@ const Canvas = ({
               open={Boolean(anchorEl)}
               onClose={handleCloseMenu}
             >
-              <MenuItem onClick={handleCloseMenu}>Import CSV</MenuItem>
-              <MenuItem onClick={handleCloseMenu}>Add Legend</MenuItem>
+              <MenuItem
+                onClick={() => {
+                  setOpenUpload(true);
+                  handleCloseMenu();
+                }}
+              >
+                Import CSV
+              </MenuItem>
+              <MenuItem
+                onClick={() => {
+                  selectLegend();
+                  handleCloseMenu();
+                }}
+              >
+                Add Legend
+              </MenuItem>
             </Menu>
           </Grid>
         </Grid>
