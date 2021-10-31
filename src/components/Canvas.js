@@ -1472,7 +1472,7 @@ const Canvas = ({
     ];
 
     return (
-      <Grid item xs={2} style={{ textAlign: "start" }}>
+      <>
         <MenuItem
           onClick={() => {
             setOpenNewLegend(true);
@@ -1537,7 +1537,7 @@ const Canvas = ({
             </Button>
           </DialogContent>
         </Dialog>
-      </Grid>
+      </>
     );
   };
 
