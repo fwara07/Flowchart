@@ -1455,6 +1455,7 @@ const Canvas = ({
         return false;
       }
     });
+    console.log(nodes)
     setElements(nodes);
   };
 
