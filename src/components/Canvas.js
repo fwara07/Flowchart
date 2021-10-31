@@ -2157,7 +2157,7 @@ const Canvas = ({
           </Grid>
           <Grid item xs={2} style={{ textAlign: "end" }}>
             <IconButton
-              style={{ marginLeft: 30 }}
+              style={{ paddingLeft: 30 }}
               aria-label="more"
               aria-controls="long-menu"
               aria-haspopup="true"
