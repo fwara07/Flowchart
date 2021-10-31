@@ -1711,6 +1711,14 @@ const Canvas = ({
         console.log(itemText);
         console.log(itemText.indexOf(value) !== -1);
         if (itemText.indexOf(value) !== -1) {
+          const edges = getConnectedEdges(node, nodes);
+          edges.map((edge) => {
+            nodes.map((node) => {
+              if (node === edge) {
+                edge.isHidden === false;
+              }
+            });
+          });
           node.isHidden = false;
           return true;
         }
