@@ -1441,7 +1441,7 @@ const Canvas = ({
   const searchNodes = (value, event) => {
     console.log(value);
     const nodes = [...elements];
-    nodes.filter((node) => {
+    const newNodes = nodes.filter((node) => {
       if (isNode(node, nodes)) {
         var itemText = (node.data.desc + node.data.title).toLowerCase();
         if (node.data.description !== null) {
@@ -1458,8 +1458,8 @@ const Canvas = ({
         return false;
       }
     });
-    console.log(nodes);
-    setElements(nodes);
+    console.log(newNodes);
+    setElements(newNodes);
   };
 
   const handleChangeSwitch = () => {
