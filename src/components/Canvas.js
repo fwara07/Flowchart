@@ -1438,32 +1438,6 @@ const Canvas = ({
     },
   });
 
-  const searchNodes = (value, event) => {
-    if (value.length !== 0) {
-      console.log(value);
-      const nodes = [...elements];
-      const newNodes = nodes.filter((node) => {
-        if (isNode(node, nodes)) {
-          var itemText = (node.data.desc + node.data.title).toLowerCase();
-          if (node.data.description !== null) {
-            let descArr = "";
-            node.data.description.map((pair) => {
-              descArr = descArr + pair.key + pair.value;
-            });
-            itemText = itemText + descArr;
-          }
-          console.log(itemText);
-          console.log(itemText.indexOf(value) !== -1);
-          return itemText.indexOf(value) !== -1;
-        } else {
-          return false;
-        }
-      });
-      console.log(newNodes);
-      filteredElements = [...newNodes];
-    }
-  };
-
   const handleChangeSwitch = () => {
     setFirstTime(true);
     setEditMode(!isEditMode);
@@ -1717,6 +1691,32 @@ const Canvas = ({
   console.log(filteredElements);
   console.log(elements);
   const classes = useStyles();
+
+  const searchNodes = (value, event) => {
+    if (value.length !== 0) {
+      console.log(value);
+      const nodes = [...elements];
+      const newNodes = nodes.filter((node) => {
+        if (isNode(node, nodes)) {
+          var itemText = (node.data.desc + node.data.title).toLowerCase();
+          if (node.data.description !== null) {
+            let descArr = "";
+            node.data.description.map((pair) => {
+              descArr = descArr + pair.key + pair.value;
+            });
+            itemText = itemText + descArr;
+          }
+          console.log(itemText);
+          console.log(itemText.indexOf(value) !== -1);
+          return itemText.indexOf(value) !== -1;
+        } else {
+          return false;
+        }
+      });
+      console.log(newNodes);
+      filteredElements = [...newNodes];
+    }
+  };
 
   if (currentFile === null) {
     return <div></div>;
