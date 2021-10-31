@@ -20,6 +20,7 @@ import {
   InputLabel,
   Chip,
   Fab,
+  Menu,
 } from "@material-ui/core";
 import React, { useState, useEffect, useRef } from "react";
 import AddIcon from "@material-ui/icons/Add";
@@ -720,7 +721,7 @@ const DiamondNodeComponent = ({ data }) => {
           width: "80px",
           position: "absolute",
           height: "80px",
-          paddgin: 20,
+          padding: 20,
           marginTop: "10%",
           marginLeft: "10%",
           zIndex: "0",
@@ -1690,7 +1691,7 @@ const Canvas = ({
     return (
       <>
         <Grid container direction="row" spacing={1} style={{ width: "80%" }}>
-          <Grid item xs={2} style={{ textAlign: "start" }}>
+          <Grid item xs={3} style={{ textAlign: "start" }}>
             {isEditMode && (
               <>
                 <Button
@@ -1828,8 +1829,8 @@ const Canvas = ({
             </Typography>
             {/* </Grid> */}
           </Grid>
-          {selectLegend()}
-          <Grid item xs={5} style={{ textAlign: "center" }}>
+          {/* {selectLegend()} */}
+          <Grid item xs={6} style={{ textAlign: "center" }}>
             <Typography component="div">
               <Grid
                 component="label"
@@ -1864,7 +1865,7 @@ const Canvas = ({
                     Save
                   </Button>
                 )}
-                <Button
+                {/* <Button
                   variant="contained"
                   color="primary"
                   style={{ marginLeft: isEditMode ? 10 : 30 }}
@@ -2140,7 +2141,7 @@ const Canvas = ({
                   >
                     {renderAlert.msg}
                   </Alert>
-                </Snackbar>
+                </Snackbar> */}
               </Grid>
             </Typography>
           </Grid>
