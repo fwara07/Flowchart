@@ -2157,6 +2157,7 @@ const Canvas = ({
           </Grid>
           <Grid item xs={2} style={{ textAlign: "end" }}>
             <IconButton
+              style={{ marginLeft: 30 }}
               aria-label="more"
               aria-controls="long-menu"
               aria-haspopup="true"
@@ -2169,11 +2170,10 @@ const Canvas = ({
               anchorEl={anchorEl}
               keepMounted
               open={Boolean(anchorEl)}
-              onClose={handleClose}
+              onClose={handleCloseMenu}
             >
-              <MenuItem onClick={handleCloseMenu}>Profile</MenuItem>
-              <MenuItem onClick={handleCloseMenu}>My account</MenuItem>
-              <MenuItem onClick={handleCloseMenu}>Logout</MenuItem>
+              <MenuItem onClick={handleCloseMenu}>Import CSV</MenuItem>
+              <MenuItem onClick={handleCloseMenu}>Add Legend</MenuItem>
             </Menu>
           </Grid>
         </Grid>
