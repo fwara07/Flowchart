@@ -908,7 +908,6 @@ const Canvas = ({
   const reactFlowWrapper = useRef(null);
   const [reactFlowInstance, setReactFlowInstance] = useState(null);
   const [openNewField, setOpenNewField] = useState(false);
-
   const [field, setField] = useState({ key: "", value: "" });
   console.log();
   const [hasArrowEdge, setArrowEdge] = useState(
@@ -1708,13 +1707,19 @@ const Canvas = ({
           }
           console.log(itemText);
           console.log(itemText.indexOf(value) !== -1);
-          return itemText.indexOf(value) !== -1;
+          if (itemText.indexOf(value) !== -1) {
+            node.isHidden === false;
+            return true;
+          }
+          node.isHidden === true;
+          return false;
+          // return itemText.indexOf(value) !== -1;
         } else {
           return false;
         }
       });
       console.log(newNodes);
-      filteredElements = [...newNodes];
+      setElements(newNodes);
     }
   };
 
