@@ -1718,7 +1718,7 @@ const Canvas = ({
               if (node === edge) {
                 console.log(node);
                 console.log(edge);
-                edge.isHidden = false;
+                node.isHidden = false;
               }
             });
           });
