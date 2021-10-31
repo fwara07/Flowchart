@@ -1729,6 +1729,7 @@ const Canvas = ({
       if (searchedEArr.includes(node)) {
         node.isHidden = false;
       }
+      return true;
     });
     console.log(finalNodes);
     setElements(finalNodes);
