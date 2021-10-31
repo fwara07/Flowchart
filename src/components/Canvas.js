@@ -1714,9 +1714,9 @@ const Canvas = ({
           const edges = getConnectedEdges([node], nodes);
           console.log(edges);
           edges.map((edge) => {
-            nodes.map((node) => {
-              if (node === edge) {
-                console.log(node);
+            nodes.map((element) => {
+              if (element === edge) {
+                console.log(element);
                 console.log(edge);
                 node.isHidden = false;
               }
