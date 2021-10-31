@@ -1699,7 +1699,7 @@ const Canvas = ({
         console.log(node);
         var itemText = (node.data.desc + node.data.title).toLowerCase();
         if (
-          node.data.description !== null ||
+          node.data.description !== null &&
           node.data.description !== undefined
         ) {
           let descArr = "";
