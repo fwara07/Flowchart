@@ -1452,6 +1452,7 @@ const Canvas = ({
           itemText = itemText + descArr;
         }
         console.log(itemText);
+        console.log(itemText.indexOf(value) !== -1);
         return itemText.indexOf(value) !== -1;
       } else {
         return false;
