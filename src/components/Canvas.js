@@ -1708,10 +1708,10 @@ const Canvas = ({
           console.log(itemText);
           console.log(itemText.indexOf(value) !== -1);
           if (itemText.indexOf(value) !== -1) {
-            node.isHidden === false;
+            node.isHidden = false;
             return true;
           }
-          node.isHidden === true;
+          node.isHidden = true;
           return false;
           // return itemText.indexOf(value) !== -1;
         } else {
