@@ -1692,36 +1692,34 @@ const Canvas = ({
   const classes = useStyles();
 
   const searchNodes = (value, event) => {
-    if (value.length !== 0) {
-      console.log(value);
-      const nodes = [...elements];
-      const newNodes = nodes.filter((node) => {
-        if (isNode(node, nodes)) {
-          var itemText = (node.data.desc + node.data.title).toLowerCase();
-          if (node.data.description !== null) {
-            let descArr = "";
-            node.data.description.map((pair) => {
-              descArr = descArr + pair.key + pair.value;
-            });
-            itemText = itemText + descArr;
-          }
-          console.log(itemText);
-          console.log(itemText.indexOf(value) !== -1);
-          if (itemText.indexOf(value) !== -1) {
-            node.isHidden = false;
-            return true;
-          }
-          node.isHidden = true;
-          return true;
-          // return itemText.indexOf(value) !== -1;
-        } else {
-          node.isHidden = true;
+    console.log(value);
+    const nodes = [...elements];
+    const newNodes = nodes.filter((node) => {
+      if (isNode(node, nodes)) {
+        var itemText = (node.data.desc + node.data.title).toLowerCase();
+        if (node.data.description !== null) {
+          let descArr = "";
+          node.data.description.map((pair) => {
+            descArr = descArr + pair.key + pair.value;
+          });
+          itemText = itemText + descArr;
+        }
+        console.log(itemText);
+        console.log(itemText.indexOf(value) !== -1);
+        if (itemText.indexOf(value) !== -1) {
+          node.isHidden = false;
           return true;
         }
-      });
-      console.log(newNodes);
-      setElements(newNodes);
-    }
+        node.isHidden = true;
+        return true;
+        // return itemText.indexOf(value) !== -1;
+      } else {
+        node.isHidden = true;
+        return true;
+      }
+    });
+    console.log(newNodes);
+    setElements(newNodes);
   };
 
   if (currentFile === null) {
