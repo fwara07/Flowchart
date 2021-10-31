@@ -1696,6 +1696,7 @@ const Canvas = ({
     const nodes = [...elements];
     const newNodes = nodes.filter((node) => {
       if (isNode(node, nodes)) {
+        console.log(node);
         var itemText = (node.data.desc + node.data.title).toLowerCase();
         if (node.data.description !== null) {
           let descArr = "";
