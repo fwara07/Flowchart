@@ -23,6 +23,7 @@ import {
   Menu,
 } from "@material-ui/core";
 import React, { useState, useEffect, useRef } from "react";
+import MoreVertIcon from "@material-ui/icons/MoreVert";
 import AddIcon from "@material-ui/icons/Add";
 import CloudUploadIcon from "@material-ui/icons/CloudUpload";
 import { DropzoneDialogBase } from "material-ui-dropzone";
@@ -924,6 +925,15 @@ const Canvas = ({
       ? elementCLicked.data.isCollapsable
       : false
   );
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const handleClickMenu = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleCloseMenu = () => {
+    setAnchorEl(null);
+  };
 
   const onLoad = (reactFlowInstance) => {
     // console.log("flow loaded:", reactFlowInstance);
@@ -1830,7 +1840,7 @@ const Canvas = ({
             {/* </Grid> */}
           </Grid>
           {/* {selectLegend()} */}
-          <Grid item xs={6} style={{ textAlign: "center" }}>
+          <Grid item xs={4} style={{ textAlign: "center" }}>
             <Typography component="div">
               <Grid
                 component="label"
@@ -2144,6 +2154,27 @@ const Canvas = ({
                 </Snackbar> */}
               </Grid>
             </Typography>
+          </Grid>
+          <Grid item xs={2} style={{ textAlign: "end" }}>
+            <IconButton
+              aria-label="more"
+              aria-controls="long-menu"
+              aria-haspopup="true"
+              onClick={handleClickMenu}
+            >
+              <MoreVertIcon />
+            </IconButton>
+            <Menu
+              id="simple-menu"
+              anchorEl={anchorEl}
+              keepMounted
+              open={Boolean(anchorEl)}
+              onClose={handleClose}
+            >
+              <MenuItem onClick={handleCloseMenu}>Profile</MenuItem>
+              <MenuItem onClick={handleClosemenu}>My account</MenuItem>
+              <MenuItem onClick={handleCloseMenu}>Logout</MenuItem>
+            </Menu>
           </Grid>
         </Grid>
         <Divider orientation="horizontal" />
