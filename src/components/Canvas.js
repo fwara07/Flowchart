@@ -1715,6 +1715,7 @@ const Canvas = ({
           return true;
           // return itemText.indexOf(value) !== -1;
         } else {
+          node.isHidden = true;
           return true;
         }
       });
