@@ -1712,10 +1712,10 @@ const Canvas = ({
             return true;
           }
           node.isHidden = true;
-          return false;
+          return true;
           // return itemText.indexOf(value) !== -1;
         } else {
-          return false;
+          return true;
         }
       });
       console.log(newNodes);
