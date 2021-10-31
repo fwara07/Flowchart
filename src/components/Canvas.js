@@ -1450,12 +1450,13 @@ const Canvas = ({
           });
           itemText = itemText + descArr;
         }
+        console.log(itemText);
         return itemText.indexOf(value) !== -1;
       } else {
         return false;
       }
     });
-    console.log(nodes)
+    console.log(nodes);
     setElements(nodes);
   };
 
