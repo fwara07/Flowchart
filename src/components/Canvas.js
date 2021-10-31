@@ -58,6 +58,7 @@ import dagre from "dagre";
 import { EditText } from "react-edit-text";
 import "react-edit-text/dist/index.css";
 import CustomEdge from "./CustomEdge";
+import { node } from "webpack";
 const markerEnd = getMarkerEnd("arrowclosed", "my-marker");
 console.log(markerEnd);
 
@@ -1695,6 +1696,12 @@ const Canvas = ({
     console.log(value);
     const nodes = [...elements];
     let searchedEArr = [];
+    if (value === "") {
+      nodes.filter((node) => {
+        node.isHidden = false;
+      });
+      return true;
+    }
     const newNodes = nodes.filter((node) => {
       if (isNode(node, nodes)) {
         console.log(node);
@@ -1712,8 +1719,6 @@ const Canvas = ({
         console.log(itemText);
         console.log(itemText.indexOf(value) !== -1);
         if (itemText.indexOf(value) !== -1) {
-          const edges = getConnectedEdges([node], nodes);
-          searchedEArr = searchedEArr.concat(edges);
           node.isHidden = false;
           return true;
         }
@@ -1724,12 +1729,6 @@ const Canvas = ({
         node.isHidden = true;
         return true;
       }
-    });
-    const finalNodes = newNodes.filter((node) => {
-      if (searchedEArr.includes(node)) {
-        node.isHidden = false;
-      }
-      return true;
     });
     console.log(finalNodes);
     setElements(finalNodes);
