@@ -1863,7 +1863,7 @@ const Canvas = ({
                   <Button
                     variant="contained"
                     color="primary"
-                    style={{ marginLeft: 60 }}
+                    style={{ marginLeft: 30 }}
                     onClick={() => {
                       // console.log(
                       //   elements,
