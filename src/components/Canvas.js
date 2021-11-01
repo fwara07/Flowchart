@@ -1735,7 +1735,7 @@ const Canvas = ({
   } else {
     return (
       <>
-        <Grid container direction="row" spacing={1} style={{ width: "80%" }}>
+        <Grid container direction="row" spacing={1} style={{ width: "70%" }}>
           <Grid item xs={3} style={{ textAlign: "start" }}>
             {isEditMode && (
               <>
@@ -1882,7 +1882,7 @@ const Canvas = ({
                 container
                 alignItems="center"
                 spacing={1}
-                style={{ paddingTop: 20, paddingLeft: 40 }}
+                style={{ paddingTop: 20, paddingLeft: 20 }}
               >
                 <Grid item>View</Grid>
                 <Grid item>
