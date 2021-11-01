@@ -1910,8 +1910,9 @@ const Canvas = ({
                     Save
                   </Button>
                 )}
-                {isEditMode && (
+                {!isEditMode && (
                   <SearchField
+                    style={{ marginLeft: 15 }}
                     placeholder="Search item"
                     onChange={searchNodes}
                   />
