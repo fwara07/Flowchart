@@ -362,7 +362,7 @@ const SpecialNodeComponent = ({ data }) => {
               >
                 Properties
               </div>
-              {data.description.length > 5 && (
+              {data.description.length > 1 && (
                 <>
                   <button
                     ref={expand_collapse_bottom}
