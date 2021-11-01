@@ -1735,7 +1735,7 @@ const Canvas = ({
   } else {
     return (
       <>
-        <Grid container direction="row" spacing={1} style={{ width: "85%" }}>
+        <Grid container direction="row" spacing={1} style={{ width: "82%" }}>
           <Grid item xs={3} style={{ textAlign: "start" }}>
             {isEditMode && (
               <>
