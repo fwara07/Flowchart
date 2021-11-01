@@ -315,18 +315,20 @@ const SpecialNodeComponent = ({ data }) => {
                   alignItems="center"
                 >
                   <div ref={keys_top} style={{ textAlign: "center" }}>
-                    {data.description.slice(0, 5).map((pair) => {
-                      return (
-                        <Typography
-                          variant="subtitle2"
-                          gutterBottom
-                          style={{
-                            paddingRight: 10,
-                          }}
-                        >
-                          {pair.key}
-                        </Typography>
-                      );
+                    {data.description.map((pair) => {
+                      if (data.section === "1") {
+                        return (
+                          <Typography
+                            variant="subtitle2"
+                            gutterBottom
+                            style={{
+                              paddingRight: 10,
+                            }}
+                          >
+                            {pair.key}
+                          </Typography>
+                        );
+                      }
                     })}
                   </div>
                   <Divider
@@ -335,18 +337,20 @@ const SpecialNodeComponent = ({ data }) => {
                     flexItem
                   />
                   <div ref={values_top} style={{ textAlign: "center" }}>
-                    {data.description.slice(0, 5).map((pair) => {
-                      return (
-                        <Typography
-                          variant="subtitle2"
-                          gutterBottom
-                          style={{
-                            paddingLeft: 10,
-                          }}
-                        >
-                          {pair.value}
-                        </Typography>
-                      );
+                    {data.description.map((pair) => {
+                      if (data.section === "1") {
+                        return (
+                          <Typography
+                            variant="subtitle2"
+                            gutterBottom
+                            style={{
+                              paddingLeft: 10,
+                            }}
+                          >
+                            {pair.value}
+                          </Typography>
+                        );
+                      }
                     })}
                   </div>
                 </Grid>
@@ -403,9 +407,8 @@ const SpecialNodeComponent = ({ data }) => {
                       }}
                     >
                       <div ref={keys_bottom} style={{ textAlign: "center" }}>
-                        {data.description
-                          .slice(5, data.description.length)
-                          .map((pair) => {
+                        {data.description.map((pair) => {
+                          if (data.section === "2") {
                             return (
                               <Typography
                                 variant="subtitle2"
@@ -417,7 +420,8 @@ const SpecialNodeComponent = ({ data }) => {
                                 {pair.key}
                               </Typography>
                             );
-                          })}
+                          }
+                        })}
                       </div>
                       <Divider
                         orientation="vertical"
@@ -425,9 +429,8 @@ const SpecialNodeComponent = ({ data }) => {
                         flexItem
                       />
                       <div ref={values_bottom} style={{ textAlign: "center" }}>
-                        {data.description
-                          .slice(5, data.description.length)
-                          .map((pair) => {
+                        {data.description.map((pair) => {
+                          if (data.section === "2") {
                             return (
                               <Typography
                                 variant="subtitle2"
@@ -439,7 +442,8 @@ const SpecialNodeComponent = ({ data }) => {
                                 {pair.value}
                               </Typography>
                             );
-                          })}
+                          }
+                        })}
                       </div>
                     </Grid>
                   </div>
@@ -922,6 +926,7 @@ const Canvas = ({
       : false
   );
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const [section, setSection] = useState("1");
 
   const handleClickMenu = (event) => {
     setAnchorEl(event.currentTarget);
@@ -957,6 +962,10 @@ const Canvas = ({
     });
     setElements(newElements);
     updateNode(newElements);
+  };
+
+  const handleChangeSection = (event) => {
+    setSection(event.target.value);
   };
 
   const updateElementsDb = (newElements, currentFile, isDelete = false) => {
@@ -1261,6 +1270,7 @@ const Canvas = ({
       data: {
         title: "title",
         description: type === "special" ? [{ key: "", value: "" }] : null,
+        section: null,
         color: selectedColor,
         isCollapsable: true,
         hasAnimatedEdge: false,
@@ -1585,6 +1595,7 @@ const Canvas = ({
     const newElements = [...elements];
     newElements.map((element) => {
       if (element.id === elementCLicked.id) {
+        element.data.section = section;
         element.data.description.push(field);
       }
     });
@@ -2727,6 +2738,19 @@ const Canvas = ({
                               size="small"
                             />
                           </div>
+                          <Select
+                            style={{ fontSize: 15 }}
+                            labelId="demo-simple-select-outlined-label"
+                            id="demo-simple-select-outlined"
+                            onChange={handleChangeSection}
+                            variant="outlined"
+                            label="Section"
+                            defaultValue="smoothstep"
+                            displayEmpty={true}
+                          >
+                            <MenuItem value="1">Section 1</MenuItem>
+                            <MenuItem value="2">Section 2</MenuItem>
+                          </Select>
                         </DialogContent>
                         <DialogActions>
                           <Button onClick={handleCloseField} color="primary">
