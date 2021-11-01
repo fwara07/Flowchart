@@ -316,7 +316,7 @@ const SpecialNodeComponent = ({ data }) => {
                 >
                   <div ref={keys_top} style={{ textAlign: "center" }}>
                     {data.description.map((pair) => {
-                      if (data.section === "1") {
+                      if (pair.section === "1") {
                         return (
                           <Typography
                             variant="subtitle2"
@@ -338,7 +338,7 @@ const SpecialNodeComponent = ({ data }) => {
                   />
                   <div ref={values_top} style={{ textAlign: "center" }}>
                     {data.description.map((pair) => {
-                      if (data.section === "1") {
+                      if (pair.section === "1") {
                         return (
                           <Typography
                             variant="subtitle2"
@@ -408,7 +408,7 @@ const SpecialNodeComponent = ({ data }) => {
                     >
                       <div ref={keys_bottom} style={{ textAlign: "center" }}>
                         {data.description.map((pair) => {
-                          if (data.section === "2") {
+                          if (pair.section === "2") {
                             return (
                               <Typography
                                 variant="subtitle2"
@@ -430,7 +430,7 @@ const SpecialNodeComponent = ({ data }) => {
                       />
                       <div ref={values_bottom} style={{ textAlign: "center" }}>
                         {data.description.map((pair) => {
-                          if (data.section === "2") {
+                          if (pair.section === "2") {
                             return (
                               <Typography
                                 variant="subtitle2"
@@ -1269,8 +1269,8 @@ const Canvas = ({
       type: type,
       data: {
         title: "title",
-        description: type === "special" ? [{ key: "", value: "" }] : null,
-        section: null,
+        description:
+          type === "special" ? [{ key: "", value: "", section: "1" }] : null,
         color: selectedColor,
         isCollapsable: true,
         hasAnimatedEdge: false,
@@ -1595,8 +1595,7 @@ const Canvas = ({
     const newElements = [...elements];
     newElements.map((element) => {
       if (element.id === elementCLicked.id) {
-        element.data.section = section;
-        element.data.description.push(field);
+        element.data.description.push({ ...field, section: section });
       }
     });
     setElements(newElements);
@@ -2738,19 +2737,31 @@ const Canvas = ({
                               size="small"
                             />
                           </div>
-                          <Select
-                            style={{ fontSize: 15 }}
-                            labelId="demo-simple-select-outlined-label"
-                            id="demo-simple-select-outlined"
-                            onChange={handleChangeSection}
+                          <FormControl
                             variant="outlined"
-                            label="Section"
-                            defaultValue="smoothstep"
-                            displayEmpty={true}
+                            style={{
+                              width: 200,
+                              marginTop: 30,
+                              textAlign: "center",
+                            }}
                           >
-                            <MenuItem value="1">Section 1</MenuItem>
-                            <MenuItem value="2">Section 2</MenuItem>
-                          </Select>
+                            <InputLabel id="demo-simple-select-outlined-label">
+                              Section
+                            </InputLabel>
+                            <Select
+                              style={{ fontSize: 15 }}
+                              labelId="demo-simple-select-outlined-label"
+                              id="demo-simple-select-outlined"
+                              onChange={handleChangeSection}
+                              variant="outlined"
+                              label="Section"
+                              defaultValue="smoothstep"
+                              displayEmpty={true}
+                            >
+                              <MenuItem value="1">Section 1</MenuItem>
+                              <MenuItem value="2">Section 2</MenuItem>
+                            </Select>
+                          </FormControl>
                         </DialogContent>
                         <DialogActions>
                           <Button onClick={handleCloseField} color="primary">
