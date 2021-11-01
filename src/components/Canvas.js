@@ -26,16 +26,13 @@ import React, { useState, useEffect, useRef } from "react";
 import SearchField from "react-search-field";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import AddIcon from "@material-ui/icons/Add";
-import CloudUploadIcon from "@material-ui/icons/CloudUpload";
 import { DropzoneDialogBase } from "material-ui-dropzone";
 import CloseIcon from "@material-ui/icons/Close";
 import Papa from "papaparse";
 import Edit from "@material-ui/icons/Edit";
 import ReactFlow, {
-  removeElements,
   ReactFlowProvider,
   getMarkerEnd,
-  getIncomers,
   getOutgoers,
   isNode,
   addEdge,
@@ -50,15 +47,13 @@ import Delete from "@material-ui/icons/Delete";
 import Add from "@material-ui/icons/Add";
 import reactCSS from "reactcss";
 import { SketchPicker } from "react-color";
-import VisibilityIcon from "@material-ui/icons/Visibility";
-import EditIcon from "@material-ui/icons/Edit";
 import { createStyles, makeStyles } from "@material-ui/core/styles";
 import { Alert, AlertTitle } from "@material-ui/lab";
 import dagre from "dagre";
 import { EditText } from "react-edit-text";
 import "react-edit-text/dist/index.css";
 import CustomEdge from "./CustomEdge";
-import { node } from "webpack";
+
 const markerEnd = getMarkerEnd("arrowclosed", "my-marker");
 console.log(markerEnd);
 
