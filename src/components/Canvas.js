@@ -1695,41 +1695,42 @@ const Canvas = ({
   const searchNodes = (value, event) => {
     console.log(value);
     const nodes = [...elements];
-    let searchedEArr = [];
+    let newNodes;
     if (value === "") {
-      nodes.filter((node) => {
+      newNodes = [...nodes];
+      newNodes.map((node) => {
         node.isHidden = false;
       });
-      return true;
-    }
-    const newNodes = nodes.filter((node) => {
-      if (isNode(node, nodes)) {
-        console.log(node);
-        var itemText = (node.data.desc + node.data.title).toLowerCase();
-        if (
-          node.data.description !== null &&
-          node.data.description !== undefined
-        ) {
-          let descArr = "";
-          node.data.description.map((pair) => {
-            descArr = descArr + pair.key + pair.value;
-          });
-          itemText = itemText + descArr;
-        }
-        console.log(itemText);
-        console.log(itemText.indexOf(value) !== -1);
-        if (itemText.indexOf(value) !== -1) {
-          node.isHidden = false;
+    } else {
+      newNodes = nodes.filter((node) => {
+        if (isNode(node, nodes)) {
+          console.log(node);
+          var itemText = (node.data.desc + node.data.title).toLowerCase();
+          if (
+            node.data.description !== null &&
+            node.data.description !== undefined
+          ) {
+            let descArr = "";
+            node.data.description.map((pair) => {
+              descArr = descArr + pair.key + pair.value;
+            });
+            itemText = itemText + descArr;
+          }
+          console.log(itemText);
+          console.log(itemText.indexOf(value) !== -1);
+          if (itemText.indexOf(value) !== -1) {
+            node.isHidden = false;
+            return true;
+          }
+          node.isHidden = true;
+          return true;
+          // return itemText.indexOf(value) !== -1;
+        } else {
+          node.isHidden = true;
           return true;
         }
-        node.isHidden = true;
-        return true;
-        // return itemText.indexOf(value) !== -1;
-      } else {
-        node.isHidden = true;
-        return true;
-      }
-    });
+      });
+    }
     console.log(newNodes);
     setElements(newNodes);
   };
