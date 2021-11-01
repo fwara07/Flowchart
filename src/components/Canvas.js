@@ -1910,7 +1910,12 @@ const Canvas = ({
                     Save
                   </Button>
                 )}
-                <SearchField placeholder="Search item" onChange={searchNodes} />
+                {isEditMode && (
+                  <SearchField
+                    placeholder="Search item"
+                    onChange={searchNodes}
+                  />
+                )}
                 {/* <Button
                   variant="contained"
                   color="primary"
