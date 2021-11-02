@@ -347,7 +347,29 @@ const SpecialNodeComponent = ({ data }) => {
                               paddingLeft: 10,
                             }}
                           >
-                            {pair.value}
+                            {pair.value1}
+                          </Typography>
+                        );
+                      }
+                    })}
+                  </div>
+                  <Divider
+                    orientation="vertical"
+                    style={{ minHeight: 50, textAlign: "center" }}
+                    flexItem
+                  />
+                  <div ref={values_top} style={{ textAlign: "center" }}>
+                    {data.description.map((pair) => {
+                      if (pair.section === "1") {
+                        return (
+                          <Typography
+                            variant="subtitle2"
+                            gutterBottom
+                            style={{
+                              paddingLeft: 10,
+                            }}
+                          >
+                            {pair.value2}
                           </Typography>
                         );
                       }
@@ -439,7 +461,29 @@ const SpecialNodeComponent = ({ data }) => {
                                   paddingLeft: 10,
                                 }}
                               >
-                                {pair.value}
+                                {pair.value1}
+                              </Typography>
+                            );
+                          }
+                        })}
+                      </div>
+                      <Divider
+                        orientation="vertical"
+                        style={{ minHeight: 50, textAlign: "center" }}
+                        flexItem
+                      />
+                      <div ref={values_bottom} style={{ textAlign: "center" }}>
+                        {data.description.map((pair) => {
+                          if (pair.section === "2") {
+                            return (
+                              <Typography
+                                variant="subtitle2"
+                                gutterBottom
+                                style={{
+                                  paddingLeft: 10,
+                                }}
+                              >
+                                {pair.value2}
                               </Typography>
                             );
                           }
@@ -908,7 +952,7 @@ const Canvas = ({
   const reactFlowWrapper = useRef(null);
   const [reactFlowInstance, setReactFlowInstance] = useState(null);
   const [openNewField, setOpenNewField] = useState(false);
-  const [field, setField] = useState({ key: "", value: "" });
+  const [field, setField] = useState({ key: "", value1: "", value2: "" });
   console.log();
   const [hasArrowEdge, setArrowEdge] = useState(
     elementCLicked.hasOwnProperty("data")
@@ -1270,7 +1314,9 @@ const Canvas = ({
       data: {
         title: "title",
         description:
-          type === "special" ? [{ key: "", value: "", section: "1" }] : null,
+          type === "special"
+            ? [{ key: "", value1: "", value2: "", section: "1" }]
+            : null,
         color: selectedColor,
         isCollapsable: true,
         hasAnimatedEdge: false,
@@ -2711,7 +2757,7 @@ const Canvas = ({
                         <DialogContent>
                           <div style={{ textAlign: "center" }}>
                             <TextField
-                              style={{ width: "40%", marginRigh: 10 }}
+                              style={{ width: "23%", marginRigh: 10 }}
                               label="Key"
                               id="outlined-size-small"
                               defaultValue="Key"
@@ -2724,44 +2770,67 @@ const Canvas = ({
                               }}
                             />
                             <TextField
-                              style={{ width: "40%", marginLeft: 10 }}
+                              style={{ width: "23%", marginLeft: 10 }}
                               label="Value"
                               id="outlined-size-normal"
-                              defaultValue="Value"
+                              defaultValue="Value 1"
                               onChange={(event) => {
                                 const newField = { ...field };
-                                newField.value = event.target.value;
+                                newField.value1 = event.target.value;
+                                setField(newField);
+                              }}
+                              variant="outlined"
+                              size="small"
+                            />
+                            <TextField
+                              style={{ width: "23%", marginLeft: 10 }}
+                              label="Value"
+                              id="outlined-size-normal"
+                              defaultValue="Value 2"
+                              onChange={(event) => {
+                                const newField = { ...field };
+                                newField.value2 = event.target.value;
                                 setField(newField);
                               }}
                               variant="outlined"
                               size="small"
                             />
                           </div>
-                          <FormControl
-                            variant="outlined"
+                          <Grid
+                            item
+                            xs={12}
                             style={{
-                              width: 200,
-                              marginTop: 30,
-                              textAlign: "center",
+                              textAlign: "start",
+                              maxHeight: "100%",
+                              overflow: "auto",
                             }}
                           >
-                            <InputLabel id="demo-simple-select-outlined-label">
-                              Section
-                            </InputLabel>
-                            <Select
-                              style={{ fontSize: 15 }}
-                              labelId="demo-simple-select-outlined-label"
-                              id="demo-simple-select-outlined"
-                              onChange={handleChangeSection}
+                            <FormControl
                               variant="outlined"
-                              label="Section"
-                              defaultValue="smoothstep"
-                              displayEmpty={true}
+                              style={{
+                                width: 200,
+                                marginTop: 30,
+                                textAlign: "center",
+                              }}
                             >
-                              <MenuItem value="1">Section 1</MenuItem>
-                              <MenuItem value="2">Section 2</MenuItem>
-                            </Select>
-                          </FormControl>
+                              <InputLabel id="demo-simple-select-outlined-label">
+                                Section
+                              </InputLabel>
+                              <Select
+                                style={{ fontSize: 15 }}
+                                labelId="demo-simple-select-outlined-label"
+                                id="demo-simple-select-outlined"
+                                onChange={handleChangeSection}
+                                variant="outlined"
+                                label="Section"
+                                defaultValue="smoothstep"
+                                displayEmpty={true}
+                              >
+                                <MenuItem value="1">Section 1</MenuItem>
+                                <MenuItem value="2">Section 2</MenuItem>
+                              </Select>
+                            </FormControl>
+                          </Grid>
                         </DialogContent>
                         <DialogActions>
                           <Button onClick={handleCloseField} color="primary">
