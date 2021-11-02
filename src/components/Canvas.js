@@ -2804,7 +2804,7 @@ const Canvas = ({
                             item
                             xs={12}
                             style={{
-                              textAlign: "start",
+                              textAlign: "center",
                               maxHeight: "100%",
                               overflow: "auto",
                             }}
@@ -2827,7 +2827,7 @@ const Canvas = ({
                                 onChange={handleChangeSection}
                                 variant="outlined"
                                 label="Section"
-                                defaultValue="smoothstep"
+                                defaultValue="1"
                                 displayEmpty={true}
                               >
                                 <MenuItem value="1">Section 1</MenuItem>
