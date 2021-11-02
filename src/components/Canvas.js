@@ -147,7 +147,7 @@ const SpecialNodeComponent = ({ data }) => {
           color: "black",
           padding: 10,
           border: `2px solid rgba(${data.color.r}, ${data.color.g}, ${data.color.b}, ${data.color.a})`,
-          width: 150,
+          width: 200,
           minHeight: 10,
           borderRadius: "10px 10px 0px 0px",
           textAlign: "center",
@@ -254,7 +254,7 @@ const SpecialNodeComponent = ({ data }) => {
       <div
         style={{
           width: "93%",
-          width: 150,
+          width: 200,
           background: "#f0f0f0",
           border: `2px solid rgba(${data.color.r}, ${data.color.g}, ${data.color.b}, ${data.color.a})`,
           color: "black",
