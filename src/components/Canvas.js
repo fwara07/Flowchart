@@ -345,6 +345,7 @@ const SpecialNodeComponent = ({ data }) => {
                             gutterBottom
                             style={{
                               paddingLeft: 10,
+                              paddingRight: 10,
                             }}
                           >
                             {pair.value1}
@@ -367,6 +368,7 @@ const SpecialNodeComponent = ({ data }) => {
                             gutterBottom
                             style={{
                               paddingLeft: 10,
+                              paddingRight: 10,
                             }}
                           >
                             {pair.value2}
@@ -459,6 +461,7 @@ const SpecialNodeComponent = ({ data }) => {
                                 gutterBottom
                                 style={{
                                   paddingLeft: 10,
+                                  paddingRight: 10,
                                 }}
                               >
                                 {pair.value1}
@@ -481,6 +484,7 @@ const SpecialNodeComponent = ({ data }) => {
                                 gutterBottom
                                 style={{
                                   paddingLeft: 10,
+                                  paddingRight: 10,
                                 }}
                               >
                                 {pair.value2}
