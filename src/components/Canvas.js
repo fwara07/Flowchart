@@ -12,12 +12,14 @@ import {
   Select,
   MenuItem,
   Switch,
+  Tooltip,
   Badge,
   Snackbar,
   DialogActions,
   Button,
   FormControl,
   InputLabel,
+  ClickAwayListener,
   Chip,
   Fab,
   Menu,
@@ -137,6 +139,7 @@ const SpecialNodeComponent = ({ data }) => {
   let expand_collapse_bottom = useRef(null);
   let grid_bottom = useRef(null);
   let properties_bottom = useRef(null);
+
   return (
     <div>
       <div
@@ -191,7 +194,6 @@ const SpecialNodeComponent = ({ data }) => {
           zIndex: 1,
         }}
         isConnectable={true}
-        connectionMode="loose"
         onMouseOver={(e) =>
           myRef.current && (myRef.current.className = "rectangle")
         }
@@ -209,7 +211,6 @@ const SpecialNodeComponent = ({ data }) => {
           zIndex: 1,
         }}
         isConnectable={true}
-        connectionMode="loose"
         onMouseOver={(e) =>
           myRef.current && (myRef.current.className = "rectangle")
         }
@@ -227,7 +228,6 @@ const SpecialNodeComponent = ({ data }) => {
           zIndex: 1,
         }}
         isConnectable={true}
-        connectionMode="loose"
         onMouseOver={(e) =>
           myRef.current && (myRef.current.className = "rectangle")
         }
@@ -245,7 +245,6 @@ const SpecialNodeComponent = ({ data }) => {
           zIndex: 1,
         }}
         isConnectable={true}
-        connectionMode="loose"
         onMouseOver={(e) =>
           myRef.current && (myRef.current.className = "rectangle")
         }
@@ -318,15 +317,24 @@ const SpecialNodeComponent = ({ data }) => {
                     {data.description.map((pair) => {
                       if (pair.section === "1") {
                         return (
-                          <Typography
-                            variant="subtitle2"
-                            gutterBottom
-                            style={{
-                              paddingRight: 10,
-                            }}
+                          <Tooltip
+                            arrow
+                            title={pair.fieldDesc}
+                            style={{ zIndex: 2 }}
                           >
-                            {pair.key}
-                          </Typography>
+                            <div>
+                              <button
+                                style={{
+                                  zIndex: 2,
+                                  position: "relative",
+                                  paddingTop: 8,
+                                  border: 0,
+                                }}
+                              >
+                                {pair.key}
+                              </button>
+                            </div>
+                          </Tooltip>
                         );
                       }
                     })}
@@ -340,16 +348,63 @@ const SpecialNodeComponent = ({ data }) => {
                     {data.description.map((pair) => {
                       if (pair.section === "1") {
                         return (
-                          <Typography
-                            variant="subtitle2"
-                            gutterBottom
-                            style={{
-                              paddingLeft: 10,
-                              paddingRight: 10,
-                            }}
-                          >
-                            {pair.value1}
-                          </Typography>
+                          <>
+                            {/* <Typography
+                              variant="subtitle2"
+                              gutterBottom
+                              style={{
+                                paddingRight: 10,
+                                paddingLeft: 10,
+                              }}
+                              aria-owns={
+                                open ? "mouse-over-popover" : undefined
+                              }
+                              aria-haspopup="true"
+                              onMouseEnter={handlePopoverOpen}
+                              onMouseLeave={handlePopoverClose}
+                            >
+                              {pair.value1}
+                            </Typography>
+                            <Popover
+                              id="mouse-over-popover"
+                              open={open}
+                              anchorEl={anchorEl}
+                              anchorOrigin={{
+                                vertical: "bottom",
+                                horizontal: "left",
+                              }}
+                              transformOrigin={{
+                                vertical: "top",
+                                horizontal: "left",
+                              }}
+                              onClose={handlePopoverClose}
+                              disableRestoreFocus
+                            >
+                              <Typography>{pair.fieldDesc}</Typography>
+                            </Popover> */}
+                            <Tooltip arrow title={pair.fieldDesc}>
+                              <div>
+                                {/* <Button
+                                  style={{
+                                    textTransform: "none",
+                                    minWidth: 10,
+                                  }}
+                                >
+                                  {pair.value1}
+                                </Button> */}
+                                <button
+                                  style={{
+                                    zIndex: 2,
+                                    position: "relative",
+                                    paddingTop: 8,
+                                    border: 0,
+                                  }}
+                                >
+                                  {pair.value1}
+                                </button>
+                              </div>
+                            </Tooltip>
+                          </>
                         );
                       }
                     })}
@@ -363,16 +418,55 @@ const SpecialNodeComponent = ({ data }) => {
                     {data.description.map((pair) => {
                       if (pair.section === "1") {
                         return (
-                          <Typography
-                            variant="subtitle2"
-                            gutterBottom
-                            style={{
-                              paddingLeft: 10,
-                              paddingRight: 10,
-                            }}
-                          >
-                            {pair.value2}
-                          </Typography>
+                          <>
+                            {/* <Typography
+                              variant="subtitle2"
+                              gutterBottom
+                              style={{
+                                paddingRight: 10,
+                                paddingLeft: 10,
+                              }}
+                              aria-owns={
+                                open ? "mouse-over-popover" : undefined
+                              }
+                              aria-haspopup="true"
+                              onMouseEnter={handlePopoverOpen}
+                              onMouseLeave={handlePopoverClose}
+                            >
+                              {pair.value2}
+                            </Typography>
+                            <Popover
+                              id="mouse-over-popover"
+                              open={open}
+                              anchorEl={anchorEl}
+                              anchorOrigin={{
+                                vertical: "bottom",
+                                horizontal: "left",
+                              }}
+                              transformOrigin={{
+                                vertical: "top",
+                                horizontal: "left",
+                              }}
+                              onClose={handlePopoverClose}
+                              disableRestoreFocus
+                            >
+                              <Typography>{pair.fieldDesc}</Typography>
+                            </Popover> */}
+                            <Tooltip arrow title={pair.fieldDesc}>
+                              <div>
+                                <button
+                                  style={{
+                                    zIndex: 2,
+                                    position: "relative",
+                                    paddingTop: 8,
+                                    border: 0,
+                                  }}
+                                >
+                                  {pair.value2}
+                                </button>
+                              </div>
+                            </Tooltip>
+                          </>
                         );
                       }
                     })}
@@ -434,15 +528,54 @@ const SpecialNodeComponent = ({ data }) => {
                         {data.description.map((pair) => {
                           if (pair.section === "2") {
                             return (
-                              <Typography
-                                variant="subtitle2"
-                                gutterBottom
-                                style={{
-                                  paddingRight: 10,
-                                }}
-                              >
-                                {pair.key}
-                              </Typography>
+                              <>
+                                {/* <Typography
+                                  variant="subtitle2"
+                                  gutterBottom
+                                  style={{
+                                    paddingRight: 10,
+                                  }}
+                                  aria-owns={
+                                    open ? "mouse-over-popover" : undefined
+                                  }
+                                  aria-haspopup="true"
+                                  onMouseEnter={handlePopoverOpen}
+                                  onMouseLeave={handlePopoverClose}
+                                >
+                                  {pair.key}
+                                </Typography>
+                                <Popover
+                                  id="mouse-over-popover"
+                                  open={open}
+                                  anchorEl={anchorEl}
+                                  anchorOrigin={{
+                                    vertical: "bottom",
+                                    horizontal: "left",
+                                  }}
+                                  transformOrigin={{
+                                    vertical: "top",
+                                    horizontal: "left",
+                                  }}
+                                  onClose={handlePopoverClose}
+                                  disableRestoreFocus
+                                >
+                                  <Typography>{pair.fieldDesc}</Typography>
+                                </Popover> */}
+                                <Tooltip arrow title={pair.fieldDesc}>
+                                  <div>
+                                    <button
+                                      style={{
+                                        zIndex: 2,
+                                        position: "relative",
+                                        paddingTop: 8,
+                                        border: 0,
+                                      }}
+                                    >
+                                      {pair.key}
+                                    </button>
+                                  </div>
+                                </Tooltip>
+                              </>
                             );
                           }
                         })}
@@ -456,16 +589,55 @@ const SpecialNodeComponent = ({ data }) => {
                         {data.description.map((pair) => {
                           if (pair.section === "2") {
                             return (
-                              <Typography
-                                variant="subtitle2"
-                                gutterBottom
-                                style={{
-                                  paddingLeft: 10,
-                                  paddingRight: 10,
-                                }}
-                              >
-                                {pair.value1}
-                              </Typography>
+                              <>
+                                {/* <Typography
+                                  variant="subtitle2"
+                                  gutterBottom
+                                  style={{
+                                    paddingRight: 10,
+                                    paddingLeft: 10,
+                                  }}
+                                  aria-owns={
+                                    open ? "mouse-over-popover" : undefined
+                                  }
+                                  aria-haspopup="true"
+                                  onMouseEnter={handlePopoverOpen}
+                                  onMouseLeave={handlePopoverClose}
+                                >
+                                  {pair.value1}
+                                </Typography>
+                                <Popover
+                                  id="mouse-over-popover"
+                                  open={open}
+                                  anchorEl={anchorEl}
+                                  anchorOrigin={{
+                                    vertical: "bottom",
+                                    horizontal: "left",
+                                  }}
+                                  transformOrigin={{
+                                    vertical: "top",
+                                    horizontal: "left",
+                                  }}
+                                  onClose={handlePopoverClose}
+                                  disableRestoreFocus
+                                >
+                                  <Typography>{pair.fieldDesc}</Typography>
+                                </Popover> */}
+                                <Tooltip arrow title={pair.fieldDesc}>
+                                  <div>
+                                    <button
+                                      style={{
+                                        zIndex: 2,
+                                        position: "relative",
+                                        paddingTop: 8,
+                                        border: 0,
+                                      }}
+                                    >
+                                      {pair.value1}
+                                    </button>
+                                  </div>
+                                </Tooltip>
+                              </>
                             );
                           }
                         })}
@@ -479,16 +651,55 @@ const SpecialNodeComponent = ({ data }) => {
                         {data.description.map((pair) => {
                           if (pair.section === "2") {
                             return (
-                              <Typography
-                                variant="subtitle2"
-                                gutterBottom
-                                style={{
-                                  paddingLeft: 10,
-                                  paddingRight: 10,
-                                }}
-                              >
-                                {pair.value2}
-                              </Typography>
+                              <>
+                                {/* <Typography
+                                  variant="subtitle2"
+                                  gutterBottom
+                                  style={{
+                                    paddingRight: 10,
+                                    paddingLeft: 10,
+                                  }}
+                                  aria-owns={
+                                    open ? "mouse-over-popover" : undefined
+                                  }
+                                  aria-haspopup="true"
+                                  onMouseEnter={handlePopoverOpen}
+                                  onMouseLeave={handlePopoverClose}
+                                >
+                                  {pair.value2}
+                                </Typography>
+                                <Popover
+                                  id="mouse-over-popover"
+                                  open={open}
+                                  anchorEl={anchorEl}
+                                  anchorOrigin={{
+                                    vertical: "bottom",
+                                    horizontal: "left",
+                                  }}
+                                  transformOrigin={{
+                                    vertical: "top",
+                                    horizontal: "left",
+                                  }}
+                                  onClose={handlePopoverClose}
+                                  disableRestoreFocus
+                                >
+                                  <Typography>{pair.fieldDesc}</Typography>
+                                </Popover> */}
+                                <Tooltip arrow title={pair.fieldDesc}>
+                                  <div>
+                                    <button
+                                      style={{
+                                        zIndex: 2,
+                                        position: "relative",
+                                        paddingTop: 8,
+                                        border: 0,
+                                      }}
+                                    >
+                                      {pair.value2}
+                                    </button>
+                                  </div>
+                                </Tooltip>
+                              </>
                             );
                           }
                         })}
@@ -975,9 +1186,14 @@ const Canvas = ({
   );
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [section, setSection] = useState("1");
+  const [fieldDesc, setFieldDesc] = useState("");
 
   const handleClickMenu = (event) => {
     setAnchorEl(event.currentTarget);
+  };
+
+  const handleChangeFieldDesc = (event) => {
+    setFieldDesc(event.target.value);
   };
 
   const handleCloseMenu = () => {
@@ -1166,7 +1382,11 @@ const Canvas = ({
         }
         console.log(newElements);
         setElements(newElements);
-        setTags(JSON.parse(json.tags));
+        setTags(
+          Array.isArray(JSON.parse(json.tags))
+            ? JSON.parse(json.tags)
+            : JSON.parse(json.tags).tags
+        );
       });
   }, [currentFile]);
 
@@ -1319,7 +1539,7 @@ const Canvas = ({
         title: "title",
         description:
           type === "special"
-            ? [{ key: "", value1: "", value2: "", section: "1" }]
+            ? [{ key: "", value1: "", value2: "", section: "1", fieldDesc: "" }]
             : null,
         color: selectedColor,
         isCollapsable: true,
@@ -1604,7 +1824,12 @@ const Canvas = ({
       setError({ value: false, msg: "" });
       setOpenNewLegend(false);
       const newLegend = { ...legends };
-      newLegend[currentFile.id] = [...legends[currentFile.id], legend];
+      console.log(newLegend);
+      if (newLegend[currentFile.id] === undefined) {
+        newLegend[currentFile.id] = [legend];
+      } else {
+        newLegend[currentFile.id] = newLegend[currentFile.id].push(legend);
+      }
       setLegends(newLegend);
       localStorage.setItem("legend", JSON.stringify(newLegend));
       setLegend({ color: "#846090", title: "" });
@@ -1645,7 +1870,7 @@ const Canvas = ({
     const newElements = [...elements];
     newElements.map((element) => {
       if (element.id === elementCLicked.id) {
-        element.data.description.push({ ...field, section: section });
+        element.data.description.push({ ...field, section, fieldDesc });
       }
     });
     setElements(newElements);
@@ -2365,7 +2590,10 @@ const Canvas = ({
                             : [];
                         lst.push({
                           key: element[1],
-                          value: element[2],
+                          value1: element[2],
+                          value2: element[3],
+                          section: element[4],
+                          fieldDesc: element[5],
                         });
                         description[ids[element[0].split(".")[0]]] = [...lst];
                       } else {
@@ -2834,6 +3062,27 @@ const Canvas = ({
                                 <MenuItem value="2">Section 2</MenuItem>
                               </Select>
                             </FormControl>
+                          </Grid>
+                          <Grid
+                            item
+                            xs={12}
+                            style={{
+                              textAlign: "center",
+                              maxHeight: "100%",
+                              overflow: "auto",
+                            }}
+                          >
+                            <TextField
+                              margin="normal"
+                              label="Description"
+                              placeholder="Description"
+                              required
+                              rows={4}
+                              multiline
+                              variant="filled"
+                              onChange={handleChangeFieldDesc}
+                              value={fieldDesc}
+                            />
                           </Grid>
                         </DialogContent>
                         <DialogActions>
