@@ -1,5 +1,3 @@
-https://user-images.githubusercontent.com/72710126/139535500-499c7cd0-9777-4300-86f9-ee8bc922ce61.mp4
-
 # How to run this project on a local computer
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
